@@ -53,11 +53,11 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 /**
  * HTTP响应类
  * 
- * @author will
+ * @author Yusuke Yamamoto
  */
-public class Response {
+public class HttpResponse {
 	
-    private static final Logger LOG = LoggerFactory.getLogger(Response.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HttpResponse.class);
     
     private static ThreadLocal<DocumentBuilder> builders =
             new ThreadLocal<DocumentBuilder>() {
@@ -80,10 +80,10 @@ public class Response {
     private HttpURLConnection con;
     private boolean streamConsumed = false;
 
-    public Response()  {
+    public HttpResponse()  {
     	
     }
-    public Response(HttpURLConnection con) throws IOException {
+    public HttpResponse(HttpURLConnection con) throws IOException {
         this.con = con;
         this.statusCode = con.getResponseCode();
         if(null == (is = con.getErrorStream())){
@@ -96,7 +96,7 @@ public class Response {
     }
 
     // for test purpose
-    /*package*/ Response(String content) {
+    /*package*/ HttpResponse(String content) {
         this.responseAsString = content;
     }
 

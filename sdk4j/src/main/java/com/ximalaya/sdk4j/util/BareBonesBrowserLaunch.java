@@ -54,5 +54,5 @@ public class BareBonesBrowserLaunch {
                 Runtime.getRuntime().exec(new String[] { browser, url });
         }
     }
-   
+    
 }
