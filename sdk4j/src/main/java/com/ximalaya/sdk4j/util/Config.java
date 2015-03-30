@@ -1,6 +1,5 @@
 package com.ximalaya.sdk4j.util;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -9,10 +8,9 @@ public class Config {
 	static{
 		try {
 			props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		}
+		catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 	
@@ -22,7 +20,7 @@ public class Config {
 		return props.getProperty(key);
 	}
 
-    public static void updateProperties(String key,String value) {    
+    public static void updateProperty(String key,String value) {    
             props.setProperty(key, value); 
     } 
 }

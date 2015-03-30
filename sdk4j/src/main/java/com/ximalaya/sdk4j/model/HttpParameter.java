@@ -42,7 +42,7 @@ public class HttpParameter implements java.io.Serializable{
 	
 	String name;
     String value;
-    private File file = null; // HTTP POST才有
+    private File file = null; // HTTP POST才会用到
 
     public HttpParameter(String name, String value) {
         this.name = name;
@@ -200,7 +200,7 @@ public class HttpParameter implements java.io.Serializable{
    
     @Override
     public String toString() {
-        return "PostParameter{" +
+        return "HttpParameter {" +
                 "name='" + name + '\'' +
                 ", value='" + value + '\'' +
                 ", file=" + file +
