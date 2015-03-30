@@ -57,6 +57,9 @@ public class HttpClient implements java.io.Serializable {
 	private org.apache.commons.httpclient.HttpClient client = null;
 	private MultiThreadedHttpConnectionManager connectionManager;
 	private static final int DEFAULT_RETRY_TIMES = 3;
+	private static final int DEFAULT_MAX_CON_PER_HOST = 150;
+	private static final int DEFAULT_CONTIMEOUT_MS = 10000;
+	private static final int DEFAULT_SOTIMEOUT_MS = 10000;
 	
 	private String proxyHost;
 	private int proxyPort;
@@ -119,10 +122,10 @@ public class HttpClient implements java.io.Serializable {
 	}
 	
 	public HttpClient() {
-		this(150, 30000, 30000, 1024 * 1024);
+		this(DEFAULT_MAX_CON_PER_HOST, DEFAULT_CONTIMEOUT_MS, DEFAULT_SOTIMEOUT_MS);
 	}
-
-	public HttpClient(int maxConPerHost, int conTimeOutMs, int soTimeOutMs, int maxSize) {
+	
+	public HttpClient(int maxConPerHost, int conTimeOutMs, int soTimeOutMs) {
 		connectionManager = new MultiThreadedHttpConnectionManager();
 		HttpConnectionManagerParams params = connectionManager.getParams();
 		params.setDefaultMaxConnectionsPerHost(maxConPerHost);
@@ -326,6 +329,5 @@ public class HttpClient implements java.io.Serializable {
 		}
 		return statusCode + ":" + cause;
 	}
-
 	
 }

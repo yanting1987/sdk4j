@@ -21,12 +21,14 @@ import org.apache.commons.httpclient.params.HttpConnectionParams;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 
 /**
-Provide a custom socket factory that implements org.apache.commons.httpclient.protocol.ProtocolSocketFactory interface. 
-The socket factory is responsible for opening a socket to the target server using either the standard or a third party
-SSL library and performing any required initialization such as performing the connection handshake. Generally the initialization 
-is performed automatically when the socket is created. 
-@author will
-*/
+ * Provide a custom socket factory that implements org.apache.commons.httpclient.protocol.ProtocolSocketFactory interface. 
+ * The socket factory is responsible for opening a socket to the target server using either the standard or a third party
+ * SSL library and performing any required initialization such as performing the connection handshake. Generally the initialization 
+ * is performed automatically when the socket is created. 
+ *
+ * @author will
+ *
+ */ 
 public class MySSLSocketFactory implements ProtocolSocketFactory {
 	private SSLContext sslcontext = null;
 	private SSLContext createSSLContext() {
