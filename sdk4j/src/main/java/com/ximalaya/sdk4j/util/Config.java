@@ -4,8 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class WeiboConfig {
-	public WeiboConfig(){}
+public class Config {
 	private static Properties props = new Properties(); 
 	static{
 		try {
@@ -16,6 +15,9 @@ public class WeiboConfig {
 			e.printStackTrace();
 		}
 	}
+	
+	public Config(){}
+	
 	public static String getValue(String key){
 		return props.getProperty(key);
 	}
