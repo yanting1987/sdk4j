@@ -1,7 +1,6 @@
 package com.ximalaya.sdk4j.http;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +29,7 @@ import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 
 /**
+ * HTTP客户端，用于完成GET/POST请求
  * @author will
  */
 public class HttpClient implements java.io.Serializable {
@@ -38,7 +38,7 @@ public class HttpClient implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 8406097812276555308L;
 	
-	public static final int HTTP_STATUS_OK = 200;                      // 请求成功
+	public static final int HTTP_STATUS_OK = 200;                     // 请求成功
 	public static final int HTTP_STATUS_CREATED = 201;                // 创建成功
 	public static final int HTTP_STATUS_ACCEPTED = 202;               // 更新成功
 	public static final int HTTP_STATUS_PERMANENT_REDIRECT = 301;    // 请求永久重定向
@@ -52,6 +52,11 @@ public class HttpClient implements java.io.Serializable {
 	public static final int HTTP_STATUS_TOO_MANY_REQUESTS = 429;      // 请求频率超配
 	public static final int HTTP_STATUS_SERVER_ERROR = 500;            // 服务器错误
 	public static final int HTTP_STATUS_BAD_GATEWAY = 502;             // 网关错误，服务器宕机或者在升级中
+	
+	private static final Logger LOG = LoggerFactory.getLogger(HttpClient.class);
+	private org.apache.commons.httpclient.HttpClient client = null;
+	private MultiThreadedHttpConnectionManager connectionManager;
+	private static final int DEFAULT_RETRY_TIMES = 3;
 	
 	private String proxyHost;
 	private int proxyPort;
@@ -112,18 +117,12 @@ public class HttpClient implements java.io.Serializable {
 	public void setProxyAuthPassword(String proxyAuthPassword) {
 		this.proxyAuthPassword = proxyAuthPassword;
 	}
-
-	private static final Logger LOG = LoggerFactory.getLogger(HttpClient.class);
-	private org.apache.commons.httpclient.HttpClient client = null;
-
-	private MultiThreadedHttpConnectionManager connectionManager;
-
+	
 	public HttpClient() {
 		this(150, 30000, 30000, 1024 * 1024);
 	}
 
-	public HttpClient(int maxConPerHost, int conTimeOutMs, int soTimeOutMs,
-			int maxSize) {
+	public HttpClient(int maxConPerHost, int conTimeOutMs, int soTimeOutMs, int maxSize) {
 		connectionManager = new MultiThreadedHttpConnectionManager();
 		HttpConnectionManagerParams params = connectionManager.getParams();
 		params.setDefaultMaxConnectionsPerHost(maxConPerHost);
@@ -131,13 +130,15 @@ public class HttpClient implements java.io.Serializable {
 		params.setSoTimeout(soTimeOutMs);
 
 		HttpClientParams clientParams = new HttpClientParams();
-		// 忽略cookie 避免 Cookie rejected 警告
-		clientParams.setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
+		clientParams.setCookiePolicy(CookiePolicy.IGNORE_COOKIES);   // 忽略cookie 避免 Cookie rejected 警告
 		client = new org.apache.commons.httpclient.HttpClient(clientParams,
 				connectionManager);
-		Protocol myhttps = new Protocol("https", new MySSLSocketFactory(), 443);
-		Protocol.registerProtocol("https", myhttps);
-		// 支持proxy
+		Protocol httpsProtocol = new Protocol("https", new MySSLSocketFactory(), 443);
+		Protocol.registerProtocol("https", httpsProtocol);
+		
+		/*
+		 * 支持proxy
+		 */
 		if (proxyHost != null && !proxyHost.equals("")) {
 			client.getHostConfiguration().setProxy(proxyHost, proxyPort);
 			client.getParams().setAuthenticationPreemptive(true);
@@ -154,13 +155,12 @@ public class HttpClient implements java.io.Serializable {
 
 	/**
 	 * 处理HTTP GET请求
-	 * 
 	 */
-	public HttpResponse get(String url, String token) throws XimalayaException {
-		return get(url, new HttpParameter[0], token);
+	public HttpResponse get(String url) throws XimalayaException {
+		return get(url, new HttpParameter[0]);
 	}
 	
-	public HttpResponse get(String url, HttpParameter[] params, String token) 
+	public HttpResponse get(String url, HttpParameter[] params) 
 			throws XimalayaException {
 		LOG.debug("Request:");
 		LOG.debug("GET:" + url);
@@ -173,10 +173,10 @@ public class HttpClient implements java.io.Serializable {
 			}
 		}
 		GetMethod getmethod = new GetMethod(url);
-		return httpRequest(getmethod, token);
+		return httpRequest(getmethod);
 	}
 	
-	public HttpResponse get(String url, HttpParameter[] params, Paging paging, String token)
+	public HttpResponse get(String url, HttpParameter[] params, Paging paging)
 			throws XimalayaException {
 		if (null != paging) {
 			List<HttpParameter> pagingParams = new ArrayList<HttpParameter>(4);
@@ -185,14 +185,8 @@ public class HttpClient implements java.io.Serializable {
 						.valueOf(paging.getPage())));
 			}
 			if (-1 != paging.getCount()) {
-				if (-1 != url.indexOf("search")) {
-					// search api takes "rpp"
-					pagingParams.add(new HttpParameter("rpp", String
-							.valueOf(paging.getCount())));
-				} else {
-					pagingParams.add(new HttpParameter("count", String
-							.valueOf(paging.getCount())));
-				}
+				pagingParams.add(new HttpParameter("count", String
+						.valueOf(paging.getCount())));
 			}
 			
 			HttpParameter[] newparams = null;
@@ -212,10 +206,10 @@ public class HttpClient implements java.io.Serializable {
 				}*/
 				newparams = arrayPagingParams;
 			}
-			return get(url, newparams, token);
+			return get(url, newparams);
 		}
 		else {
-			return get(url, params, token);
+			return get(url, params);
 		}
 	}
 
@@ -234,22 +228,10 @@ public class HttpClient implements java.io.Serializable {
 			}
 		}
 		DeleteMethod deleteMethod = new DeleteMethod(url);
-		return httpRequest(deleteMethod, token);
-
+		return httpRequest(deleteMethod);
 	}
 
-	/**
-	 * 处理http post请求
-	 * 
-	 */
-	public HttpResponse post(String url, HttpParameter[] params, String token)
-			throws XimalayaException {
-		return post(url, params, true, token);
-
-	}
-	
-	public HttpResponse post(String url, HttpParameter[] params,
-			Boolean WithTokenHeader, String token) throws XimalayaException {
+	public HttpResponse post(String url, HttpParameter[] params) throws XimalayaException {
 		LOG.debug("Request:");
 		LOG.debug("POST" + url);
 		PostMethod postMethod = new PostMethod(url);
@@ -258,46 +240,27 @@ public class HttpClient implements java.io.Serializable {
 		}
 		HttpMethodParams param = postMethod.getParams();
 		param.setContentCharset("UTF-8");
-		return httpRequest(postMethod, WithTokenHeader, token);
-	}
-	
-	public HttpResponse httpRequest(HttpMethod method, String token) throws XimalayaException {
-		return httpRequest(method, true, token);
+		return httpRequest(postMethod);
 	}
 
-	public HttpResponse httpRequest(HttpMethod method, Boolean WithTokenHeader, String token)
+	public HttpResponse httpRequest(HttpMethod method)
 			throws XimalayaException {
-		InetAddress ipaddr;
 		int responseCode = -1;
 		try {
-			ipaddr = InetAddress.getLocalHost();
-			List<Header> headers = new ArrayList<Header>();
-			if (WithTokenHeader) {
-				if (token == null) {
-					throw new IllegalStateException("Oauth2 token is not set!");
-				}
-				headers.add(new Header("Authorization", "OAuth2 " + token));
-				headers.add(new Header("API-RemoteIP", ipaddr.getHostAddress()));
-				client.getHostConfiguration().getParams().setParameter("http.default-headers", headers);
-				for (Header hd : headers) {
-					LOG.debug(hd.getName() + ": " + hd.getValue());
-				}
-			}
-			
 			method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
-					new DefaultHttpMethodRetryHandler(3, false));
+					new DefaultHttpMethodRetryHandler(DEFAULT_RETRY_TIMES, false));
 			client.executeMethod(method);
 			Header[] resHeader = method.getResponseHeaders();
 			responseCode = method.getStatusCode();
 			LOG.debug("Response:");
 			LOG.debug("https StatusCode:" + String.valueOf(responseCode));
-
+			
 			for (Header header : resHeader) {
 				LOG.debug(header.getName() + ":" + header.getValue());
 			}
 			HttpResponse response = new HttpResponse();
 			response.setResponseAsString(method.getResponseBodyAsString());
-			LOG.debug(response.toString() + "\n");
+			LOG.debug(response.toString());
 
 			if (responseCode != HTTP_STATUS_OK) {
 				try {
@@ -308,7 +271,6 @@ public class HttpClient implements java.io.Serializable {
 				}
 			}
 			return response;
-
 		} catch (IOException ioe) {
 			throw new XimalayaException(ioe.getMessage(), ioe, responseCode);
 		} finally {
