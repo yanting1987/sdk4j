@@ -14,7 +14,7 @@ public class AlbumsTest {
 	
 	@Test
 	public void testGetAlbumList() throws XimalayaException {
-		AlbumList albumList = albums.getAlbumList(3L, null, new Paging());
+		AlbumList albumList = albums.getAlbumList(6L, null, new Paging());
 		Assert.assertFalse(albumList.getAlbums().isEmpty());
 	}
 
