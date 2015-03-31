@@ -28,7 +28,7 @@ package com.ximalaya.sdk4j.model;
 
 /**
  * 分页参数
- * @author Yusuke Yamamoto - yusuke at mac.com
+ * @author will
  */
 public class Paging implements java.io.Serializable {
 	private static final long serialVersionUID = -3285857427993796670L;
@@ -69,6 +69,11 @@ public class Paging implements java.io.Serializable {
             throw new IllegalArgumentException(SET_PAGE_ERROR_MSG);
         }
         this.page = page;
+    }
+    
+    public Paging page(int page) {
+    	setPage(page);
+    	return this;
     }
 
     public int getCount() {

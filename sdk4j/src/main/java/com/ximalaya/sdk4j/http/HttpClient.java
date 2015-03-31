@@ -71,8 +71,7 @@ public class HttpClient implements java.io.Serializable {
 	}
 
 	/**
-	 * Sets proxy host. System property -Dsinat4j.http.proxyHost or
-	 * http.proxyHost overrides this attribute.
+	 * Sets proxy host
 	 * 
 	 * @param proxyHost
 	 */
@@ -85,8 +84,7 @@ public class HttpClient implements java.io.Serializable {
 	}
 
 	/**
-	 * Sets proxy port. System property -Dsinat4j.http.proxyPort or
-	 * -Dhttp.proxyPort overrides this attribute.
+	 * Sets proxy port
 	 * 
 	 * @param proxyPort
 	 */
@@ -99,8 +97,7 @@ public class HttpClient implements java.io.Serializable {
 	}
 
 	/**
-	 * Sets proxy authentication user. System property -Dsinat4j.http.proxyUser
-	 * overrides this attribute.
+	 * Sets proxy authentication user
 	 * 
 	 * @param proxyAuthUser
 	 */
@@ -134,8 +131,7 @@ public class HttpClient implements java.io.Serializable {
 
 		HttpClientParams clientParams = new HttpClientParams();
 		clientParams.setCookiePolicy(CookiePolicy.IGNORE_COOKIES);   // 忽略cookie 避免 Cookie rejected 警告
-		client = new org.apache.commons.httpclient.HttpClient(clientParams,
-				connectionManager);
+		client = new org.apache.commons.httpclient.HttpClient(clientParams, connectionManager);
 		Protocol httpsProtocol = new Protocol("https", new MySSLSocketFactory(), 443);
 		Protocol.registerProtocol("https", httpsProtocol);
 		

@@ -115,7 +115,6 @@ public class XimalayaResponse implements java.io.Serializable {
         return "";
      }
 
-    /*modify by sycheng  add "".equals(str) */
     protected static int getChildInt(String str, Element elem) {
         String str2 = getTextContent(str, elem);
         if (null == str2 || "".equals(str2)||"null".equals(str)) {
