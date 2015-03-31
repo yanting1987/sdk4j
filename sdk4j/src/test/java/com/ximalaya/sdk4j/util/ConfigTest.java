@@ -8,7 +8,9 @@ public class ConfigTest {
 	
 	@Test
 	public void testUpdateProperty() {
-		Assert.assertEquals("abc", Config.getValue("app_key"));
+		String appKey = XimalayaConfig.getValue("ximalaya.openapi.app_key");
+		Assert.assertNotNull(appKey);
+		Assert.assertTrue(appKey.length() == 32);
 	}
 
 }
