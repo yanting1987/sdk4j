@@ -9,14 +9,14 @@ import java.util.List;
  */
 public class TagList {
 	
-	private long categoryID;      // 标签所属分类ID
+	private Long categoryID;      // 标签所属分类ID
 	private String categoryName;   // 标签所属分类名称
 	private List<Tag> tags;        // 标签列表
 	
-	public long getCategoryID() {
+	public Long getCategoryID() {
 		return categoryID;
 	}
-	public void setCategoryID(long categoryID) {
+	public void setCategoryID(Long categoryID) {
 		this.categoryID = categoryID;
 	}
 	public String getCategoryName() {
@@ -30,6 +30,35 @@ public class TagList {
 	}
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((categoryID == null) ? 0 : categoryID.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj) {
+			return true;
+		}
+		if(obj == null) {
+			return false;
+		}
+		if(getClass() != obj.getClass()) {
+			return false;
+		}
+		
+		TagList other = (TagList) obj;
+		if((categoryID == null && other.categoryID != null) 
+			|| !categoryID.equals(other.categoryID)) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 }

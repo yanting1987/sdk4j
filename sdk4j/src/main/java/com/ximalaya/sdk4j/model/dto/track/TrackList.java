@@ -40,4 +40,38 @@ public class TrackList extends AbstractPageResult {
 	public void setTracks(List<Track> tracks) {
 		this.tracks = tracks;
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((categoryID == null) ? 0 : categoryID.hashCode());
+		result = prime * result + ((tagName == null) ? 0: tagName.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj) {
+			return true;
+		}
+		if(obj == null) {
+			return false;
+		}
+		if(getClass() != obj.getClass()) {
+			return false;
+		}
+		
+		TrackList other = (TrackList) obj;
+		if((categoryID == null && other.categoryID != null) 
+			|| !categoryID.equals(other.categoryID)) {
+			return false;
+		}
+		if(tagName == null && other.tagName != null
+			|| !tagName.equals(other.tagName)) {
+			return false;
+		}
+		
+		return true;
+	}
 }
