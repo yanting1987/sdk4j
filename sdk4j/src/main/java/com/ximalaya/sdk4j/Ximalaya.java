@@ -8,8 +8,7 @@ import com.ximalaya.sdk4j.util.CrypterUtil;
 import com.ximalaya.sdk4j.util.SignatureUtil;
 import com.ximalaya.sdk4j.util.XimalayaConfig;
 
-public class Ximalaya implements Serializable {
-
+public abstract class Ximalaya implements Serializable {
 	/**
 	 * 
 	 */
@@ -23,7 +22,7 @@ public class Ximalaya implements Serializable {
 	protected static final String APP_SECRET = XimalayaConfig.getValue("ximalaya.openapi.appSecret");
 	protected static final String SERVER_AUTHENTICATE_STATIC_KEY = XimalayaConfig.getValue("ximalaya.openapi.serverAuthenticateStaticKey");
 	
-	protected static final HttpClient client = new HttpClient();
+	protected static final HttpClient CLIENT = new HttpClient();
 	protected static final HttpParameter[] DEFAULT_SPECIFIC_PARAMS = new HttpParameter[0];
 	
 	private static final int SERVER_CLIENT_OS_TYPE = 4;   // 服务端client_os_type参数固定为4
@@ -32,10 +31,9 @@ public class Ximalaya implements Serializable {
 	 * 组装HTTP请求参数
 	 * @return
 	 */
-	public final HttpParameter[] assembleHttpParams() {
+	protected final HttpParameter[] assembleHttpParams(HttpParameter[] specificParams) {
 		HttpParameter[] resultParams = null;
 		HttpParameter[] commonParams = assembleCommonParams();
-		HttpParameter[] specificParams = assembleSpecificParams();
 		resultParams = new HttpParameter[commonParams.length + specificParams.length + 1];
 		if(specificParams.length > 0) {
 			System.arraycopy(commonParams, 0, resultParams, 0, commonParams.length);
@@ -55,7 +53,7 @@ public class Ximalaya implements Serializable {
 	 * 
 	 * @return
 	 */
-	public final HttpParameter[] assembleCommonParams() {
+	private final HttpParameter[] assembleCommonParams() {
 		HttpParameter[] commonParams = new HttpParameter[4];
 		commonParams[0] = new HttpParameter("app_key", APP_KEY);
 		commonParams[1] = new HttpParameter("client_os_type", SERVER_CLIENT_OS_TYPE);
@@ -67,9 +65,10 @@ public class Ximalaya implements Serializable {
 	/**
 	 * 组装每个API接口特有的参数，子类可以重写该方法以提供自己的特有参数
 	 * 
+	 * @param rawSpecificParams
 	 * @return
 	 */
-	protected HttpParameter[] assembleSpecificParams() {
+	protected HttpParameter[] assembleSpecificParams(Object[] rawSpecificParams) {
 		return DEFAULT_SPECIFIC_PARAMS;
 	}
 	

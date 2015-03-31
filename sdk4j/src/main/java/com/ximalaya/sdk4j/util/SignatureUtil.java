@@ -1,8 +1,5 @@
 package com.ximalaya.sdk4j.util;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.TreeMap;
 
