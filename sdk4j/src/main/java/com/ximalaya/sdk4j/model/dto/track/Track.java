@@ -2,7 +2,7 @@ package com.ximalaya.sdk4j.model.dto.track;
 
 import java.io.Serializable;
 
-import com.ximalaya.sdk4j.model.DTOKind;
+import com.ximalaya.sdk4j.model.dto.DTOKind;
 import com.ximalaya.sdk4j.model.dto.IKindAware;
 
 /**

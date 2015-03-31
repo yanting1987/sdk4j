@@ -1,4 +1,4 @@
-package com.ximalaya.sdk4j.model;
+package com.ximalaya.sdk4j.model.dto;
 
 public interface DTOKind {
 	

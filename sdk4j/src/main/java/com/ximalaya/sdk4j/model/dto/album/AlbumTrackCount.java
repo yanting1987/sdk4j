@@ -1,6 +1,6 @@
 package com.ximalaya.sdk4j.model.dto.album;
 
-import com.ximalaya.sdk4j.model.DTOKind;
+import com.ximalaya.sdk4j.model.dto.DTOKind;
 import com.ximalaya.sdk4j.model.dto.IKindAware;
 
 public class AlbumTrackCount implements IKindAware {
