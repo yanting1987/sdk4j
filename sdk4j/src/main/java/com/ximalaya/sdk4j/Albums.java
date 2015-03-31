@@ -13,7 +13,7 @@ public class Albums extends Ximalaya {
 	private static final long serialVersionUID = -8651526987345601726L;
 	
 	/**
-	 * 根据分类和标签获取专辑（带分页）
+	 * 根据分类和标签获取热门专辑（带分页）
 	 * 
 	 * @param categoryID 必填，分类ID
 	 * @param tagName    可选，标签名
@@ -21,7 +21,7 @@ public class Albums extends Ximalaya {
 	 * @return
 	 * @throws XimalayaException 
 	 */
-	public AlbumList getAlbumList(long categoryID, String tagName, Paging paging) throws XimalayaException {
+	public AlbumList getHotAlbumList(long categoryID, String tagName, Paging paging) throws XimalayaException {
 		return Album.constructAlbumList(
 				CLIENT.get(String.format("%s/albums/list", BASE_URL), 
 							assembleHttpParams(assembleSpecificParams(new Object[] { categoryID, tagName, paging }))));
