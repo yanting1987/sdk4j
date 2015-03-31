@@ -11,9 +11,9 @@ import com.ximalaya.sdk4j.model.dto.AbstractPageResult;
  */
 public class AlbumList extends AbstractPageResult {
 	
-	private Long categoryID;       // 标签所属分类ID
-	private String categoryName;   // 标签所属分类名称
-	private String tagName;        // 标签名
+	private Long categoryID;       // 标签所属分类ID，可选
+	private String categoryName;   // 标签所属分类名称，可选
+	private String tagName;        // 标签名，可选
 	private List<Album> albums;    // 专辑列表
 	
 	public Long getCategoryID() {

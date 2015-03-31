@@ -11,9 +11,9 @@ import com.ximalaya.sdk4j.model.dto.AbstractPageResult;
  */
 public class TrackList extends AbstractPageResult {
 	
-	private Long categoryID;       // 声音所属分类ID
-	private String categoryName;   // 声音所属分类名
-	private String tagName;        // 选填的声音所属标签名，无则返回空
+	private Long categoryID;       // 声音所属分类ID，可选
+	private String categoryName;   // 声音所属分类名，可选
+	private String tagName;        // 选填的声音所属标签名，可选
 	private List<Track> tracks;    // 声音列表
 	
 	public Long getCategoryID() {
