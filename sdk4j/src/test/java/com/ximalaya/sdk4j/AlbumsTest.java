@@ -13,7 +13,7 @@ public class AlbumsTest {
 	Albums albums = new Albums();
 	
 	@Test
-	public void testGetAlbumList() throws XimalayaException {
+	public void testGetHotAlbumList() throws XimalayaException {
 		AlbumList albumList = albums.getHotAlbumList(6L, null, new Paging());
 		Assert.assertFalse(albumList.getAlbums().isEmpty());
 	}
