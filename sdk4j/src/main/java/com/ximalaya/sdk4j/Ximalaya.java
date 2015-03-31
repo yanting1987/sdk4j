@@ -42,9 +42,14 @@ public abstract class Ximalaya implements Serializable {
 		else {
 			System.arraycopy(commonParams, 0, resultParams, 0, commonParams.length);
 		}
+		
+		/*
+		 * 计算签名参数 
+		 */
 		String seed = APP_SECRET + SERVER_AUTHENTICATE_STATIC_KEY;
 		String sig = SignatureUtil.caculateSignature(resultParams, seed);
 		resultParams[resultParams.length - 1] = new HttpParameter("sig", sig);
+		
 		return resultParams;
 	}
 	
@@ -58,12 +63,12 @@ public abstract class Ximalaya implements Serializable {
 		commonParams[0] = new HttpParameter("app_key", APP_KEY);
 		commonParams[1] = new HttpParameter("client_os_type", SERVER_CLIENT_OS_TYPE);
 		commonParams[2] = new HttpParameter("nonce", CrypterUtil.getRandKey());  // nonce是一个随机字符串
-		commonParams[3] = new HttpParameter("timestamp", System.currentTimeMillis() / 1000);
+		commonParams[3] = new HttpParameter("timestamp", System.currentTimeMillis());
 		return commonParams;
 	}
 	
 	/**
-	 * 组装每个API接口特有的参数，子类可以重写该方法以提供自己的特有参数
+	 * 组装每个API接口特有的参数，默认无特有参数，子类可以重写该方法以提供自己的特有参数
 	 * 
 	 * @param rawSpecificParams
 	 * @return

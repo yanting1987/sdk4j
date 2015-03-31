@@ -24,7 +24,7 @@ public class Albums extends Ximalaya {
 	public AlbumList getAlbumList(long categoryID, String tagName, Paging paging) throws XimalayaException {
 		return Album.constructAlbumList(
 				CLIENT.get(String.format("%s/albums/list", BASE_URL), 
-							assembleHttpParams(assembleSpecificParams(new Object[] { categoryID, tagName })), 
+							assembleHttpParams(assembleSpecificParams(new Object[] { categoryID, tagName, paging })), 
 							paging));
 	}
 	
@@ -33,14 +33,19 @@ public class Albums extends Ximalaya {
 		HttpParameter[] specificParams = null;
 		long categoryID = (Long) rawParams[0];
 		String tagName = rawParams[1] == null ? null : String.valueOf(rawParams);
+		Paging paging = (Paging) rawParams[2];
 		if(tagName != null && !tagName.isEmpty()) {
-			specificParams = new HttpParameter[2];
+			specificParams = new HttpParameter[4];
 			specificParams[0] = new HttpParameter("category_id", categoryID);
 			specificParams[1] = new HttpParameter("tag_name", tagName);
+			specificParams[2] = new HttpParameter("page", paging.getPage());
+			specificParams[3] = new HttpParameter("count", paging.getCount());
 		}
 		else {
-			specificParams = new HttpParameter[1];
+			specificParams = new HttpParameter[3];
 			specificParams[0] = new HttpParameter("category_id", categoryID);
+			specificParams[1] = new HttpParameter("page", paging.getPage());
+			specificParams[2] = new HttpParameter("count", paging.getCount());
 		}
 		return specificParams;
 	}

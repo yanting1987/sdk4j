@@ -58,7 +58,7 @@ public class XimalayaException extends Exception {
     	this.statusCode = statusCode;
     }
     
-    public XimalayaException(String msg , JSONObject json, int statusCode) throws JSONException {
+    public XimalayaException(String msg, JSONObject json, int statusCode) throws JSONException {
         super(msg + "\n error_no:" + json.getInt("error_no") + " error_code:" + json.getString("error_code")
         	+ " error_desc: " + json.getString("error_desc") + " service: " + json.getString("service"));
         this.statusCode = statusCode;

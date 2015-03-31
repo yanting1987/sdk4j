@@ -1,5 +1,7 @@
 package com.ximalaya.sdk4j;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import com.ximalaya.sdk4j.model.Paging;
@@ -13,7 +15,8 @@ public class AlbumsTest {
 	@Test
 	public void testGetAlbumList() throws XimalayaException {
 		AlbumList albumList = albums.getAlbumList(0L, null, new Paging());
-		System.out.println(albumList.getAlbums().size());
+		Assert.assertFalse(albumList.getAlbums().isEmpty());
 	}
 
 }
+   
