@@ -24,8 +24,7 @@ public class Albums extends Ximalaya {
 	public AlbumList getAlbumList(long categoryID, String tagName, Paging paging) throws XimalayaException {
 		return Album.constructAlbumList(
 				CLIENT.get(String.format("%s/albums/list", BASE_URL), 
-							assembleHttpParams(assembleSpecificParams(new Object[] { categoryID, tagName, paging })), 
-							paging));
+							assembleHttpParams(assembleSpecificParams(new Object[] { categoryID, tagName, paging }))));
 	}
 	
 	@Override

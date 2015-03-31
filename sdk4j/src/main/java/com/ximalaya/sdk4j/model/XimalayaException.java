@@ -59,13 +59,16 @@ public class XimalayaException extends Exception {
     }
     
     public XimalayaException(String msg, JSONObject json, int statusCode) throws JSONException {
-        super(msg + "\n error_no:" + json.getInt("error_no") + " error_code:" + json.getString("error_code")
-        	+ " error_desc: " + json.getString("error_desc") + " service: " + json.getString("service"));
+        super(msg + "\n { error_no: " + json.getInt("error_no") + ", error_code: \"" + json.getString("error_code")
+        	+ "\", error_desc: \"" + json.getString("error_desc") + "\", service: " + (json.has("service") ? ("\"" + json.getString("service") + "\"") : null
+        	+ "}"));
         this.statusCode = statusCode;
         this.errorNo = json.getInt("error_no");
         this.errorCode = json.getString("error_code");
         this.errorDesc = json.getString("error_desc");
-        this.service = json.getString("service");
+        if(json.has("service")) {
+        	this.service = json.getString("service");
+        }
     }
 
     public XimalayaException(String msg, Exception cause) {

@@ -2,8 +2,6 @@ package com.ximalaya.sdk4j.http;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.Header;
@@ -25,7 +23,6 @@ import org.slf4j.LoggerFactory;
 
 import com.ximalaya.sdk4j.model.HttpParameter;
 import com.ximalaya.sdk4j.model.MySSLSocketFactory;
-import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 
 /**
@@ -161,7 +158,6 @@ public class HttpClient implements java.io.Serializable {
 	
 	public HttpResponse get(String url, HttpParameter[] params) 
 			throws XimalayaException {
-		LOG.debug("Request:");
 		LOG.debug("GET:" + url);
 		if (null != params && params.length > 0) {
 			String encodedParams = HttpClient.encodeParameters(params);
@@ -173,43 +169,6 @@ public class HttpClient implements java.io.Serializable {
 		}
 		GetMethod getmethod = new GetMethod(url);
 		return httpRequest(getmethod);
-	}
-	
-	public HttpResponse get(String url, HttpParameter[] params, Paging paging)
-			throws XimalayaException {
-		if (null != paging) {
-			List<HttpParameter> pagingParams = new ArrayList<HttpParameter>(4);
-			if (-1 != paging.getPage()) {
-				pagingParams.add(new HttpParameter("page", String
-						.valueOf(paging.getPage())));
-			}
-			if (-1 != paging.getCount()) {
-				pagingParams.add(new HttpParameter("count", String
-						.valueOf(paging.getCount())));
-			}
-			
-			HttpParameter[] newparams = null;
-			HttpParameter[] arrayPagingParams = pagingParams.toArray(new HttpParameter[pagingParams.size()]);
-			if (null != params) {
-				newparams = new HttpParameter[params.length + pagingParams.size()];
-				System.arraycopy(params, 0, newparams, 0, params.length);
-				System.arraycopy(arrayPagingParams, 0, newparams, params.length, pagingParams.size());
-			} else {
-				/*if (0 != arrayPagingParams.length) {
-					String encodedParams = HttpClient.encodeParameters(arrayPagingParams);
-					if (-1 != url.indexOf("?")) {
-						url += "&" + encodedParams;
-					} else {
-						url += "?" + encodedParams;
-					}
-				}*/
-				newparams = arrayPagingParams;
-			}
-			return get(url, newparams);
-		}
-		else {
-			return get(url, params);
-		}
 	}
 
 	/**
@@ -231,7 +190,6 @@ public class HttpClient implements java.io.Serializable {
 	}
 
 	public HttpResponse post(String url, HttpParameter[] params) throws XimalayaException {
-		LOG.debug("Request:");
 		LOG.debug("POST" + url);
 		PostMethod postMethod = new PostMethod(url);
 		for (int i = 0; i < params.length; i++) {
