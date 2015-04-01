@@ -24,9 +24,9 @@ public class Albums extends Ximalaya {
 	/**
 	 * 根据分类和标签获取热门专辑（带分页）
 	 * 
-	 * @param categoryID 必填，分类ID
-	 * @param tagName    可选，标签名
-	 * @param paging     可选（不填则为默认值），分页参数
+	 * @param categoryID 分类ID，必填
+	 * @param tagName    标签名，可选
+	 * @param paging     分页参数，可选，不填则为默认值
 	 * @return
 	 * @throws XimalayaException 
 	 */

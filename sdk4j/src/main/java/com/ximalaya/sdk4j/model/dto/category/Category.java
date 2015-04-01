@@ -1,7 +1,15 @@
 package com.ximalaya.sdk4j.model.dto.category;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.ximalaya.sdk4j.http.HttpResponse;
+import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.DTOKind;
 import com.ximalaya.sdk4j.model.dto.IKindAware;
 
@@ -18,8 +26,6 @@ public class Category implements IKindAware, Serializable {
 	
 	private Long id;               // ID
 	private String categoryName;   // 分类名
-	private Long updatedAt;        // 更新时间
-	private Long createdAt;        // 更新时间
 	
 	public Long getId() {
 		return id;
@@ -33,22 +39,39 @@ public class Category implements IKindAware, Serializable {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	public Long getUpdatedAt() {
-		return updatedAt;
-	}
-	public void setUpdatedAt(Long updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-	public Long getCreatedAt() {
-		return createdAt;
-	}
-	public void setCreatedAt(Long createdAt) {
-		this.createdAt = createdAt;
-	}
 	
 	@Override
 	public String getKind() {
 		return DTOKind.CATEGORY_KIND;
+	}
+	
+	public Category(JSONObject json) throws XimalayaException {
+		init(json);
+	}
+	
+	private void init(JSONObject json) throws XimalayaException {
+		if(json != null) {
+			try {
+				id = json.getLong("id");
+				categoryName = json.getString("category_name");
+			} catch (JSONException jsone) {
+				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
+			}
+		}
+	}
+	
+	public static List<Category> constructCategories(HttpResponse response) throws XimalayaException {
+		List<Category> categories = new ArrayList<Category> ();
+		JSONArray categoriesJsonArray = response.asJSONArray();
+		try {
+			int size = categoriesJsonArray.length();
+			for(int i = 0; i < size; i++) {
+				categories.add(new Category(categoriesJsonArray.getJSONObject(i)));
+			}
+		} catch (JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return categories;
 	}
 	
 	@Override
@@ -87,11 +110,7 @@ public class Category implements IKindAware, Serializable {
 		strBuilder.append(id);
 		strBuilder.append(", categoryName: \"");
 		strBuilder.append(categoryName);
-		strBuilder.append("\", updatedAt: ");
-		strBuilder.append(updatedAt);
-		strBuilder.append(", createdAt: ");
-		strBuilder.append(createdAt);
-		strBuilder.append("}");
+		strBuilder.append("\"}");
 		return strBuilder.toString();
 	}
 	

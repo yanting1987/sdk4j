@@ -15,8 +15,8 @@ public class Tags extends Ximalaya {
 	/**
 	 * 根据分类和类型获取标签
 	 * 
-	 * @param categoryID 分类ID
-	 * @param type       类型，0-专辑标签，1-声音标签
+	 * @param categoryID 分类ID，必填
+	 * @param type       类型，必填，0-专辑标签，1-声音标签
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -39,7 +39,7 @@ public class Tags extends Ximalaya {
 	/**
 	 * 根据分类获取专辑标签
 	 * 
-	 * @param categoryID
+	 * @param categoryID 分类ID，必填
 	 * @return
 	 * @throws XimalayaException 
 	 */
@@ -50,7 +50,7 @@ public class Tags extends Ximalaya {
 	/**
 	 * 根据分类获取声音标签
 	 * 
-	 * @param categoryID
+	 * @param categoryID 分类ID，必填
 	 * @return
 	 * @throws XimalayaException
 	 */
