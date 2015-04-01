@@ -12,6 +12,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
 import com.ximalaya.sdk4j.model.dto.DTOKind;
 import com.ximalaya.sdk4j.model.dto.IKindAware;
+import com.ximalaya.sdk4j.model.dto.track.Track;
 
 /**
  * 专辑DTO
@@ -164,8 +165,8 @@ public class Album extends XimalayaResponse implements IKindAware {
 	
 	public static List<Album> constructAlbums(HttpResponse response) throws XimalayaException {
 		List<Album> albums = new ArrayList<Album> ();
+		JSONArray albumsJsonArray = response.asJSONArray();
 		try {
-			JSONArray albumsJsonArray = response.asJSONArray();
 			int size = albumsJsonArray.length();
 			for(int i = 0; i < size; i++) {
 				albums.add(new Album(albumsJsonArray.getJSONObject(i)));
@@ -203,6 +204,43 @@ public class Album extends XimalayaResponse implements IKindAware {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
 		return albumList;
+	}
+	
+	public static List<AlbumTrackCount> constructAlbumTrackCounts(HttpResponse response) throws XimalayaException {
+		List<AlbumTrackCount> albumTrackCounts = new ArrayList<AlbumTrackCount> ();
+		JSONArray albumTrackCountsJsonArray = response.asJSONArray();
+		try {
+			int size = albumTrackCountsJsonArray.length();
+			for(int i = 0; i < size; i++) {
+				albumTrackCounts.add(new AlbumTrackCount(albumTrackCountsJsonArray.getJSONObject(i)));
+			}
+		} catch (JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return albumTrackCounts;
+	}
+	
+	public static AlbumTracks constructAlbumTracks(HttpResponse response) throws XimalayaException {
+		AlbumTracks albumTracks = new AlbumTracks();
+		JSONObject albumTracksJsonObject = response.asJSONObject();
+		try {
+			albumTracks.setAlbumID(albumTracksJsonObject.getLong("album_id"));
+			albumTracks.setAlbumTitle(albumTracksJsonObject.getString("album_title"));
+			albumTracks.setCoverUrlSmall(albumTracksJsonObject.getString("cover_url_small"));
+			albumTracks.setCoverUrlMiddle(albumTracksJsonObject.getString("cover_url_middle"));
+			albumTracks.setCoverUrlLarge(albumTracksJsonObject.getString("cover_url_large"));
+			
+			List<Track> tracks = new ArrayList<Track> ();
+			JSONArray tracksJsonArray = albumTracksJsonObject.getJSONArray("tracks");
+			int size = tracksJsonArray.length();
+			for(int i = 0; i < size; i++) {
+				tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
+			}
+			albumTracks.setTracks(tracks);
+		} catch(JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return albumTracks;
 	}
 	
 	@Override

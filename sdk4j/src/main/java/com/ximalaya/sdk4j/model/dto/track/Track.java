@@ -1,7 +1,11 @@
 package com.ximalaya.sdk4j.model.dto.track;
 
-import java.io.Serializable;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import com.ximalaya.sdk4j.http.HttpResponse;
+import com.ximalaya.sdk4j.model.XimalayaException;
+import com.ximalaya.sdk4j.model.XimalayaResponse;
 import com.ximalaya.sdk4j.model.dto.DTOKind;
 import com.ximalaya.sdk4j.model.dto.IKindAware;
 
@@ -10,29 +14,29 @@ import com.ximalaya.sdk4j.model.dto.IKindAware;
  * @author will
  *
  */
-public class Track implements IKindAware, Serializable {
+public class Track extends XimalayaResponse implements IKindAware {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4324052388239950724L;
 	
-	private Long id;          // ID
-	private String trackTitle;               // 声音标题
-	private String trackTags;                // 声音标签列表字符串，以英文逗号分隔
-	private String trackIntro;               // 声音简介
-	private String coverUrlSmall;            // 声音封面小图
-	private String coverUrlMiddle;           // 声音封面中图
-	private String coverUrlLarge;            // 声音封面大图
-	private String nickname;                 // 声音所属主播用户名
-	private String avatarUrl;                // 声音所属主播头像
-	private Double duration;                // 声音时长
-	private Long playCount;                  // 声音播放次数
-	private Integer favoriteCount;           // 声音喜欢数
-	private String playUrl32;                // 声音32位播放地址
-	private String playUrl64;                // 声音64位播放地址
-	private Long subordinatedAlbumID;        // 声音所属专辑ID
-	private Long updatedAt;   // 更新时间
-	private Long createdAt;   // 更新时间
+	private Long id;                    // ID
+	private String trackTitle;          // 声音标题
+	private String trackTags;           // 声音标签列表字符串，以英文逗号分隔
+	private String trackIntro;          // 声音简介
+	private String coverUrlSmall;       // 声音封面小图
+	private String coverUrlMiddle;      // 声音封面中图
+	private String coverUrlLarge;       // 声音封面大图
+	private String nickname;            // 声音所属主播用户名
+	private String avatarUrl;           // 声音所属主播头像
+	private Double duration;            // 声音时长
+	private Long playCount;             // 声音播放次数
+	private Long favoriteCount;      // 声音喜欢数
+	private String playUrl32;           // 声音32位播放地址
+	private String playUrl64;           // 声音64位播放地址
+	private Long subordinatedAlbumID;   // 声音所属专辑ID
+	private Long updatedAt;             // 更新时间
+	private Long createdAt;             // 更新时间
 	
 	public Long getId() {
 		return id;
@@ -100,10 +104,10 @@ public class Track implements IKindAware, Serializable {
 	public void setPlayCount(Long playCount) {
 		this.playCount = playCount;
 	}
-	public Integer getFavoriteCount() {
+	public Long getFavoriteCount() {
 		return favoriteCount;
 	}
-	public void setFavoriteCount(Integer favoriteCount) {
+	public void setFavoriteCount(Long favoriteCount) {
 		this.favoriteCount = favoriteCount;
 	}
 	public String getPlayUrl32() {
@@ -142,6 +146,42 @@ public class Track implements IKindAware, Serializable {
 		return DTOKind.TRACK_KIND;
 	}
 	
+	public Track(JSONObject json) throws XimalayaException {
+		super();
+		init(json);
+	}
+	
+	public Track(HttpResponse response) throws XimalayaException {
+		super();
+		init(response.asJSONObject());
+	}
+	
+	private void init(JSONObject json) throws XimalayaException {
+		if(json != null) {
+			try {
+				id = json.getLong("id");
+				trackTitle = json.getString("track_title");
+				trackTags = json.getString("track_tags");
+				trackIntro = json.getString("track_intro");
+				coverUrlSmall = json.getString("cover_url_small");
+				coverUrlMiddle = json.getString("cover_url_middle");
+				coverUrlLarge = json.getString("cover_url_large");
+				nickname = json.getString("nickname");
+				avatarUrl = json.getString("avatar_url");
+				duration = json.getDouble("duration");
+				playCount = json.getLong("play_count");
+				favoriteCount = json.getLong("favorite_count");
+				playUrl32 = json.getString("play_url_32");
+				playUrl64 = json.getString("play_url_64");
+				subordinatedAlbumID = json.getLong("subordinated_album_id");
+				updatedAt = json.getLong("updated_at");
+				createdAt = json.getLong("created_at");
+			} catch (JSONException jsone) {
+				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
+			}
+		}
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -169,6 +209,47 @@ public class Track implements IKindAware, Serializable {
 		}
 		
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder strBuilder = new StringBuilder();
+		strBuilder.append("Track {id: ");
+		strBuilder.append(id);
+		strBuilder.append(", trackTitle: \"");
+		strBuilder.append(trackTitle);
+		strBuilder.append("\", trackTags: \"");
+		strBuilder.append(trackTags);
+		strBuilder.append("\", trackIntro: \"");
+		strBuilder.append(trackIntro);
+		strBuilder.append("\", coverUrlSmall: \"");
+		strBuilder.append(coverUrlSmall);
+		strBuilder.append("\", coverUrlMiddle: \"");
+		strBuilder.append(coverUrlMiddle);
+		strBuilder.append("\", coverUrlLarge: \"");
+		strBuilder.append(coverUrlLarge);
+		strBuilder.append("\", nickname: \"");
+		strBuilder.append(nickname);
+		strBuilder.append("\", avatarUrl: \"");
+		strBuilder.append(avatarUrl);
+		strBuilder.append("\", duration: ");
+		strBuilder.append(duration);
+		strBuilder.append(", playCount: ");
+		strBuilder.append(playCount);
+		strBuilder.append(", favoriteCount: ");
+		strBuilder.append(favoriteCount);
+		strBuilder.append(", playUrl32: ");
+		strBuilder.append(playUrl32);
+		strBuilder.append(", playUrl64: ");
+		strBuilder.append(playUrl64);
+		strBuilder.append(", subordinatedAlbumID: ");
+		strBuilder.append(subordinatedAlbumID);
+		strBuilder.append(", updatedAt: ");
+		strBuilder.append(updatedAt);
+		strBuilder.append(", createdAt: ");
+		strBuilder.append(createdAt);
+		strBuilder.append("}");
+		return strBuilder.toString();
 	}
 	
 }

@@ -158,7 +158,6 @@ public class HttpClient implements java.io.Serializable {
 	
 	public HttpResponse get(String url, HttpParameter[] params) 
 			throws XimalayaException {
-		LOG.debug("GET:" + url);
 		if (null != params && params.length > 0) {
 			String encodedParams = HttpClient.encodeParameters(params);
 			if (-1 == url.indexOf("?")) {
@@ -167,6 +166,7 @@ public class HttpClient implements java.io.Serializable {
 				url += "&" + encodedParams;
 			}
 		}
+		LOG.debug("GET:" + url);
 		GetMethod getmethod = new GetMethod(url);
 		return httpRequest(getmethod);
 	}

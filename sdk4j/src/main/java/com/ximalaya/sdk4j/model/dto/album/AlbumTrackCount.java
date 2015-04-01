@@ -1,10 +1,13 @@
 package com.ximalaya.sdk4j.model.dto.album;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.DTOKind;
 import com.ximalaya.sdk4j.model.dto.IKindAware;
 
 public class AlbumTrackCount implements IKindAware {
-	
 	private Long id;           // ID
 	private Long trackCount;   // 该专辑包含声音数
 	
@@ -24,6 +27,21 @@ public class AlbumTrackCount implements IKindAware {
 	@Override
 	public String getKind() {
 		return DTOKind.ALBUM_KIND;
+	}
+	
+	public AlbumTrackCount(JSONObject json) throws XimalayaException {
+		init(json);
+	}
+	
+	private void init(JSONObject json) throws XimalayaException {
+		if(json != null) {
+			try {
+				id = json.getLong("id");
+				trackCount = json.getLong("track_count");
+			} catch (JSONException jsone) {
+				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
+			}
+		}
 	}
 	
 	@Override
@@ -54,5 +72,15 @@ public class AlbumTrackCount implements IKindAware {
 		
 		return true;
 	}
-
+	
+	@Override
+	public String toString() {
+		StringBuilder strBuilder = new StringBuilder();
+		strBuilder.append("AlbumTrackCount {id: ");
+		strBuilder.append(id);
+		strBuilder.append(", trackCount: ");
+		strBuilder.append(trackCount);
+		strBuilder.append("}");
+		return strBuilder.toString();
+	}
 }

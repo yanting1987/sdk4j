@@ -85,4 +85,29 @@ public class AlbumTracks extends AbstractPageResult {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder strBuilder = new StringBuilder();
+		strBuilder.append("AlbumTracks: {albumID: ");
+		strBuilder.append(albumID);
+		strBuilder.append(", albumTitle: \"");
+		strBuilder.append(albumTitle);
+		strBuilder.append("\", coverUrlSmall: \"");
+		strBuilder.append(coverUrlSmall);
+		strBuilder.append("\", coverUrlMiddle: \"");
+		strBuilder.append(coverUrlMiddle);
+		strBuilder.append("\", coverUrlLarge: \"");
+		strBuilder.append(coverUrlLarge);
+		strBuilder.append("\", tracks: [");
+		if(tracks != null && !tracks.isEmpty()) {
+			for(Track track: tracks) {
+				strBuilder.append(track.toString());
+				strBuilder.append(", ");
+			}
+			strBuilder.deleteCharAt(strBuilder.lastIndexOf(","));
+		}
+		strBuilder.append("]}");
+		return strBuilder.toString();
+	}
+	
 }
