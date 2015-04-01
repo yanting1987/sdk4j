@@ -1,5 +1,7 @@
 package com.ximalaya.sdk4j.model.dto.album;
 
+import java.io.Serializable;
+
 import com.ximalaya.sdk4j.model.dto.DTOKind;
 import com.ximalaya.sdk4j.model.dto.IKindAware;
 
@@ -8,7 +10,11 @@ import com.ximalaya.sdk4j.model.dto.IKindAware;
  * @author will
  *
  */
-public class UpdatedAlbum implements IKindAware {
+public class UpdatedAlbum implements IKindAware, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8239169416716318234L;
 	
 	private Long id;                       // ID
 	private String albumTitle;             // 专辑标题

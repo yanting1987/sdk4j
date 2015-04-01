@@ -1,5 +1,9 @@
 package com.ximalaya.sdk4j.model.dto.track;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -180,6 +184,63 @@ public class Track extends XimalayaResponse implements IKindAware {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
 		}
+	}
+	
+	public static TrackList constructTrackList(HttpResponse response) throws XimalayaException {
+		TrackList trackList = new TrackList();
+		JSONObject trackListJsonObject = response.asJSONObject();
+		try {
+			if(trackListJsonObject.has("category_id")) {
+				trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
+			}
+			if(trackListJsonObject.has("category_name")) {
+				trackList.setCategoryName(trackListJsonObject.getString("category_name"));
+			}
+			if(trackListJsonObject.has("tag_name")) {
+				trackList.setTagName(trackListJsonObject.getString("tag_name"));
+			}
+			trackList.setTotalPage(trackListJsonObject.getInt("total_page"));
+			trackList.setTotalCount(trackListJsonObject.getInt("total_count"));
+			
+			List<Track> tracks = new ArrayList<Track> ();
+			JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
+			int size = tracksJsonArray.length();
+			for(int i = 0; i < size; i++) {
+				tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
+			}
+			trackList.setTracks(tracks);
+		} catch(JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return trackList;
+	}
+	
+	public static List<Track> constructTracks(HttpResponse response) throws XimalayaException {
+		List<Track> tracks = new ArrayList<Track> ();
+		JSONArray tracksJsonArray = response.asJSONArray();
+		try {
+			int size = tracksJsonArray.length();
+			for(int i = 0; i < size; i++) {
+				tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
+			}
+		} catch (JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return tracks;
+	}
+	
+	public static List<DownloadTrack> constructDownTracks(HttpResponse response) throws XimalayaException {
+		List<DownloadTrack> downloadTracks = new ArrayList<DownloadTrack> ();
+		JSONArray downloadTracksJsonArray = response.asJSONArray();
+		try {
+			int size = downloadTracksJsonArray.length();
+			for(int i = 0; i < size; i++) {
+				downloadTracks.add(new DownloadTrack(downloadTracksJsonArray.getJSONObject(i)));
+			}
+		} catch (JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return downloadTracks;
 	}
 	
 	@Override

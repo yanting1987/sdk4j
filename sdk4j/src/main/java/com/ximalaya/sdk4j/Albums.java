@@ -31,8 +31,8 @@ public class Albums extends Ximalaya {
 	 * @throws XimalayaException 
 	 */
 	public AlbumList getHotAlbumList(long categoryID, String tagName, Paging paging) throws XimalayaException {
-		if(categoryID <= 0) {
-			throw new IllegalArgumentException("categoryID should > 0");
+		if(categoryID < 0) {
+			throw new IllegalArgumentException("categoryID should >= 0");
 		}
 		paging = (paging == null) ? new Paging() : paging;
 		
@@ -74,7 +74,7 @@ public class Albums extends Ximalaya {
 	}
 	
 	/**
-	 * 根据一组ID批量获取专辑包含声音数信息
+	 * 根据一组专辑ID批量获取专辑包含声音数信息
 	 * 
 	 * @param albumIDs 一组专辑ID，必填
 	 * @return

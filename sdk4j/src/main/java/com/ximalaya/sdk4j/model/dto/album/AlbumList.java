@@ -1,5 +1,6 @@
 package com.ximalaya.sdk4j.model.dto.album;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.ximalaya.sdk4j.model.dto.AbstractPageResult;
@@ -9,7 +10,11 @@ import com.ximalaya.sdk4j.model.dto.AbstractPageResult;
  * @author will
  *
  */
-public class AlbumList extends AbstractPageResult {
+public class AlbumList extends AbstractPageResult implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7355077855402965227L;
 	
 	private Long categoryID;       // 标签所属分类ID，可选
 	private String categoryName;   // 标签所属分类名称，可选

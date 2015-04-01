@@ -1,5 +1,7 @@
 package com.ximalaya.sdk4j.model.dto.album;
 
+import java.io.Serializable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,7 +9,12 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.DTOKind;
 import com.ximalaya.sdk4j.model.dto.IKindAware;
 
-public class AlbumTrackCount implements IKindAware {
+public class AlbumTrackCount implements IKindAware, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4350343495118789469L;
+	
 	private Long id;           // ID
 	private Long trackCount;   // 该专辑包含声音数
 	

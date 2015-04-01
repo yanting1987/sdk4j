@@ -1,5 +1,11 @@
 package com.ximalaya.sdk4j.model.dto.track;
 
+import java.io.Serializable;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.DTOKind;
 import com.ximalaya.sdk4j.model.dto.IKindAware;
 
@@ -8,7 +14,11 @@ import com.ximalaya.sdk4j.model.dto.IKindAware;
  * @author will
  *
  */
-public class DownloadTrack implements IKindAware {
+public class DownloadTrack implements IKindAware, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3784342948490045616L;
 	
 	private Long id;             // ID
 	private String trackTitle;   // 声音标题
@@ -51,6 +61,24 @@ public class DownloadTrack implements IKindAware {
 		return DTOKind.TRACK_KIND;
 	}
 	
+	public DownloadTrack(JSONObject json) throws XimalayaException {
+		init(json);
+	}
+	
+	private void init(JSONObject json) throws XimalayaException {
+		if(json != null) {
+			try {
+				id = json.getLong("id");
+				trackTitle = json.getString("track_title");
+				playUrl32 = json.getString("play_url_32");
+				playUrl64 = json.getString("play_url_64");
+				playUrlAac = json.getString("play_url_aac");
+			} catch (JSONException jsone) {
+				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
+			}
+		}
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -78,6 +106,23 @@ public class DownloadTrack implements IKindAware {
 		}
 		
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder strBuilder = new StringBuilder();
+		strBuilder.append("DownTrack {id: ");
+		strBuilder.append(id);
+		strBuilder.append(", trackTitle: \"");
+		strBuilder.append(trackTitle);
+		strBuilder.append("\", playUrl32: \"");
+		strBuilder.append(playUrl32);
+		strBuilder.append("\", playUrl64: \"");
+		strBuilder.append(playUrl64);
+		strBuilder.append("\", playUrlAac: \"");
+		strBuilder.append(playUrlAac);
+		strBuilder.append("}");
+		return strBuilder.toString();
 	}
 
 }

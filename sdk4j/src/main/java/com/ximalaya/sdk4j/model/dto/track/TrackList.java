@@ -1,5 +1,6 @@
 package com.ximalaya.sdk4j.model.dto.track;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.ximalaya.sdk4j.model.dto.AbstractPageResult;
@@ -9,7 +10,11 @@ import com.ximalaya.sdk4j.model.dto.AbstractPageResult;
  * @author will
  *
  */
-public class TrackList extends AbstractPageResult {
+public class TrackList extends AbstractPageResult implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2548721408063441899L;
 	
 	private Long categoryID;       // 声音所属分类ID，可选
 	private String categoryName;   // 声音所属分类名，可选

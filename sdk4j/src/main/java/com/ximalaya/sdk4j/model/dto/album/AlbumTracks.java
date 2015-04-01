@@ -1,5 +1,6 @@
 package com.ximalaya.sdk4j.model.dto.album;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.ximalaya.sdk4j.model.dto.AbstractPageResult;
@@ -10,8 +11,12 @@ import com.ximalaya.sdk4j.model.dto.track.Track;
  * @author will
  *
  */
-public class AlbumTracks extends AbstractPageResult {
-
+public class AlbumTracks extends AbstractPageResult implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5651248836985634066L;
+	
 	private Long albumID;            // 专辑ID
 	private String albumTitle;       // 专辑名称
 	private String coverUrlSmall;    // 专辑封面小图

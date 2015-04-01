@@ -1,0 +1,61 @@
+package com.ximalaya.sdk4j;
+
+import java.util.List;
+
+import com.ximalaya.sdk4j.model.HttpParameter;
+import com.ximalaya.sdk4j.model.XimalayaException;
+import com.ximalaya.sdk4j.model.dto.tag.Tag;
+
+public class Tags extends Ximalaya {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3845650700794416855L;
+	
+	/**
+	 * 根据分类和类型获取标签
+	 * 
+	 * @param categoryID 分类ID
+	 * @param type       类型，0-专辑标签，1-声音标签
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Tag> getTags(long categoryID, int type) throws XimalayaException {
+		if(categoryID < 0) {
+			throw new IllegalArgumentException("categoryID should >= 0");
+		}
+		if(type != 0 && type != 1) {
+			throw new IllegalArgumentException("type should be 0(album tag) or 1(track tag)");
+		}
+		
+		HttpParameter[] specificParams = new HttpParameter[2];
+		specificParams[0] = new HttpParameter("category_id", categoryID);
+		specificParams[1] = new HttpParameter("type", type);
+		return Tag.constructTags(
+				CLIENT.get(String.format("%s/tags/list", BASE_URL),
+						    assembleHttpParams(specificParams)));
+	}
+	
+	/**
+	 * 根据分类获取专辑标签
+	 * 
+	 * @param categoryID
+	 * @return
+	 * @throws XimalayaException 
+	 */
+	public List<Tag> getAlbumTags(long categoryID) throws XimalayaException {
+		return getTags(categoryID, 0);
+	}
+	
+	/**
+	 * 根据分类获取声音标签
+	 * 
+	 * @param categoryID
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Tag> getTrackTags(long categoryID) throws XimalayaException {
+		return getTags(categoryID, 1);
+	}
+	
+}

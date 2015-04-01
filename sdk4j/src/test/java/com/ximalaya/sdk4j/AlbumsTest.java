@@ -22,7 +22,7 @@ public class AlbumsTest {
 		AlbumList albumList = albumsService.getHotAlbumList(6L, null, new Paging());
 		List<Album> albums = albumList.getAlbums();
 		Assert.assertNotNull(albums);
-		Assert.assertFalse(albumList.getAlbums().isEmpty());
+		Assert.assertFalse(albums.isEmpty());
 	}
 	
 	@Test

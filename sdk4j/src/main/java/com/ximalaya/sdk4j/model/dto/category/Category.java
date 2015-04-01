@@ -16,16 +16,22 @@ public class Category implements IKindAware, Serializable {
 	 */
 	private static final long serialVersionUID = -8134137599995673738L;
 	
-	private Long id;          // ID
-	private Long updatedAt;   // 更新时间
-	private Long createdAt;   // 更新时间
-	private String categoryName;     // 分类名
+	private Long id;               // ID
+	private String categoryName;   // 分类名
+	private Long updatedAt;        // 更新时间
+	private Long createdAt;        // 更新时间
 	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 	public Long getUpdatedAt() {
 		return updatedAt;
@@ -38,12 +44,6 @@ public class Category implements IKindAware, Serializable {
 	}
 	public void setCreatedAt(Long createdAt) {
 		this.createdAt = createdAt;
-	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
 	}
 	
 	@Override
@@ -78,6 +78,21 @@ public class Category implements IKindAware, Serializable {
 		}
 		
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder strBuilder = new StringBuilder();
+		strBuilder.append("Category {id: ");
+		strBuilder.append(id);
+		strBuilder.append(", categoryName: \"");
+		strBuilder.append(categoryName);
+		strBuilder.append("\", updatedAt: ");
+		strBuilder.append(updatedAt);
+		strBuilder.append(", createdAt: ");
+		strBuilder.append(createdAt);
+		strBuilder.append("}");
+		return strBuilder.toString();
 	}
 	
 }
