@@ -172,9 +172,8 @@ public class HttpClient implements java.io.Serializable {
 	}
 
 	/**
-	 * 处理http deletemethod请求
+	 * 处理HTTP DELETE请求
 	 */
-
 	public HttpResponse delete(String url, HttpParameter[] params, String token)
 			throws XimalayaException {
 		if (0 != params.length) {
