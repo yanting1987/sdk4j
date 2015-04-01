@@ -165,10 +165,10 @@ public class Album extends XimalayaResponse implements IKindAware {
 	public static List<Album> constructAlbums(HttpResponse response) throws XimalayaException {
 		List<Album> albums = new ArrayList<Album> ();
 		try {
-			JSONArray list = response.asJSONArray();
-			int size = list.length();
+			JSONArray albumsJsonArray = response.asJSONArray();
+			int size = albumsJsonArray.length();
 			for(int i = 0; i < size; i++) {
-				albums.add(new Album(list.getJSONObject(i)));
+				albums.add(new Album(albumsJsonArray.getJSONObject(i)));
 			}
 		} catch (JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
@@ -193,10 +193,10 @@ public class Album extends XimalayaResponse implements IKindAware {
  			albumList.setTotalCount(albumListJsonObject.getInt("total_count"));
  			
  			List<Album> albums = new ArrayList<Album> ();
- 			JSONArray list = albumListJsonObject.getJSONArray("albums");
- 			int size = list.length();
+ 			JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");
+ 			int size = albumsJsonArray.length();
  			for(int i = 0; i < size; i++) {
- 				albums.add(new Album(list.getJSONObject(i)));
+ 				albums.add(new Album(albumsJsonArray.getJSONObject(i)));
  			}
  			albumList.setAlbums(albums);
 		} catch(JSONException jsone) {
@@ -232,6 +232,41 @@ public class Album extends XimalayaResponse implements IKindAware {
 		}
 		
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder strBuilder = new StringBuilder();
+		strBuilder.append("Album {id: ");
+		strBuilder.append(id);
+		strBuilder.append(", albumTitle: \"");
+		strBuilder.append(albumTitle);
+		strBuilder.append("\", albumTags: \"");
+		strBuilder.append(albumTags);
+		strBuilder.append("\", albumIntro: \"");
+		strBuilder.append(albumIntro);
+		strBuilder.append("\", coverUrlSmall: \"");
+		strBuilder.append(coverUrlSmall);
+		strBuilder.append("\", coverUrlMiddle: \"");
+		strBuilder.append(coverUrlMiddle);
+		strBuilder.append("\", coverUrlLarge: \"");
+		strBuilder.append(coverUrlLarge);
+		strBuilder.append("\", nickname: \"");
+		strBuilder.append(nickname);
+		strBuilder.append("\", avatarUrl: \"");
+		strBuilder.append(avatarUrl);
+		strBuilder.append("\", playCount: ");
+		strBuilder.append(playCount);
+		strBuilder.append(", includeTrackCount: ");
+		strBuilder.append(includeTrackCount);
+		strBuilder.append(", lastUptrackAt: ");
+		strBuilder.append(lastUptrackAt);
+		strBuilder.append(", updatedAt: ");
+		strBuilder.append(updatedAt);
+		strBuilder.append(", createdAt: ");
+		strBuilder.append(createdAt);
+		strBuilder.append("}");
+		return strBuilder.toString();
 	}
 	
 }

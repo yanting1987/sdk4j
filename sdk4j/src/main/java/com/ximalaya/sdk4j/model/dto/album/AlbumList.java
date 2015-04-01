@@ -75,4 +75,25 @@ public class AlbumList extends AbstractPageResult {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder strBuilder = new StringBuilder();
+		strBuilder.append("AlbumList {categoryID: ");
+		strBuilder.append(categoryID);
+		strBuilder.append(", categoryName: \"");
+		strBuilder.append(categoryName);
+		strBuilder.append("\", tagName: \"");
+		strBuilder.append(tagName);
+		strBuilder.append("\", albums: [");
+		if(albums != null && !albums.isEmpty()) {
+			for(Album album: albums) {
+				strBuilder.append(album.toString());
+				strBuilder.append(", ");
+			}
+			strBuilder.deleteCharAt(strBuilder.lastIndexOf(","));
+		}
+		strBuilder.append("]}");
+		return strBuilder.toString();
+	}
+	
 }

@@ -238,17 +238,16 @@ public class HttpClient implements java.io.Serializable {
 	/*
 	 * 对HTTP请求参数进行encode处理
 	 */
-	public static String encodeParameters(HttpParameter[] postParams) {
+	public static String encodeParameters(HttpParameter[] params) {
 		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < postParams.length; i++) {
+		for (int i = 0; i < params.length; i++) {
 			if (i != 0) {
 				buf.append("&");
 			}
 			try {
-				buf.append(URLEncoder.encode(postParams[i].getName(), "UTF-8"))
-						.append("=")
-						.append(URLEncoder.encode(postParams[i].getValue(),
-								"UTF-8"));
+				buf.append(URLEncoder.encode(params[i].getName(), "UTF-8"))
+				   .append("=")
+				   .append(URLEncoder.encode(params[i].getValue(), "UTF-8"));
 			} catch (java.io.UnsupportedEncodingException neverHappen) {
 			}
 		}

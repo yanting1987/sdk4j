@@ -29,6 +29,7 @@ public abstract class Ximalaya implements Serializable {
 	
 	/**
 	 * 组装HTTP请求参数
+	 * @param specificParams 每个接口除去通用参数以外的请求参数
 	 * @return
 	 */
 	protected final HttpParameter[] assembleHttpParams(HttpParameter[] specificParams) {
@@ -65,16 +66,6 @@ public abstract class Ximalaya implements Serializable {
 		commonParams[2] = new HttpParameter("nonce", CrypterUtil.getRandKey());  // nonce是一个随机字符串
 		commonParams[3] = new HttpParameter("timestamp", System.currentTimeMillis());
 		return commonParams;
-	}
-	
-	/**
-	 * 组装每个API接口特有的参数，默认无特有参数，子类可以重写该方法以提供自己的特有参数
-	 * 
-	 * @param rawSpecificParams
-	 * @return
-	 */
-	protected HttpParameter[] assembleSpecificParams(Object[] rawSpecificParams) {
-		return DEFAULT_SPECIFIC_PARAMS;
 	}
 	
 }
