@@ -14,8 +14,6 @@ public class XimalayaConfig {
 		}
 	}
 	
-	public XimalayaConfig(){}
-	
 	public static String getValue(String key){
 		return props.getProperty(key);
 	}
