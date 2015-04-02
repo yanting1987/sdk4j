@@ -73,6 +73,7 @@ public class Tracks extends Ximalaya {
 	}
 	
 	/**
+	 * 批量获取声音下载信息
 	 * 
 	 * @param trackIDs
 	 * @return
