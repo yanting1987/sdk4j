@@ -35,7 +35,7 @@ public class Track extends XimalayaResponse implements IKindAware {
 	private String avatarUrl;           // 声音所属主播头像
 	private Double duration;            // 声音时长
 	private Long playCount;             // 声音播放次数
-	private Long favoriteCount;      // 声音喜欢数
+	private Long favoriteCount;         // 声音喜欢数
 	private String playUrl32;           // 声音32位播放地址
 	private String playUrl64;           // 声音64位播放地址
 	private Long subordinatedAlbumID;   // 声音所属专辑ID
