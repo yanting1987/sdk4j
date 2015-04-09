@@ -87,9 +87,9 @@ public class TrackList extends AbstractPageResult implements Serializable {
 		strBuilder.append(categoryID);
 		strBuilder.append(", categoryName: ");
 		strBuilder.append(categoryName == null ? null : ("\"" + categoryName + "\""));
-		strBuilder.append("\", tagName: ");
+		strBuilder.append(", tagName: ");
 		strBuilder.append(tagName == null ? null : ("\"" + tagName + "\""));
-		strBuilder.append("\", tracks: [");
+		strBuilder.append(", tracks: [");
 		if(tracks != null && !tracks.isEmpty()) {
 			for(Track track: tracks) {
 				strBuilder.append(track.toString());
