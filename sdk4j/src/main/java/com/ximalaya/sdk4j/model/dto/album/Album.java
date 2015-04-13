@@ -32,9 +32,11 @@ public class Album extends XimalayaResponse implements IKindAware {
 	private String coverUrlSmall;     // 专辑封面小图
 	private String coverUrlMiddle;    // 专辑封面中图
 	private String coverUrlLarge;     // 专辑封面大图
+	private Long uid;                 // 专辑所属主播用户ID
 	private String nickname;          // 专辑所属主播名
 	private String avatarUrl;         // 专辑所属主播头像
 	private Long playCount;           // 专辑播放次数
+	private Long favoriteCount;       // 专辑被喜欢次数
 	private Long includeTrackCount;   // 专辑包含声音数
 	private Long lastUptrackAt;       // 专辑中最新一条声音上传时间
 	private Long updatedAt;           // 更新时间
@@ -82,6 +84,12 @@ public class Album extends XimalayaResponse implements IKindAware {
 	public void setCoverUrlLarge(String coverUrlLarge) {
 		this.coverUrlLarge = coverUrlLarge;
 	}
+	public Long getUid() {
+		return uid;
+	}
+	public void setUid(Long uid) {
+		this.uid = uid;
+	}
 	public String getNickname() {
 		return nickname;
 	}
@@ -99,6 +107,12 @@ public class Album extends XimalayaResponse implements IKindAware {
 	}
 	public void setPlayCount(Long playCount) {
 		this.playCount = playCount;
+	}
+	public Long getFavoriteCount() {
+		return favoriteCount;
+	}
+	public void setFavoriteCount(Long favoriteCount) {
+		this.favoriteCount = favoriteCount;
 	}
 	public Long getIncludeTrackCount() {
 		return includeTrackCount;
@@ -150,9 +164,11 @@ public class Album extends XimalayaResponse implements IKindAware {
 				coverUrlSmall = json.getString("cover_url_small");
 				coverUrlMiddle = json.getString("cover_url_middle");
 				coverUrlLarge = json.getString("cover_url_large");
+				uid = json.getLong("uid");
 				nickname = json.getString("nickname");
 				avatarUrl = json.getString("avatar_url");
 				playCount = json.getLong("play_count");
+				favoriteCount = json.getLong("favorite_count");
 				includeTrackCount = json.getLong("include_track_count");
 				lastUptrackAt = json.getLong("last_uptrack_at");
 				updatedAt = json.getLong("updated_at");
@@ -289,12 +305,16 @@ public class Album extends XimalayaResponse implements IKindAware {
 		strBuilder.append(coverUrlMiddle);
 		strBuilder.append("\", coverUrlLarge: \"");
 		strBuilder.append(coverUrlLarge);
-		strBuilder.append("\", nickname: \"");
+		strBuilder.append("\", uid: ");
+		strBuilder.append(uid);
+		strBuilder.append(", nickname: \"");
 		strBuilder.append(nickname);
 		strBuilder.append("\", avatarUrl: \"");
 		strBuilder.append(avatarUrl);
 		strBuilder.append("\", playCount: ");
 		strBuilder.append(playCount);
+		strBuilder.append(", favoriteCount: ");
+		strBuilder.append(favoriteCount);
 		strBuilder.append(", includeTrackCount: ");
 		strBuilder.append(includeTrackCount);
 		strBuilder.append(", lastUptrackAt: ");

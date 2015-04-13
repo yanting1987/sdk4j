@@ -31,11 +31,13 @@ public class Track extends XimalayaResponse implements IKindAware {
 	private String coverUrlSmall;       // 声音封面小图
 	private String coverUrlMiddle;      // 声音封面中图
 	private String coverUrlLarge;       // 声音封面大图
+	private Long uid;                   // 声音所属主播用户ID
 	private String nickname;            // 声音所属主播用户名
 	private String avatarUrl;           // 声音所属主播头像
 	private Double duration;            // 声音时长
 	private Long playCount;             // 声音播放次数
 	private Long favoriteCount;         // 声音喜欢数
+	private Long commentCount;          // 声音评论数
 	private String playUrl32;           // 声音32位播放地址
 	private String playUrl64;           // 声音64位播放地址
 	private Long subordinatedAlbumID;   // 声音所属专辑ID
@@ -84,6 +86,12 @@ public class Track extends XimalayaResponse implements IKindAware {
 	public void setCoverUrlLarge(String coverUrlLarge) {
 		this.coverUrlLarge = coverUrlLarge;
 	}
+	public Long getUid() {
+		return uid;
+	}
+	public void setUid(Long uid) {
+		this.uid = uid;
+	}
 	public String getNickname() {
 		return nickname;
 	}
@@ -113,6 +121,12 @@ public class Track extends XimalayaResponse implements IKindAware {
 	}
 	public void setFavoriteCount(Long favoriteCount) {
 		this.favoriteCount = favoriteCount;
+	}
+	public Long getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(Long commentCount) {
+		this.commentCount = commentCount;
 	}
 	public String getPlayUrl32() {
 		return playUrl32;
@@ -170,11 +184,13 @@ public class Track extends XimalayaResponse implements IKindAware {
 				coverUrlSmall = json.getString("cover_url_small");
 				coverUrlMiddle = json.getString("cover_url_middle");
 				coverUrlLarge = json.getString("cover_url_large");
+				uid = json.getLong("uid");
 				nickname = json.getString("nickname");
 				avatarUrl = json.getString("avatar_url");
 				duration = json.getDouble("duration");
 				playCount = json.getLong("play_count");
 				favoriteCount = json.getLong("favorite_count");
+				commentCount = json.getLong("comment_count");
 				playUrl32 = json.getString("play_url_32");
 				playUrl64 = json.getString("play_url_64");
 				subordinatedAlbumID = json.getLong("subordinated_album_id");
@@ -289,7 +305,9 @@ public class Track extends XimalayaResponse implements IKindAware {
 		strBuilder.append(coverUrlMiddle);
 		strBuilder.append("\", coverUrlLarge: \"");
 		strBuilder.append(coverUrlLarge);
-		strBuilder.append("\", nickname: \"");
+		strBuilder.append("\", uid: ");
+		strBuilder.append(uid);
+		strBuilder.append(", nickname: \"");
 		strBuilder.append(nickname);
 		strBuilder.append("\", avatarUrl: \"");
 		strBuilder.append(avatarUrl);
@@ -299,6 +317,8 @@ public class Track extends XimalayaResponse implements IKindAware {
 		strBuilder.append(playCount);
 		strBuilder.append(", favoriteCount: ");
 		strBuilder.append(favoriteCount);
+		strBuilder.append(", commentCount: ");
+		strBuilder.append(commentCount);
 		strBuilder.append(", playUrl32: ");
 		strBuilder.append(playUrl32);
 		strBuilder.append(", playUrl64: ");

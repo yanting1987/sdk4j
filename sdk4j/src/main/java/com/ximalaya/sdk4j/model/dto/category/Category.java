@@ -24,8 +24,11 @@ public class Category implements IKindAware, Serializable {
 	 */
 	private static final long serialVersionUID = -8134137599995673738L;
 	
-	private Long id;               // ID
-	private String categoryName;   // 分类名
+	private Long id;                 // ID
+	private String categoryName;     // 分类名
+	private String coverUrlSmall;    // 封面小图
+	private String coverUrlMiddle;   // 封面中图
+	private String coverUrlLarge;    // 封面大图
 	
 	public Long getId() {
 		return id;
@@ -38,6 +41,24 @@ public class Category implements IKindAware, Serializable {
 	}
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+	public String getCoverUrlSmall() {
+		return coverUrlSmall;
+	}
+	public void setCoverUrlSmall(String coverUrlSmall) {
+		this.coverUrlSmall = coverUrlSmall;
+	}
+	public String getCoverUrlMiddle() {
+		return coverUrlMiddle;
+	}
+	public void setCoverUrlMiddle(String coverUrlMiddle) {
+		this.coverUrlMiddle = coverUrlMiddle;
+	}
+	public String getCoverUrlLarge() {
+		return coverUrlLarge;
+	}
+	public void setCoverUrlLarge(String coverUrlLarge) {
+		this.coverUrlLarge = coverUrlLarge;
 	}
 	
 	@Override
@@ -54,6 +75,15 @@ public class Category implements IKindAware, Serializable {
 			try {
 				id = json.getLong("id");
 				categoryName = json.getString("category_name");
+				if(json.has("cover_url_small")) {
+					coverUrlSmall = json.getString("cover_url_small");
+				}
+				if(json.has("cover_url_middle")) {
+					coverUrlMiddle = json.getString("cover_url_middle");
+				}
+				if(json.has("cover_url_large")) {
+					coverUrlLarge = json.getString("cover_url_large");
+				}
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
@@ -110,7 +140,13 @@ public class Category implements IKindAware, Serializable {
 		strBuilder.append(id);
 		strBuilder.append(", categoryName: \"");
 		strBuilder.append(categoryName);
-		strBuilder.append("\"}");
+		strBuilder.append("\", coverUrlSmall: ");
+		strBuilder.append(coverUrlSmall == null ? null : ("\"" + coverUrlSmall + "\""));
+		strBuilder.append(", coverUrlMiddle: ");
+		strBuilder.append(coverUrlMiddle == null ? null : ("\"" + coverUrlMiddle + "\""));
+		strBuilder.append(", coverUrlLarge: ");
+		strBuilder.append(coverUrlLarge == null ? null : ("\"" + coverUrlLarge + "\""));
+		strBuilder.append("}");
 		return strBuilder.toString();
 	}
 	
