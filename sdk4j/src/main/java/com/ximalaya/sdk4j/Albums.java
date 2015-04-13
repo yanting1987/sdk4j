@@ -51,7 +51,7 @@ public class Albums extends Ximalaya {
 			specificParams[2] = new HttpParameter("count", paging.getCount());
 		}
 		return Album.constructAlbumList(
-				CLIENT.get(String.format("%s/albums/list", BASE_URL), 
+				CLIENT.get(String.format("%s/albums/hot", BASE_URL), 
 							assembleHttpParams(specificParams)));
 	}
 	
