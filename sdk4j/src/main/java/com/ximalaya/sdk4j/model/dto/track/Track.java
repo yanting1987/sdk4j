@@ -39,7 +39,9 @@ public class Track extends XimalayaResponse implements IKindAware {
 	private Long favoriteCount;         // 声音喜欢数
 	private Long commentCount;          // 声音评论数
 	private String playUrl32;           // 声音32位播放地址
+	private Integer playSize32;         // 声音32位大小
 	private String playUrl64;           // 声音64位播放地址
+	private Integer playSize64;         // 声音64位大小
 	private Long subordinatedAlbumID;   // 声音所属专辑ID
 	private Long updatedAt;             // 更新时间
 	private Long createdAt;             // 更新时间
@@ -134,11 +136,23 @@ public class Track extends XimalayaResponse implements IKindAware {
 	public void setPlayUrl32(String playUrl32) {
 		this.playUrl32 = playUrl32;
 	}
+	public Integer getPlaySize32() {
+		return playSize32;
+	}
+	public void setPlaySize32(Integer playSize32) {
+		this.playSize32 = playSize32;
+	}
 	public String getPlayUrl64() {
 		return playUrl64;
 	}
 	public void setPlayUrl64(String playUrl64) {
 		this.playUrl64 = playUrl64;
+	}
+	public Integer getPlaySize64() {
+		return playSize64;
+	}
+	public void setPlaySize64(Integer playSize64) {
+		this.playSize64 = playSize64;
 	}
 	public Long getSubordinatedAlbumID() {
 		return subordinatedAlbumID;
@@ -192,7 +206,9 @@ public class Track extends XimalayaResponse implements IKindAware {
 				favoriteCount = json.getLong("favorite_count");
 				commentCount = json.getLong("comment_count");
 				playUrl32 = json.getString("play_url_32");
+				playSize32 = json.getInt("play_size_32");
 				playUrl64 = json.getString("play_url_64");
+				playSize64 = json.getInt("play_size_64");
 				subordinatedAlbumID = json.getLong("subordinated_album_id");
 				updatedAt = json.getLong("updated_at");
 				createdAt = json.getLong("created_at");
@@ -319,10 +335,14 @@ public class Track extends XimalayaResponse implements IKindAware {
 		strBuilder.append(favoriteCount);
 		strBuilder.append(", commentCount: ");
 		strBuilder.append(commentCount);
-		strBuilder.append(", playUrl32: ");
+		strBuilder.append(", playUrl32: \"");
 		strBuilder.append(playUrl32);
-		strBuilder.append(", playUrl64: ");
+		strBuilder.append("\", playSize32: ");
+		strBuilder.append(playSize32);
+		strBuilder.append(", playUrl64: \"");
 		strBuilder.append(playUrl64);
+		strBuilder.append("\", playSize64: ");
+		strBuilder.append(playSize64);
 		strBuilder.append(", subordinatedAlbumID: ");
 		strBuilder.append(subordinatedAlbumID);
 		strBuilder.append(", updatedAt: ");
