@@ -245,6 +245,8 @@ public class Album extends XimalayaResponse implements IKindAware {
 			albumTracks.setCoverUrlSmall(albumTracksJsonObject.getString("cover_url_small"));
 			albumTracks.setCoverUrlMiddle(albumTracksJsonObject.getString("cover_url_middle"));
 			albumTracks.setCoverUrlLarge(albumTracksJsonObject.getString("cover_url_large"));
+			albumTracks.setTotalCount(albumTracksJsonObject.getInt("total_count"));
+			albumTracks.setTotalPage(albumTracksJsonObject.getInt("total_page"));
 			
 			List<Track> tracks = new ArrayList<Track> ();
 			JSONArray tracksJsonArray = albumTracksJsonObject.getJSONArray("tracks");
