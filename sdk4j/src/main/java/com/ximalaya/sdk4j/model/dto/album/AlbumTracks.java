@@ -103,7 +103,11 @@ public class AlbumTracks extends AbstractPageResult implements Serializable {
 		strBuilder.append(coverUrlMiddle);
 		strBuilder.append("\", coverUrlLarge: \"");
 		strBuilder.append(coverUrlLarge);
-		strBuilder.append("\", tracks: [");
+		strBuilder.append("\", totalCount: ");
+		strBuilder.append(totalCount);
+		strBuilder.append(", totalPage: ");
+		strBuilder.append(totalPage);
+		strBuilder.append(", tracks: [");
 		if(tracks != null && !tracks.isEmpty()) {
 			for(Track track: tracks) {
 				strBuilder.append(track.toString());

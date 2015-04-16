@@ -89,7 +89,11 @@ public class AlbumList extends AbstractPageResult implements Serializable {
 		strBuilder.append(categoryName);
 		strBuilder.append("\", tagName: \"");
 		strBuilder.append(tagName);
-		strBuilder.append("\", albums: [");
+		strBuilder.append("\", totalCount: ");
+		strBuilder.append(totalCount);
+		strBuilder.append(", totalPage: ");
+		strBuilder.append(totalPage);
+		strBuilder.append(", albums: [");
 		if(albums != null && !albums.isEmpty()) {
 			for(Album album: albums) {
 				strBuilder.append(album.toString());

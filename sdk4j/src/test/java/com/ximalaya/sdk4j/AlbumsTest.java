@@ -23,6 +23,7 @@ public class AlbumsTest {
 		List<Album> albums = albumList.getAlbums();
 		Assert.assertNotNull(albums);
 		Assert.assertFalse(albums.isEmpty());
+		System.out.println(albumList);
 	}
 	
 	@Test
@@ -41,8 +42,9 @@ public class AlbumsTest {
 	
 	@Test
 	public void testBrowseAlbumTracks() throws XimalayaException {
-		AlbumTracks albumTracks = albumsService.browseAlbumTracks(74391, new Paging());
+		AlbumTracks albumTracks = albumsService.browseAlbumTracks(78349, new Paging());
 		Assert.assertNotNull(albumTracks);
+		System.out.println(albumTracks);
 	}
 
 }
