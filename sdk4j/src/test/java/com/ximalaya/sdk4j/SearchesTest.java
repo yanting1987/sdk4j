@@ -13,13 +13,13 @@ public class SearchesTest {
 	
 	@Test
 	public void testSearchAlbum() throws XimalayaException {
-		AlbumList albumList = searchesService.searchAlbumList("郭德纲", new Paging());
+		AlbumList albumList = searchesService.searchAlbumList("郭德纲", 0, new Paging());
 		System.out.println(albumList);
 	}
 	
 	@Test
 	public void testSearchTracks() throws XimalayaException {
-		TrackList trackList = searchesService.searchTrackList("郭德纲", new Paging());
+		TrackList trackList = searchesService.searchTrackList("郭德纲", 0, new Paging());
 		System.out.println(trackList);
 	}
 
