@@ -22,7 +22,6 @@ public class AlbumsTest {
 		AlbumList albumList = albumsService.getHotAlbumList(0L, null, new Paging());
 		List<Album> albums = albumList.getAlbums();
 		Assert.assertNotNull(albums);
-		Assert.assertFalse(albums.isEmpty());
 		System.out.println(albumList);
 	}
 	
