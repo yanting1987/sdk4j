@@ -3,7 +3,7 @@ package com.ximalaya.sdk4j;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ximalaya.sdk4j.model.HttpParameter;
+import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.track.DownloadTrack;
@@ -11,6 +11,11 @@ import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
 import com.ximalaya.sdk4j.util.StringUtil;
 
+/**
+ * 声音相关接口
+ * @author will
+ *
+ */
 public class Tracks extends Ximalaya {
 	/**
 	 * 
@@ -30,10 +35,8 @@ public class Tracks extends Ximalaya {
 	 * @throws XimalayaException 
 	 */
 	public TrackList getHotTrackList(long categoryID, String tagName, Paging paging) throws XimalayaException {
-		if(categoryID < 0) {
-			throw new IllegalArgumentException("categoryID should >= 0");
-		}
-		paging = (paging == null) ? new Paging() : paging;
+		checkCategoryID(categoryID);
+		Paging.checkAndSetPaging(paging);
 		
 		HttpParameter[] specificParams = null;
 		if(tagName != null && !tagName.isEmpty()) {
@@ -88,6 +91,12 @@ public class Tracks extends Ximalaya {
 		return Track.constructDownTracks(
 				CLIENT.get(String.format("%s/tracks/down_batch", BASE_URL),
 						   assembleHttpParams(specificParams)));
+	}
+	
+	private void checkCategoryID(long categoryID) {
+		if(categoryID < 0) {
+			throw new IllegalArgumentException("categoryID should >= 0");
+		}
 	}
 
 }

@@ -3,7 +3,7 @@ package com.ximalaya.sdk4j;
 import java.io.Serializable;
 
 import com.ximalaya.sdk4j.http.HttpClient;
-import com.ximalaya.sdk4j.model.HttpParameter;
+import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.util.CrypterUtil;
 import com.ximalaya.sdk4j.util.SignatureUtil;
 import com.ximalaya.sdk4j.util.XimalayaConfig;
@@ -28,8 +28,16 @@ public abstract class Ximalaya implements Serializable {
 	private static final int SERVER_CLIENT_OS_TYPE = 4;   // 服务端client_os_type参数固定为4
 	
 	/**
+	 * 组装HTTP请求参数，不带特殊业务参数
+	 * @return
+	 */
+	protected final HttpParameter[] assembleHttpParams() {
+		return assembleHttpParams(DEFAULT_SPECIFIC_PARAMS);
+	}
+	
+	/**
 	 * 组装HTTP请求参数
-	 * @param specificParams 每个接口除去通用参数以外的请求参数
+	 * @param specificParams 每个接口除去通用参数以外的特殊业务参数
 	 * @return
 	 */
 	protected final HttpParameter[] assembleHttpParams(HttpParameter[] specificParams) {

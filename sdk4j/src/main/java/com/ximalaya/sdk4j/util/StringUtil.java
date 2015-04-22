@@ -21,5 +21,14 @@ public class StringUtil {
 		strBuilder.deleteCharAt(strBuilder.lastIndexOf(seperator));
 		return strBuilder.toString();
 	}
+	
+	/**
+	 * 判断字符串是否为null或者长度为0
+	 * @param s
+	 * @return
+	 */
+	public static boolean isEmpty(String s) {
+		return s == null || s.length() == 0;
+	}
 
 }

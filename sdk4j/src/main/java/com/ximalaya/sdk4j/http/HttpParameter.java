@@ -24,7 +24,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.ximalaya.sdk4j.model;
+package com.ximalaya.sdk4j.http;
 
 import java.io.File;
 import java.net.URLEncoder;
@@ -224,7 +224,7 @@ public class HttpParameter implements java.io.Serializable{
         StringBuffer buf = new StringBuffer();
         for (int j = 0; j < httpParams.length; j++) {
             if (httpParams[j].isFile()) {
-                throw new IllegalArgumentException("parameter [" + httpParams[j].name + "]should be text");
+                throw new IllegalArgumentException("parameter [" + httpParams[j].name + "] should be text");
             }
             if (j != 0) {
                 buf.append("&");

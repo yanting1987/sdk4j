@@ -3,7 +3,7 @@ package com.ximalaya.sdk4j;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ximalaya.sdk4j.model.HttpParameter;
+import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.Album;
@@ -12,6 +12,11 @@ import com.ximalaya.sdk4j.model.dto.album.AlbumTrackCount;
 import com.ximalaya.sdk4j.model.dto.album.AlbumTracks;
 import com.ximalaya.sdk4j.util.StringUtil;
 
+/**
+ * 专辑相关接口
+ * @author will
+ *
+ */
 public class Albums extends Ximalaya {
 	/**
 	 * 
@@ -31,13 +36,11 @@ public class Albums extends Ximalaya {
 	 * @throws XimalayaException 
 	 */
 	public AlbumList getHotAlbumList(long categoryID, String tagName, Paging paging) throws XimalayaException {
-		if(categoryID < 0) {
-			throw new IllegalArgumentException("categoryID should >= 0");
-		}
-		paging = (paging == null) ? new Paging() : paging;
+		checkCategoryID(categoryID);
+		Paging.checkAndSetPaging(paging);
 		
 		HttpParameter[] specificParams = null;
-		if(tagName != null && !tagName.isEmpty()) {
+		if(!StringUtil.isEmpty(tagName)) {
 			specificParams = new HttpParameter[4];
 			specificParams[0] = new HttpParameter("category_id", categoryID);
 			specificParams[1] = new HttpParameter("tag_name", tagName);
@@ -100,10 +103,8 @@ public class Albums extends Ximalaya {
 	 * @throws XimalayaException 
 	 */
 	public AlbumTracks browseAlbumTracks(long albumID, Paging paging) throws XimalayaException {
-		if(albumID <= 0) {
-			throw new IllegalArgumentException("albumID should > 0");
-		}
-		paging = (paging == null) ? new Paging() : paging;
+		checkAlbumID(albumID);
+		Paging.checkAndSetPaging(paging);
 		
 		HttpParameter[] specificParams = new HttpParameter[3];
 		specificParams[0] = new HttpParameter("album_id", albumID);
@@ -112,6 +113,18 @@ public class Albums extends Ximalaya {
 		return Album.constructAlbumTracks(
 				CLIENT.get(String.format("%s/albums/browse", BASE_URL),
 						   assembleHttpParams(specificParams)));
+	}
+	
+	private void checkCategoryID(long categoryID) {
+		if(categoryID < 0) {
+			throw new IllegalArgumentException("categoryID should >= 0");
+		}
+	}
+	
+	private void checkAlbumID(long albumID) {
+		if(albumID <= 0) {
+			throw new IllegalArgumentException("albumID should > 0");
+		}
 	}
 
 }

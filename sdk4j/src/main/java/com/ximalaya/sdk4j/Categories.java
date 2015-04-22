@@ -5,7 +5,11 @@ import java.util.List;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.category.Category;
 
-
+/**
+ * 喜马拉雅内容分类
+ * @author will
+ *
+ */
 public class Categories extends Ximalaya {
 	/**
 	 * 
@@ -20,8 +24,7 @@ public class Categories extends Ximalaya {
 	 */
 	public List<Category> getCategories() throws XimalayaException {
 		return Category.constructCategories(
-				CLIENT.get(String.format("%s/categories/list", BASE_URL),
-						    assembleHttpParams(DEFAULT_SPECIFIC_PARAMS)));
+				CLIENT.get(String.format("%s/categories/list", BASE_URL), assembleHttpParams()));
 	}
 
 }

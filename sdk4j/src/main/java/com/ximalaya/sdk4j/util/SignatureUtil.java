@@ -6,7 +6,7 @@ import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ximalaya.sdk4j.model.HttpParameter;
+import com.ximalaya.sdk4j.http.HttpParameter;
 
 /**
  * 签名计算工具类

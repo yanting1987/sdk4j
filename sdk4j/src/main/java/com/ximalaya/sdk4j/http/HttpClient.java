@@ -1,7 +1,6 @@
 package com.ximalaya.sdk4j.http;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.Header;
@@ -21,7 +20,6 @@ import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ximalaya.sdk4j.model.HttpParameter;
 import com.ximalaya.sdk4j.model.MySSLSocketFactory;
 import com.ximalaya.sdk4j.model.XimalayaException;
 
@@ -159,7 +157,7 @@ public class HttpClient implements java.io.Serializable {
 	public HttpResponse get(String url, HttpParameter[] params) 
 			throws XimalayaException {
 		if (null != params && params.length > 0) {
-			String encodedParams = HttpClient.encodeParameters(params);
+			String encodedParams = HttpParameter.encodeParameters(params);
 			if (-1 == url.indexOf("?")) {
 				url += "?" + encodedParams;
 			} else {
@@ -177,7 +175,7 @@ public class HttpClient implements java.io.Serializable {
 	public HttpResponse delete(String url, HttpParameter[] params, String token)
 			throws XimalayaException {
 		if (0 != params.length) {
-			String encodedParams = HttpClient.encodeParameters(params);
+			String encodedParams = HttpParameter.encodeParameters(params);
 			if (-1 == url.indexOf("?")) {
 				url += "?" + encodedParams;
 			} else {
@@ -235,8 +233,6 @@ public class HttpClient implements java.io.Serializable {
 	}
 
 	/*
-	 * 对HTTP请求参数进行encode处理
-	 */
 	public static String encodeParameters(HttpParameter[] params) {
 		StringBuffer buf = new StringBuffer();
 		for (int i = 0; i < params.length; i++) {
@@ -252,6 +248,7 @@ public class HttpClient implements java.io.Serializable {
 		}
 		return buf.toString();
 	}
+	*/
 	
 	private static String getCause(int statusCode) {
 		String cause = null;

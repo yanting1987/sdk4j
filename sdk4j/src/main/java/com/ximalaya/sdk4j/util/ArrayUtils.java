@@ -3,7 +3,7 @@ package com.ximalaya.sdk4j.util;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.ximalaya.sdk4j.model.HttpParameter;
+import com.ximalaya.sdk4j.http.HttpParameter;
 
 public class ArrayUtils {
 

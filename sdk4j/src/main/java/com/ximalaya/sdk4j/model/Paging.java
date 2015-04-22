@@ -66,4 +66,8 @@ public class Paging implements java.io.Serializable {
         return this;
     }
     
+    public static Paging checkAndSetPaging(Paging paging) {
+    	return paging == null ? new Paging(): paging;
+    }
+    
 }

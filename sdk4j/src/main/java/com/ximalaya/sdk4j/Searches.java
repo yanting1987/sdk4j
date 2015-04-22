@@ -1,6 +1,6 @@
 package com.ximalaya.sdk4j;
 
-import com.ximalaya.sdk4j.model.HttpParameter;
+import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.Album;
@@ -8,7 +8,11 @@ import com.ximalaya.sdk4j.model.dto.album.AlbumList;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
 
-
+/**
+ * 搜索，包括专辑搜索和声音搜索
+ * @author will
+ *
+ */
 public class Searches extends Ximalaya {
 	/**
 	 * 
@@ -54,7 +58,7 @@ public class Searches extends Ximalaya {
 		if(categoryID < 0) {
 			throw new IllegalArgumentException("category_id should >= 0");
 		}
-		paging = (paging == null) ? new Paging() : paging;
+		Paging.checkAndSetPaging(paging);
 	}
 	
 	private HttpParameter[] constructSpecificParamsForSearch(String q, long categoryID,  Paging paging) {
