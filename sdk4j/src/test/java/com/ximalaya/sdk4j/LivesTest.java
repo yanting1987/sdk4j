@@ -35,7 +35,7 @@ public class LivesTest {
 	
 	@Test
 	public void testGetProgram() throws XimalayaException {
-		Program program = lives.getProgram(99999);
+		Program program = lives.getProgram(75);
 		System.out.println(program);
 	}
 
