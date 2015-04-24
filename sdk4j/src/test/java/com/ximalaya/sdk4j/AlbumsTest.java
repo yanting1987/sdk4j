@@ -41,7 +41,7 @@ public class AlbumsTest {
 	
 	@Test
 	public void testBrowseAlbumTracks() throws XimalayaException {
-		AlbumTracks albumTracks = albumsService.browseAlbumTracks(78349, new Paging());
+		AlbumTracks albumTracks = albumsService.browseAlbumTracks(81702, new Paging(1, 5));
 		Assert.assertNotNull(albumTracks);
 		System.out.println(albumTracks);
 	}
