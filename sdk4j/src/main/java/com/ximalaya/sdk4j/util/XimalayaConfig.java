@@ -1,15 +1,20 @@
 package com.ximalaya.sdk4j.util;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class XimalayaConfig {
-	private static Properties props = new Properties(); 
+	private static Properties props = new Properties();
+	private static final String CONFIG_FILE_NAME = "config.properties";
 	static{
-		try {
-			props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties"));
+		InputStream configStream = ClassLoader.getSystemClassLoader().getResourceAsStream(CONFIG_FILE_NAME);
+		if(configStream == null) {
+			configStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(CONFIG_FILE_NAME);
 		}
-		catch (IOException e) {
+		try {
+			props.load(configStream);
+		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
