@@ -37,7 +37,7 @@ public class Albums extends Ximalaya {
 	 */
 	public AlbumList getHotAlbumList(long categoryID, String tagName, Paging paging) throws XimalayaException {
 		checkCategoryID(categoryID);
-		Paging.checkAndSetPaging(paging);
+		paging = paging == null ? new Paging(): paging;
 		
 		HttpParameter[] specificParams = null;
 		if(!StringUtil.isEmpty(tagName)) {
@@ -104,7 +104,7 @@ public class Albums extends Ximalaya {
 	 */
 	public AlbumTracks browseAlbumTracks(long albumID, Paging paging) throws XimalayaException {
 		checkAlbumID(albumID);
-		Paging.checkAndSetPaging(paging);
+		paging = paging == null ? new Paging(): paging;
 		
 		HttpParameter[] specificParams = new HttpParameter[3];
 		specificParams[0] = new HttpParameter("album_id", albumID);

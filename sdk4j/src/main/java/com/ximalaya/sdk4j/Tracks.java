@@ -36,7 +36,7 @@ public class Tracks extends Ximalaya {
 	 */
 	public TrackList getHotTrackList(long categoryID, String tagName, Paging paging) throws XimalayaException {
 		checkCategoryID(categoryID);
-		Paging.checkAndSetPaging(paging);
+		paging = paging == null ? new Paging(): paging;
 		
 		HttpParameter[] specificParams = null;
 		if(tagName != null && !tagName.isEmpty()) {

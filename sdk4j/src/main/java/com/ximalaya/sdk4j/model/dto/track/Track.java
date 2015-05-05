@@ -42,6 +42,7 @@ public class Track extends XimalayaResponse implements IKindAware {
 	private Integer playSize32;         // 声音32位大小
 	private String playUrl64;           // 声音64位播放地址
 	private Integer playSize64;         // 声音64位大小
+	private String downloadUrl;         // 声音下载地址
 	private Long subordinatedAlbumID;   // 声音所属专辑ID
 	private Long updatedAt;             // 更新时间
 	private Long createdAt;             // 更新时间
@@ -154,6 +155,12 @@ public class Track extends XimalayaResponse implements IKindAware {
 	public void setPlaySize64(Integer playSize64) {
 		this.playSize64 = playSize64;
 	}
+	public String getDownloadUrl() {
+		return downloadUrl;
+	}
+	public void setDownloadUrl(String downloadUrl) {
+		this.downloadUrl = downloadUrl;
+	}
 	public Long getSubordinatedAlbumID() {
 		return subordinatedAlbumID;
 	}
@@ -209,6 +216,7 @@ public class Track extends XimalayaResponse implements IKindAware {
 				playSize32 = json.getInt("play_size_32");
 				playUrl64 = json.getString("play_url_64");
 				playSize64 = json.getInt("play_size_64");
+				downloadUrl = json.getString("download_url");
 				subordinatedAlbumID = json.getLong("subordinated_album_id");
 				updatedAt = json.getLong("updated_at");
 				createdAt = json.getLong("created_at");
@@ -343,7 +351,9 @@ public class Track extends XimalayaResponse implements IKindAware {
 		strBuilder.append(playUrl64);
 		strBuilder.append("\", playSize64: ");
 		strBuilder.append(playSize64);
-		strBuilder.append(", subordinatedAlbumID: ");
+		strBuilder.append(", downloadUrl: \"");
+		strBuilder.append(downloadUrl);
+		strBuilder.append("\", subordinatedAlbumID: ");
 		strBuilder.append(subordinatedAlbumID);
 		strBuilder.append(", updatedAt: ");
 		strBuilder.append(updatedAt);

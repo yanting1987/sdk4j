@@ -29,7 +29,8 @@ public class Searches extends Ximalaya {
 	 * @throws XimalayaException
 	 */
 	public AlbumList searchAlbumList(String q, long categoryID,  Paging paging) throws XimalayaException {
-		checkSearchParam(q, categoryID, paging);
+		checkSearchParam(q, categoryID);
+		paging = paging == null ? new Paging(): paging;
 		return Album.constructAlbumList(
 				CLIENT.get(String.format("%s/search/albums", BASE_URL),
 						   assembleHttpParams(constructSpecificParamsForSearch(q, categoryID, paging))));
@@ -45,20 +46,20 @@ public class Searches extends Ximalaya {
 	 * @throws XimalayaException
 	 */
 	public TrackList searchTrackList(String q, long categoryID, Paging paging) throws XimalayaException {
-		checkSearchParam(q, categoryID, paging);
+		checkSearchParam(q, categoryID);
+		paging = paging == null ? new Paging(): paging;
 		return Track.constructTrackList(
 				CLIENT.get(String.format("%s/search/tracks", BASE_URL),
 						   assembleHttpParams(constructSpecificParamsForSearch(q, categoryID, paging))));
 	}
 	
-	private void checkSearchParam(String q, long categoryID, Paging paging) {
+	private void checkSearchParam(String q, long categoryID) {
 		if(q == null || q.isEmpty()) {
 			throw new IllegalArgumentException("q should not empty");
 		}
 		if(categoryID < 0) {
 			throw new IllegalArgumentException("category_id should >= 0");
 		}
-		Paging.checkAndSetPaging(paging);
 	}
 	
 	private HttpParameter[] constructSpecificParamsForSearch(String q, long categoryID,  Paging paging) {

@@ -65,9 +65,4 @@ public class Paging implements java.io.Serializable {
         setCount(count);
         return this;
     }
-    
-    public static Paging checkAndSetPaging(Paging paging) {
-    	return paging == null ? new Paging(): paging;
-    }
-    
 }

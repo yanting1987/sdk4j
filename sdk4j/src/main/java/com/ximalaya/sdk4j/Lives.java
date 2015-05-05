@@ -47,7 +47,7 @@ public class Lives extends Ximalaya {
 	 */
 	public RadioList getRadioList(int radioType, String provinceCode, Paging paging) throws XimalayaException {
 		checkRadioTypeAndProvinceCode(radioType, provinceCode);
-		Paging.checkAndSetPaging(paging);
+		paging = paging == null ? new Paging(): paging;
 		
 		HttpParameter[] specificParams = null;
 		if(!StringUtil.isEmpty(provinceCode)) {
