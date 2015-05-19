@@ -10,8 +10,7 @@ import org.json.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
-import com.ximalaya.sdk4j.model.dto.DTOKind;
-import com.ximalaya.sdk4j.model.dto.IKindAware;
+import com.ximalaya.sdk4j.model.dto.track.LastUpTrack;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 
 /**
@@ -19,34 +18,41 @@ import com.ximalaya.sdk4j.model.dto.track.Track;
  * @author will
  *
  */
-public class Album extends XimalayaResponse implements IKindAware {
+public class Album extends XimalayaResponse {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 989057998224528965L;
 	
-	private Long id;                  // ID
-	private String albumTitle;        // 专辑标题
-	private String albumTags;         // 专辑标签字符串，以英文逗号分隔
-	private String albumIntro;        // 专辑简介
-	private String coverUrlSmall;     // 专辑封面小图
-	private String coverUrlMiddle;    // 专辑封面中图
-	private String coverUrlLarge;     // 专辑封面大图
-	private Long uid;                 // 专辑所属主播用户ID
-	private String nickname;          // 专辑所属主播名
-	private String avatarUrl;         // 专辑所属主播头像
-	private Long playCount;           // 专辑播放次数
-	private Long favoriteCount;       // 专辑被喜欢次数
-	private Long includeTrackCount;   // 专辑包含声音数
-	private Long lastUptrackAt;       // 专辑中最新一条声音上传时间
-	private Long updatedAt;           // 更新时间
-	private Long createdAt;           // 更新时间
+	private Long id;                   // ID
+	private String kind;               // DTO实体类型
+	private String albumTitle;         // 专辑标题
+	private String albumTags;          // 专辑标签字符串，以英文逗号分隔
+	private String albumIntro;         // 专辑简介
+	private String coverUrlSmall;      // 专辑封面小图
+	private String coverUrlMiddle;     // 专辑封面中图
+	private String coverUrlLarge;      // 专辑封面大图
+	private Long uid;                  // 专辑所属主播用户ID
+	private String nickname;           // 专辑所属主播名
+	private String avatarUrl;          // 专辑所属主播头像
+	private Long playCount;            // 专辑播放次数
+	private Long favoriteCount;        // 专辑被喜欢次数
+	private Long includeTrackCount;    // 专辑包含声音数
+	private LastUpTrack lastUpTrack;   // 专辑内最新上传声音
+	private Long updatedAt;            // 更新时间
+	private Long createdAt;            // 更新时间
 	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 	public String getAlbumTitle() {
 		return albumTitle;
@@ -120,11 +126,11 @@ public class Album extends XimalayaResponse implements IKindAware {
 	public void setIncludeTrackCount(Long includeTrackCount) {
 		this.includeTrackCount = includeTrackCount;
 	}
-	public Long getLastUptrackAt() {
-		return lastUptrackAt;
+	public LastUpTrack getLastUptrack() {
+		return lastUpTrack;
 	}
-	public void setLastUptrackAt(Long lastUptrackAt) {
-		this.lastUptrackAt = lastUptrackAt;
+	public void setLastUptrack(LastUpTrack lastUptrack) {
+		this.lastUpTrack = lastUptrack;
 	}
 	public Long getUpdatedAt() {
 		return updatedAt;
@@ -137,11 +143,6 @@ public class Album extends XimalayaResponse implements IKindAware {
 	}
 	public void setCreatedAt(Long createdAt) {
 		this.createdAt = createdAt;
-	}
-	
-	@Override
-	public String getKind() {
-		return DTOKind.ALBUM_KIND;
 	}
 	
 	public Album(JSONObject json) throws XimalayaException {
@@ -158,6 +159,7 @@ public class Album extends XimalayaResponse implements IKindAware {
 		if(json != null) {
 			try {
 				id = json.getLong("id");
+				kind = json.getString("kind");
 				albumTitle = json.getString("album_title");
 				albumTags = json.getString("album_tags");
 				albumIntro = json.getString("album_intro");
@@ -170,7 +172,7 @@ public class Album extends XimalayaResponse implements IKindAware {
 				playCount = json.getLong("play_count");
 				favoriteCount = json.getLong("favorite_count");
 				includeTrackCount = json.getLong("include_track_count");
-				lastUptrackAt = json.getLong("last_uptrack_at");
+				lastUpTrack = new LastUpTrack(json.getJSONObject("last_uptrack"));
 				updatedAt = json.getLong("updated_at");
 				createdAt = json.getLong("created_at");
 			} catch (JSONException jsone) {
@@ -242,6 +244,7 @@ public class Album extends XimalayaResponse implements IKindAware {
 		try {
 			albumTracks.setAlbumID(albumTracksJsonObject.getLong("album_id"));
 			albumTracks.setAlbumTitle(albumTracksJsonObject.getString("album_title"));
+			albumTracks.setCategoryID(albumTracksJsonObject.getLong("category_id"));
 			albumTracks.setCoverUrlSmall(albumTracksJsonObject.getString("cover_url_small"));
 			albumTracks.setCoverUrlMiddle(albumTracksJsonObject.getString("cover_url_middle"));
 			albumTracks.setCoverUrlLarge(albumTracksJsonObject.getString("cover_url_large"));
@@ -295,7 +298,9 @@ public class Album extends XimalayaResponse implements IKindAware {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append("Album {id: ");
 		strBuilder.append(id);
-		strBuilder.append(", albumTitle: \"");
+		strBuilder.append(", kind: \"");
+		strBuilder.append(kind);
+		strBuilder.append("\", albumTitle: \"");
 		strBuilder.append(albumTitle);
 		strBuilder.append("\", albumTags: \"");
 		strBuilder.append(albumTags);
@@ -319,9 +324,9 @@ public class Album extends XimalayaResponse implements IKindAware {
 		strBuilder.append(favoriteCount);
 		strBuilder.append(", includeTrackCount: ");
 		strBuilder.append(includeTrackCount);
-		strBuilder.append(", lastUptrackAt: ");
-		strBuilder.append(lastUptrackAt);
-		strBuilder.append(", updatedAt: ");
+		strBuilder.append(", lastUpTrack: {");
+		strBuilder.append(lastUpTrack);
+		strBuilder.append("}, updatedAt: ");
 		strBuilder.append(updatedAt);
 		strBuilder.append(", createdAt: ");
 		strBuilder.append(createdAt);

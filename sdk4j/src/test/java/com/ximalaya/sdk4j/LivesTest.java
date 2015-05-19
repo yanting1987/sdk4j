@@ -9,7 +9,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.live.Program;
 import com.ximalaya.sdk4j.model.dto.live.Province;
 import com.ximalaya.sdk4j.model.dto.live.RadioList;
-import com.ximalaya.sdk4j.model.dto.live.ThreeDaySchedules;
+import com.ximalaya.sdk4j.model.dto.live.ScheduleList;
 
 public class LivesTest {
 	
@@ -29,7 +29,7 @@ public class LivesTest {
 	
 	@Test
 	public void testGetSchedules() throws XimalayaException {
-		ThreeDaySchedules threeDaySchedules = lives.getSchedules(75);
+		ScheduleList threeDaySchedules = lives.getSchedules(75);
 		System.out.println(threeDaySchedules);
 	}
 	

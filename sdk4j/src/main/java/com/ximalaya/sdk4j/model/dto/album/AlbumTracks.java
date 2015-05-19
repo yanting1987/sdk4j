@@ -19,6 +19,7 @@ public class AlbumTracks extends AbstractPageResult implements Serializable {
 	
 	private Long albumID;            // 专辑ID
 	private String albumTitle;       // 专辑名称
+	private Long categoryID;         // 专辑分类ID
 	private String coverUrlSmall;    // 专辑封面小图
 	private String coverUrlMiddle;   // 专辑封面中图
 	private String coverUrlLarge;    // 专辑封面大图
@@ -35,6 +36,12 @@ public class AlbumTracks extends AbstractPageResult implements Serializable {
 	}
 	public void setAlbumTitle(String albumTitle) {
 		this.albumTitle = albumTitle;
+	}
+	public Long getCategoryID() {
+		return categoryID;
+	}
+	public void setCategoryID(Long categoryID) {
+		this.categoryID = categoryID;
 	}
 	public String getCoverUrlSmall() {
 		return coverUrlSmall;
@@ -97,7 +104,9 @@ public class AlbumTracks extends AbstractPageResult implements Serializable {
 		strBuilder.append(albumID);
 		strBuilder.append(", albumTitle: \"");
 		strBuilder.append(albumTitle);
-		strBuilder.append("\", coverUrlSmall: \"");
+		strBuilder.append("\", categoryID: ");
+		strBuilder.append(categoryID);
+		strBuilder.append(", coverUrlSmall: \"");
 		strBuilder.append(coverUrlSmall);
 		strBuilder.append("\", coverUrlMiddle: \"");
 		strBuilder.append(coverUrlMiddle);

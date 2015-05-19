@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
-import com.ximalaya.sdk4j.model.dto.IKindAware;
 
 /**
  * 直播电台DTO
@@ -18,23 +17,24 @@ import com.ximalaya.sdk4j.model.dto.IKindAware;
  * @author will
  *
  */
-public class Radio extends XimalayaResponse implements IKindAware {
+public class Radio extends XimalayaResponse {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8588679252699226797L;
 	
-	private Long id;                // 电台ID
-	private String radioName;       // 电台名称
-	private Long scheduleID;        // 正在直播的节目时间表ID
-	private Long  radioPlayCount;   // 电台累计被收听次数
-	private String rate24AacUrl;    // 24码率aac格式播放地址
-	private String rate24TsUrl;     // 24码率ts格式播放地址
-	private String rate64AacUrl;    // 64码率aac格式播放地址
-	private String rate64TsUrl;     // 64码率ts格式播放地址
-	private String coverUrlSmall;   // 电台封面小图
-	private String coverUrlLarge;   // 电台封面大图
+	private Long id;                            // 电台ID
+	private String kind;                        // DTO实体类型
+	private String radioName;                   // 电台名称
+	private String radioDesc;                   // 电台简介
+	private String programName;                 // 正在直播的节目名称
+	private Long scheduleID;                    // 正在直播的节目时间表ID
+	private List<Integer> supportBitRates;      // 支持的码率列表，如[24, 64]
+	private List<RadioPlayUrl> radioPlayUrls;   // 电台在线播放地址列表
+	private Long  radioPlayCount;               // 电台累计被收听次数
+	private String coverUrlSmall;               // 电台封面小图
+	private String coverUrlLarge;               // 电台封面大图
 	
 	public Long getId() {
 		return id;
@@ -42,47 +42,53 @@ public class Radio extends XimalayaResponse implements IKindAware {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getScheduleID() {
-		return scheduleID;
+	public String getKind() {
+		return kind;
 	}
-	public void setScheduleID(Long scheduleID) {
-		this.scheduleID = scheduleID;
-	}
-	public Long getRadioPlayCount() {
-		return radioPlayCount;
-	}
-	public void setRadioPlayCount(Long radioPlayCount) {
-		this.radioPlayCount = radioPlayCount;
-	}
-	public String getRate24AacUrl() {
-		return rate24AacUrl;
-	}
-	public void setRate24AacUrl(String rate24AacUrl) {
-		this.rate24AacUrl = rate24AacUrl;
-	}
-	public String getRate24TsUrl() {
-		return rate24TsUrl;
-	}
-	public void setRate24TsUrl(String rate24TsUrl) {
-		this.rate24TsUrl = rate24TsUrl;
-	}
-	public String getRate64AacUrl() {
-		return rate64AacUrl;
-	}
-	public void setRate64AacUrl(String rate64AacUrl) {
-		this.rate64AacUrl = rate64AacUrl;
-	}
-	public String getRate64TsUrl() {
-		return rate64TsUrl;
-	}
-	public void setRate64TsUrl(String rate64TsUrl) {
-		this.rate64TsUrl = rate64TsUrl;
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 	public String getRadioName() {
 		return radioName;
 	}
 	public void setRadioName(String radioName) {
 		this.radioName = radioName;
+	}
+	public String getRadioDesc() {
+		return radioDesc;
+	}
+	public void setRadioDesc(String radioDesc) {
+		this.radioDesc = radioDesc;
+	}
+	public String getProgramName() {
+		return programName;
+	}
+	public void setProgramName(String programName) {
+		this.programName = programName;
+	}
+	public Long getScheduleID() {
+		return scheduleID;
+	}
+	public void setScheduleID(Long scheduleID) {
+		this.scheduleID = scheduleID;
+	}
+	public List<Integer> getSupportBitRates() {
+		return supportBitRates;
+	}
+	public void setSupportBitRates(List<Integer> supportBitRates) {
+		this.supportBitRates = supportBitRates;
+	}
+	public List<RadioPlayUrl> getRadioPlayUrls() {
+		return radioPlayUrls;
+	}
+	public void setRadioPlayUrls(List<RadioPlayUrl> radioPlayUrls) {
+		this.radioPlayUrls = radioPlayUrls;
+	}
+	public Long getRadioPlayCount() {
+		return radioPlayCount;
+	}
+	public void setRadioPlayCount(Long radioPlayCount) {
+		this.radioPlayCount = radioPlayCount;
 	}
 	public String getCoverUrlSmall() {
 		return coverUrlSmall;
@@ -95,11 +101,6 @@ public class Radio extends XimalayaResponse implements IKindAware {
 	}
 	public void setCoverUrlLarge(String coverUrlLarge) {
 		this.coverUrlLarge = coverUrlLarge;
-	}
-
-	@Override
-	public String getKind() {
-		return "radio";
 	}
 	
 	public Radio(HttpResponse response) throws XimalayaException {
@@ -116,13 +117,27 @@ public class Radio extends XimalayaResponse implements IKindAware {
 		if(json != null) {
 			try {
 				id = json.getLong("id");
+				kind = json.getString("kind");
 				radioName = json.getString("radio_name");
+				radioDesc = json.getString("radioDesc");
+				programName = json.getString("program_name");
 				scheduleID = json.getLong("schedule_id");
+				
+				supportBitRates = new ArrayList<Integer> ();
+				JSONArray supportBitRatesJsonArray = json.getJSONArray("support_bitrates");
+				int size = supportBitRatesJsonArray.length();
+				for(int i = 0; i < size; i++) {
+					supportBitRates.add(supportBitRatesJsonArray.getInt(i));
+				}
+				
+				radioPlayUrls = new ArrayList<RadioPlayUrl> ();
+				JSONArray radioPlayUrlsJsonArray = json.getJSONArray("radio_play_urls");
+				size = radioPlayUrlsJsonArray.length();
+				for(int i = 0; i < size; i++) {
+					radioPlayUrls.add(new RadioPlayUrl(radioPlayUrlsJsonArray.getJSONObject(i)));
+				}
+				
 				radioPlayCount = json.getLong("radio_play_count");
-				rate24AacUrl = json.getString("rate24_aac_url");
-				rate24TsUrl = json.getString("rate24_ts_url");
-				rate64AacUrl = json.getString("rate64_aac_url");
-				rate64TsUrl = json.getString("rate64_ts_url");
 				coverUrlSmall = json.getString("cover_url_small");
 				coverUrlLarge = json.getString("cover_url_large");
 			} catch (JSONException jsone) {
@@ -185,21 +200,29 @@ public class Radio extends XimalayaResponse implements IKindAware {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append("Radio {id: ");
 		strBuilder.append(id);
-		strBuilder.append(", radioName: \"");
+		strBuilder.append(", kind: \"");
+		strBuilder.append(kind);
+		strBuilder.append("\", radioName: \"");
 		strBuilder.append(radioName);
+		strBuilder.append("\", radioDesc: ");
+		strBuilder.append(radioDesc);
+		strBuilder.append("\", programName: \"");
+		strBuilder.append(programName);
 		strBuilder.append("\", scheduleID: ");
 		strBuilder.append(scheduleID);
-		strBuilder.append(", radioPlayCount: ");
+		strBuilder.append(", supportBitRates: ");
+		strBuilder.append(supportBitRates);
+		strBuilder.append(", radioPlayUrls: [");
+		if(radioPlayUrls != null && !radioPlayUrls.isEmpty()) {
+			for(RadioPlayUrl url: radioPlayUrls) {
+				strBuilder.append(url.toString());
+				strBuilder.append(", ");
+			}
+			strBuilder.deleteCharAt(strBuilder.lastIndexOf(","));
+		}
+		strBuilder.append("], radioPlayCount: ");
 		strBuilder.append(radioPlayCount);
-		strBuilder.append(", rate24AacUrl: \"");
-		strBuilder.append(rate24AacUrl);
-		strBuilder.append("\", rate24TsUrl: \"");
-		strBuilder.append(rate24TsUrl);
-		strBuilder.append("\", rate64AacUrl: \"");
-		strBuilder.append(rate64AacUrl);
-		strBuilder.append("\", rate64TsUrl: \"");
-		strBuilder.append(rate64TsUrl);
-		strBuilder.append("\", coverUrlSmall: \"");
+		strBuilder.append(", coverUrlSmall: \"");
 		strBuilder.append(coverUrlSmall);
 		strBuilder.append("\", coverUrlLarge: \"");
 		strBuilder.append(coverUrlLarge);

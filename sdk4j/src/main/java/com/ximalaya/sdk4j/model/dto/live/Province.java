@@ -10,8 +10,6 @@ import org.json.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
-import com.ximalaya.sdk4j.model.dto.DTOKind;
-import com.ximalaya.sdk4j.model.dto.IKindAware;
 
 /**
  * 直播省市DTO模型
@@ -19,7 +17,7 @@ import com.ximalaya.sdk4j.model.dto.IKindAware;
  * @author will
  *
  */
-public class Province extends XimalayaResponse implements IKindAware {
+public class Province extends XimalayaResponse {
 	
 	/**
 	 * 
@@ -27,9 +25,9 @@ public class Province extends XimalayaResponse implements IKindAware {
 	private static final long serialVersionUID = 7557254279857972145L;
 	
 	private Long id;                // 省市ID
+	private String kind;            // DTO实体类型
 	private String provinceCode;    // 省市代码，比如"110000"
 	private String provinceName;    // 省市名称
-	private Integer provinceType;   // 省市类型，0-普通省份，1-直辖市，2-自治区，3-特别行政区
 	private Long createdAt;         // 更新时间
 	
 	public Long getId() {
@@ -37,6 +35,12 @@ public class Province extends XimalayaResponse implements IKindAware {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 	public String getProvinceCode() {
 		return provinceCode;
@@ -50,22 +54,11 @@ public class Province extends XimalayaResponse implements IKindAware {
 	public void setProvinceName(String provinceName) {
 		this.provinceName = provinceName;
 	}
-	public Integer getProvinceType() {
-		return provinceType;
-	}
-	public void setProvinceType(Integer provinceType) {
-		this.provinceType = provinceType;
-	}
 	public Long getCreatedAt() {
 		return createdAt;
 	}
 	public void setCreatedAt(Long createdAt) {
 		this.createdAt = createdAt;
-	}
-	
-	@Override
-	public String getKind() {
-		return DTOKind.PROVINCE_KIND;
 	}
 	
 	public Province(HttpResponse response) throws XimalayaException {
@@ -82,9 +75,9 @@ public class Province extends XimalayaResponse implements IKindAware {
 		if(json != null) {
 			try {
 				id = json.getLong("id");
+				kind = json.getString("kind");
 				provinceCode = json.getString("province_code");
 				provinceName = json.getString("province_name");
-				provinceType = json.getInt("province_type");
 				createdAt = json.getLong("created_at");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
@@ -140,13 +133,13 @@ public class Province extends XimalayaResponse implements IKindAware {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append("Province {id: ");
 		strBuilder.append(id);
-		strBuilder.append(", provinceCode: \"");
+		strBuilder.append(", kind: \"");
+		strBuilder.append(kind);
+		strBuilder.append("\", provinceCode: \"");
 		strBuilder.append(provinceCode);
 		strBuilder.append("\", provinceName: \"");
 		strBuilder.append(provinceName);
-		strBuilder.append("\", provinceType: ");
-		strBuilder.append(provinceType);
-		strBuilder.append(", createdAt: ");
+		strBuilder.append("\", createdAt: ");
 		strBuilder.append(createdAt);
 		strBuilder.append("}");
 		return strBuilder.toString();

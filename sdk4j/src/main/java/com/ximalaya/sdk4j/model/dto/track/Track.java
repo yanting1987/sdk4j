@@ -10,21 +10,20 @@ import org.json.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
-import com.ximalaya.sdk4j.model.dto.DTOKind;
-import com.ximalaya.sdk4j.model.dto.IKindAware;
 
 /**
  * 声音DTO
  * @author will
  *
  */
-public class Track extends XimalayaResponse implements IKindAware {
+public class Track extends XimalayaResponse {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4324052388239950724L;
 	
 	private Long id;                    // ID
+	private String kind;                // DTO实体类型
 	private String trackTitle;          // 声音标题
 	private String trackTags;           // 声音标签列表字符串，以英文逗号分隔
 	private String trackIntro;          // 声音简介
@@ -38,12 +37,14 @@ public class Track extends XimalayaResponse implements IKindAware {
 	private Long playCount;             // 声音播放次数
 	private Long favoriteCount;         // 声音喜欢数
 	private Long commentCount;          // 声音评论数
+	private Long downloadCount;         // 声音下载数
 	private String playUrl32;           // 声音32位播放地址
 	private Integer playSize32;         // 声音32位大小
 	private String playUrl64;           // 声音64位播放地址
 	private Integer playSize64;         // 声音64位大小
 	private String downloadUrl;         // 声音下载地址
 	private Long subordinatedAlbumID;   // 声音所属专辑ID
+	private Integer source;             // 声音来源，1-用户原创，2-用户转采
 	private Long updatedAt;             // 更新时间
 	private Long createdAt;             // 更新时间
 	
@@ -52,6 +53,12 @@ public class Track extends XimalayaResponse implements IKindAware {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 	public String getTrackTitle() {
 		return trackTitle;
@@ -131,6 +138,12 @@ public class Track extends XimalayaResponse implements IKindAware {
 	public void setCommentCount(Long commentCount) {
 		this.commentCount = commentCount;
 	}
+	public Long getDownloadCount() {
+		return downloadCount;
+	}
+	public void setDownloadCount(Long downloadCount) {
+		this.downloadCount = downloadCount;
+	}
 	public String getPlayUrl32() {
 		return playUrl32;
 	}
@@ -167,6 +180,12 @@ public class Track extends XimalayaResponse implements IKindAware {
 	public void setSubordinatedAlbumID(Long subordinatedAlbumID) {
 		this.subordinatedAlbumID = subordinatedAlbumID;
 	}
+	public Integer getSource() {
+		return source;
+	}
+	public void setSource(Integer source) {
+		this.source = source;
+	}
 	public Long getUpdatedAt() {
 		return updatedAt;
 	}
@@ -178,11 +197,6 @@ public class Track extends XimalayaResponse implements IKindAware {
 	}
 	public void setCreatedAt(Long createdAt) {
 		this.createdAt = createdAt;
-	}
-	
-	@Override
-	public String getKind() {
-		return DTOKind.TRACK_KIND;
 	}
 	
 	public Track(JSONObject json) throws XimalayaException {
@@ -199,6 +213,7 @@ public class Track extends XimalayaResponse implements IKindAware {
 		if(json != null) {
 			try {
 				id = json.getLong("id");
+				kind = json.getString("kind");
 				trackTitle = json.getString("track_title");
 				trackTags = json.getString("track_tags");
 				trackIntro = json.getString("track_intro");
@@ -212,12 +227,14 @@ public class Track extends XimalayaResponse implements IKindAware {
 				playCount = json.getLong("play_count");
 				favoriteCount = json.getLong("favorite_count");
 				commentCount = json.getLong("comment_count");
+				downloadCount = json.getLong("download_count");
 				playUrl32 = json.getString("play_url_32");
 				playSize32 = json.getInt("play_size_32");
 				playUrl64 = json.getString("play_url_64");
 				playSize64 = json.getInt("play_size_64");
 				downloadUrl = json.getString("download_url");
 				subordinatedAlbumID = json.getLong("subordinated_album_id");
+				source = json.getInt("source");
 				updatedAt = json.getLong("updated_at");
 				createdAt = json.getLong("created_at");
 			} catch (JSONException jsone) {
@@ -317,7 +334,9 @@ public class Track extends XimalayaResponse implements IKindAware {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append("Track {id: ");
 		strBuilder.append(id);
-		strBuilder.append(", trackTitle: \"");
+		strBuilder.append(", kind: \"");
+		strBuilder.append(kind);
+		strBuilder.append("\", trackTitle: \"");
 		strBuilder.append(trackTitle);
 		strBuilder.append("\", trackTags: \"");
 		strBuilder.append(trackTags);
@@ -343,6 +362,8 @@ public class Track extends XimalayaResponse implements IKindAware {
 		strBuilder.append(favoriteCount);
 		strBuilder.append(", commentCount: ");
 		strBuilder.append(commentCount);
+		strBuilder.append(", downloadCount: ");
+		strBuilder.append(downloadCount);
 		strBuilder.append(", playUrl32: \"");
 		strBuilder.append(playUrl32);
 		strBuilder.append("\", playSize32: ");
@@ -355,6 +376,8 @@ public class Track extends XimalayaResponse implements IKindAware {
 		strBuilder.append(downloadUrl);
 		strBuilder.append("\", subordinatedAlbumID: ");
 		strBuilder.append(subordinatedAlbumID);
+		strBuilder.append(", source: ");
+		strBuilder.append(source);
 		strBuilder.append(", updatedAt: ");
 		strBuilder.append(updatedAt);
 		strBuilder.append(", createdAt: ");

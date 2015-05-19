@@ -6,21 +6,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.dto.DTOKind;
-import com.ximalaya.sdk4j.model.dto.IKindAware;
 
 /**
  * 下载声音DTO
  * @author will
  *
  */
-public class DownloadTrack implements IKindAware, Serializable {
+public class DownloadTrack implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3784342948490045616L;
 	
 	private Long id;             // ID
+	private String kind;         // DTO实体类型
 	private String trackTitle;   // 声音标题
 	private String playUrl32;    // 声音32位播放地址
 	private String playUrl64;    // 声音64位播放地址
@@ -31,6 +30,12 @@ public class DownloadTrack implements IKindAware, Serializable {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 	public String getTrackTitle() {
 		return trackTitle;
@@ -56,10 +61,6 @@ public class DownloadTrack implements IKindAware, Serializable {
 	public void setPlayUrlAac(String playUrlAac) {
 		this.playUrlAac = playUrlAac;
 	}
-	@Override
-	public String getKind() {
-		return DTOKind.TRACK_KIND;
-	}
 	
 	public DownloadTrack(JSONObject json) throws XimalayaException {
 		init(json);
@@ -69,6 +70,7 @@ public class DownloadTrack implements IKindAware, Serializable {
 		if(json != null) {
 			try {
 				id = json.getLong("id");
+				kind = json.getString("kind");
 				trackTitle = json.getString("track_title");
 				playUrl32 = json.getString("play_url_32");
 				playUrl64 = json.getString("play_url_64");
@@ -113,7 +115,9 @@ public class DownloadTrack implements IKindAware, Serializable {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append("DownTrack {id: ");
 		strBuilder.append(id);
-		strBuilder.append(", trackTitle: \"");
+		strBuilder.append(", kind: \"");
+		strBuilder.append(kind);
+		strBuilder.append("\", trackTitle: \"");
 		strBuilder.append(trackTitle);
 		strBuilder.append("\", playUrl32: \"");
 		strBuilder.append(playUrl32);

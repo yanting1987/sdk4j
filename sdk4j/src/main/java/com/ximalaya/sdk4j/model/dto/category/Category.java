@@ -10,21 +10,20 @@ import org.json.JSONObject;
 
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.dto.DTOKind;
-import com.ximalaya.sdk4j.model.dto.IKindAware;
 
 /**
  * 分类DTO
  * @author will
  *
  */
-public class Category implements IKindAware, Serializable {
+public class Category implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8134137599995673738L;
 	
 	private Long id;                 // ID
+	private String kind;             // DTO实体类型
 	private String categoryName;     // 分类名
 	private String coverUrlSmall;    // 封面小图
 	private String coverUrlMiddle;   // 封面中图
@@ -35,6 +34,12 @@ public class Category implements IKindAware, Serializable {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 	public String getCategoryName() {
 		return categoryName;
@@ -61,11 +66,6 @@ public class Category implements IKindAware, Serializable {
 		this.coverUrlLarge = coverUrlLarge;
 	}
 	
-	@Override
-	public String getKind() {
-		return DTOKind.CATEGORY_KIND;
-	}
-	
 	public Category(JSONObject json) throws XimalayaException {
 		init(json);
 	}
@@ -74,6 +74,7 @@ public class Category implements IKindAware, Serializable {
 		if(json != null) {
 			try {
 				id = json.getLong("id");
+				kind = json.getString("kind");
 				categoryName = json.getString("category_name");
 				if(json.has("cover_url_small")) {
 					coverUrlSmall = json.getString("cover_url_small");
@@ -138,7 +139,9 @@ public class Category implements IKindAware, Serializable {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append("Category {id: ");
 		strBuilder.append(id);
-		strBuilder.append(", categoryName: \"");
+		strBuilder.append(", kind: \"");
+		strBuilder.append(kind);
+		strBuilder.append("\", categoryName: \"");
 		strBuilder.append(categoryName);
 		strBuilder.append("\", coverUrlSmall: ");
 		strBuilder.append(coverUrlSmall == null ? null : ("\"" + coverUrlSmall + "\""));

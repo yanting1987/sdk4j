@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
-import com.ximalaya.sdk4j.model.dto.IKindAware;
 import com.ximalaya.sdk4j.model.dto.profile.User;
 
 /**
@@ -19,27 +18,36 @@ import com.ximalaya.sdk4j.model.dto.profile.User;
  * @author will
  *
  */
-public class Schedule extends XimalayaResponse implements IKindAware {
+public class Schedule extends XimalayaResponse {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2863359065879699665L;
 	
-	private Long id;                 // 节目时间表ID
-	private Long programID;          // 节目ID
-	private String programName;      // 节目名称
-	private String startTime;        // 开始时间
-	private String endTime;          // 结束时间
-	private Integer playType;        // 播放类型，0-直播，1-重播，2-跨天，3-无流期
-	private String listenBackUrl;    // 直播节目回听地址
-	private List<User> announcers;   // 主播列表 
+	private Long id;                            // 节目时间表ID
+	private String kind;                        // DTO实体类型
+	private Long programID;                     // 节目ID
+	private String programName;                 // 节目名称
+	private String startTime;                   // 开始时间
+	private String endTime;                     // 结束时间
+	private Integer playType;                   // 播放类型，0-直播，1-重播，2-跨天，3-无流期
+	private String listenBackUrl;               // 直播节目回听地址
+	private List<Integer> supportBitRates;      // 支持的码率列表，如[24, 64]
+	private List<RadioPlayUrl> radioPlayUrls;   // 电台在线播放地址列表
+	private List<User> announcers;              // 主播列表 
 	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 	public Long getProgramID() {
 		return programID;
@@ -77,16 +85,23 @@ public class Schedule extends XimalayaResponse implements IKindAware {
 	public void setListenBackUrl(String listenBackUrl) {
 		this.listenBackUrl = listenBackUrl;
 	}
+	public List<Integer> getSupportBitRates() {
+		return supportBitRates;
+	}
+	public void setSupportBitRates(List<Integer> supportBitRates) {
+		this.supportBitRates = supportBitRates;
+	}
+	public List<RadioPlayUrl> getRadioPlayUrls() {
+		return radioPlayUrls;
+	}
+	public void setRadioPlayUrls(List<RadioPlayUrl> radioPlayUrls) {
+		this.radioPlayUrls = radioPlayUrls;
+	}
 	public List<User> getAnnouncers() {
 		return announcers;
 	}
 	public void setAnnouncers(List<User> announcers) {
 		this.announcers = announcers;
-	}
-	
-	@Override
-	public String getKind() {
-		return "schedule";
 	}
 	
 	public Schedule(HttpResponse response) throws XimalayaException {
@@ -103,15 +118,31 @@ public class Schedule extends XimalayaResponse implements IKindAware {
 		if(json != null) {
 			try {
 				id = json.getLong("id");
+				kind = json.getString("kind");
 				programID = json.getLong("program_id");
 				programName = json.getString("program_name");
 				startTime = json.getString("start_time");
 				endTime = json.getString("end_time");
 				playType = json.getInt("play_type");
 				listenBackUrl = json.getString("listen_back_url");
+				
+				supportBitRates = new ArrayList<Integer> ();
+				JSONArray supportBitRatesJsonArray = json.getJSONArray("support_bitrates");
+				int size = supportBitRatesJsonArray.length();
+				for(int i = 0; i < size; i++) {
+					supportBitRates.add(supportBitRatesJsonArray.getInt(i));
+				}
+				
+				radioPlayUrls = new ArrayList<RadioPlayUrl> ();
+				JSONArray radioPlayUrlsJsonArray = json.getJSONArray("radio_play_urls");
+				size = radioPlayUrlsJsonArray.length();
+				for(int i = 0; i < size; i++) {
+					radioPlayUrls.add(new RadioPlayUrl(radioPlayUrlsJsonArray.getJSONObject(i)));
+				}
+				
 				List<User> announcers = new ArrayList<User> ();
 				JSONArray announcersJsonArray = json.getJSONArray("announcers");
-				int size = announcersJsonArray.length();
+				size = announcersJsonArray.length();
 				for(int i = 0; i < size; i++) {
 					announcers.add(new User(announcersJsonArray.getJSONObject(i)));
 				}
@@ -122,26 +153,24 @@ public class Schedule extends XimalayaResponse implements IKindAware {
 		}
 	}
 	
-	public static ThreeDaySchedules constructSchedules(HttpResponse response) throws XimalayaException {
-		ThreeDaySchedules threeDaySchedules = new ThreeDaySchedules();
-		JSONObject threeDaySchedulesJsonObject = response.asJSONObject();
+	public static ScheduleList constructScheduleList(HttpResponse response) throws XimalayaException {
+		ScheduleList scheduleList = new ScheduleList();
+		JSONObject scheduleListJsonObject = response.asJSONObject();
 		try {
-			threeDaySchedules.setYesterdaySchedules(parseJsonArrayToSchedules(threeDaySchedulesJsonObject.getJSONArray("yesterday_schedules")));
-			threeDaySchedules.setTodaySchedules(parseJsonArrayToSchedules(threeDaySchedulesJsonObject.getJSONArray("today_schedules")));
-			threeDaySchedules.setTodaySchedules(parseJsonArrayToSchedules(threeDaySchedulesJsonObject.getJSONArray("tomorrow_schedules")));
+			scheduleList.setTotalPage(scheduleListJsonObject.getInt("total_page"));
+			scheduleList.setTotalCount(scheduleListJsonObject.getInt("total_count"));
+			
+			List<Schedule> schedules = new ArrayList<Schedule> ();
+			JSONArray schedulesJsonArray = scheduleListJsonObject.getJSONArray("schedules");
+			int size = schedulesJsonArray.length();
+			for(int i = 0; i < size; i++) {
+				schedules.add(new Schedule(schedulesJsonArray.getJSONObject(i)));
+			}
+			scheduleList.setSchedules(schedules);
 		} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
-		return threeDaySchedules;
-	}
-	
-	private static List<Schedule> parseJsonArrayToSchedules(JSONArray schedulesJsonArray) throws XimalayaException, JSONException {
-		List<Schedule> schedules = new ArrayList<Schedule> ();
-		int size = schedulesJsonArray.length();
-		for(int i = 0; i < size; i++) {
-			schedules.add(new Schedule(schedulesJsonArray.getJSONObject(i)));
-		}
-		return schedules;
+		return scheduleList;
 	}
 	
 	@Override
@@ -178,7 +207,9 @@ public class Schedule extends XimalayaResponse implements IKindAware {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append("Schedule {id: ");
 		strBuilder.append(id);
-		strBuilder.append(", programID: \"");
+		strBuilder.append(", kind: \"");
+		strBuilder.append(kind);
+		strBuilder.append("\", programID: \"");
 		strBuilder.append(programID);
 		strBuilder.append("\", programName: \"");
 		strBuilder.append(programName);
@@ -190,7 +221,17 @@ public class Schedule extends XimalayaResponse implements IKindAware {
 		strBuilder.append(playType);
 		strBuilder.append(", listenBackUrl: \"");
 		strBuilder.append(listenBackUrl);
-		strBuilder.append("\", announcers: [");
+		strBuilder.append("\", supportBitRates: ");
+		strBuilder.append(supportBitRates);
+		strBuilder.append(", radioPlayUrls: [");
+		if(radioPlayUrls != null && !radioPlayUrls.isEmpty()) {
+			for(RadioPlayUrl url: radioPlayUrls) {
+				strBuilder.append(url.toString());
+				strBuilder.append(", ");
+			}
+			strBuilder.deleteCharAt(strBuilder.lastIndexOf(","));
+		}
+		strBuilder.append("], announcers: [");
 		if(announcers != null && !announcers.isEmpty()) {
 			for(User announcer: announcers) {
 				strBuilder.append(announcer.toString());

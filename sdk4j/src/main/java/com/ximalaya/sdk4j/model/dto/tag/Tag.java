@@ -10,8 +10,6 @@ import org.json.JSONObject;
 
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.dto.DTOKind;
-import com.ximalaya.sdk4j.model.dto.IKindAware;
 
 /**
  * 标签DTO
@@ -19,13 +17,14 @@ import com.ximalaya.sdk4j.model.dto.IKindAware;
  * @author will
  *
  */
-public class Tag implements IKindAware, Serializable {
+public class Tag implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3639856295998431047L;
 		
 	private String tagName;          // 标签名
+	private String kind;             // DTO实体类型
 	private String coverUrlSmall;    // 封面小图
 	private String coverUrlMiddle;   // 封面中图
 	private String coverUrlLarge;    // 封面大图
@@ -35,6 +34,12 @@ public class Tag implements IKindAware, Serializable {
 	}
 	public void setTagName(String tagName) {
 		this.tagName = tagName;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 	public String getCoverUrlSmall() {
 		return coverUrlSmall;
@@ -55,11 +60,6 @@ public class Tag implements IKindAware, Serializable {
 		this.coverUrlLarge = coverUrlLarge;
 	}
 	
-	@Override
-	public String getKind() {
-		return DTOKind.TAG_KIND;
-	}
-	
 	public Tag(JSONObject json) throws XimalayaException {
 		init(json);
 	}
@@ -68,6 +68,7 @@ public class Tag implements IKindAware, Serializable {
 		if(json != null) {
 			try {
 				tagName = json.getString("tag_name");
+				kind = json.getString("kind");
 				if(json.has("cover_url_small")) {
 					coverUrlSmall = json.getString("cover_url_small");
 				}
@@ -131,6 +132,8 @@ public class Tag implements IKindAware, Serializable {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append("Tag {tagName: \"");
 		strBuilder.append(tagName);
+		strBuilder.append("\", kind: \"");
+		strBuilder.append(kind);
 		strBuilder.append("\", coverUrlSmall: ");
 		strBuilder.append(coverUrlSmall == null ? null : ("\"" + coverUrlSmall + "\""));
 		strBuilder.append(", coverUrlMiddle: ");
