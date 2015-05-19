@@ -35,6 +35,7 @@ public class Radio extends XimalayaResponse {
 	private Long  radioPlayCount;               // 电台累计被收听次数
 	private String coverUrlSmall;               // 电台封面小图
 	private String coverUrlLarge;               // 电台封面大图
+	private Long updatedAt;                     // 电台更新时间
 	
 	public Long getId() {
 		return id;
@@ -102,6 +103,12 @@ public class Radio extends XimalayaResponse {
 	public void setCoverUrlLarge(String coverUrlLarge) {
 		this.coverUrlLarge = coverUrlLarge;
 	}
+	public Long getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Long updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 	
 	public Radio(HttpResponse response) throws XimalayaException {
 		super(response);
@@ -140,6 +147,7 @@ public class Radio extends XimalayaResponse {
 				radioPlayCount = json.getLong("radio_play_count");
 				coverUrlSmall = json.getString("cover_url_small");
 				coverUrlLarge = json.getString("cover_url_large");
+				updatedAt = json.getLong("updated_at");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
@@ -226,7 +234,9 @@ public class Radio extends XimalayaResponse {
 		strBuilder.append(coverUrlSmall);
 		strBuilder.append("\", coverUrlLarge: \"");
 		strBuilder.append(coverUrlLarge);
-		strBuilder.append("\"}");
+		strBuilder.append("\", updated_at: ");
+		strBuilder.append(updatedAt);
+		strBuilder.append("}");
 		return strBuilder.toString();
 	}
 
