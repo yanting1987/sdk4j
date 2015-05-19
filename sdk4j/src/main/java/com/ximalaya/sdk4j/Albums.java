@@ -29,7 +29,7 @@ public class Albums extends Ximalaya {
 	/**
 	 * 根据分类和标签获取热门专辑（带分页）
 	 * 
-	 * @param categoryID 分类ID，必填
+	 * @param categoryID 分类ID，必填，如果为0则表示所有分类下热门专辑
 	 * @param tagName    标签名，可选
 	 * @param paging     分页参数，可选，不填则为默认值
 	 * @return

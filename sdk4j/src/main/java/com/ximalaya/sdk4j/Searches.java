@@ -23,7 +23,7 @@ public class Searches extends Ximalaya {
 	 * 搜索专辑
 	 * 
 	 * @param q 搜索词，必填
-	 * @param categoryID 分类ID，0-热门分类，1-...
+	 * @param categoryID 分类ID，必填，如果为0则表示所有分类下的专辑
 	 * @param paging 分页参数，可选，不填则为默认值
 	 * @return
 	 * @throws XimalayaException
@@ -40,7 +40,7 @@ public class Searches extends Ximalaya {
 	 * 搜索声音
 	 * 
 	 * @param q      搜索词，必填
-	 * @param categoryID 分类ID，0-热门分类，1-...
+	 * @param categoryID 分类ID，必填，如果为0则表示所有分类下的声音
 	 * @param paging 分页参数，可选，不填则为默认值
 	 * @return
 	 * @throws XimalayaException

@@ -28,7 +28,7 @@ public class Tracks extends Ximalaya {
 	/**
 	 * 根据分类和标签获取热门声音（带分页）
 	 * 
-	 * @param categoryID 分类ID，必填
+	 * @param categoryID 分类ID，必填，如果为0则表示所有分类下热门声音
 	 * @param tagName    标签名，可选
 	 * @param paging     分页参数，可选，如果为null则为默认分页参数
 	 * @return
