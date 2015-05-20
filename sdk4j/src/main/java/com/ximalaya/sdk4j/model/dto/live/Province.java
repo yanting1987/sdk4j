@@ -26,7 +26,7 @@ public class Province extends XimalayaResponse {
 	
 	private Long id;                // 省市ID
 	private String kind;            // DTO实体类型
-	private String provinceCode;    // 省市代码，比如"110000"
+	private Integer provinceCode;   // 省市代码，比如110000
 	private String provinceName;    // 省市名称
 	private Long createdAt;         // 更新时间
 	
@@ -42,10 +42,10 @@ public class Province extends XimalayaResponse {
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
-	public String getProvinceCode() {
+	public Integer getProvinceCode() {
 		return provinceCode;
 	}
-	public void setProvinceCode(String provinceCode) {
+	public void setProvinceCode(Integer provinceCode) {
 		this.provinceCode = provinceCode;
 	}
 	public String getProvinceName() {
@@ -76,7 +76,7 @@ public class Province extends XimalayaResponse {
 			try {
 				id = json.getLong("id");
 				kind = json.getString("kind");
-				provinceCode = json.getString("province_code");
+				provinceCode = json.getInt("province_code");
 				provinceName = json.getString("province_name");
 				createdAt = json.getLong("created_at");
 			} catch (JSONException jsone) {
@@ -135,9 +135,9 @@ public class Province extends XimalayaResponse {
 		strBuilder.append(id);
 		strBuilder.append(", kind: \"");
 		strBuilder.append(kind);
-		strBuilder.append("\", provinceCode: \"");
+		strBuilder.append("\", provinceCode: ");
 		strBuilder.append(provinceCode);
-		strBuilder.append("\", provinceName: \"");
+		strBuilder.append(", provinceName: \"");
 		strBuilder.append(provinceName);
 		strBuilder.append("\", createdAt: ");
 		strBuilder.append(createdAt);

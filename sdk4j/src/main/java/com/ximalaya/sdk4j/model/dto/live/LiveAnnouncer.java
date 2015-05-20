@@ -1,4 +1,4 @@
-package com.ximalaya.sdk4j.model.dto.profile;
+package com.ximalaya.sdk4j.model.dto.live;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,23 +8,21 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
 
 /**
- * 喜马拉雅用户DTO，包括主播和普通用户
+ * 直播主播
  * 
  * @author will
  *
  */
-public class User extends XimalayaResponse {
-	
+public class LiveAnnouncer extends XimalayaResponse {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3394162338155271567L;
+	private static final long serialVersionUID = 4842558218631171986L;
 	
-	private Long id;              // ID
-	private String kind;          // DTO实体类型
-	private String nickname;      // 用户昵称
-	private String avatarUrl;     // 用户头像
-	private Boolean isVerified;   // 用户是否加V
+	private Long id;            // ID
+	private String kind;        // DTO实体类型
+	private String nickname;    // 点播主播昵称
+	private String avatarUrl;   // 点播主播头像
 	
 	public Long getId() {
 		return id;
@@ -50,19 +48,13 @@ public class User extends XimalayaResponse {
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
 	}
-	public Boolean isVerified() {
-		return isVerified;
-	}
-	public void setVerified(Boolean isVerified) {
-		this.isVerified = isVerified;
-	}
-
-	public User(HttpResponse response) throws XimalayaException {
+	
+	public LiveAnnouncer(HttpResponse response) throws XimalayaException {
 		super(response);
 		init(response.asJSONObject());
 	}
 	
-	public User(JSONObject json) throws XimalayaException {
+	public LiveAnnouncer(JSONObject json) throws XimalayaException {
 		super();
 		init(json);
 	}
@@ -74,7 +66,6 @@ public class User extends XimalayaResponse {
 				kind = json.getString("kind");
 				nickname = json.getString("nickname");
 				avatarUrl = json.getString("avatar_url");
-				isVerified = json.getBoolean("is_verified");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
@@ -101,7 +92,7 @@ public class User extends XimalayaResponse {
 			return false;
 		}
 		
-		User other = (User) obj;
+		LiveAnnouncer other = (LiveAnnouncer) obj;
 		if((id == null && other.id != null) 
 			|| !id.equals(other.id)) {
 			return false;
@@ -121,10 +112,7 @@ public class User extends XimalayaResponse {
 		strBuilder.append(nickname);
 		strBuilder.append("\", avatarUrl: \"");
 		strBuilder.append(avatarUrl);
-		strBuilder.append("\", isVerified: ");
-		strBuilder.append(isVerified);
-		strBuilder.append("}");
+		strBuilder.append("\"}");
 		return strBuilder.toString();
 	}
-
 }

@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
+import com.ximalaya.sdk4j.model.dto.profile.User;
 import com.ximalaya.sdk4j.model.dto.track.LastUpTrack;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 
@@ -32,9 +33,7 @@ public class Album extends XimalayaResponse {
 	private String coverUrlSmall;      // 专辑封面小图
 	private String coverUrlMiddle;     // 专辑封面中图
 	private String coverUrlLarge;      // 专辑封面大图
-	private Long uid;                  // 专辑所属主播用户ID
-	private String nickname;           // 专辑所属主播名
-	private String avatarUrl;          // 专辑所属主播头像
+	private User announcer;            // 专辑所属主播
 	private Long playCount;            // 专辑播放次数
 	private Long favoriteCount;        // 专辑被喜欢次数
 	private Long includeTrackCount;    // 专辑包含声音数
@@ -90,23 +89,11 @@ public class Album extends XimalayaResponse {
 	public void setCoverUrlLarge(String coverUrlLarge) {
 		this.coverUrlLarge = coverUrlLarge;
 	}
-	public Long getUid() {
-		return uid;
+	public User getAnnouncer() {
+		return announcer;
 	}
-	public void setUid(Long uid) {
-		this.uid = uid;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getAvatarUrl() {
-		return avatarUrl;
-	}
-	public void setAvatarUrl(String avatarUrl) {
-		this.avatarUrl = avatarUrl;
+	public void setAnnouncer(User announcer) {
+		this.announcer = announcer;
 	}
 	public Long getPlayCount() {
 		return playCount;
@@ -166,9 +153,7 @@ public class Album extends XimalayaResponse {
 				coverUrlSmall = json.getString("cover_url_small");
 				coverUrlMiddle = json.getString("cover_url_middle");
 				coverUrlLarge = json.getString("cover_url_large");
-				uid = json.getLong("uid");
-				nickname = json.getString("nickname");
-				avatarUrl = json.getString("avatar_url");
+				announcer = new User(json.getJSONObject("announcer"));
 				playCount = json.getLong("play_count");
 				favoriteCount = json.getLong("favorite_count");
 				includeTrackCount = json.getLong("include_track_count");
@@ -312,13 +297,9 @@ public class Album extends XimalayaResponse {
 		strBuilder.append(coverUrlMiddle);
 		strBuilder.append("\", coverUrlLarge: \"");
 		strBuilder.append(coverUrlLarge);
-		strBuilder.append("\", uid: ");
-		strBuilder.append(uid);
-		strBuilder.append(", nickname: \"");
-		strBuilder.append(nickname);
-		strBuilder.append("\", avatarUrl: \"");
-		strBuilder.append(avatarUrl);
-		strBuilder.append("\", playCount: ");
+		strBuilder.append("\", announcer: ");
+		strBuilder.append(announcer);
+		strBuilder.append(", playCount: ");
 		strBuilder.append(playCount);
 		strBuilder.append(", favoriteCount: ");
 		strBuilder.append(favoriteCount);

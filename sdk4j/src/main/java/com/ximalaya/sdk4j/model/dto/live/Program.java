@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
-import com.ximalaya.sdk4j.model.dto.profile.User;
 
 /**
  * 直播节目DTO
@@ -25,18 +24,18 @@ public class Program extends XimalayaResponse {
 	 */
 	private static final long serialVersionUID = -6614882882187524681L;
 	
-	private Long id;                            // 节目ID
-	private String kind;                        // DTO实体类型
-	private Long scheduleID;                    // 节目时间表ID
-	private String programName;                 // 节目名称
-	private String startTime;                   // 节目开始时间
-	private String endTime;                     // 节目结束时间
-	private Integer playType;                   // 播放类型，0-直播，1-重播，2-跨天，3-无流期
-	private String backPicUrl;                  // 节目背景图URL
-	private Long fmuid;                         // 喜马拉雅平台主播用户ID 
-	private List<Integer> supportBitRates;      // 支持的码率列表，如[24, 64]
-	private List<RadioPlayUrl> radioPlayUrls;   // 电台在线播放地址列表
-	private List<User> announcers;              // 主播列表
+	private Long id;                              // 节目ID
+	private String kind;                          // DTO实体类型
+	private Long scheduleID;                      // 节目时间表ID
+	private String programName;                   // 节目名称
+	private String startTime;                     // 节目开始时间
+	private String endTime;                       // 节目结束时间
+	private Integer playType;                     // 播放类型，0-直播，1-重播，2-跨天，3-无流期
+	private String backPicUrl;                    // 节目背景图URL
+	private Long fmuid;                           // 喜马拉雅平台主播用户ID 
+	private List<Integer> supportBitRates;        // 支持的码率列表，如[24, 64]
+	private List<RadioPlayUrl> radioPlayUrls;     // 电台在线播放地址列表
+	private List<LiveAnnouncer> liveAnnouncers;   // 直播主播列表
 	
 	public Long getId() {
 		return id;
@@ -104,11 +103,11 @@ public class Program extends XimalayaResponse {
 	public void setRadioPlayUrls(List<RadioPlayUrl> radioPlayUrls) {
 		this.radioPlayUrls = radioPlayUrls;
 	}
-	public List<User> getAnnouncers() {
-		return announcers;
+	public List<LiveAnnouncer> getLiveAnnouncers() {
+		return liveAnnouncers;
 	}
-	public void setAnnouncers(List<User> announcers) {
-		this.announcers = announcers;
+	public void setLiveAnnouncers(List<LiveAnnouncer> liveAnnouncers) {
+		this.liveAnnouncers = liveAnnouncers;
 	}
 	
 	public Program(HttpResponse response) throws XimalayaException {
@@ -143,13 +142,13 @@ public class Program extends XimalayaResponse {
 					radioPlayUrls.add(new RadioPlayUrl(radioPlayUrlsJsonArray.getJSONObject(i)));
 				}
 				
-				List<User> announcers = new ArrayList<User> ();
-				JSONArray announcersJsonArray = json.getJSONArray("announcers");
-				size = announcersJsonArray.length();
+				List<LiveAnnouncer> liveAnnouncers = new ArrayList<LiveAnnouncer> ();
+				JSONArray liveAnnouncersJsonArray = json.getJSONArray("live_announcers");
+				size = liveAnnouncersJsonArray.length();
 				for(int i = 0; i < size; i++) {
-					announcers.add(new User(announcersJsonArray.getJSONObject(i)));
+					liveAnnouncers.add(new LiveAnnouncer(liveAnnouncersJsonArray.getJSONObject(i)));
 				}
-				this.announcers = announcers;
+				this.liveAnnouncers = liveAnnouncers;
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
@@ -216,10 +215,10 @@ public class Program extends XimalayaResponse {
 			}
 			strBuilder.deleteCharAt(strBuilder.lastIndexOf(","));
 		}
-		strBuilder.append("], announcers: [");
-		if(announcers != null && !announcers.isEmpty()) {
-			for(User announcer: announcers) {
-				strBuilder.append(announcer.toString());
+		strBuilder.append("], liveAnnouncers: [");
+		if(liveAnnouncers != null && !liveAnnouncers.isEmpty()) {
+			for(LiveAnnouncer liveAnnouncer: liveAnnouncers) {
+				strBuilder.append(liveAnnouncer);
 				strBuilder.append(", ");
 			}
 		}

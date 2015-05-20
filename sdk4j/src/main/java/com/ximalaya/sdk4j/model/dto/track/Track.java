@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
+import com.ximalaya.sdk4j.model.dto.profile.User;
 
 /**
  * 声音DTO
@@ -30,9 +31,7 @@ public class Track extends XimalayaResponse {
 	private String coverUrlSmall;       // 声音封面小图
 	private String coverUrlMiddle;      // 声音封面中图
 	private String coverUrlLarge;       // 声音封面大图
-	private Long uid;                   // 声音所属主播用户ID
-	private String nickname;            // 声音所属主播用户名
-	private String avatarUrl;           // 声音所属主播头像
+	private User announcer;             // 声音所属主播
 	private Double duration;            // 声音时长
 	private Long playCount;             // 声音播放次数
 	private Long favoriteCount;         // 声音喜欢数
@@ -95,24 +94,6 @@ public class Track extends XimalayaResponse {
 	}
 	public void setCoverUrlLarge(String coverUrlLarge) {
 		this.coverUrlLarge = coverUrlLarge;
-	}
-	public Long getUid() {
-		return uid;
-	}
-	public void setUid(Long uid) {
-		this.uid = uid;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getAvatarUrl() {
-		return avatarUrl;
-	}
-	public void setAvatarUrl(String avatarUrl) {
-		this.avatarUrl = avatarUrl;
 	}
 	public Double getDuration() {
 		return duration;
@@ -220,9 +201,7 @@ public class Track extends XimalayaResponse {
 				coverUrlSmall = json.getString("cover_url_small");
 				coverUrlMiddle = json.getString("cover_url_middle");
 				coverUrlLarge = json.getString("cover_url_large");
-				uid = json.getLong("uid");
-				nickname = json.getString("nickname");
-				avatarUrl = json.getString("avatar_url");
+				announcer = new User(json.getJSONObject("announcer"));
 				duration = json.getDouble("duration");
 				playCount = json.getLong("play_count");
 				favoriteCount = json.getLong("favorite_count");
@@ -349,13 +328,9 @@ public class Track extends XimalayaResponse {
 		strBuilder.append(coverUrlMiddle);
 		strBuilder.append("\", coverUrlLarge: \"");
 		strBuilder.append(coverUrlLarge);
-		strBuilder.append("\", uid: ");
-		strBuilder.append(uid);
-		strBuilder.append(", nickname: \"");
-		strBuilder.append(nickname);
-		strBuilder.append("\", avatarUrl: \"");
-		strBuilder.append(avatarUrl);
-		strBuilder.append("\", duration: ");
+		strBuilder.append("\", announcer: ");
+		strBuilder.append(announcer);
+		strBuilder.append(", duration: ");
 		strBuilder.append(duration);
 		strBuilder.append(", playCount: ");
 		strBuilder.append(playCount);

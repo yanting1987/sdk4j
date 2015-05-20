@@ -23,7 +23,7 @@ public class LivesTest {
 	
 	@Test
 	public void testGetRadioList() throws XimalayaException {
-		RadioList radioList = lives.getRadioList(2, "110000", new Paging());
+		RadioList radioList = lives.getRadioList(1, "110000", new Paging());
 		System.out.println(radioList);
 	}
 	

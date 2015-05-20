@@ -126,8 +126,13 @@ public class Radio extends XimalayaResponse {
 				id = json.getLong("id");
 				kind = json.getString("kind");
 				radioName = json.getString("radio_name");
-				radioDesc = json.getString("radioDesc");
-				programName = json.getString("program_name");
+				radioDesc = json.getString("radio_desc");
+				try {
+					programName = json.getString("program_name");
+				}
+				catch(Exception e) {   // program_name可能为null
+					// swallow it
+				}
 				scheduleID = json.getLong("schedule_id");
 				
 				supportBitRates = new ArrayList<Integer> ();
