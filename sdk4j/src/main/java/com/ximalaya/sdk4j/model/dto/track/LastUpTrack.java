@@ -61,11 +61,21 @@ public class LastUpTrack extends XimalayaResponse {
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
 			try {
-				trackID = json.getLong("track_id");
-				trackTitle = json.getString("track_title");
-				duration = json.getDouble("duration");
-				createdAt = json.getLong("created_at");
-				updatedAt = json.getLong("updated_at");
+				if(json.has("track_id")) {
+					trackID = json.getLong("track_id");
+				}
+				if(json.has("track_title")) {
+					trackTitle = json.getString("track_title");
+				}
+				if(json.has("duration")) {
+					duration = json.getDouble("duration");
+				}
+				if(json.has("created_at")) {
+					createdAt = json.getLong("created_at");
+				}
+				if(json.has("updated_at")) {
+					updatedAt = json.getLong("updated_at");
+				}
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}

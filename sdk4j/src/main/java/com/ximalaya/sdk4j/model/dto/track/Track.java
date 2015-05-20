@@ -274,8 +274,9 @@ public class Track extends XimalayaResponse {
 	
 	public static List<Track> constructTracks(HttpResponse response) throws XimalayaException {
 		List<Track> tracks = new ArrayList<Track> ();
-		JSONArray tracksJsonArray = response.asJSONArray();
+		JSONArray tracksJsonArray = null;
 		try {
+			tracksJsonArray = response.asJSONObject().getJSONArray("tracks");
 			int size = tracksJsonArray.length();
 			for(int i = 0; i < size; i++) {
 				tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
