@@ -32,7 +32,7 @@ public class Track extends XimalayaResponse {
 	private String coverUrlMiddle;      // 声音封面中图
 	private String coverUrlLarge;       // 声音封面大图
 	private User announcer;             // 声音所属主播
-	private Double duration;            // 声音时长
+	private Integer duration;           // 声音时长
 	private Long playCount;             // 声音播放次数
 	private Long favoriteCount;         // 声音喜欢数
 	private Long commentCount;          // 声音评论数
@@ -95,10 +95,10 @@ public class Track extends XimalayaResponse {
 	public void setCoverUrlLarge(String coverUrlLarge) {
 		this.coverUrlLarge = coverUrlLarge;
 	}
-	public Double getDuration() {
+	public Integer getDuration() {
 		return duration;
 	}
-	public void setDuration(Double duration) {
+	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
 	public Long getPlayCount() {
@@ -202,7 +202,7 @@ public class Track extends XimalayaResponse {
 				coverUrlMiddle = json.getString("cover_url_middle");
 				coverUrlLarge = json.getString("cover_url_large");
 				announcer = new User(json.getJSONObject("announcer"));
-				duration = json.getDouble("duration");
+				duration = json.getInt("duration");
 				playCount = json.getLong("play_count");
 				favoriteCount = json.getLong("favorite_count");
 				commentCount = json.getLong("comment_count");
