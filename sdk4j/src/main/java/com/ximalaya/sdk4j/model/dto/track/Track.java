@@ -95,6 +95,12 @@ public class Track extends XimalayaResponse {
 	public void setCoverUrlLarge(String coverUrlLarge) {
 		this.coverUrlLarge = coverUrlLarge;
 	}
+	public User getAnnouncer() {
+		return announcer;
+	}
+	public void setAnnouncer(User announcer) {
+		this.announcer = announcer;
+	}
 	public Integer getDuration() {
 		return duration;
 	}
@@ -308,58 +314,4 @@ public class Track extends XimalayaResponse {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("Track {id: ");
-		strBuilder.append(id);
-		strBuilder.append(", kind: \"");
-		strBuilder.append(kind);
-		strBuilder.append("\", trackTitle: \"");
-		strBuilder.append(trackTitle);
-		strBuilder.append("\", trackTags: \"");
-		strBuilder.append(trackTags);
-		strBuilder.append("\", trackIntro: \"");
-		strBuilder.append(trackIntro);
-		strBuilder.append("\", coverUrlSmall: \"");
-		strBuilder.append(coverUrlSmall);
-		strBuilder.append("\", coverUrlMiddle: \"");
-		strBuilder.append(coverUrlMiddle);
-		strBuilder.append("\", coverUrlLarge: \"");
-		strBuilder.append(coverUrlLarge);
-		strBuilder.append("\", announcer: ");
-		strBuilder.append(announcer);
-		strBuilder.append(", duration: ");
-		strBuilder.append(duration);
-		strBuilder.append(", playCount: ");
-		strBuilder.append(playCount);
-		strBuilder.append(", favoriteCount: ");
-		strBuilder.append(favoriteCount);
-		strBuilder.append(", commentCount: ");
-		strBuilder.append(commentCount);
-		strBuilder.append(", downloadCount: ");
-		strBuilder.append(downloadCount);
-		strBuilder.append(", playUrl32: \"");
-		strBuilder.append(playUrl32);
-		strBuilder.append("\", playSize32: ");
-		strBuilder.append(playSize32);
-		strBuilder.append(", playUrl64: \"");
-		strBuilder.append(playUrl64);
-		strBuilder.append("\", playSize64: ");
-		strBuilder.append(playSize64);
-		strBuilder.append(", downloadUrl: \"");
-		strBuilder.append(downloadUrl);
-		strBuilder.append("\", subordinatedAlbumID: ");
-		strBuilder.append(subordinatedAlbumID);
-		strBuilder.append(", source: ");
-		strBuilder.append(source);
-		strBuilder.append(", updatedAt: ");
-		strBuilder.append(updatedAt);
-		strBuilder.append(", createdAt: ");
-		strBuilder.append(createdAt);
-		strBuilder.append("}");
-		return strBuilder.toString();
-	}
-	
 }

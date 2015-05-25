@@ -109,24 +109,4 @@ public class DownloadTrack implements Serializable {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("DownTrack {id: ");
-		strBuilder.append(id);
-		strBuilder.append(", kind: \"");
-		strBuilder.append(kind);
-		strBuilder.append("\", trackTitle: \"");
-		strBuilder.append(trackTitle);
-		strBuilder.append("\", playUrl32: \"");
-		strBuilder.append(playUrl32);
-		strBuilder.append("\", playUrl64: \"");
-		strBuilder.append(playUrl64);
-		strBuilder.append("\", playUrlAac: \"");
-		strBuilder.append(playUrlAac);
-		strBuilder.append("}");
-		return strBuilder.toString();
-	}
-
 }

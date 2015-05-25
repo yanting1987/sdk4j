@@ -100,19 +100,4 @@ public class LiveAnnouncer extends XimalayaResponse {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("User {id: ");
-		strBuilder.append(id);
-		strBuilder.append(", kind: \"");
-		strBuilder.append(kind);
-		strBuilder.append("\", nickname: \"");
-		strBuilder.append(nickname);
-		strBuilder.append("\", avatarUrl: \"");
-		strBuilder.append(avatarUrl);
-		strBuilder.append("\"}");
-		return strBuilder.toString();
-	}
 }

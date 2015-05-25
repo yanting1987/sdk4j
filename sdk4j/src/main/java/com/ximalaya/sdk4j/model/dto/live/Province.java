@@ -127,21 +127,4 @@ public class Province extends XimalayaResponse {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("Province {id: ");
-		strBuilder.append(id);
-		strBuilder.append(", kind: \"");
-		strBuilder.append(kind);
-		strBuilder.append("\", provinceCode: ");
-		strBuilder.append(provinceCode);
-		strBuilder.append(", provinceName: \"");
-		strBuilder.append(provinceName);
-		strBuilder.append("\", createdAt: ");
-		strBuilder.append(createdAt);
-		strBuilder.append("}");
-		return strBuilder.toString();
-	}
 }

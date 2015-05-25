@@ -79,29 +79,4 @@ public class TrackList extends AbstractPageResult implements Serializable {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("TrackList {categoryID: ");
-		strBuilder.append(categoryID);
-		strBuilder.append(", categoryName: ");
-		strBuilder.append(categoryName == null ? null : ("\"" + categoryName + "\""));
-		strBuilder.append(", tagName: ");
-		strBuilder.append(tagName == null ? null : ("\"" + tagName + "\""));
-		strBuilder.append(", totalCount: ");
-		strBuilder.append(totalCount);
-		strBuilder.append(", totalPage: ");
-		strBuilder.append(totalPage);
-		strBuilder.append(", tracks: [");
-		if(tracks != null && !tracks.isEmpty()) {
-			for(Track track: tracks) {
-				strBuilder.append(track.toString());
-				strBuilder.append(", ");
-			}
-			strBuilder.deleteCharAt(strBuilder.lastIndexOf(","));
-		}
-		strBuilder.append("]}");
-		return strBuilder.toString();
-	}
 }

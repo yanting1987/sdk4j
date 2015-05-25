@@ -277,42 +277,4 @@ public class Album extends XimalayaResponse {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("Album {id: ");
-		strBuilder.append(id);
-		strBuilder.append(", kind: \"");
-		strBuilder.append(kind);
-		strBuilder.append("\", albumTitle: \"");
-		strBuilder.append(albumTitle);
-		strBuilder.append("\", albumTags: \"");
-		strBuilder.append(albumTags);
-		strBuilder.append("\", albumIntro: \"");
-		strBuilder.append(albumIntro);
-		strBuilder.append("\", coverUrlSmall: \"");
-		strBuilder.append(coverUrlSmall);
-		strBuilder.append("\", coverUrlMiddle: \"");
-		strBuilder.append(coverUrlMiddle);
-		strBuilder.append("\", coverUrlLarge: \"");
-		strBuilder.append(coverUrlLarge);
-		strBuilder.append("\", announcer: ");
-		strBuilder.append(announcer);
-		strBuilder.append(", playCount: ");
-		strBuilder.append(playCount);
-		strBuilder.append(", favoriteCount: ");
-		strBuilder.append(favoriteCount);
-		strBuilder.append(", includeTrackCount: ");
-		strBuilder.append(includeTrackCount);
-		strBuilder.append(", lastUpTrack: {");
-		strBuilder.append(lastUpTrack);
-		strBuilder.append("}, updatedAt: ");
-		strBuilder.append(updatedAt);
-		strBuilder.append(", createdAt: ");
-		strBuilder.append(createdAt);
-		strBuilder.append("}");
-		return strBuilder.toString();
-	}
-	
 }

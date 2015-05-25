@@ -8,7 +8,6 @@ import java.util.List;
  *
  */
 public class TagList {
-	
 	private Long categoryID;      // 标签所属分类ID
 	private String categoryName;   // 标签所属分类名称
 	private List<Tag> tags;        // 标签列表
@@ -60,5 +59,4 @@ public class TagList {
 		
 		return true;
 	}
-	
 }

@@ -126,22 +126,4 @@ public class Tag implements Serializable {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("Tag {tagName: \"");
-		strBuilder.append(tagName);
-		strBuilder.append("\", kind: \"");
-		strBuilder.append(kind);
-		strBuilder.append("\", coverUrlSmall: ");
-		strBuilder.append(coverUrlSmall == null ? null : ("\"" + coverUrlSmall + "\""));
-		strBuilder.append(", coverUrlMiddle: ");
-		strBuilder.append(coverUrlMiddle == null ? null : ("\"" + coverUrlMiddle + "\""));
-		strBuilder.append(", coverUrlLarge: ");
-		strBuilder.append(coverUrlLarge == null ? null : ("\"" + coverUrlLarge + "\""));
-		strBuilder.append("}");
-		return strBuilder.toString();
-	}
-	
 }

@@ -133,24 +133,4 @@ public class Category implements Serializable {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("Category {id: ");
-		strBuilder.append(id);
-		strBuilder.append(", kind: \"");
-		strBuilder.append(kind);
-		strBuilder.append("\", categoryName: \"");
-		strBuilder.append(categoryName);
-		strBuilder.append("\", coverUrlSmall: ");
-		strBuilder.append(coverUrlSmall == null ? null : ("\"" + coverUrlSmall + "\""));
-		strBuilder.append(", coverUrlMiddle: ");
-		strBuilder.append(coverUrlMiddle == null ? null : ("\"" + coverUrlMiddle + "\""));
-		strBuilder.append(", coverUrlLarge: ");
-		strBuilder.append(coverUrlLarge == null ? null : ("\"" + coverUrlLarge + "\""));
-		strBuilder.append("}");
-		return strBuilder.toString();
-	}
-	
 }

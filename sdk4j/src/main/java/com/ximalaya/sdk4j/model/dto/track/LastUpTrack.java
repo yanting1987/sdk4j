@@ -110,21 +110,4 @@ public class LastUpTrack extends XimalayaResponse {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("LastUpTrack {trackID: ");
-		strBuilder.append(trackID);
-		strBuilder.append(", trackTitle: \"");
-		strBuilder.append(trackTitle);
-		strBuilder.append("\", duration: ");
-		strBuilder.append(duration);
-		strBuilder.append(", createdAt: ");
-		strBuilder.append(createdAt);
-		strBuilder.append(", updatedAt: ");
-		strBuilder.append(updatedAt);
-		strBuilder.append("}");
-		return strBuilder.toString();
-	}
 }

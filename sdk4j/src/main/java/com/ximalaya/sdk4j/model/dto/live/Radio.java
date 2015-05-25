@@ -31,7 +31,10 @@ public class Radio extends XimalayaResponse {
 	private String programName;                 // 正在直播的节目名称
 	private Long scheduleID;                    // 正在直播的节目时间表ID
 	private List<Integer> supportBitRates;      // 支持的码率列表，如[24, 64]
-	private List<RadioPlayUrl> radioPlayUrls;   // 电台在线播放地址列表
+	private String rate24AacUrl;                // 24码率电台在线播放地址，aac格式
+	private String rate24TsUrl;                 // 24码率电台在线播放地址，ts格式
+	private String rate64AacUrl;                // 64码率电台在线播放地址，aac格式
+	private String rate64TsUrl;                 // 64码率电台在线播放地址，t是格式
 	private Long  radioPlayCount;               // 电台累计被收听次数
 	private String coverUrlSmall;               // 电台封面小图
 	private String coverUrlLarge;               // 电台封面大图
@@ -79,11 +82,29 @@ public class Radio extends XimalayaResponse {
 	public void setSupportBitRates(List<Integer> supportBitRates) {
 		this.supportBitRates = supportBitRates;
 	}
-	public List<RadioPlayUrl> getRadioPlayUrls() {
-		return radioPlayUrls;
+	public String getRate24AacUrl() {
+		return rate24AacUrl;
 	}
-	public void setRadioPlayUrls(List<RadioPlayUrl> radioPlayUrls) {
-		this.radioPlayUrls = radioPlayUrls;
+	public void setRate24AacUrl(String rate24AacUrl) {
+		this.rate24AacUrl = rate24AacUrl;
+	}
+	public String getRate24TsUrl() {
+		return rate24TsUrl;
+	}
+	public void setRate24TsUrl(String rate24TsUrl) {
+		this.rate24TsUrl = rate24TsUrl;
+	}
+	public String getRate64AacUrl() {
+		return rate64AacUrl;
+	}
+	public void setRate64AacUrl(String rate64AacUrl) {
+		this.rate64AacUrl = rate64AacUrl;
+	}
+	public String getRate64TsUrl() {
+		return rate64TsUrl;
+	}
+	public void setRate64TsUrl(String rate64TsUrl) {
+		this.rate64TsUrl = rate64TsUrl;
 	}
 	public Long getRadioPlayCount() {
 		return radioPlayCount;
@@ -142,12 +163,10 @@ public class Radio extends XimalayaResponse {
 					supportBitRates.add(supportBitRatesJsonArray.getInt(i));
 				}
 				
-				radioPlayUrls = new ArrayList<RadioPlayUrl> ();
-				JSONArray radioPlayUrlsJsonArray = json.getJSONArray("radio_play_urls");
-				size = radioPlayUrlsJsonArray.length();
-				for(int i = 0; i < size; i++) {
-					radioPlayUrls.add(new RadioPlayUrl(radioPlayUrlsJsonArray.getJSONObject(i)));
-				}
+				rate24AacUrl = json.getString("rate24_aac_url");
+				rate24TsUrl = json.getString("rate24_ts_url");
+				rate64AacUrl = json.getString("rate64_aac_url");
+				rate64TsUrl = json.getString("rate64_ts_url");
 				
 				radioPlayCount = json.getLong("radio_play_count");
 				coverUrlSmall = json.getString("cover_url_small");
@@ -207,42 +226,4 @@ public class Radio extends XimalayaResponse {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("Radio {id: ");
-		strBuilder.append(id);
-		strBuilder.append(", kind: \"");
-		strBuilder.append(kind);
-		strBuilder.append("\", radioName: \"");
-		strBuilder.append(radioName);
-		strBuilder.append("\", radioDesc: ");
-		strBuilder.append(radioDesc);
-		strBuilder.append("\", programName: \"");
-		strBuilder.append(programName);
-		strBuilder.append("\", scheduleID: ");
-		strBuilder.append(scheduleID);
-		strBuilder.append(", supportBitRates: ");
-		strBuilder.append(supportBitRates);
-		strBuilder.append(", radioPlayUrls: [");
-		if(radioPlayUrls != null && !radioPlayUrls.isEmpty()) {
-			for(RadioPlayUrl url: radioPlayUrls) {
-				strBuilder.append(url.toString());
-				strBuilder.append(", ");
-			}
-			strBuilder.deleteCharAt(strBuilder.lastIndexOf(","));
-		}
-		strBuilder.append("], radioPlayCount: ");
-		strBuilder.append(radioPlayCount);
-		strBuilder.append(", coverUrlSmall: \"");
-		strBuilder.append(coverUrlSmall);
-		strBuilder.append("\", coverUrlLarge: \"");
-		strBuilder.append(coverUrlLarge);
-		strBuilder.append("\", updated_at: ");
-		strBuilder.append(updatedAt);
-		strBuilder.append("}");
-		return strBuilder.toString();
-	}
-
 }

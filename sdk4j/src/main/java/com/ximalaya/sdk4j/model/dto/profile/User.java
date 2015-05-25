@@ -109,22 +109,4 @@ public class User extends XimalayaResponse {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("User {id: ");
-		strBuilder.append(id);
-		strBuilder.append(", kind: \"");
-		strBuilder.append(kind);
-		strBuilder.append("\", nickname: \"");
-		strBuilder.append(nickname);
-		strBuilder.append("\", avatarUrl: \"");
-		strBuilder.append(avatarUrl);
-		strBuilder.append("\", isVerified: ");
-		strBuilder.append(isVerified);
-		strBuilder.append("}");
-		return strBuilder.toString();
-	}
-
 }

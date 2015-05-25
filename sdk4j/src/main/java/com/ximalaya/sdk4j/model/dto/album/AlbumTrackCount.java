@@ -80,17 +80,4 @@ public class AlbumTrackCount implements Serializable {
 		
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("AlbumTrackCount {id: ");
-		strBuilder.append(id);
-		strBuilder.append(", kind: \"");
-		strBuilder.append(kind);
-		strBuilder.append("\", trackCount: ");
-		strBuilder.append(trackCount);
-		strBuilder.append("}");
-		return strBuilder.toString();
-	}
 }
