@@ -2,6 +2,8 @@ package com.ximalaya.sdk4j;
 
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import com.ximalaya.sdk4j.model.XimalayaException;
@@ -14,7 +16,7 @@ public class CategoriesTest {
 	@Test
 	public void testGetCategories() throws XimalayaException {
 		List<Category> categories = categoriesService.getCategories();
-		System.out.println(categories);
+		Assert.assertTrue(categories != null && !categories.isEmpty());
 	}
 	
 }

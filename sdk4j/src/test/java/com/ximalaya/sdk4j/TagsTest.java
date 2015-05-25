@@ -2,6 +2,8 @@ package com.ximalaya.sdk4j;
 
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import com.ximalaya.sdk4j.model.XimalayaException;
@@ -14,7 +16,7 @@ public class TagsTest {
 	@Test
 	public void testGetAlbumTags() throws XimalayaException {
 		List<Tag> tags = tagsService.getAlbumTags(0);
-		System.out.println(tags);
+		Assert.assertTrue(tags != null && !tags.isEmpty());
 	}
 
 }

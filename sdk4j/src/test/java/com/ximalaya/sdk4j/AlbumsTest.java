@@ -21,29 +21,26 @@ public class AlbumsTest {
 	public void testGetHotAlbumList() throws XimalayaException {
 		AlbumList albumList = albumsService.getHotAlbumList(0L, null, new Paging());
 		List<Album> albums = albumList.getAlbums();
-		Assert.assertNotNull(albums);
-		System.out.println(albumList);
+		Assert.assertTrue(albums != null && !albums.isEmpty());
 	}
 	
 	@Test
 	public void testBatchGetAlbums() throws XimalayaException {
 		List<Album> albums = albumsService.batchGetAlbums(new long[] {74391, 78349});
-		Assert.assertNotNull(albums);
-		Assert.assertFalse(albums.isEmpty());
+		Assert.assertTrue(albums != null && !albums.isEmpty());
 	}
 	
 	@Test
 	public void testBatchGetAlbumTrackCounts() throws XimalayaException {
 		List<AlbumTrackCount> albumTrackCounts = albumsService.batchGetAlbumTrackCounts(new long[] { 74391, 78349 });
-		Assert.assertNotNull(albumTrackCounts);
-		Assert.assertFalse(albumTrackCounts.isEmpty());
+		Assert.assertTrue(albumTrackCounts != null && !albumTrackCounts.isEmpty());
 	}
 	
 	@Test
 	public void testBrowseAlbumTracks() throws XimalayaException {
 		AlbumTracks albumTracks = albumsService.browseAlbumTracks(81702, new Paging(1, 5));
-		Assert.assertNotNull(albumTracks);
-		System.out.println(albumTracks);
+		Assert.assertTrue(albumTracks != null && albumTracks.getTracks() != null
+				&& !albumTracks.getTracks().isEmpty());
 	}
 
 }

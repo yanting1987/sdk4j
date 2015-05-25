@@ -19,22 +19,19 @@ public class TracksTest {
 	public void testGetHotTrackList() throws XimalayaException {
 		TrackList trackList = tracksService.getHotTrackList(0, null, null);
 		List<Track> tracks = trackList.getTracks();
-		Assert.assertNotNull(tracks);
-		Assert.assertFalse(tracks.isEmpty());
+		Assert.assertTrue(tracks != null && !tracks.isEmpty());
 	}
 	
 	@Test
 	public void testBatchGetTracks() throws XimalayaException {
 		List<Track> tracks = tracksService.batchGetTracks(new long[] { 251739, 252045 });
-		Assert.assertNotNull(tracks);
-		Assert.assertFalse(tracks.isEmpty());
+		Assert.assertTrue(tracks != null && !tracks.isEmpty());
 	}
 	
 	@Test
 	public void testBatchGetDownloadTracks() throws XimalayaException {
 		List<DownloadTrack> downTracks = tracksService.batchGetDownloadTracks(new long[] { 251739, 252045 });
-		Assert.assertNotNull(downTracks);
-		Assert.assertFalse(downTracks.isEmpty());
+		Assert.assertTrue(downTracks != null && !downTracks.isEmpty());
 	}
 
 }

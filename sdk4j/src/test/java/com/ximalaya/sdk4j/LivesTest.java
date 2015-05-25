@@ -2,6 +2,8 @@ package com.ximalaya.sdk4j;
 
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import com.ximalaya.sdk4j.model.Paging;
@@ -18,25 +20,27 @@ public class LivesTest {
 	@Test
 	public void testGetProvinces() throws XimalayaException {
 		List<Province> provinces = lives.getProvinces();
-		System.out.println(provinces);
+		Assert.assertTrue(provinces != null && !provinces.isEmpty());
 	}
 	
 	@Test
 	public void testGetRadioList() throws XimalayaException {
 		RadioList radioList = lives.getRadioList(1, "110000", new Paging());
-		System.out.println(radioList);
+		Assert.assertTrue(radioList != null && radioList.getRadios() != null
+				&& !radioList.getRadios().isEmpty());
 	}
 	
 	@Test
 	public void testGetSchedules() throws XimalayaException {
 		ScheduleList threeDaySchedules = lives.getSchedules(75);
-		System.out.println(threeDaySchedules);
+		Assert.assertTrue(threeDaySchedules != null && threeDaySchedules.getSchedules() != null
+				&& !threeDaySchedules.getSchedules().isEmpty());
 	}
 	
 	@Test
 	public void testGetProgram() throws XimalayaException {
 		Program program = lives.getProgram(75);
-		System.out.println(program);
+		Assert.assertNotNull(program != null && program.getProgramName() != null);
 	}
 
 }
