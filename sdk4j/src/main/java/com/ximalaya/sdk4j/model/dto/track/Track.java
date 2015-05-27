@@ -232,25 +232,29 @@ public class Track extends XimalayaResponse {
 		TrackList trackList = new TrackList();
 		JSONObject trackListJsonObject = response.asJSONObject();
 		try {
-			if(trackListJsonObject.has("category_id")) {
-				trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
+			int totalCount = trackListJsonObject.getInt("total_count");
+			if(totalCount > 0) {
+				trackList.setTotalPage(trackListJsonObject.getInt("total_page"));
+				trackList.setTotalCount(trackListJsonObject.getInt("total_count"));
+				
+				if(trackListJsonObject.has("category_id")) {
+					trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
+				}
+				if(trackListJsonObject.has("category_name")) {
+					trackList.setCategoryName(trackListJsonObject.getString("category_name"));
+				}
+				if(trackListJsonObject.has("tag_name")) {
+					trackList.setTagName(trackListJsonObject.getString("tag_name"));
+				}
+				
+				List<Track> tracks = new ArrayList<Track> ();
+				JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
+				int size = tracksJsonArray.length();
+				for(int i = 0; i < size; i++) {
+					tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
+				}
+				trackList.setTracks(tracks);
 			}
-			if(trackListJsonObject.has("category_name")) {
-				trackList.setCategoryName(trackListJsonObject.getString("category_name"));
-			}
-			if(trackListJsonObject.has("tag_name")) {
-				trackList.setTagName(trackListJsonObject.getString("tag_name"));
-			}
-			trackList.setTotalPage(trackListJsonObject.getInt("total_page"));
-			trackList.setTotalCount(trackListJsonObject.getInt("total_count"));
-			
-			List<Track> tracks = new ArrayList<Track> ();
-			JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
-			int size = tracksJsonArray.length();
-			for(int i = 0; i < size; i++) {
-				tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
-			}
-			trackList.setTracks(tracks);
 		} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}

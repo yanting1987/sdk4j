@@ -26,21 +26,30 @@ public class AlbumsTest {
 	
 	@Test
 	public void testBatchGetAlbums() throws XimalayaException {
-		List<Album> albums = albumsService.batchGetAlbums(new long[] {74391, 78349});
-		Assert.assertTrue(albums != null && !albums.isEmpty());
+		List<Album> albums = albumsService.batchGetAlbums(new long[] {84363, 84365, 84752});
+		Assert.assertTrue(albums != null && albums.size() == 2);
 	}
 	
 	@Test
 	public void testBatchGetAlbumTrackCounts() throws XimalayaException {
-		List<AlbumTrackCount> albumTrackCounts = albumsService.batchGetAlbumTrackCounts(new long[] { 74391, 78349 });
-		Assert.assertTrue(albumTrackCounts != null && !albumTrackCounts.isEmpty());
+		List<AlbumTrackCount> albumTrackCounts = albumsService.batchGetAlbumTrackCounts(new long[] {84363, 84365, 84752});
+		Assert.assertTrue(albumTrackCounts != null && albumTrackCounts.size() == 2);
 	}
 	
 	@Test
 	public void testBrowseAlbumTracks() throws XimalayaException {
-		AlbumTracks albumTracks = albumsService.browseAlbumTracks(81702, new Paging(1, 5));
+		/*
+		 * 有版权
+		 */
+		AlbumTracks albumTracks = albumsService.browseAlbumTracks(84363, new Paging(1, 5));
 		Assert.assertTrue(albumTracks != null && albumTracks.getTracks() != null
 				&& !albumTracks.getTracks().isEmpty());
+		
+		/*
+		 * 无版权
+		 */
+		albumTracks = albumsService.browseAlbumTracks(84364, new Paging(1, 5));
+		Assert.assertTrue(albumTracks != null && albumTracks.getTracks() == null);
 	}
 
 }
