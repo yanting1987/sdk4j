@@ -213,20 +213,6 @@ public class Album extends XimalayaResponse {
 		return albumList;
 	}
 	
-	public static List<AlbumTrackCount> constructAlbumTrackCounts(HttpResponse response) throws XimalayaException {
-		List<AlbumTrackCount> albumTrackCounts = new ArrayList<AlbumTrackCount> ();
-		JSONArray albumTrackCountsJsonArray = response.asJSONArray();
-		try {
-			int size = albumTrackCountsJsonArray.length();
-			for(int i = 0; i < size; i++) {
-				albumTrackCounts.add(new AlbumTrackCount(albumTrackCountsJsonArray.getJSONObject(i)));
-			}
-		} catch (JSONException jsone) {
-			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
-		}
-		return albumTrackCounts;
-	}
-	
 	public static AlbumTracks constructAlbumTracks(HttpResponse response) throws XimalayaException {
 		AlbumTracks albumTracks = new AlbumTracks();
 		JSONObject albumTracksJsonObject = response.asJSONObject();

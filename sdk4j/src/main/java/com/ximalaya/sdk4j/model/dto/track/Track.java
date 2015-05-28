@@ -276,20 +276,6 @@ public class Track extends XimalayaResponse {
 		return tracks;
 	}
 	
-	public static List<DownloadTrack> constructDownTracks(HttpResponse response) throws XimalayaException {
-		List<DownloadTrack> downloadTracks = new ArrayList<DownloadTrack> ();
-		JSONArray downloadTracksJsonArray = response.asJSONArray();
-		try {
-			int size = downloadTracksJsonArray.length();
-			for(int i = 0; i < size; i++) {
-				downloadTracks.add(new DownloadTrack(downloadTracksJsonArray.getJSONObject(i)));
-			}
-		} catch (JSONException jsone) {
-			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
-		}
-		return downloadTracks;
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

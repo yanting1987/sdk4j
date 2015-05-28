@@ -10,7 +10,6 @@ import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.Album;
 import com.ximalaya.sdk4j.model.dto.album.AlbumList;
-import com.ximalaya.sdk4j.model.dto.album.AlbumTrackCount;
 import com.ximalaya.sdk4j.model.dto.album.AlbumTracks;
 
 public class AlbumsTest {
@@ -28,12 +27,6 @@ public class AlbumsTest {
 	public void testBatchGetAlbums() throws XimalayaException {
 		List<Album> albums = albumsService.batchGetAlbums(new long[] {84363, 84365, 84752});
 		Assert.assertTrue(albums != null && albums.size() == 2);
-	}
-	
-	@Test
-	public void testBatchGetAlbumTrackCounts() throws XimalayaException {
-		List<AlbumTrackCount> albumTrackCounts = albumsService.batchGetAlbumTrackCounts(new long[] {84363, 84365, 84752});
-		Assert.assertTrue(albumTrackCounts != null && albumTrackCounts.size() == 2);
 	}
 	
 	@Test

@@ -6,7 +6,6 @@ import java.util.List;
 import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.dto.track.DownloadTrack;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
 import com.ximalaya.sdk4j.util.StringUtil;
@@ -23,7 +22,6 @@ public class Tracks extends Ximalaya {
 	private static final long serialVersionUID = -6472908914256459025L;
 	
 	private static final List<Track> EMPTY_TRACKS = new ArrayList<Track> (0);
-	private static final List<DownloadTrack> EMPTY_DOWNLOAD_TRACKS = new ArrayList<DownloadTrack> (0);
 	
 	/**
 	 * 根据分类和标签获取热门声音（带分页）
@@ -72,24 +70,6 @@ public class Tracks extends Ximalaya {
 		HttpParameter[] specificParams = new HttpParameter[] { new HttpParameter("ids", StringUtil.join(trackIDs, ",")) };
 		return Track.constructTracks(
 				CLIENT.get(String.format("%s/tracks/get_batch", BASE_URL),
-						   assembleHttpParams(specificParams)));
-	}
-	
-	/**
-	 * 批量获取声音下载信息
-	 * 
-	 * @param trackIDs
-	 * @return
-	 * @throws XimalayaException
-	 */
-	public List<DownloadTrack> batchGetDownloadTracks(long[] trackIDs) throws XimalayaException {
-		if(trackIDs == null || trackIDs.length == 0) {
-			return EMPTY_DOWNLOAD_TRACKS; 
-		}
-		
-		HttpParameter[] specificParams = new HttpParameter[] { new HttpParameter("ids", StringUtil.join(trackIDs, ",")) };
-		return Track.constructDownTracks(
-				CLIENT.get(String.format("%s/tracks/down_batch", BASE_URL),
 						   assembleHttpParams(specificParams)));
 	}
 	

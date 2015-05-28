@@ -8,7 +8,6 @@ import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.Album;
 import com.ximalaya.sdk4j.model.dto.album.AlbumList;
-import com.ximalaya.sdk4j.model.dto.album.AlbumTrackCount;
 import com.ximalaya.sdk4j.model.dto.album.AlbumTracks;
 import com.ximalaya.sdk4j.util.StringUtil;
 
@@ -24,7 +23,6 @@ public class Albums extends Ximalaya {
 	private static final long serialVersionUID = -8651526987345601726L;
 	
 	private static final List<Album> EMPTY_ALBUMS = new ArrayList<Album> (0);
-	private static final List<AlbumTrackCount> EMPTY_ALBUM_TRACK_COUNTS = new ArrayList<AlbumTrackCount> (0);
 	
 	/**
 	 * 根据分类和标签获取热门专辑（带分页）
@@ -73,24 +71,6 @@ public class Albums extends Ximalaya {
 		HttpParameter[] specificParams = new HttpParameter[] { new HttpParameter("ids", StringUtil.join(albumIDs, ",")) };
 		return Album.constructAlbums(
 				CLIENT.get(String.format("%s/albums/get_batch", BASE_URL),
-						   assembleHttpParams(specificParams)));
-	}
-	
-	/**
-	 * 根据一组专辑ID批量获取专辑包含声音数信息
-	 * 
-	 * @param albumIDs 一组专辑ID，必填
-	 * @return
-	 * @throws XimalayaException
-	 */
-	public List<AlbumTrackCount> batchGetAlbumTrackCounts(long[] albumIDs) throws XimalayaException {
-		if(albumIDs == null || albumIDs.length == 0) {
-			return EMPTY_ALBUM_TRACK_COUNTS; 
-		}
-		
-		HttpParameter[] specificParams = new HttpParameter[] { new HttpParameter("ids", StringUtil.join(albumIDs, ",")) };
-		return Album.constructAlbumTrackCounts(
-				CLIENT.get(String.format("%s/albums/get_trackcount_batch", BASE_URL),
 						   assembleHttpParams(specificParams)));
 	}
 	
