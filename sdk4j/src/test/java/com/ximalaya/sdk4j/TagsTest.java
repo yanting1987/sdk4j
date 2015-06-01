@@ -18,5 +18,11 @@ public class TagsTest {
 		List<Tag> tags = tagsService.getAlbumTags(0);
 		Assert.assertTrue(tags != null && !tags.isEmpty());
 	}
+	
+	@Test
+	public void testGetTrackTags() throws XimalayaException {
+		List<Tag> tags = tagsService.getTrackTags(0);
+		Assert.assertTrue(tags != null && !tags.isEmpty());
+	}
 
 }
