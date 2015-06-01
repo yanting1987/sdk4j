@@ -147,11 +147,11 @@ public class Radio extends XimalayaResponse {
 				id = json.getLong("id");
 				kind = json.getString("kind");
 				radioName = json.getString("radio_name");
-				radioDesc = json.getString("radio_desc");
 				try {
-					programName = json.getString("program_name");
+					radioDesc = json.getString("radio_desc");       // 电台简介可能为空
+					programName = json.getString("program_name");   // 节目名称可能为空
 				}
-				catch(Exception e) {   // program_name可能为null
+				catch(Exception e) {
 					// swallow it
 				}
 				scheduleID = json.getLong("schedule_id");
