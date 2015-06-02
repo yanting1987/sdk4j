@@ -29,7 +29,7 @@ public class AlbumsTest {
 		Assert.assertTrue(albums != null && albums.size() == 2);
 	}
 	
-	@Test
+	@Test  
 	public void testBrowseAlbumTracks() throws XimalayaException {
 		/*
 		 * 有版权
