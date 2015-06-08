@@ -77,7 +77,7 @@ public class Schedule extends XimalayaResponse {
 				kind = json.getString("kind");
 				startTime = json.getString("start_time");
 				endTime = json.getString("end_time");
-				relatedProgram = new Program(json);
+				relatedProgram = new Program(json.getJSONObject("related_program"));
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
