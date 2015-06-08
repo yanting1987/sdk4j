@@ -74,7 +74,7 @@ public class Lives extends Ximalaya {
 	 * @throws XimalayaException
 	 */
 	@SuppressWarnings("deprecation")
-	public List<Schedule> getSchedules(int radioID) throws XimalayaException {
+	public List<Schedule> getSchedules(long radioID) throws XimalayaException {
 		return getSchedules(radioID, new Date().getDay());
 	}
 	
@@ -85,7 +85,7 @@ public class Lives extends Ximalaya {
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public List<Schedule> getSchedules(int radioID, int weekday) throws XimalayaException {
+	public List<Schedule> getSchedules(long radioID, int weekday) throws XimalayaException {
 		checkRadioID(radioID);
 		checkWeekday(weekday);
 		HttpParameter[] specificParameters = new HttpParameter[2];
@@ -101,7 +101,7 @@ public class Lives extends Ximalaya {
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public Program getPlayingProgram(int radioID) throws XimalayaException {
+	public Program getPlayingProgram(long radioID) throws XimalayaException {
 		checkRadioID(radioID);
 		return new Program(
 				CLIENT.get(String.format("%s/live/get_playing_program", BASE_URL), 
@@ -117,7 +117,7 @@ public class Lives extends Ximalaya {
 		}
 	}
 	
-	private void checkRadioID(int radioID) {
+	private void checkRadioID(long radioID) {
 		if(radioID <= 0) {
 			throw new IllegalArgumentException("radio_id should > 0");
 		}
