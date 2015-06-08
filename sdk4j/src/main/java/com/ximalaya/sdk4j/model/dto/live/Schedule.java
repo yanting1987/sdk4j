@@ -12,7 +12,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
 
 /**
- * 直播节目时间表DTO
+ * 直播节目排期DTO
  * 
  * @author will
  *
@@ -27,7 +27,7 @@ public class Schedule extends XimalayaResponse {
 	private String kind;              // DTO实体类型
 	private String startTime;         // 开始时间
 	private String endTime;           // 结束时间
-	private Integer updatedAt;		  // 创建时间，Unix毫秒数时间戳
+	private Long updatedAt;		       // 创建时间，Unix毫秒数时间戳
 	private Program relatedProgram;   // 关联的直播节目
 	
 	public Long getId() {
@@ -54,10 +54,10 @@ public class Schedule extends XimalayaResponse {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	public Integer getUpdatedAt() {
+	public Long getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(Integer updatedAt) {
+	public void setUpdatedAt(Long updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	public Program getRelatedProgram() {
@@ -79,7 +79,7 @@ public class Schedule extends XimalayaResponse {
 				kind = json.getString("kind");
 				startTime = json.getString("start_time");
 				endTime = json.getString("end_time");
-				updatedAt = json.getInt("updated_at");
+				updatedAt = json.getLong("updated_at");
 				relatedProgram = new Program(json.getJSONObject("related_program"));
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
