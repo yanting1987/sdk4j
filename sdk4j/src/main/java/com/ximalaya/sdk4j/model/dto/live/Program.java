@@ -131,7 +131,12 @@ public class Program extends XimalayaResponse {
 			try {
 				id = json.getLong("id");
 				kind = json.getString("kind");
-				programName = json.getString("program_name");
+				try {
+					programName = json.getString("program_name");   // 节目名称可能为空
+				}
+				catch(Exception e) {
+					// swallow it
+				}
 				playType = json.getInt("play_type");
 				backPicUrl = json.getString("back_pic_url");
 				listenBackUrl = json.getString("listen_back_url");
