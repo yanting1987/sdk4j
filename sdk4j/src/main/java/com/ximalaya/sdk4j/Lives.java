@@ -96,7 +96,7 @@ public class Lives extends Ximalaya {
 	}
 	
 	/**
-	 * 根据直播电台ID获取正在直播的节目详情
+	 * 根据直播电台ID获取对应直播电台正在直播的节目详情
 	 * @param radioID 直播电台ID
 	 * @return
 	 * @throws XimalayaException
