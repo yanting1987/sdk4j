@@ -120,7 +120,7 @@ public class Schedule extends XimalayaResponse {
 		
 		Schedule other = (Schedule) obj;
 		if((id == null && other.id != null) 
-			|| !id.equals(other.id) || !relatedProgram.equals(other)) {
+			|| !id.equals(other.id) || !relatedProgram.equals(other.getRelatedProgram())) {
 			return false;
 		}
 		
