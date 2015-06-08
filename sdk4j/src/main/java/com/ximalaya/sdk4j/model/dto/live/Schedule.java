@@ -77,18 +77,17 @@ public class Schedule extends XimalayaResponse {
 				kind = json.getString("kind");
 				startTime = json.getString("start_time");
 				endTime = json.getString("end_time");
-				relatedProgram = new Program(json);
+				relatedProgram = new Program(json.getJSONObject("related_program"));
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
 		}
 	}
 	
-	public static List<Schedule> constructScheduleList(HttpResponse response) throws XimalayaException {
-		JSONObject scheduleListJsonObject = response.asJSONObject();
+	public static List<Schedule> constructSchedules(HttpResponse response) throws XimalayaException {
+		JSONArray schedulesJsonArray = response.asJSONArray();
 		List<Schedule> schedules = new ArrayList<Schedule> ();
 		try {
-			JSONArray schedulesJsonArray = scheduleListJsonObject.getJSONArray("schedules");
 			int size = schedulesJsonArray.length();
 			for(int i = 0; i < size; i++) {
 				schedules.add(new Schedule(schedulesJsonArray.getJSONObject(i)));

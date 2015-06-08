@@ -91,7 +91,7 @@ public class Lives extends Ximalaya {
 		HttpParameter[] specificParameters = new HttpParameter[2];
 		specificParameters[0] = new HttpParameter("radio_id", radioID);
 		specificParameters[1] = new HttpParameter("weekday", weekday);
-		return Schedule.constructScheduleList(CLIENT.get(String.format("%s/live/schedules", BASE_URL),
+		return Schedule.constructSchedules(CLIENT.get(String.format("%s/live/schedules", BASE_URL),
 						    assembleHttpParams(specificParameters)));
 	}
 	
