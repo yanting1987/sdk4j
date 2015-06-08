@@ -96,12 +96,12 @@ public class Lives extends Ximalaya {
 	}
 	
 	/**
-	 * 根据直播电台ID获取直播节目详情
+	 * 根据直播电台ID获取正在直播的节目详情
 	 * @param radioID 直播电台ID
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public Program getProgram(int radioID) throws XimalayaException {
+	public Program getPlayingProgram(int radioID) throws XimalayaException {
 		checkRadioID(radioID);
 		return new Program(
 				CLIENT.get(String.format("%s/live/get_playing_program", BASE_URL), 

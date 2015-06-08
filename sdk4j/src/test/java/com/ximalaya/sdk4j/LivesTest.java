@@ -39,7 +39,7 @@ public class LivesTest {
 	
 	@Test
 	public void testGetProgram() throws XimalayaException {
-		Program program = lives.getProgram(75);
+		Program program = lives.getPlayingProgram(75);
 		Assert.assertNotNull(program != null && program.getProgramName() != null);
 	}
 
