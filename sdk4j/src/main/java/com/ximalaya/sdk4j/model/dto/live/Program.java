@@ -26,13 +26,14 @@ public class Program extends XimalayaResponse {
 	
 	private Long id;                              // 节目ID
 	private String kind;                          // DTO实体类型
-	private Long scheduleID;                      // 节目时间表ID
+//	private Long scheduleID;                      // 节目时间表ID
 	private String programName;                   // 节目名称
-	private String startTime;                     // 节目开始时间
-	private String endTime;                       // 节目结束时间
+//	private String startTime;                     // 节目开始时间
+//	private String endTime;                       // 节目结束时间
 	private Integer playType;                     // 播放类型，0-直播，1-重播，2-跨天，3-无流期
 	private String backPicUrl;                    // 节目背景图URL
-	private Long fmuid;                           // 喜马拉雅平台主播用户ID
+	private String listenBackUrl;				  // 节目回听地址
+//	private Long fmuid;                           // 喜马拉雅平台主播用户ID
 	private List<Integer> supportBitRates;        // 支持的码率列表，如[24, 64]
 	private String rate24AacUrl;                  // 24码率电台在线播放地址，aac格式
 	private String rate24TsUrl;                   // 24码率电台在线播放地址，ts格式
@@ -52,29 +53,11 @@ public class Program extends XimalayaResponse {
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
-	public Long getScheduleID() {
-		return scheduleID;
-	}
-	public void setScheduleID(Long scheduleID) {
-		this.scheduleID = scheduleID;
-	}
 	public String getProgramName() {
 		return programName;
 	}
 	public void setProgramName(String programName) {
 		this.programName = programName;
-	}
-	public String getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-	public String getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
 	}
 	public Integer getPlayType() {
 		return playType;
@@ -88,11 +71,11 @@ public class Program extends XimalayaResponse {
 	public void setBackPicUrl(String backPicUrl) {
 		this.backPicUrl = backPicUrl;
 	}
-	public Long getFmuid() {
-		return fmuid;
+	public String getListenBackUrl() {
+		return listenBackUrl;
 	}
-	public void setFmuid(Long fmuid) {
-		this.fmuid = fmuid;
+	public void setListenBackUrl(String listenBackUrl) {
+		this.listenBackUrl = listenBackUrl;
 	}
 	public List<Integer> getSupportBitRates() {
 		return supportBitRates;
@@ -141,13 +124,10 @@ public class Program extends XimalayaResponse {
 			try {
 				id = json.getLong("id");
 				kind = json.getString("kind");
-				scheduleID = json.getLong("schedule_id");
 				programName = json.getString("program_name");
-				startTime = json.getString("start_time");
-				endTime = json.getString("end_time");
 				playType = json.getInt("play_type");
 				backPicUrl = json.getString("back_pic_url");
-				fmuid = json.getLong("fmuid");
+				listenBackUrl = json.getString("listen_back_url");
 				
 				supportBitRates = new ArrayList<Integer> ();
 				JSONArray supportBitRatesJsonArray = json.getJSONArray("support_bitrates");
