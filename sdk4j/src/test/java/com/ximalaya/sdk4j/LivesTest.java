@@ -11,7 +11,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.live.Program;
 import com.ximalaya.sdk4j.model.dto.live.Province;
 import com.ximalaya.sdk4j.model.dto.live.RadioList;
-import com.ximalaya.sdk4j.model.dto.live.ScheduleList;
+import com.ximalaya.sdk4j.model.dto.live.Schedule;
 
 public class LivesTest {
 	
@@ -32,9 +32,9 @@ public class LivesTest {
 	
 	@Test
 	public void testGetSchedules() throws XimalayaException {
-		ScheduleList threeDaySchedules = lives.getSchedules(75);
-		Assert.assertTrue(threeDaySchedules != null && threeDaySchedules.getSchedules() != null
-				&& !threeDaySchedules.getSchedules().isEmpty());
+		List<Schedule> threeDaySchedules = lives.getSchedules(75);
+		Assert.assertTrue(threeDaySchedules != null && threeDaySchedules != null
+				&& !threeDaySchedules.isEmpty());
 	}
 	
 	@Test

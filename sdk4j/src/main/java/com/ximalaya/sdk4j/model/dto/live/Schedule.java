@@ -18,27 +18,16 @@ import com.ximalaya.sdk4j.model.XimalayaResponse;
  *
  */
 public class Schedule extends XimalayaResponse {
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2863359065879699665L;
 	
-	private Long id;                              // 节目时间表ID
-	private String kind;                          // DTO实体类型
-	private String startTime;                     // 开始时间
-	private String endTime;                       // 结束时间
-	private Long programID;                       // 节目ID
-	private String programName;                   // 节目名称
-	private Integer playType;                     // 播放类型，0-直播，1-重播，2-跨天，3-无流期
-	private String backPicUrl;					  // 节目背景图地址
-	private String listenBackUrl;                 // 直播节目回听地址
-	private List<Integer> supportBitRates;        // 支持的码率列表，如[24, 64]
-	private String rate24AacUrl;                  // 24码率电台在线播放地址，aac格式
-	private String rate24TsUrl;                   // 24码率电台在线播放地址，ts格式
-	private String rate64AacUrl;                  // 64码率电台在线播放地址，aac格式
-	private String rate64TsUrl;                   // 64码率电台在线播放地址，t是格式
-	private List<LiveAnnouncer> liveAnnouncers;   // 直播主播列表 
+	private Long id;                  // 节目时间表ID
+	private String kind;              // DTO实体类型
+	private String startTime;         // 开始时间
+	private String endTime;           // 结束时间
+	private Program relatedProgram;   // 关联的直播节目
 	
 	public Long getId() {
 		return id;
@@ -52,18 +41,6 @@ public class Schedule extends XimalayaResponse {
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
-	public Long getProgramID() {
-		return programID;
-	}
-	public void setProgramID(Long programID) {
-		this.programID = programID;
-	}
-	public String getProgramName() {
-		return programName;
-	}
-	public void setProgramName(String programName) {
-		this.programName = programName;
-	}
 	public String getStartTime() {
 		return startTime;
 	}
@@ -76,59 +53,11 @@ public class Schedule extends XimalayaResponse {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	public Integer getPlayType() {
-		return playType;
+	public Program getRelatedProgram() {
+		return relatedProgram;
 	}
-	public void setPlayType(Integer playType) {
-		this.playType = playType;
-	}
-	public String getListenBackUrl() {
-		return listenBackUrl;
-	}
-	public void setListenBackUrl(String listenBackUrl) {
-		this.listenBackUrl = listenBackUrl;
-	}
-	public String getBackPicUrl() {
-		return backPicUrl;
-	}
-	public void setBackPicUrl(String backPicUrl) {
-		this.backPicUrl = backPicUrl;
-	}
-	public List<Integer> getSupportBitRates() {
-		return supportBitRates;
-	}
-	public void setSupportBitRates(List<Integer> supportBitRates) {
-		this.supportBitRates = supportBitRates;
-	}
-	public String getRate24AacUrl() {
-		return rate24AacUrl;
-	}
-	public void setRate24AacUrl(String rate24AacUrl) {
-		this.rate24AacUrl = rate24AacUrl;
-	}
-	public String getRate24TsUrl() {
-		return rate24TsUrl;
-	}
-	public void setRate24TsUrl(String rate24TsUrl) {
-		this.rate24TsUrl = rate24TsUrl;
-	}
-	public String getRate64AacUrl() {
-		return rate64AacUrl;
-	}
-	public void setRate64AacUrl(String rate64AacUrl) {
-		this.rate64AacUrl = rate64AacUrl;
-	}
-	public String getRate64TsUrl() {
-		return rate64TsUrl;
-	}
-	public void setRate64TsUrl(String rate64TsUrl) {
-		this.rate64TsUrl = rate64TsUrl;
-	}
-	public List<LiveAnnouncer> getLiveAnnouncers() {
-		return liveAnnouncers;
-	}
-	public void setAnnouncers(List<LiveAnnouncer> liveAnnouncers) {
-		this.liveAnnouncers = liveAnnouncers;
+	public void setRelatedProgram(Program relatedProgram) {
+		this.relatedProgram = relatedProgram;
 	}
 	
 	public Schedule(HttpResponse response) throws XimalayaException {
@@ -148,59 +77,26 @@ public class Schedule extends XimalayaResponse {
 				kind = json.getString("kind");
 				startTime = json.getString("start_time");
 				endTime = json.getString("end_time");
-				programID = json.getLong("program_id");
-				try {
-					programName = json.getString("program_name");
-				}
-				catch(Exception e) {   // program_name可能为null
-					// swallow it
-				}
-				playType = json.getInt("play_type");
-				backPicUrl = json.getString("back_pic_url");
-				listenBackUrl = json.getString("listen_back_url");
-				supportBitRates = new ArrayList<Integer> ();
-				JSONArray supportBitRatesJsonArray = json.getJSONArray("support_bitrates");
-				int size = supportBitRatesJsonArray.length();
-				for(int i = 0; i < size; i++) {
-					supportBitRates.add(supportBitRatesJsonArray.getInt(i));
-				}
-				
-				rate24AacUrl = json.getString("rate24_aac_url");
-				rate24TsUrl = json.getString("rate24_ts_url");
-				rate64AacUrl = json.getString("rate64_aac_url");
-				rate64TsUrl = json.getString("rate64_ts_url");
-				
-				List<LiveAnnouncer> liveAnnouncers = new ArrayList<LiveAnnouncer> ();
-				JSONArray liveAnnouncersJsonArray = json.getJSONArray("live_announcers");
-				size = liveAnnouncersJsonArray.length();
-				for(int i = 0; i < size; i++) {
-					liveAnnouncers.add(new LiveAnnouncer(liveAnnouncersJsonArray.getJSONObject(i)));
-				}
-				this.liveAnnouncers = liveAnnouncers;
+				relatedProgram = new Program(json);
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
 		}
 	}
 	
-	public static ScheduleList constructScheduleList(HttpResponse response) throws XimalayaException {
-		ScheduleList scheduleList = new ScheduleList();
+	public static List<Schedule> constructScheduleList(HttpResponse response) throws XimalayaException {
 		JSONObject scheduleListJsonObject = response.asJSONObject();
+		List<Schedule> schedules = new ArrayList<Schedule> ();
 		try {
-			scheduleList.setTotalPage(scheduleListJsonObject.getInt("total_page"));
-			scheduleList.setTotalCount(scheduleListJsonObject.getInt("total_count"));
-			
-			List<Schedule> schedules = new ArrayList<Schedule> ();
 			JSONArray schedulesJsonArray = scheduleListJsonObject.getJSONArray("schedules");
 			int size = schedulesJsonArray.length();
 			for(int i = 0; i < size; i++) {
 				schedules.add(new Schedule(schedulesJsonArray.getJSONObject(i)));
 			}
-			scheduleList.setSchedules(schedules);
 		} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
-		return scheduleList;
+		return schedules;
 	}
 	
 	@Override
@@ -225,7 +121,7 @@ public class Schedule extends XimalayaResponse {
 		
 		Schedule other = (Schedule) obj;
 		if((id == null && other.id != null) 
-			|| !id.equals(other.id)) {
+			|| !id.equals(other.id) || !relatedProgram.equals(other)) {
 			return false;
 		}
 		

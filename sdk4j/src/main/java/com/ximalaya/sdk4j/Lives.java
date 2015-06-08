@@ -11,7 +11,6 @@ import com.ximalaya.sdk4j.model.dto.live.Province;
 import com.ximalaya.sdk4j.model.dto.live.Radio;
 import com.ximalaya.sdk4j.model.dto.live.RadioList;
 import com.ximalaya.sdk4j.model.dto.live.Schedule;
-import com.ximalaya.sdk4j.model.dto.live.ScheduleList;
 import com.ximalaya.sdk4j.util.StringUtil;
 
 /**
@@ -75,7 +74,7 @@ public class Lives extends Ximalaya {
 	 * @throws XimalayaException
 	 */
 	@SuppressWarnings("deprecation")
-	public ScheduleList getSchedules(int radioID) throws XimalayaException {
+	public List<Schedule> getSchedules(int radioID) throws XimalayaException {
 		return getSchedules(radioID, new Date().getDay());
 	}
 	
@@ -86,15 +85,13 @@ public class Lives extends Ximalaya {
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public ScheduleList getSchedules(int radioID, int weekday) throws XimalayaException {
+	public List<Schedule> getSchedules(int radioID, int weekday) throws XimalayaException {
 		checkRadioID(radioID);
 		checkWeekday(weekday);
-		
 		HttpParameter[] specificParameters = new HttpParameter[2];
 		specificParameters[0] = new HttpParameter("radio_id", radioID);
 		specificParameters[1] = new HttpParameter("weekday", weekday);
-		return Schedule.constructScheduleList(
-				CLIENT.get(String.format("%s/live/schedules", BASE_URL),
+		return Schedule.constructScheduleList(CLIENT.get(String.format("%s/live/schedules", BASE_URL),
 						    assembleHttpParams(specificParameters)));
 	}
 	
