@@ -104,7 +104,7 @@ public class Lives extends Ximalaya {
 	public Program getProgram(int radioID) throws XimalayaException {
 		checkRadioID(radioID);
 		return new Program(
-				CLIENT.get(String.format("%s/live/get_playing _program", BASE_URL), 
+				CLIENT.get(String.format("%s/live/get_playing_program", BASE_URL), 
 				            assembleHttpParams(new HttpParameter[] { new HttpParameter("radio_id", radioID) })));
 	}
 	
