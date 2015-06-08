@@ -27,6 +27,7 @@ public class Schedule extends XimalayaResponse {
 	private String kind;              // DTO实体类型
 	private String startTime;         // 开始时间
 	private String endTime;           // 结束时间
+	private Integer updatedAt;		  // 创建时间，Unix毫秒数时间戳
 	private Program relatedProgram;   // 关联的直播节目
 	
 	public Long getId() {
@@ -53,16 +54,17 @@ public class Schedule extends XimalayaResponse {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
+	public Integer getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Integer updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 	public Program getRelatedProgram() {
 		return relatedProgram;
 	}
 	public void setRelatedProgram(Program relatedProgram) {
 		this.relatedProgram = relatedProgram;
-	}
-	
-	public Schedule(HttpResponse response) throws XimalayaException {
-		super(response);
-		init(response.asJSONObject());
 	}
 	
 	public Schedule(JSONObject json) throws XimalayaException {
@@ -77,6 +79,7 @@ public class Schedule extends XimalayaResponse {
 				kind = json.getString("kind");
 				startTime = json.getString("start_time");
 				endTime = json.getString("end_time");
+				updatedAt = json.getInt("updated_at");
 				relatedProgram = new Program(json.getJSONObject("related_program"));
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
@@ -84,11 +87,10 @@ public class Schedule extends XimalayaResponse {
 		}
 	}
 	
-	public static List<Schedule> constructScheduleList(HttpResponse response) throws XimalayaException {
-		JSONObject scheduleListJsonObject = response.asJSONObject();
+	public static List<Schedule> constructSchedules(HttpResponse response) throws XimalayaException {
+		JSONArray schedulesJsonArray = response.asJSONArray();
 		List<Schedule> schedules = new ArrayList<Schedule> ();
 		try {
-			JSONArray schedulesJsonArray = scheduleListJsonObject.getJSONArray("schedules");
 			int size = schedulesJsonArray.length();
 			for(int i = 0; i < size; i++) {
 				schedules.add(new Schedule(schedulesJsonArray.getJSONObject(i)));
@@ -121,7 +123,7 @@ public class Schedule extends XimalayaResponse {
 		
 		Schedule other = (Schedule) obj;
 		if((id == null && other.id != null) 
-			|| !id.equals(other.id) || !relatedProgram.equals(other)) {
+			|| !id.equals(other.id) || !relatedProgram.equals(other.getRelatedProgram())) {
 			return false;
 		}
 		
