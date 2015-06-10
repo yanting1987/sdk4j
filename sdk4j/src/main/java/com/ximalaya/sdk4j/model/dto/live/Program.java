@@ -29,7 +29,7 @@ public class Program extends XimalayaResponse {
 	private String programName;                   // 节目名称
 	private Integer playType;                     // 播放类型，0-直播，1-重播，2-跨天，3-无流期
 	private String backPicUrl;                    // 节目背景图URL
-	private String listenBackUrl;				  // 节目回听地址
+	private String listenBackUrl;				   // 节目回听地址
 	private List<Integer> supportBitRates;        // 支持的码率列表，如[24, 64]
 	private String rate24AacUrl;                  // 24码率电台在线播放地址，aac格式
 	private String rate24TsUrl;                   // 24码率电台在线播放地址，ts格式
