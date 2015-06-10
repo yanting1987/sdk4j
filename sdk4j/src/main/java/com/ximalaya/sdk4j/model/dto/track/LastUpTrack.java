@@ -86,7 +86,7 @@ public class LastUpTrack extends XimalayaResponse {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((trackID == null) ? 0 : trackID.hashCode());
+		result = prime * result + ((trackID == null) ? 0 : trackID.intValue());
 		return result;
 	}
 	

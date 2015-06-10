@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
+import com.ximalaya.sdk4j.util.StringUtil;
 
 /**
  * 标签DTO
@@ -102,7 +103,7 @@ public class Tag implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((tagName == null) ? 0 : tagName.hashCode());
+		result = prime * result + ((tagName == null) ? 0 : StringUtil.getConsistentHashCodeForSameStr(tagName));
 		return result;
 	}
 	
