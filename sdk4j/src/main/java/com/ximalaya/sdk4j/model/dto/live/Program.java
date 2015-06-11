@@ -27,9 +27,7 @@ public class Program extends XimalayaResponse {
 	private Long id;                              // 节目ID
 	private String kind;                          // DTO实体类型
 	private String programName;                   // 节目名称
-	private Integer playType;                     // 播放类型，0-直播，1-重播，2-跨天，3-无流期
 	private String backPicUrl;                    // 节目背景图URL
-	private String listenBackUrl;				  // 节目回听地址
 	private List<Integer> supportBitRates;        // 支持的码率列表，如[24, 64]
 	private String rate24AacUrl;                  // 24码率电台在线播放地址，aac格式
 	private String rate24TsUrl;                   // 24码率电台在线播放地址，ts格式
@@ -56,23 +54,11 @@ public class Program extends XimalayaResponse {
 	public void setProgramName(String programName) {
 		this.programName = programName;
 	}
-	public Integer getPlayType() {
-		return playType;
-	}
-	public void setPlayType(Integer playType) {
-		this.playType = playType;
-	}
 	public String getBackPicUrl() {
 		return backPicUrl;
 	}
 	public void setBackPicUrl(String backPicUrl) {
 		this.backPicUrl = backPicUrl;
-	}
-	public String getListenBackUrl() {
-		return listenBackUrl;
-	}
-	public void setListenBackUrl(String listenBackUrl) {
-		this.listenBackUrl = listenBackUrl;
 	}
 	public List<Integer> getSupportBitRates() {
 		return supportBitRates;
@@ -137,9 +123,7 @@ public class Program extends XimalayaResponse {
 				catch(Exception e) {
 					// swallow it
 				}
-				playType = json.getInt("play_type");
 				backPicUrl = json.getString("back_pic_url");
-				listenBackUrl = json.getString("listen_back_url");
 				
 				supportBitRates = new ArrayList<Integer> ();
 				JSONArray supportBitRatesJsonArray = json.getJSONArray("support_bitrates");

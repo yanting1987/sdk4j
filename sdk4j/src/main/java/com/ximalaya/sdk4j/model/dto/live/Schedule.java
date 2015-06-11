@@ -27,8 +27,10 @@ public class Schedule extends XimalayaResponse {
 	private String kind;              // DTO实体类型
 	private String startTime;         // 开始时间
 	private String endTime;           // 结束时间
-	private Long updatedAt;		       // 创建时间，Unix毫秒数时间戳
+	private Long updatedAt;		      // 创建时间，Unix毫秒数时间戳
 	private Program relatedProgram;   // 关联的直播节目
+	private String listenBackUrl;	  // 节目回听地址
+	private Integer playType;         // 播放类型，0-直播，1-重播，2-跨天，3-无流期
 	
 	public Long getId() {
 		return id;
@@ -66,6 +68,18 @@ public class Schedule extends XimalayaResponse {
 	public void setRelatedProgram(Program relatedProgram) {
 		this.relatedProgram = relatedProgram;
 	}
+	public String getListenBackUrl() {
+		return listenBackUrl;
+	}
+	public void setListenBackUrl(String listenBackUrl) {
+		this.listenBackUrl = listenBackUrl;
+	}
+	public Integer getPlayType() {
+		return playType;
+	}
+	public void setPlayType(Integer playType) {
+		this.playType = playType;
+	}
 	
 	public Schedule(JSONObject json) throws XimalayaException {
 		super();
@@ -81,6 +95,8 @@ public class Schedule extends XimalayaResponse {
 				endTime = json.getString("end_time");
 				updatedAt = json.getLong("updated_at");
 				relatedProgram = new Program(json.getJSONObject("related_program"));
+				playType = json.getInt("play_type");
+				listenBackUrl = json.getString("listen_back_url");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
