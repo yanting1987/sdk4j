@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.ximalaya.sdk4j.model.dto.AbstractPageResult;
+import com.ximalaya.sdk4j.util.StringUtil;
 
 /***
  * 专辑列表DTO
@@ -50,8 +51,8 @@ public class AlbumList extends AbstractPageResult implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((categoryID == null) ? 0 : categoryID.hashCode());
-		result = prime * result + ((tagName == null) ? 0: tagName.hashCode());
+		result = prime * result + ((categoryID == null) ? 0 : categoryID.intValue());
+		result = prime * result + ((tagName == null) ? 0: StringUtil.getConsistentHashCodeForSameStr(tagName));
 		return result;
 	}
 	

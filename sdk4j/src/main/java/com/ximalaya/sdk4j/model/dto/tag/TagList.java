@@ -35,7 +35,7 @@ public class TagList {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((categoryID == null) ? 0 : categoryID.hashCode());
+		result = prime * result + ((categoryID == null) ? 0 : categoryID.intValue());
 		return result;
 	}
 	

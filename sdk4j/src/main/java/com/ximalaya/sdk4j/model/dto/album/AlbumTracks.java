@@ -72,7 +72,7 @@ public class AlbumTracks extends AbstractPageResult implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((albumID == null) ? 0 : albumID.hashCode());
+		result = prime * result + ((albumID == null) ? 0 : albumID.intValue());
 		return result;
 	}
 	

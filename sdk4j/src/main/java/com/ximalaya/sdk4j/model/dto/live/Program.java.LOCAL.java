@@ -34,7 +34,7 @@ public class Program extends XimalayaResponse {
 	private String rate64AacUrl;                  // 64码率电台在线播放地址，aac格式
 	private String rate64TsUrl;                   // 64码率电台在线播放地址，t是格式
 	private List<LiveAnnouncer> liveAnnouncers;   // 直播主播列表
-	private Long updatedAt;					      // 更新时间，Unix毫秒数时间戳
+	private Long updatedAt;					       // 更新时间，Unix毫秒数时间戳
 	
 	public Long getId() {
 		return id;
@@ -155,7 +155,7 @@ public class Program extends XimalayaResponse {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.intValue());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 	
