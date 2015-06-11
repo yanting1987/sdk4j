@@ -27,10 +27,10 @@ public class Schedule extends XimalayaResponse {
 	private String kind;              // DTO实体类型
 	private String startTime;         // 开始时间
 	private String endTime;           // 结束时间
-	private Long updatedAt;		      // 创建时间，Unix毫秒数时间戳
-	private Program relatedProgram;   // 关联的直播节目
-	private String listenBackUrl;	  // 节目回听地址
+	private Long updatedAt;		       // 创建时间，Unix毫秒数时间戳
+	private String listenBackUrl;	   // 节目回听地址
 	private Integer playType;         // 播放类型，0-直播，1-重播，2-跨天，3-无流期
+	private Program relatedProgram;   // 关联的直播节目
 	
 	public Long getId() {
 		return id;
@@ -62,12 +62,6 @@ public class Schedule extends XimalayaResponse {
 	public void setUpdatedAt(Long updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	public Program getRelatedProgram() {
-		return relatedProgram;
-	}
-	public void setRelatedProgram(Program relatedProgram) {
-		this.relatedProgram = relatedProgram;
-	}
 	public String getListenBackUrl() {
 		return listenBackUrl;
 	}
@@ -79,6 +73,12 @@ public class Schedule extends XimalayaResponse {
 	}
 	public void setPlayType(Integer playType) {
 		this.playType = playType;
+	}
+	public Program getRelatedProgram() {
+		return relatedProgram;
+	}
+	public void setRelatedProgram(Program relatedProgram) {
+		this.relatedProgram = relatedProgram;
 	}
 	
 	public Schedule(JSONObject json) throws XimalayaException {
@@ -94,9 +94,9 @@ public class Schedule extends XimalayaResponse {
 				startTime = json.getString("start_time");
 				endTime = json.getString("end_time");
 				updatedAt = json.getLong("updated_at");
-				relatedProgram = new Program(json.getJSONObject("related_program"));
 				playType = json.getInt("play_type");
 				listenBackUrl = json.getString("listen_back_url");
+				relatedProgram = new Program(json.getJSONObject("related_program"));
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
@@ -139,7 +139,7 @@ public class Schedule extends XimalayaResponse {
 		
 		Schedule other = (Schedule) obj;
 		if((id == null && other.id != null) 
-			|| !id.equals(other.id) || !relatedProgram.equals(other.getRelatedProgram())) {
+			|| !id.equals(other.id)) {
 			return false;
 		}
 		
