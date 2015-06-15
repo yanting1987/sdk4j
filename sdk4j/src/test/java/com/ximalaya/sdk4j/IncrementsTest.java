@@ -17,6 +17,7 @@ public class IncrementsTest {
 	
 	Increments increments = new Increments();
 	
+	@Test
 	public void testGetIncrementAlbumList() throws XimalayaException {
 		IncrementAlbumList incrAlbumList = increments.getIncrementAlbumList(0L, "小说", null, 1434351797388L);
 		assertTrue(incrAlbumList != null && !(incrAlbumList.getAlbums()==null) 
@@ -36,6 +37,7 @@ public class IncrementsTest {
 		assertTrue(scheduleList != null && !scheduleList.isEmpty());
 	}
 	
+	@Test
 	public void testGetIncrementTracks() throws XimalayaException {
 		IncrementTrackList trackList = increments.getIncrementTracks(1, new Paging(), 1434351797388L);
 		assertTrue(trackList != null && !(trackList.getTracks()==null) 
