@@ -17,7 +17,7 @@ import com.ximalaya.sdk4j.util.StringUtil;
 
 /**
  * 直播相关接口
- * @author will
+ * @author william
  *
  */
 public class Increments extends Ximalaya {
