@@ -39,7 +39,6 @@ public class Radio extends XimalayaResponse {
 	private String coverUrlSmall;               // 电台封面小图
 	private String coverUrlLarge;               // 电台封面大图
 	private Long updatedAt;                     // 电台更新时间
-	private Long createdAt;						// 电台创建时间
 	
 	public Long getId() {
 		return id;
@@ -131,12 +130,6 @@ public class Radio extends XimalayaResponse {
 	public void setUpdatedAt(Long updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	public Long getCreatedAt() {
-		return createdAt;
-	}
-	public void setCreatedAt(Long createdAt) {
-		this.createdAt = createdAt;
-	}
 	public Radio(HttpResponse response) throws XimalayaException {
 		super(response);
 		init(response.asJSONObject());
@@ -178,7 +171,6 @@ public class Radio extends XimalayaResponse {
 				coverUrlSmall = json.getString("cover_url_small");
 				coverUrlLarge = json.getString("cover_url_large");
 				updatedAt = json.getLong("updated_at");
-				createdAt = json.getLong("created_at");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
