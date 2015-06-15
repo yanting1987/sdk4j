@@ -94,8 +94,9 @@ public class Schedule extends XimalayaResponse {
 				startTime = json.getString("start_time");
 				endTime = json.getString("end_time");
 				updatedAt = json.getLong("updated_at");
-				playType = json.getInt("play_type");
-				listenBackUrl = json.getString("listen_back_url");
+				String playTypeStr = catchNullToString(json,"play_type");
+				playType = playTypeStr.equals("null") ? null:Integer.valueOf(playTypeStr);
+				listenBackUrl = catchNullToString(json,"listen_back_url");
 				relatedProgram = new Program(json.getJSONObject("related_program"));
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
@@ -115,6 +116,14 @@ public class Schedule extends XimalayaResponse {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
 		return schedules;
+	}
+	
+	private String catchNullToString(JSONObject json,String key){
+		try {
+			return json.get(key).toString();
+		} catch (JSONException e) {
+			return "null";
+		}
 	}
 	
 	@Override
@@ -145,4 +154,5 @@ public class Schedule extends XimalayaResponse {
 		
 		return true;
 	}
+	
 }
