@@ -28,7 +28,6 @@ public class Schedule extends XimalayaResponse {
 	private String startTime;         // 开始时间
 	private String endTime;           // 结束时间
 	private Long updatedAt;		      // 更新时间，Unix毫秒数时间戳
-	private Long createdAt;			  // 创建时间，Unix毫秒数时间戳
 	private String listenBackUrl;	  // 节目回听地址
 	private Integer playType;         // 播放类型，0-直播，1-重播，2-跨天，3-无流期
 	private Program relatedProgram;   // 关联的直播节目
@@ -63,12 +62,6 @@ public class Schedule extends XimalayaResponse {
 	public void setUpdatedAt(Long updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	public Long getCreatedAt() {
-		return createdAt;
-	}
-	public void setCreatedAt(Long createdAt) {
-		this.createdAt = createdAt;
-	}
 	public String getListenBackUrl() {
 		return listenBackUrl;
 	}
@@ -101,7 +94,6 @@ public class Schedule extends XimalayaResponse {
 				startTime = json.getString("start_time");
 				endTime = json.getString("end_time");
 				updatedAt = json.getLong("updated_at");
-				createdAt = json.getLong("created_at");
 				playType = json.getInt("play_type");
 				listenBackUrl = json.getString("listen_back_url");
 				relatedProgram = new Program(json.getJSONObject("related_program"));

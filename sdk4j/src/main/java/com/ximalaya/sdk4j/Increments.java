@@ -43,7 +43,7 @@ public class Increments extends Ximalaya {
 		
 		HttpParameter[] specificParams = null;
 		if(!StringUtil.isEmpty(tagName)) {
-			specificParams = new HttpParameter[4];
+			specificParams = new HttpParameter[5];
 			specificParams[0] = new HttpParameter("category_id", categoryID);
 			specificParams[1] = new HttpParameter("tag_name", tagName);
 			specificParams[2] = new HttpParameter("page", paging.getPage());
@@ -51,7 +51,7 @@ public class Increments extends Ximalaya {
 			specificParams[4] = new HttpParameter("update_time", updateTime);
 		}
 		else {
-			specificParams = new HttpParameter[3];
+			specificParams = new HttpParameter[4];
 			specificParams[0] = new HttpParameter("category_id", categoryID);
 			specificParams[1] = new HttpParameter("page", paging.getPage());
 			specificParams[2] = new HttpParameter("count", paging.getCount());
@@ -75,7 +75,7 @@ public class Increments extends Ximalaya {
 		DTOValidateUtil.validateAlbumID(albumID);
 		paging = paging == null ? new Paging(): paging;
 		
-		HttpParameter[] specificParams = new HttpParameter[3];
+		HttpParameter[] specificParams = new HttpParameter[4];
 		specificParams[0] = new HttpParameter("album_id", albumID);
 		specificParams[1] = new HttpParameter("page", paging.getPage());
 		specificParams[2] = new HttpParameter("count", paging.getCount());
@@ -101,7 +101,7 @@ public class Increments extends Ximalaya {
 		
 		HttpParameter[] specificParams = null;
 		if(!StringUtil.isEmpty(provinceCode)) {
-			specificParams = new HttpParameter[4];
+			specificParams = new HttpParameter[5];
 			specificParams[0] = new HttpParameter("radio_type", radioType);
 			specificParams[1] = new HttpParameter("province_code", provinceCode);
 			specificParams[2] = new HttpParameter("page", paging.getPage());
@@ -109,7 +109,7 @@ public class Increments extends Ximalaya {
 			specificParams[4] = new HttpParameter("update_time", updateTime);
 		}
 		else {
-			specificParams = new HttpParameter[3];
+			specificParams = new HttpParameter[5];
 			specificParams[0] = new HttpParameter("radio_type", radioType);
 			specificParams[1] = new HttpParameter("page", paging.getPage());
 			specificParams[2] = new HttpParameter("count", paging.getCount());
@@ -130,7 +130,7 @@ public class Increments extends Ximalaya {
 	public List<IncrementSchedule> getIncrementSchedules(long radioID, int weekday,long updateTime) throws XimalayaException {
 		DTOValidateUtil.validateRadioID(radioID);
 		DTOValidateUtil.validateWeekday(weekday);
-		HttpParameter[] specificParameters = new HttpParameter[2];
+		HttpParameter[] specificParameters = new HttpParameter[3];
 		specificParameters[0] = new HttpParameter("radio_id", radioID);
 		specificParameters[1] = new HttpParameter("weekday", weekday);
 		specificParameters[2] = new HttpParameter("update_time", updateTime);
