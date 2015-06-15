@@ -23,6 +23,8 @@ public class LiveAnnouncer extends XimalayaResponse {
 	private String kind;        // DTO实体类型
 	private String nickname;    // 点播主播昵称
 	private String avatarUrl;   // 点播主播头像
+	private Long updatedAt;
+	private Long createdAt;
 	
 	public Long getId() {
 		return id;
@@ -48,7 +50,18 @@ public class LiveAnnouncer extends XimalayaResponse {
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
 	}
-	
+	public Long getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Long updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	public Long getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Long createdAt) {
+		this.createdAt = createdAt;
+	}
 	public LiveAnnouncer(HttpResponse response) throws XimalayaException {
 		super(response);
 		init(response.asJSONObject());
@@ -66,6 +79,8 @@ public class LiveAnnouncer extends XimalayaResponse {
 				kind = json.getString("kind");
 				nickname = json.getString("nickname");
 				avatarUrl = json.getString("avatar_url");
+				createdAt = json.getLong("created_at");
+				updatedAt = json.getLong("updated_at");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}

@@ -28,6 +28,8 @@ public class Category implements Serializable {
 	private String coverUrlSmall;    // 封面小图
 	private String coverUrlMiddle;   // 封面中图
 	private String coverUrlLarge;    // 封面大图
+	private Long updatedAt;
+	private Long createdAt;
 	
 	public Long getId() {
 		return id;
@@ -65,7 +67,18 @@ public class Category implements Serializable {
 	public void setCoverUrlLarge(String coverUrlLarge) {
 		this.coverUrlLarge = coverUrlLarge;
 	}
-	
+	public Long getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Long updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	public Long getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Long createdAt) {
+		this.createdAt = createdAt;
+	}
 	public Category(JSONObject json) throws XimalayaException {
 		init(json);
 	}
@@ -85,6 +98,8 @@ public class Category implements Serializable {
 				if(json.has("cover_url_large")) {
 					coverUrlLarge = json.getString("cover_url_large");
 				}
+				createdAt = json.getLong("created_at");
+				updatedAt = json.getLong("updated_at");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}

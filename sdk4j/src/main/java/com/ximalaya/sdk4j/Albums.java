@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ximalaya.sdk4j.http.HttpParameter;
+import com.ximalaya.sdk4j.model.DTOValidateUtil;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.Album;
@@ -34,7 +35,7 @@ public class Albums extends Ximalaya {
 	 * @throws XimalayaException 
 	 */
 	public AlbumList getHotAlbumList(long categoryID, String tagName, Paging paging) throws XimalayaException {
-		checkCategoryID(categoryID);
+		DTOValidateUtil.validateCategoryID(categoryID);
 		paging = paging == null ? new Paging(): paging;
 		
 		HttpParameter[] specificParams = null;
@@ -83,7 +84,7 @@ public class Albums extends Ximalaya {
 	 * @throws XimalayaException 
 	 */
 	public AlbumTracks browseAlbumTracks(long albumID, Paging paging) throws XimalayaException {
-		checkAlbumID(albumID);
+		DTOValidateUtil.validateAlbumID(albumID);
 		paging = paging == null ? new Paging(): paging;
 		
 		HttpParameter[] specificParams = new HttpParameter[3];
@@ -95,16 +96,4 @@ public class Albums extends Ximalaya {
 						   assembleHttpParams(specificParams)));
 	}
 	
-	private void checkCategoryID(long categoryID) {
-		if(categoryID < 0) {
-			throw new IllegalArgumentException("categoryID should >= 0");
-		}
-	}
-	
-	private void checkAlbumID(long albumID) {
-		if(albumID <= 0) {
-			throw new IllegalArgumentException("albumID should > 0");
-		}
-	}
-
 }

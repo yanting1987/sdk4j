@@ -25,6 +25,8 @@ public class User extends XimalayaResponse {
 	private String nickname;      // 用户昵称
 	private String avatarUrl;     // 用户头像
 	private Boolean isVerified;   // 用户是否加V
+	private Long updatedAt;   	  // 更新时间
+	private Long createdAt;   	  // 更新时间
 	
 	public Long getId() {
 		return id;
@@ -50,13 +52,24 @@ public class User extends XimalayaResponse {
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
 	}
-	public Boolean isVerified() {
+	public Boolean getIsVerified() {
 		return isVerified;
 	}
-	public void setVerified(Boolean isVerified) {
+	public void setIsVerified(Boolean isVerified) {
 		this.isVerified = isVerified;
 	}
-
+	public Long getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Long updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	public Long getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Long createdAt) {
+		this.createdAt = createdAt;
+	}
 	public User(HttpResponse response) throws XimalayaException {
 		super(response);
 		init(response.asJSONObject());
@@ -75,6 +88,8 @@ public class User extends XimalayaResponse {
 				nickname = json.getString("nickname");
 				avatarUrl = json.getString("avatar_url");
 				isVerified = json.getBoolean("is_verified");
+				createdAt = json.getLong("created_at");
+				updatedAt = json.getLong("updated_at");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}

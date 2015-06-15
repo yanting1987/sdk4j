@@ -29,6 +29,7 @@ public class Province extends XimalayaResponse {
 	private Integer provinceCode;   // 省市代码，比如110000
 	private String provinceName;    // 省市名称
 	private Long createdAt;         // 更新时间
+	private Long updatedAt;
 	
 	public Long getId() {
 		return id;
@@ -60,7 +61,12 @@ public class Province extends XimalayaResponse {
 	public void setCreatedAt(Long createdAt) {
 		this.createdAt = createdAt;
 	}
-	
+	public Long getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Long updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 	public Province(HttpResponse response) throws XimalayaException {
 		super(response);
 		init(response.asJSONObject());
@@ -79,6 +85,7 @@ public class Province extends XimalayaResponse {
 				provinceCode = json.getInt("province_code");
 				provinceName = json.getString("province_name");
 				createdAt = json.getLong("created_at");
+				updatedAt = json.getLong("updated_at");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}

@@ -35,6 +35,7 @@ public class Program extends XimalayaResponse {
 	private String rate64TsUrl;                   // 64码率电台在线播放地址，t是格式
 	private List<LiveAnnouncer> liveAnnouncers;   // 直播主播列表
 	private Long updatedAt;					      // 更新时间，Unix毫秒数时间戳
+	private Long createdAt;						  // 创建时间，Unix毫秒数时间戳
 	
 	public Long getId() {
 		return id;
@@ -102,6 +103,12 @@ public class Program extends XimalayaResponse {
 	public void setUpdatedAt(Long updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	public Long getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Long createdAt) {
+		this.createdAt = createdAt;
+	}
 	public Program(HttpResponse response) throws XimalayaException {
 		super(response);
 		init(response.asJSONObject());
@@ -145,6 +152,7 @@ public class Program extends XimalayaResponse {
 				}
 				this.liveAnnouncers = liveAnnouncers;
 				this.updatedAt = json.getLong("updated_at");
+				this.createdAt = json.getLong("created_at");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}

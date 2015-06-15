@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.ximalaya.sdk4j.http.HttpParameter;
+import com.ximalaya.sdk4j.model.DTOValidateUtil;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.live.Program;
@@ -45,7 +46,7 @@ public class Lives extends Ximalaya {
 	 * @throws XimalayaException
 	 */
 	public RadioList getRadioList(int radioType, String provinceCode, Paging paging) throws XimalayaException {
-		checkRadioTypeAndProvinceCode(radioType, provinceCode);
+		DTOValidateUtil.validateRadioTypeAndProvinceCode(radioType, provinceCode);
 		paging = paging == null ? new Paging(): paging;
 		
 		HttpParameter[] specificParams = null;
@@ -86,8 +87,8 @@ public class Lives extends Ximalaya {
 	 * @throws XimalayaException
 	 */
 	public List<Schedule> getSchedules(long radioID, int weekday) throws XimalayaException {
-		checkRadioID(radioID);
-		checkWeekday(weekday);
+		DTOValidateUtil.validateRadioID(radioID);
+		DTOValidateUtil.validateWeekday(weekday);
 		HttpParameter[] specificParameters = new HttpParameter[2];
 		specificParameters[0] = new HttpParameter("radio_id", radioID);
 		specificParameters[1] = new HttpParameter("weekday", weekday);
@@ -102,31 +103,10 @@ public class Lives extends Ximalaya {
 	 * @throws XimalayaException
 	 */
 	public Program getPlayingProgram(long radioID) throws XimalayaException {
-		checkRadioID(radioID);
+		DTOValidateUtil.validateRadioID(radioID);
 		return new Program(
 				CLIENT.get(String.format("%s/live/get_playing_program", BASE_URL), 
 				            assembleHttpParams(new HttpParameter[] { new HttpParameter("radio_id", radioID) })));
 	}
 	
-	private void checkRadioTypeAndProvinceCode(int radioType, String provinceCode) {
-		if(radioType < 1 || radioType > 3) {
-			throw new IllegalArgumentException("radioType should >= 1 and <= 3");
-		}
-		if(radioType == 2 && StringUtil.isEmpty(provinceCode)) {
-			throw new IllegalArgumentException("provinceCode should be specified when radioType equals to 2");
-		}
-	}
-	
-	private void checkRadioID(long radioID) {
-		if(radioID <= 0) {
-			throw new IllegalArgumentException("radio_id should > 0");
-		}
-	}
-	
-	private void checkWeekday(int weekday) {
-		if(weekday < 0 || weekday > 6) {
-			throw new IllegalArgumentException("weekday should >= 0 and <= 6");
-		}
-	}
-
 }
