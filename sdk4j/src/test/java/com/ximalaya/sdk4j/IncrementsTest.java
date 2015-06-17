@@ -38,8 +38,8 @@ public class IncrementsTest {
 	}
 	
 	@Test
-	public void testGetIncrementTracks() throws XimalayaException {
-		IncrementTrackList trackList = increments.getIncrementTracks(1, new Paging(), 1434351797388L);
+	public void testGetIncrementTrackList() throws XimalayaException {
+		IncrementTrackList trackList = increments.getIncrementTrackList(1, new Paging(), 1434351797388L);
 		assertTrue(trackList != null && !(trackList.getTracks()==null) 
 			&& !trackList.getTracks().isEmpty());
 	}

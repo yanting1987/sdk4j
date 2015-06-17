@@ -71,7 +71,7 @@ public class Increments extends Ximalaya {
 	 * @return
 	 * @throws XimalayaException 
 	 */
-	public IncrementTrackList getIncrementTracks(long albumID, Paging paging, long updateTime) throws XimalayaException {
+	public IncrementTrackList getIncrementTrackList(long albumID, Paging paging, long updateTime) throws XimalayaException {
 		DTOValidateUtil.validateAlbumID(albumID);
 		paging = paging == null ? new Paging(): paging;
 		
