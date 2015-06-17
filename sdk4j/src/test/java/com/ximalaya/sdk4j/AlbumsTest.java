@@ -25,8 +25,8 @@ public class AlbumsTest {
 	
 	@Test
 	public void testBatchGetAlbums() throws XimalayaException {
-		List<Album> albums = albumsService.batchGetAlbums(new long[] {84363, 84365, 84752});
-		Assert.assertTrue(albums != null && albums.size() == 2);
+		List<Album> albums = albumsService.batchGetAlbums(new long[] {269483, 414117, 239463});
+		Assert.assertTrue(albums != null && albums.size() > 0);
 	}
 	
 	@Test  
@@ -34,7 +34,7 @@ public class AlbumsTest {
 		/*
 		 * 有版权
 		 */
-		AlbumTracks albumTracks = albumsService.browseAlbumTracks(84363, new Paging(1, 5));
+		AlbumTracks albumTracks = albumsService.browseAlbumTracks(269483, new Paging(1, 5));
 		Assert.assertTrue(albumTracks != null && albumTracks.getTracks() != null
 				&& !albumTracks.getTracks().isEmpty());
 		

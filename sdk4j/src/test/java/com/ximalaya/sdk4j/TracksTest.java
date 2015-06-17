@@ -16,16 +16,15 @@ public class TracksTest {
 	
 	@Test
 	public void testGetHotTrackList() throws XimalayaException {
-		TrackList trackList = tracksService.getHotTrackList(0, null, null);
+		TrackList trackList = tracksService.getHotTrackList(9, null, null);
 		List<Track> tracks = trackList.getTracks();
 		Assert.assertTrue(tracks != null && !tracks.isEmpty());
 	}
 	
 	@Test
 	public void testBatchGetTracks() throws XimalayaException {
-		List<Track> tracks = tracksService
-				.batchGetTracks(new long[] { 253572, 253290, 251727, 251726 });   // 前2个无版权，后2个有版权
-		Assert.assertTrue(tracks != null && tracks.size() == 2);
+		List<Track> tracks = tracksService.batchGetTracks(new long[] { 7368204, 7349613 });   // 有版权
+		Assert.assertTrue(tracks != null && tracks.size() > 0);
 	}
 
 }
