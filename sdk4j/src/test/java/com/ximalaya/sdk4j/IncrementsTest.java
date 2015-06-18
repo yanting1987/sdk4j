@@ -14,32 +14,33 @@ import com.ximalaya.sdk4j.model.dto.live.IncrementSchedule;
 import com.ximalaya.sdk4j.model.dto.track.IncrementTrackList;
 
 public class IncrementsTest {
+	private static final long LESSTHENTENMINUTES = System.currentTimeMillis()-60*8*1000;
 	
 	Increments increments = new Increments();
 	
 	@Test
 	public void testGetIncrementAlbumList() throws XimalayaException {
-		IncrementAlbumList incrAlbumList = increments.getIncrementAlbumList(0L, "小说", null, 1434351797388L);
+		IncrementAlbumList incrAlbumList = increments.getIncrementAlbumList(3L, null, null, LESSTHENTENMINUTES);
 		assertTrue(incrAlbumList != null && !(incrAlbumList.getAlbums()==null) 
 			&& !incrAlbumList.getAlbums().isEmpty());
 	}
 	
 	@Test
 	public void testGetIncrementRadioList() throws XimalayaException {
-		IncrementRadioList incrRadioList = increments.getIncrementRadioList(2, "360000", new Paging(), 1434003325300L);
+		IncrementRadioList incrRadioList = increments.getIncrementRadioList(2, "540000", new Paging(), LESSTHENTENMINUTES);
 		assertTrue(incrRadioList != null && !(incrRadioList.getRadios()==null) 
 			&& !incrRadioList.getRadios().isEmpty());
 	}
 	
 	@Test
 	public void testGetIncrementSchedules() throws XimalayaException {
-		List<IncrementSchedule> scheduleList = increments.getIncrementSchedules(610, 0, 1434003325300L);
-		assertTrue(scheduleList != null && !scheduleList.isEmpty());
+		List<IncrementSchedule> scheduleList = increments.getIncrementSchedules(1037, 3, LESSTHENTENMINUTES);
+		assertTrue(scheduleList != null && (scheduleList.size() > 0));
 	}
 	
 	@Test
 	public void testGetIncrementTrackList() throws XimalayaException {
-		IncrementTrackList trackList = increments.getIncrementTrackList(1, new Paging(), 1434351797388L);
+		IncrementTrackList trackList = increments.getIncrementTrackList(278614, new Paging(), LESSTHENTENMINUTES);
 		assertTrue(trackList != null && !(trackList.getTracks()==null) 
 			&& !trackList.getTracks().isEmpty());
 	}
