@@ -35,7 +35,7 @@ public class IncrementsTest {
 	@Test
 	public void testGetIncrementSchedules() throws XimalayaException {
 		List<IncrementSchedule> scheduleList = increments.getIncrementSchedules(1037, 3, LESSTHENTENMINUTES);
-		assertTrue(scheduleList != null && !scheduleList.isEmpty());
+		assertTrue(scheduleList != null && (scheduleList.size() > 0));
 	}
 	
 	@Test
