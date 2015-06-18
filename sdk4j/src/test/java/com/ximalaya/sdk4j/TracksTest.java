@@ -16,7 +16,7 @@ public class TracksTest {
 	
 	@Test
 	public void testGetHotTrackList() throws XimalayaException {
-		TrackList trackList = tracksService.getHotTrackList(0, null, null);
+		TrackList trackList = tracksService.getHotTrackList(0, "排行榜", null);
 		List<Track> tracks = trackList.getTracks();
 		Assert.assertTrue(tracks != null && !tracks.isEmpty());
 	}
