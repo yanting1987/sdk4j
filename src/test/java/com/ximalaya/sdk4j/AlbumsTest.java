@@ -18,7 +18,7 @@ public class AlbumsTest {
 	
 	@Test
 	public void testGetHotAlbumList() throws XimalayaException {
-		AlbumList albumList = albumsService.getHotAlbumList(0L, null, new Paging());
+		AlbumList albumList = albumsService.getHotAlbumList(0L, "郭德纲相声", new Paging());
 		List<Album> albums = albumList.getAlbums();
 		Assert.assertTrue(albums != null && !albums.isEmpty());
 	}
