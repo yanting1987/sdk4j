@@ -237,15 +237,9 @@ public class Track extends XimalayaResponse {
 				trackList.setTotalPage(trackListJsonObject.getInt("total_page"));
 				trackList.setTotalCount(trackListJsonObject.getInt("total_count"));
 				
-				if(trackListJsonObject.has("category_id")) {
 					trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
-				}
-				if(trackListJsonObject.has("category_name")) {
 					trackList.setCategoryName(trackListJsonObject.getString("category_name"));
-				}
-				if(trackListJsonObject.has("tag_name")) {
 					trackList.setTagName(trackListJsonObject.getString("tag_name"));
-				}
 				
 				List<Track> tracks = new ArrayList<Track> ();
 				JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");

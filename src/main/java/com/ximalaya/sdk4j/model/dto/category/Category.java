@@ -75,15 +75,9 @@ public class Category implements Serializable {
 				id = json.getLong("id");
 				kind = json.getString("kind");
 				categoryName = json.getString("category_name");
-				if(json.has("cover_url_small")) {
-					coverUrlSmall = json.getString("cover_url_small");
-				}
-				if(json.has("cover_url_middle")) {
-					coverUrlMiddle = json.getString("cover_url_middle");
-				}
-				if(json.has("cover_url_large")) {
-					coverUrlLarge = json.getString("cover_url_large");
-				}
+				coverUrlSmall = json.getString("cover_url_small");
+				coverUrlMiddle = json.getString("cover_url_middle");
+				coverUrlLarge = json.getString("cover_url_large");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}

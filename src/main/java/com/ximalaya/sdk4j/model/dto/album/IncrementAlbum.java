@@ -48,19 +48,12 @@ public class IncrementAlbum extends Album {
  			if(totalCount > 0) {
  				albumList.setTotalPage(albumListJsonObject.getInt("total_page"));
  	 			albumList.setTotalCount(totalCount);
- 	 			try{
- 	 				albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
- 	 			} catch(JSONException jsone) {
- 	 			}
- 	 			try{
- 	 				albumList.setCategoryName(albumListJsonObject.getString("category_name"));
- 	 			} catch(JSONException jsone) {
- 	 			}
- 	 			try{
- 	 				albumList.setTagName(albumListJsonObject.getString("tag_name"));
- 	 			} catch(JSONException jsone) {
- 	 			}
- 	 			List<IncrementAlbum> albums = new ArrayList<IncrementAlbum> ();
+ 	 			
+ 	 			albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
+ 	 			albumList.setCategoryName(albumListJsonObject.getString("category_name"));
+ 	 			albumList.setTagName(albumListJsonObject.getString("tag_name"));
+ 	 			
+ 	 			List<IncrementAlbum> albums = new ArrayList<IncrementAlbum>();
  	 			JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");
  	 			int size = albumsJsonArray.length();
  	 			for(int i = 0; i < size; i++) {

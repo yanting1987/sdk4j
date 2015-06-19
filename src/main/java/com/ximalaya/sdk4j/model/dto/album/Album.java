@@ -189,15 +189,9 @@ public class Album extends XimalayaResponse {
  				albumList.setTotalPage(albumListJsonObject.getInt("total_page"));
  	 			albumList.setTotalCount(totalCount);
  	 			
- 	 			if(albumListJsonObject.has("category_id")) {
- 	 				albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
- 	 			}
- 	 			if(albumListJsonObject.has("category_name")) {
- 	 				albumList.setCategoryName(albumListJsonObject.getString("category_name"));
- 	 			}
- 	 			if(albumListJsonObject.has("tag_name")) {
- 	 				albumList.setTagName(albumListJsonObject.getString("tag_name"));
- 	 			}
+ 	 			albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
+ 	 			albumList.setCategoryName(albumListJsonObject.getString("category_name"));
+ 	 			albumList.setTagName(albumListJsonObject.getString("tag_name"));
  	 			
  	 			List<Album> albums = new ArrayList<Album> ();
  	 			JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");

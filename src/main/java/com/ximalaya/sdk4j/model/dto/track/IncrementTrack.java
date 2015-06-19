@@ -46,18 +46,11 @@ public class IncrementTrack extends Track {
 		try {
 			int totalCount = incrementTracksJsonObject.getInt("total_count");
 			if(totalCount > 0) {
-				try{
-					incrementTracks.setCategoryID(incrementTracksJsonObject.getLong("category_id"));
-				} catch(JSONException jsone) {
-				}
-				try{
-					incrementTracks.setCategoryName(incrementTracksJsonObject.getString("category_name"));
-				} catch(JSONException jsone) {
-				}
-				try{
-					incrementTracks.setTagName(incrementTracksJsonObject.getString("tag_name"));
-				} catch(JSONException jsone) {
-				}
+				
+				incrementTracks.setCategoryID(incrementTracksJsonObject.getLong("category_id"));
+				incrementTracks.setCategoryName(incrementTracksJsonObject.getString("category_name"));
+				incrementTracks.setTagName(incrementTracksJsonObject.getString("tag_name"));
+				
 				incrementTracks.setTotalCount(totalCount);
 				incrementTracks.setTotalPage(incrementTracksJsonObject.getInt("total_page"));
 				
