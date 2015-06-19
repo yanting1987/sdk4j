@@ -18,7 +18,6 @@ public class TrackList extends AbstractPageResult implements Serializable {
 	private static final long serialVersionUID = -2548721408063441899L;
 	
 	private Long categoryID;       // 声音所属分类ID，可选
-	private String categoryName;   // 声音所属分类名，可选
 	private String tagName;        // 选填的声音所属标签名，可选
 	private List<Track> tracks;    // 声音列表
 	
@@ -27,12 +26,6 @@ public class TrackList extends AbstractPageResult implements Serializable {
 	}
 	public void setCategoryID(Long categoryID) {
 		this.categoryID = categoryID;
-	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
 	}
 	public String getTagName() {
 		return tagName;

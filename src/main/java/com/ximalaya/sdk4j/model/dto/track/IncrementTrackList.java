@@ -6,7 +6,6 @@ import com.ximalaya.sdk4j.model.dto.AbstractPageResult;
 
 public class IncrementTrackList extends AbstractPageResult {
 	private Long categoryID;               // 声音所属分类ID
-	private String categoryName;           // 声音所属分类名
 	private String tagName;                // 选填的声音所属标签名，无则返回空
 	private List<IncrementTrack> tracks;   // 声音列表
 	
@@ -15,12 +14,6 @@ public class IncrementTrackList extends AbstractPageResult {
 	}
 	public void setCategoryID(Long categoryID) {
 		this.categoryID = categoryID;
-	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
 	}
 	public String getTagName() {
 		return tagName;

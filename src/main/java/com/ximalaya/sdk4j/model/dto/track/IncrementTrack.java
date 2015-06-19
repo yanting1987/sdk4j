@@ -48,7 +48,6 @@ public class IncrementTrack extends Track {
 			if(totalCount > 0) {
 				
 				incrementTracks.setCategoryID(incrementTracksJsonObject.getLong("category_id"));
-				incrementTracks.setCategoryName(incrementTracksJsonObject.getString("category_name"));
 				incrementTracks.setTagName(incrementTracksJsonObject.getString("tag_name"));
 				
 				incrementTracks.setTotalCount(totalCount);

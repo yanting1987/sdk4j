@@ -238,7 +238,6 @@ public class Track extends XimalayaResponse {
 				trackList.setTotalCount(trackListJsonObject.getInt("total_count"));
 				
 					trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
-					trackList.setCategoryName(trackListJsonObject.getString("category_name"));
 					trackList.setTagName(trackListJsonObject.getString("tag_name"));
 				
 				List<Track> tracks = new ArrayList<Track> ();

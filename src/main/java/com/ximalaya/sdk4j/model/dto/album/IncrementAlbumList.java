@@ -12,7 +12,6 @@ import com.ximalaya.sdk4j.model.dto.AbstractPageResult;
 public class IncrementAlbumList extends AbstractPageResult {
 	
 	private Long categoryID;               // 标签所属分类ID
-	private String categoryName;           // 标签所属分类名称
 	private String tagName;                // 标签名
 	private List<IncrementAlbum> albums;   // 专辑列表
 	
@@ -21,12 +20,6 @@ public class IncrementAlbumList extends AbstractPageResult {
 	}
 	public void setCategoryID(Long categoryID) {
 		this.categoryID = categoryID;
-	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
 	}
 	public String getTagName() {
 		return tagName;

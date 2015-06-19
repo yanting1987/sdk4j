@@ -50,7 +50,6 @@ public class IncrementAlbum extends Album {
  	 			albumList.setTotalCount(totalCount);
  	 			
  	 			albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
- 	 			albumList.setCategoryName(albumListJsonObject.getString("category_name"));
  	 			albumList.setTagName(albumListJsonObject.getString("tag_name"));
  	 			
  	 			List<IncrementAlbum> albums = new ArrayList<IncrementAlbum>();
