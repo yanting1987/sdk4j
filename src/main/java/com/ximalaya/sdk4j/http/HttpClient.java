@@ -231,24 +231,6 @@ public class HttpClient implements java.io.Serializable {
 			method.releaseConnection();
 		}
 	}
-
-	/*
-	public static String encodeParameters(HttpParameter[] params) {
-		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < params.length; i++) {
-			if (i != 0) {
-				buf.append("&");
-			}
-			try {
-				buf.append(URLEncoder.encode(params[i].getName(), "UTF-8"))
-				   .append("=")
-				   .append(URLEncoder.encode(params[i].getValue(), "UTF-8"));
-			} catch (java.io.UnsupportedEncodingException neverHappen) {
-			}
-		}
-		return buf.toString();
-	}
-	*/
 	
 	private static String getCause(int statusCode) {
 		String cause = null;
