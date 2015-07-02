@@ -52,7 +52,7 @@ public class HttpClient implements java.io.Serializable {
 	private org.apache.commons.httpclient.HttpClient client = null;
 	private MultiThreadedHttpConnectionManager connectionManager;
 	private static final int DEFAULT_RETRY_TIMES = 3;
-	private static final int DEFAULT_MAX_CON_PER_HOST = 150;
+	private static final int DEFAULT_MAX_CON_PER_HOST = 20;
 	private static final int DEFAULT_CONTIMEOUT_MS = 15000;
 	private static final int DEFAULT_SOTIMEOUT_MS = 15000;
 	
