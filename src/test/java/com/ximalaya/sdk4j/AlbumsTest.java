@@ -44,5 +44,13 @@ public class AlbumsTest {
 		albumTracks = albumsService.browseAlbumTracks(84364, new Paging(1, 5));
 		Assert.assertTrue(albumTracks != null && albumTracks.getTracks() == null);
 	}
+	
+	@Test
+	public void testetAllCopyrightAlbumList() throws XimalayaException{
+		AlbumList albumList = albumsService.getAllCopyrightAlbumList(0, null);
+		Assert.assertTrue(albumList != null);
+		List<Album> albums = albumList.getAlbums();
+		Assert.assertTrue(albums!= null && albums.size() > 0);
+	}
 
 }

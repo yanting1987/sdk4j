@@ -76,6 +76,28 @@ public class Albums extends Ximalaya {
 	}
 	
 	/**
+	 * 根据分类和标签获取指定分类下所有带版权的专辑（带分页）
+	 * 
+	 * @param categoryID 分类ID，必填，如果为0则表示所有分类下热门专辑
+	 * @param paging     分页参数，可选，不填则为默认值
+	 * @return
+	 * @throws XimalayaException 
+	 */
+	public AlbumList getAllCopyrightAlbumList(long categoryID, Paging paging) throws XimalayaException {
+		DTOValidateUtil.validateCategoryID(categoryID);
+		paging = paging == null ? new Paging(): paging;
+		
+		HttpParameter[] specificParams = null;
+		specificParams = new HttpParameter[3];
+		specificParams[0] = new HttpParameter("category_id", categoryID);
+		specificParams[1] = new HttpParameter("page", paging.getPage());
+		specificParams[2] = new HttpParameter("count", paging.getCount());
+		return Album.constructAlbumList(
+				CLIENT.get(String.format("%s/albums/get_all", BASE_URL), 
+							assembleHttpParams(specificParams)));
+	}
+	
+	/**
 	 * 根据专辑ID获取专辑内声音（即浏览专辑）
 	 * 
 	 * @param albumID 专辑ID
