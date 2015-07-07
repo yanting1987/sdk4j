@@ -52,7 +52,7 @@ public class HttpClient implements java.io.Serializable {
 	private org.apache.commons.httpclient.HttpClient client = null;
 	private MultiThreadedHttpConnectionManager connectionManager;
 	private static final int DEFAULT_RETRY_TIMES = 3;
-	private static final int DEFAULT_MAX_CON_PER_HOST = 150;
+	private static final int DEFAULT_MAX_CON_PER_HOST = 20;
 	private static final int DEFAULT_CONTIMEOUT_MS = 15000;
 	private static final int DEFAULT_SOTIMEOUT_MS = 15000;
 	
@@ -231,24 +231,6 @@ public class HttpClient implements java.io.Serializable {
 			method.releaseConnection();
 		}
 	}
-
-	/*
-	public static String encodeParameters(HttpParameter[] params) {
-		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < params.length; i++) {
-			if (i != 0) {
-				buf.append("&");
-			}
-			try {
-				buf.append(URLEncoder.encode(params[i].getName(), "UTF-8"))
-				   .append("=")
-				   .append(URLEncoder.encode(params[i].getValue(), "UTF-8"));
-			} catch (java.io.UnsupportedEncodingException neverHappen) {
-			}
-		}
-		return buf.toString();
-	}
-	*/
 	
 	private static String getCause(int statusCode) {
 		String cause = null;
