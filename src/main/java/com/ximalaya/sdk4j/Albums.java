@@ -10,6 +10,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.Album;
 import com.ximalaya.sdk4j.model.dto.album.AlbumList;
 import com.ximalaya.sdk4j.model.dto.album.AlbumTracks;
+import com.ximalaya.sdk4j.model.dto.album.UpdatedAlbum;
 import com.ximalaya.sdk4j.util.StringUtil;
 
 /**
@@ -24,6 +25,7 @@ public class Albums extends Ximalaya {
 	private static final long serialVersionUID = -8651526987345601726L;
 	
 	private static final List<Album> EMPTY_ALBUMS = new ArrayList<Album> (0);
+	private static final List<UpdatedAlbum> EMPTY_UPDATEDALBUMS = new ArrayList<UpdatedAlbum> (0);
 	
 	/**
 	 * 根据分类和标签获取热门专辑（带分页）
@@ -118,4 +120,20 @@ public class Albums extends Ximalaya {
 						   assembleHttpParams(specificParams)));
 	}
 	
+	/**
+	 * 根据专辑ID列表获取批量专辑更新提醒信息列表
+	 * @param albumIDs 专辑ID
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<UpdatedAlbum> getUpdatedAlbums(long[] albumIDs) throws XimalayaException {
+		if(albumIDs == null || albumIDs.length == 0) {
+			return EMPTY_UPDATEDALBUMS; 
+		}
+		
+		HttpParameter[] specificParams = new HttpParameter[] { new HttpParameter("ids", StringUtil.join(albumIDs, ",")) };
+		return UpdatedAlbum.constructUpdatedAlbums(
+				CLIENT.get(String.format("%s/albums/get_update", BASE_URL), 
+							assembleHttpParams(specificParams)));
+	}
 }

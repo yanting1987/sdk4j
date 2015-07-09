@@ -11,6 +11,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.Album;
 import com.ximalaya.sdk4j.model.dto.album.AlbumList;
 import com.ximalaya.sdk4j.model.dto.album.AlbumTracks;
+import com.ximalaya.sdk4j.model.dto.album.UpdatedAlbum;
 
 public class AlbumsTest {
 	
@@ -53,4 +54,9 @@ public class AlbumsTest {
 		Assert.assertTrue(albums!= null && albums.size() > 0);
 	}
 
+	@Test
+	public void testGetUpdatedAlbums() throws XimalayaException{
+		List<UpdatedAlbum> albums = albumsService.getUpdatedAlbums(new long[]{85120,87338,85753});
+		Assert.assertTrue(albums!= null && albums.size() > 0);
+	}
 }
