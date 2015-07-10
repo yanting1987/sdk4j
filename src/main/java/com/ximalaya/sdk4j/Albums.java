@@ -133,7 +133,7 @@ public class Albums extends Ximalaya {
 		
 		HttpParameter[] specificParams = new HttpParameter[] { new HttpParameter("ids", StringUtil.join(albumIDs, ",")) };
 		return UpdatedAlbum.constructUpdatedAlbums(
-				CLIENT.get(String.format("%s/albums/get_update", BASE_URL), 
+				CLIENT.get(String.format("%s/albums/get_update_batch", BASE_URL), 
 							assembleHttpParams(specificParams)));
 	}
 }
