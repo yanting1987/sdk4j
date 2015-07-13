@@ -62,7 +62,7 @@ public class AlbumWord extends XimalayaResponse{
 		if(json != null) {
 			try {
 				id = json.getLong("id");
-				keyword = json.getString("key_word");
+				keyword = json.getString("keyword");
 				highlightKeyword = json.getString("highlight_keyword");
 				category = json.getString("category");
 				imgPath = json.getString("img_path");

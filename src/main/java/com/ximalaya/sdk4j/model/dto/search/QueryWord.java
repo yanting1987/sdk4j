@@ -47,7 +47,7 @@ public class QueryWord extends XimalayaResponse {
 		if(json != null) {
 			try {
 				id = json.getLong("id");
-				keyword = json.getString("key_word");
+				keyword = json.getString("keyword");
 				highlightKeyword = json.getString("highlight_keyword");
 			} catch (JSONException jsone) {
 				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);

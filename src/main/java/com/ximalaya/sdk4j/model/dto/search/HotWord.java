@@ -50,7 +50,7 @@ public class HotWord extends XimalayaResponse {
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
 			try {
-				searchword = json.getString("searchword");
+				searchword = json.getString("search_word");
 				degree = json.getInt("degree");
 				count = json.getInt("count");
 			} catch (JSONException jsone) {
