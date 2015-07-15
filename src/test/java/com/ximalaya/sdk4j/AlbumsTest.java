@@ -56,7 +56,7 @@ public class AlbumsTest {
 
 	@Test
 	public void testGetUpdatedAlbums() throws XimalayaException{
-		List<UpdatedAlbum> albums = albumsService.getUpdatedAlbums(new long[]{85120,87338,85753});
+		List<UpdatedAlbum> albums = albumsService.getUpdatedAlbums(new long[]{294573,331403,232829});
 		Assert.assertTrue(albums!= null && albums.size() > 0);
 	}
 }
