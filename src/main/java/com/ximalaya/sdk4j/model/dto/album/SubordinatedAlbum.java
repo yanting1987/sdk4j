@@ -11,7 +11,7 @@ import com.ximalaya.sdk4j.model.XimalayaResponse;
 public class SubordinatedAlbum extends XimalayaResponse{
 	private static final long serialVersionUID = 3258103693586173720L;
 	
-	private Long id;				   // 专辑ID
+	private Long id;                   // 专辑ID
 	private String albumTitle;         // 专辑标题
 	private String coverUrlSmall;      // 专辑封面小图
 	private String coverUrlMiddle;     // 专辑封面中图
