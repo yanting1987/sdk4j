@@ -3,6 +3,8 @@ package com.ximalaya.sdk4j;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
@@ -53,6 +55,18 @@ public class Tracks extends Ximalaya {
 		return Track.constructTrackList(
 				CLIENT.get(String.format("%s/tracks/hot", BASE_URL),
 						   assembleHttpParams(specificParams)));
+	}
+	
+	
+	public TrackList getLastPlayTracks(Long albumId, Long uid, Long trackId,int count) throws XimalayaException{
+		HttpParameter[] specificParams = new HttpParameter[4];;			
+			specificParams[0] = new HttpParameter("album_id", albumId);
+			specificParams[1] = new HttpParameter("uid", uid);
+			specificParams[2] = new HttpParameter("track_id", trackId);
+			specificParams[3] = new HttpParameter("count", count);
+			return Track.constructTrackList(
+					CLIENT.get(String.format("%s/tracks/get_last_play_list", BASE_URL),
+							   assembleHttpParams(specificParams)));
 	}
 	
 	/**
