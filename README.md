@@ -3,7 +3,7 @@
 Java OpenAPI Server SDK for Ximalaya
 
 
-## 2015/07/17 william 0.0.6-SNAPSHOT更新:
+### 2015/07/17 william 0.0.6-SNAPSHOT更新:
 
 * 新增SubordinatedAlbum DTO，并将Track DTO中的subordinated_album_id字段替换为SubordinatedAlbum。新增的SubordinatedAlbum属性如下:
 
