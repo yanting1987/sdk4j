@@ -30,8 +30,11 @@ public class TracksTest {
 
 	@Test
 	public void testGetLastPlayTracks() throws XimalayaException {
-		TrackList trackList = tracksService.getLastPlayTracks(1L, 1L, 1L, 10);
+		//TrackList trackList = tracksService.getLastPlayTracks(87415L, 20924L, 265031L, 5);
+		TrackList trackList = tracksService.getLastPlayTracks(86573L, 713L, 259713L, 5);
 		List<Track> tracks = trackList.getTracks();
-		Assert.assertTrue(tracks != null && !tracks.isEmpty());
+		for(Track track:tracks){
+			System.out.println(track.getCoverUrlLarge());
+		}
 	}
 }

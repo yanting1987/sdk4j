@@ -65,7 +65,7 @@ public class Tracks extends Ximalaya {
 			specificParams[2] = new HttpParameter("track_id", trackId);
 			specificParams[3] = new HttpParameter("count", count);
 			return Track.constructTrackList(
-					CLIENT.get(String.format("%s/tracks/get_last_play_list", BASE_URL),
+					CLIENT.get(String.format("%s/tracks/get_last_play_tracks", BASE_URL),
 							   assembleHttpParams(specificParams)));
 	}
 	
