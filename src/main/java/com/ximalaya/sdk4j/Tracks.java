@@ -61,7 +61,7 @@ public class Tracks extends Ximalaya {
 	public TrackList getLastPlayTracks(Long albumId, Long uid, Long trackId,int count) throws XimalayaException{
 		HttpParameter[] specificParams = new HttpParameter[4];;			
 			specificParams[0] = new HttpParameter("album_id", albumId);
-			specificParams[1] = new HttpParameter("uid", uid);
+			specificParams[1] = new HttpParameter("pid", uid);
 			specificParams[2] = new HttpParameter("track_id", trackId);
 			specificParams[3] = new HttpParameter("count", count);
 			return Track.constructTrackList(
