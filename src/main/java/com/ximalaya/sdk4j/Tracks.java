@@ -57,16 +57,24 @@ public class Tracks extends Ximalaya {
 						   assembleHttpParams(specificParams)));
 	}
 	
-	
-	public TrackList getLastPlayTracks(Long albumId, Long uid, Long trackId,int count) throws XimalayaException{
-		HttpParameter[] specificParams = new HttpParameter[4];;			
-			specificParams[0] = new HttpParameter("album_id", albumId);
-			specificParams[1] = new HttpParameter("uid", uid);
+	/**
+	 * 根据上一次所听声音的id，搜索给定数量的数据。
+	 * @param pid     主播ID
+	 * @param albumId 专辑ID
+	 * @param trackId 声音ID
+	 * @param count   需要数据的条数
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public TrackList getLastPlayTracks(Long pid, Long albumId, Long trackId,int count) throws XimalayaException{
+		HttpParameter[] specificParams = new HttpParameter[4];
+			specificParams[0] = new HttpParameter("pid", pid);
+			specificParams[1] = new HttpParameter("album_id", albumId);
 			specificParams[2] = new HttpParameter("track_id", trackId);
 			specificParams[3] = new HttpParameter("count", count);
-			return Track.constructTrackList(
-					CLIENT.get(String.format("%s/tracks/get_last_play_list", BASE_URL),
-							   assembleHttpParams(specificParams)));
+		return Track.constructTrackList(
+				CLIENT.get(String.format("%s/tracks/get_last_play_tracks", BASE_URL),
+							assembleHttpParams(specificParams)));
 	}
 	
 	/**
