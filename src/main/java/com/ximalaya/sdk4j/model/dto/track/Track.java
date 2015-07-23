@@ -235,15 +235,11 @@ public class Track extends XimalayaResponse {
 		try {
 			int totalCount = trackListJsonObject.getInt("total_count");
 			if(totalCount > 0) {
-				try {
-					trackList.setTotalPage(trackListJsonObject.getInt("total_page"));
-				} catch (JSONException e) {
-					// sometimes no need swallow it
-				}
-				trackList.setTotalCount(totalCount);
+				trackList.setTotalPage(trackListJsonObject.getInt("total_page"));
+				trackList.setTotalCount(trackListJsonObject.getInt("total_count"));
 				
-				trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
-				trackList.setTagName(trackListJsonObject.getString("tag_name"));
+					trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
+					trackList.setTagName(trackListJsonObject.getString("tag_name"));
 				
 				List<Track> tracks = new ArrayList<Track> ();
 				JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");

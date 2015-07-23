@@ -14,23 +14,24 @@ public class TracksTest {
 
 	Tracks tracksService = new Tracks();
 
-	@Test
-	public void testGetHotTrackList() throws XimalayaException {
-		TrackList trackList = tracksService.getHotTrackList(0, null, null);
-		List<Track> tracks = trackList.getTracks();
-		Assert.assertTrue(tracks != null && !tracks.isEmpty());
-	}
+//	@Test
+//	public void testGetHotTrackList() throws XimalayaException {
+//		TrackList trackList = tracksService.getHotTrackList(0, null, null);
+//		List<Track> tracks = trackList.getTracks();
+//		Assert.assertTrue(tracks != null && !tracks.isEmpty());
+//	}
 
-	@Test
+/*	@Test
 	public void testBatchGetTracks() throws XimalayaException {
-		List<Track> tracks = tracksService.batchGetTracks(new long[] { 7368204,7349613 }); // 有版权
+		List<Track> tracks = tracksService.batchGetTracks(new long[] { 7368204,
+				7349613 }); // 有版权
 		Assert.assertTrue(tracks != null && tracks.size() > 0);
-	}
+	}*/
 
 	@Test
 	public void testGetLastPlayTracks() throws XimalayaException {
-		TrackList trackList = tracksService.getLastPlayTracks(12964151L, 275158L, 7861837L, 2);
+		TrackList trackList = tracksService.getLastPlayTracks(1L, 1L, 1L, 10);
 		List<Track> tracks = trackList.getTracks();
-		Assert.assertTrue(trackList != null && tracks != null && tracks.size() > 0);
+		Assert.assertTrue(tracks != null && !tracks.isEmpty());
 	}
 }
