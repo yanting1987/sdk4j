@@ -4,6 +4,7 @@ public abstract class AbstractPageResult {
 	
 	protected Integer totalPage;    // 总页数
 	protected Integer totalCount;   // 声音总数
+	protected Integer currentPage;
 	
 	public Integer getTotalPage() {
 		return totalPage;
@@ -17,5 +18,10 @@ public abstract class AbstractPageResult {
 	public void setTotalCount(Integer totalCount) {
 		this.totalCount = totalCount;
 	}
-
+	public Integer getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(Integer currentPage) {
+		this.currentPage = currentPage;
+	}
 }
