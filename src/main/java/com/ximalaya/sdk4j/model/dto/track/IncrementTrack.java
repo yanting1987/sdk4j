@@ -52,6 +52,7 @@ public class IncrementTrack extends Track {
 				
 				incrementTracks.setTotalCount(totalCount);
 				incrementTracks.setTotalPage(incrementTracksJsonObject.getInt("total_page"));
+				incrementTracks.setCurrentPage(incrementTracksJsonObject.getInt("current_page"));
 				
 				List<IncrementTrack> tracks = new ArrayList<IncrementTrack> ();
 				JSONArray tracksJsonArray = incrementTracksJsonObject.getJSONArray("tracks");

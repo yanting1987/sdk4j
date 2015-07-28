@@ -188,6 +188,7 @@ public class Album extends XimalayaResponse {
  			if(totalCount > 0) {
  				albumList.setTotalPage(albumListJsonObject.getInt("total_page"));
  	 			albumList.setTotalCount(totalCount);
+ 	 			albumList.setCurrentPage(albumListJsonObject.getInt("current_page"));
  	 			
  	 			albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
  	 			albumList.setTagName(albumListJsonObject.getString("tag_name"));

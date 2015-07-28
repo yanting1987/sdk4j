@@ -178,6 +178,7 @@ public class Radio extends XimalayaResponse {
 		try {
 			radioList.setTotalPage(radioListJsonObject.getInt("total_page"));
 			radioList.setTotalCount(radioListJsonObject.getInt("total_count"));
+			radioList.setCurrentPage(radioListJsonObject.getInt("current_page"));
 			
 			List<Radio> radios = new ArrayList<Radio> ();
 			JSONArray radiosJsonArray = radioListJsonObject.getJSONArray("radios");

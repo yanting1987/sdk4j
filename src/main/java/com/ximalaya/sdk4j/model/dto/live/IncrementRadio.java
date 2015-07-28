@@ -40,6 +40,7 @@ public class IncrementRadio extends Radio {
 		try {
 			radioList.setTotalPage(radioListJsonObject.getInt("total_page"));
 			radioList.setTotalCount(radioListJsonObject.getInt("total_count"));
+			radioList.setCurrentPage(radioListJsonObject.getInt("current_page"));
 			
 			List<IncrementRadio> radios = new ArrayList<IncrementRadio> ();
 			JSONArray radiosJsonArray = radioListJsonObject.getJSONArray("radios");
