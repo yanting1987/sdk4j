@@ -4,7 +4,7 @@ public abstract class AbstractPageResult {
 	
 	protected Integer totalPage;    // 总页数
 	protected Integer totalCount;   // 声音总数
-	protected Integer currentPage;
+	protected Integer currentPage;  // 当前页
 	
 	public Integer getTotalPage() {
 		return totalPage;
