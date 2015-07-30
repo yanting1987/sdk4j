@@ -221,6 +221,7 @@ public class Album extends XimalayaResponse {
 				albumTracks.setCoverUrlLarge(albumTracksJsonObject.getString("cover_url_large"));
 				albumTracks.setTotalCount(totalCount);
 				albumTracks.setTotalPage(albumTracksJsonObject.getInt("total_page"));
+				albumTracks.setCurrentPage(albumTracksJsonObject.getInt("current_page"));
 				
 				List<Track> tracks = new ArrayList<Track> ();
 				JSONArray tracksJsonArray = albumTracksJsonObject.getJSONArray("tracks");
