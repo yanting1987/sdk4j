@@ -188,6 +188,7 @@ public class Album extends XimalayaResponse {
  			if(totalCount > 0) {
  				albumList.setTotalPage(albumListJsonObject.getInt("total_page"));
  	 			albumList.setTotalCount(totalCount);
+ 	 			albumList.setCurrentPage(albumListJsonObject.getInt("current_page"));
  	 			
  	 			albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
  	 			albumList.setTagName(albumListJsonObject.getString("tag_name"));
@@ -220,6 +221,7 @@ public class Album extends XimalayaResponse {
 				albumTracks.setCoverUrlLarge(albumTracksJsonObject.getString("cover_url_large"));
 				albumTracks.setTotalCount(totalCount);
 				albumTracks.setTotalPage(albumTracksJsonObject.getInt("total_page"));
+				albumTracks.setCurrentPage(albumTracksJsonObject.getInt("current_page"));
 				
 				List<Track> tracks = new ArrayList<Track> ();
 				JSONArray tracksJsonArray = albumTracksJsonObject.getJSONArray("tracks");
