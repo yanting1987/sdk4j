@@ -1,15 +1,14 @@
 package com.ximalaya.sdk4j.model.dto.live;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.ximalaya.sdk4j.http.HttpResponse;
+import com.ximalaya.sdk4j.model.XimalayaException;
+import com.ximalaya.sdk4j.model.XimalayaResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.ximalaya.sdk4j.http.HttpResponse;
-import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.XimalayaResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 直播电台DTO
@@ -180,6 +179,26 @@ public class Radio extends XimalayaResponse {
 			radioList.setTotalCount(radioListJsonObject.getInt("total_count"));
 			radioList.setCurrentPage(radioListJsonObject.getInt("current_page"));
 			
+			List<Radio> radios = new ArrayList<Radio> ();
+			JSONArray radiosJsonArray = radioListJsonObject.getJSONArray("radios");
+			int size = radiosJsonArray.length();
+			for(int i = 0; i < size; i++) {
+				radios.add(new Radio(radiosJsonArray.getJSONObject(i)));
+			}
+			radioList.setRadios(radios);
+		} catch(JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return radioList;
+	}
+
+	public static RadioList constructRadioList(JSONObject radioListJsonObject) throws XimalayaException {
+		RadioList radioList = new RadioList();
+		try {
+			radioList.setTotalPage(radioListJsonObject.getInt("total_page"));
+			radioList.setTotalCount(radioListJsonObject.getInt("total_count"));
+			radioList.setCurrentPage(radioListJsonObject.getInt("current_page"));
+
 			List<Radio> radios = new ArrayList<Radio> ();
 			JSONArray radiosJsonArray = radioListJsonObject.getJSONArray("radios");
 			int size = radiosJsonArray.length();

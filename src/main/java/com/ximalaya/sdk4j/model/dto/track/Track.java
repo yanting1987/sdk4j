@@ -1,17 +1,16 @@
 package com.ximalaya.sdk4j.model.dto.track;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
 import com.ximalaya.sdk4j.model.dto.album.SubordinatedAlbum;
 import com.ximalaya.sdk4j.model.dto.profile.User;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 声音DTO
@@ -232,6 +231,35 @@ public class Track extends XimalayaResponse {
 	public static TrackList constructTrackList(HttpResponse response) throws XimalayaException {
 		TrackList trackList = new TrackList();
 		JSONObject trackListJsonObject = response.asJSONObject();
+		try {
+			int totalCount = trackListJsonObject.getInt("total_count");
+			if(totalCount > 0) {
+				trackList.setTotalCount(totalCount);
+				try {
+					trackList.setTotalPage(trackListJsonObject.getInt("total_page"));
+					trackList.setCurrentPage(trackListJsonObject.getInt("current_page"));
+				} catch (JSONException e) {
+					// sometimes no need, so swallow it
+				}
+				trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
+				trackList.setTagName(trackListJsonObject.getString("tag_name"));
+				List<Track> tracks = new ArrayList<Track> ();
+				JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
+				int size = tracksJsonArray.length();
+				for(int i = 0; i < size; i++) {
+					tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
+				}
+				trackList.setTracks(tracks);
+			}
+		} catch(JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return trackList;
+	}
+
+	public static TrackList constructTrackList(JSONObject trackListJsonObject) throws XimalayaException {
+		TrackList trackList = new TrackList();
+
 		try {
 			int totalCount = trackListJsonObject.getInt("total_count");
 			if(totalCount > 0) {

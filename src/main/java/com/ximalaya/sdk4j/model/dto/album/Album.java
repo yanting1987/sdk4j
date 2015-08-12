@@ -1,18 +1,17 @@
 package com.ximalaya.sdk4j.model.dto.album;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
 import com.ximalaya.sdk4j.model.dto.profile.User;
 import com.ximalaya.sdk4j.model.dto.track.LastUpTrack;
 import com.ximalaya.sdk4j.model.dto.track.Track;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 专辑DTO
@@ -206,6 +205,33 @@ public class Album extends XimalayaResponse {
 		}
 		return albumList;
 	}
+
+
+	public static AlbumList constructAlbumList(JSONObject albumListJsonObject) throws XimalayaException {
+		AlbumList albumList = new AlbumList();
+		try {
+			int totalCount = albumListJsonObject.getInt("total_count");
+			if(totalCount > 0) {
+				albumList.setTotalPage(albumListJsonObject.getInt("total_page"));
+				albumList.setTotalCount(totalCount);
+				albumList.setCurrentPage(albumListJsonObject.getInt("current_page"));
+
+				albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
+				albumList.setTagName(albumListJsonObject.getString("tag_name"));
+
+				List<Album> albums = new ArrayList<Album> ();
+				JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");
+				int size = albumsJsonArray.length();
+				for(int i = 0; i < size; i++) {
+					albums.add(new Album(albumsJsonArray.getJSONObject(i)));
+				}
+				albumList.setAlbums(albums);
+			}
+		} catch(JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return albumList;
+	}
 	
 	public static AlbumTracks constructAlbumTracks(HttpResponse response) throws XimalayaException {
 		AlbumTracks albumTracks = new AlbumTracks();
@@ -236,7 +262,8 @@ public class Album extends XimalayaResponse {
 		}
 		return albumTracks;
 	}
-	
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
