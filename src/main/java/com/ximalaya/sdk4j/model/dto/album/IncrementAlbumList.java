@@ -15,6 +15,9 @@ public class IncrementAlbumList extends AbstractPageResult {
 	private String tagName;                // 标签名
 	private List<IncrementAlbum> albums;   // 专辑列表
 	
+	public IncrementAlbumList() {
+	}
+	
 	public Long getCategoryID() {
 		return categoryID;
 	}

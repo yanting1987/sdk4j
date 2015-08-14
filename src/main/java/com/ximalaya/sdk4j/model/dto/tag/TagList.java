@@ -12,6 +12,9 @@ public class TagList {
 	private String categoryName;   // 标签所属分类名称
 	private List<Tag> tags;        // 标签列表
 	
+	public TagList() {
+	}
+	
 	public Long getCategoryID() {
 		return categoryID;
 	}

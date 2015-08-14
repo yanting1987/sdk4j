@@ -1,8 +1,6 @@
 package com.ximalaya.sdk4j.model.dto.profile;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
@@ -25,6 +23,9 @@ public class User extends XimalayaResponse {
 	private String nickname;      // 用户昵称
 	private String avatarUrl;     // 用户头像
 	private Boolean isVerified;   // 用户是否加V
+	
+	public User() {
+	}
 	
 	public Long getId() {
 		return id;
@@ -68,15 +69,11 @@ public class User extends XimalayaResponse {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				id = json.getLong("id");
-				kind = json.getString("kind");
-				nickname = json.getString("nickname");
-				avatarUrl = json.getString("avatar_url");
-				isVerified = json.getBoolean("is_verified");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			id = json.getLong("id");
+			kind = json.getString("kind");
+			nickname = json.getString("nickname");
+			avatarUrl = json.getString("avatar_url");
+			isVerified = json.getBoolean("is_verified");
 		}
 	}
 	

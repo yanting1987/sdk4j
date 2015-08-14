@@ -3,10 +3,9 @@ package com.ximalaya.sdk4j.model.dto.album;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 
@@ -20,6 +19,9 @@ public class IncrementAlbum extends Album {
 
 	private boolean isOnline;   // 上线/下线
 	
+	public IncrementAlbum() {
+	}
+	
 	public IncrementAlbum(HttpResponse response) throws XimalayaException {
 		super(response);
 		init(response.asJSONObject());
@@ -32,11 +34,7 @@ public class IncrementAlbum extends Album {
 	
 	private void init(JSONObject json) throws XimalayaException{
 		if(json != null) {
-			try {
-				isOnline = json.getBoolean("is_online");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			isOnline = json.getBoolean("is_online");
 		}
 	}
 	
@@ -44,20 +42,19 @@ public class IncrementAlbum extends Album {
 		IncrementAlbumList albumList = new IncrementAlbumList();
 		JSONObject albumListJsonObject = response.asJSONObject();
  		try {
- 			int totalCount = albumListJsonObject.getInt("total_count");
+ 			int totalCount = albumListJsonObject.getIntValue("total_count");
  			if(totalCount > 0) {
- 				albumList.setTotalPage(albumListJsonObject.getInt("total_page"));
+ 				albumList.setTotalPage(albumListJsonObject.getIntValue("total_page"));
  	 			albumList.setTotalCount(totalCount);
- 	 			albumList.setCurrentPage(albumListJsonObject.getInt("current_page"));
+ 	 			albumList.setCurrentPage(albumListJsonObject.getIntValue("current_page"));
  	 			
  	 			albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
  	 			albumList.setTagName(albumListJsonObject.getString("tag_name"));
  	 			
  	 			List<IncrementAlbum> albums = new ArrayList<IncrementAlbum>();
  	 			JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");
- 	 			int size = albumsJsonArray.length();
- 	 			for(int i = 0; i < size; i++) {
- 	 				albums.add(new IncrementAlbum(albumsJsonArray.getJSONObject(i)));
+ 	 			for(int i = 0; i < albumsJsonArray.size(); i++) {
+ 	 				albums.add(albumsJsonArray.getObject(i, IncrementAlbum.class));
  	 			}
  	 			albumList.setAlbums(albums);
  			}

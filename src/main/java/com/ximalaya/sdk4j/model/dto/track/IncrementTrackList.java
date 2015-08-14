@@ -9,6 +9,9 @@ public class IncrementTrackList extends AbstractPageResult {
 	private String tagName;                // 选填的声音所属标签名，无则返回空
 	private List<IncrementTrack> tracks;   // 声音列表
 	
+	public IncrementTrackList() {
+	}
+	
 	public Long getCategoryID() {
 		return categoryID;
 	}

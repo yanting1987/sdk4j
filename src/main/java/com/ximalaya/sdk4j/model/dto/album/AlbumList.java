@@ -21,6 +21,9 @@ public class AlbumList extends AbstractPageResult implements Serializable {
 	private String tagName;        // 标签名，可选
 	private List<Album> albums;    // 专辑列表
 	
+	public AlbumList() {
+	}
+	
 	public Long getCategoryID() {
 		return categoryID;
 	}

@@ -3,10 +3,9 @@ package com.ximalaya.sdk4j.model.dto.live;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 
@@ -15,6 +14,9 @@ public class IncrementSchedule extends Schedule {
 	
 	private boolean isOnline;   // 上线/下线(1表示新增或修改，0表示删除)
 	
+	public IncrementSchedule() {
+	}
+	
 	public IncrementSchedule(JSONObject json) throws XimalayaException {
 		super(json);
 		init(json);
@@ -22,11 +24,7 @@ public class IncrementSchedule extends Schedule {
 	
 	private void init(JSONObject json) throws XimalayaException{
 		if(json != null) {
-			try {
-				isOnline = json.getBoolean("is_online");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			isOnline = json.getBoolean("is_online");
 		}
 	}
 	
@@ -34,8 +32,7 @@ public class IncrementSchedule extends Schedule {
 		JSONArray schedulesJsonArray = response.asJSONArray();
 		List<IncrementSchedule> schedules = new ArrayList<IncrementSchedule> ();
 		try {
-			int size = schedulesJsonArray.length();
-			for(int i = 0; i < size; i++) {
+			for(int i = 0; i < schedulesJsonArray.size(); i++) {
 				schedules.add(new IncrementSchedule(schedulesJsonArray.getJSONObject(i)));
 			}
 		} catch(JSONException jsone) {

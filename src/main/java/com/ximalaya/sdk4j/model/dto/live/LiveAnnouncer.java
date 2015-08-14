@@ -1,8 +1,6 @@
 package com.ximalaya.sdk4j.model.dto.live;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
@@ -23,6 +21,9 @@ public class LiveAnnouncer extends XimalayaResponse {
 	private String kind;        // DTO实体类型
 	private String nickname;    // 点播主播昵称
 	private String avatarUrl;   // 点播主播头像
+	
+	public LiveAnnouncer() {
+	}
 	
 	public Long getId() {
 		return id;
@@ -60,14 +61,10 @@ public class LiveAnnouncer extends XimalayaResponse {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				id = json.getLong("id");
-				kind = json.getString("kind");
-				nickname = json.getString("nickname");
-				avatarUrl = json.getString("avatar_url");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			id = json.getLong("id");
+			kind = json.getString("kind");
+			nickname = json.getString("nickname");
+			avatarUrl = json.getString("avatar_url");
 		}
 	}
 	

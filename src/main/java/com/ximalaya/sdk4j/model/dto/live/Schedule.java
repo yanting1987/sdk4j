@@ -3,10 +3,9 @@ package com.ximalaya.sdk4j.model.dto.live;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
@@ -31,6 +30,9 @@ public class Schedule extends XimalayaResponse {
 	private String listenBackUrl;	  // 节目回听地址
 	private Integer playType;         // 播放类型，0-直播，1-重播，2-跨天，3-无流期
 	private Program relatedProgram;   // 关联的直播节目
+	
+	public Schedule() {
+	}
 	
 	public Long getId() {
 		return id;
@@ -88,18 +90,14 @@ public class Schedule extends XimalayaResponse {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				id = json.getLong("id");
-				kind = json.getString("kind");
-				startTime = json.getString("start_time");
-				endTime = json.getString("end_time");
-				updatedAt = json.getLong("updated_at");
-				playType = json.getInt("play_type");
-				listenBackUrl = json.getString("listen_back_url");
-				relatedProgram = new Program(json.getJSONObject("related_program"));
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			id = json.getLong("id");
+			kind = json.getString("kind");
+			startTime = json.getString("start_time");
+			endTime = json.getString("end_time");
+			updatedAt = json.getLong("updated_at");
+			playType = json.getIntValue("play_type");
+			listenBackUrl = json.getString("listen_back_url");
+			relatedProgram = new Program(json.getJSONObject("related_program"));
 		}
 	}
 	
@@ -107,9 +105,8 @@ public class Schedule extends XimalayaResponse {
 		JSONArray schedulesJsonArray = response.asJSONArray();
 		List<Schedule> schedules = new ArrayList<Schedule> ();
 		try {
-			int size = schedulesJsonArray.length();
-			for(int i = 0; i < size; i++) {
-				schedules.add(new Schedule(schedulesJsonArray.getJSONObject(i)));
+			for(int i = 0; i < schedulesJsonArray.size(); i++) {
+				schedules.add(schedulesJsonArray.getObject(i, Schedule.class));
 			}
 		} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);

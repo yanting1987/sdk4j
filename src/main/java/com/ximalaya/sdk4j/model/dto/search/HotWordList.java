@@ -5,6 +5,9 @@ import java.util.List;
 public class HotWordList {
 	private List<HotWord> hotWords;
 
+	public HotWordList() {
+	}
+	
 	public List<HotWord> getHotWords() {
 		return hotWords;
 	}

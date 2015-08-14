@@ -3,10 +3,9 @@ package com.ximalaya.sdk4j.model.dto.live;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
@@ -39,6 +38,9 @@ public class Radio extends XimalayaResponse {
 	private String coverUrlSmall;               // 电台封面小图
 	private String coverUrlLarge;               // 电台封面大图
 	private Long updatedAt;                     // 电台更新时间
+	
+	public Radio() {
+	}
 	
 	public Long getId() {
 		return id;
@@ -142,33 +144,28 @@ public class Radio extends XimalayaResponse {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				id = json.getLong("id");
-				kind = json.getString("kind");
-				radioName = json.getString("radio_name");
-				radioDesc = json.getString("radio_desc");       // 电台简介可能为空
-				programName = json.getString("program_name");   // 节目名称可能为空
-				scheduleID = json.getLong("schedule_id");
-				
-				supportBitRates = new ArrayList<Integer> ();
-				JSONArray supportBitRatesJsonArray = json.getJSONArray("support_bitrates");
-				int size = supportBitRatesJsonArray.length();
-				for(int i = 0; i < size; i++) {
-					supportBitRates.add(supportBitRatesJsonArray.getInt(i));
-				}
-				
-				rate24AacUrl = json.getString("rate24_aac_url");
-				rate24TsUrl = json.getString("rate24_ts_url");
-				rate64AacUrl = json.getString("rate64_aac_url");
-				rate64TsUrl = json.getString("rate64_ts_url");
-				
-				radioPlayCount = json.getLong("radio_play_count");
-				coverUrlSmall = json.getString("cover_url_small");
-				coverUrlLarge = json.getString("cover_url_large");
-				updatedAt = json.getLong("updated_at");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
+			id = json.getLong("id");
+			kind = json.getString("kind");
+			radioName = json.getString("radio_name");
+			radioDesc = json.getString("radio_desc");       // 电台简介可能为空
+			programName = json.getString("program_name");   // 节目名称可能为空
+			scheduleID = json.getLong("schedule_id");
+			
+			supportBitRates = new ArrayList<Integer> ();
+			JSONArray supportBitRatesJsonArray = json.getJSONArray("support_bitrates");
+			for(int i = 0; i < supportBitRatesJsonArray.size(); i++) {
+				supportBitRates.add(supportBitRatesJsonArray.getIntValue(i));
 			}
+			
+			rate24AacUrl = json.getString("rate24_aac_url");
+			rate24TsUrl = json.getString("rate24_ts_url");
+			rate64AacUrl = json.getString("rate64_aac_url");
+			rate64TsUrl = json.getString("rate64_ts_url");
+			
+			radioPlayCount = json.getLong("radio_play_count");
+			coverUrlSmall = json.getString("cover_url_small");
+			coverUrlLarge = json.getString("cover_url_large");
+			updatedAt = json.getLong("updated_at");
 		}
 	}
 	
@@ -176,15 +173,14 @@ public class Radio extends XimalayaResponse {
 		RadioList radioList = new RadioList();
 		JSONObject radioListJsonObject = response.asJSONObject();
 		try {
-			radioList.setTotalPage(radioListJsonObject.getInt("total_page"));
-			radioList.setTotalCount(radioListJsonObject.getInt("total_count"));
-			radioList.setCurrentPage(radioListJsonObject.getInt("current_page"));
+			radioList.setTotalPage(radioListJsonObject.getIntValue("total_page"));
+			radioList.setTotalCount(radioListJsonObject.getIntValue("total_count"));
+			radioList.setCurrentPage(radioListJsonObject.getIntValue("current_page"));
 			
 			List<Radio> radios = new ArrayList<Radio> ();
 			JSONArray radiosJsonArray = radioListJsonObject.getJSONArray("radios");
-			int size = radiosJsonArray.length();
-			for(int i = 0; i < size; i++) {
-				radios.add(new Radio(radiosJsonArray.getJSONObject(i)));
+			for(int i = 0; i < radiosJsonArray.size(); i++) {
+				radios.add(radiosJsonArray.getObject(i, Radio.class));
 			}
 			radioList.setRadios(radios);
 		} catch(JSONException jsone) {

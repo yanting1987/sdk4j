@@ -40,14 +40,15 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.model.XimalayaException;
 
 /**
@@ -191,7 +192,7 @@ public class HttpResponse {
      */
     public JSONObject asJSONObject() throws XimalayaException {
         try {
-            return new JSONObject(asString());
+            return JSON.parseObject(asString());
         } catch (JSONException jsone) {
             throw new XimalayaException(jsone.getMessage() + ":" + this.responseAsString, jsone);
         }
@@ -205,7 +206,7 @@ public class HttpResponse {
      */
     public JSONArray asJSONArray() throws XimalayaException {
         try {
-        	return  new JSONArray(asString());  
+        	return JSON.parseArray(asString());  
         } catch (Exception jsone) {
             throw new XimalayaException(jsone.getMessage() + ":" + this.responseAsString, jsone);
         }
