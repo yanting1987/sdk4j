@@ -1,17 +1,15 @@
 package com.ximalaya.sdk4j;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.ximalaya.sdk4j.http.HttpParameter;
+import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.DTOValidateUtil;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.dto.album.Album;
-import com.ximalaya.sdk4j.model.dto.album.AlbumList;
-import com.ximalaya.sdk4j.model.dto.album.AlbumTracks;
-import com.ximalaya.sdk4j.model.dto.album.UpdatedAlbum;
+import com.ximalaya.sdk4j.model.dto.album.*;
 import com.ximalaya.sdk4j.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 专辑相关接口
@@ -74,7 +72,7 @@ public class Albums extends Ximalaya {
 		HttpParameter[] specificParams = new HttpParameter[] { new HttpParameter("ids", StringUtil.join(albumIDs, ",")) };
 		return Album.constructAlbums(
 				CLIENT.get(String.format("%s/albums/get_batch", BASE_URL),
-						   assembleHttpParams(specificParams)));
+						assembleHttpParams(specificParams)));
 	}
 	
 	/**
@@ -95,8 +93,8 @@ public class Albums extends Ximalaya {
 		specificParams[1] = new HttpParameter("page", paging.getPage());
 		specificParams[2] = new HttpParameter("count", paging.getCount());
 		return Album.constructAlbumList(
-				CLIENT.get(String.format("%s/albums/get_all", BASE_URL), 
-							assembleHttpParams(specificParams)));
+				CLIENT.get(String.format("%s/albums/get_all", BASE_URL),
+						assembleHttpParams(specificParams)));
 	}
 	
 	/**
@@ -117,7 +115,7 @@ public class Albums extends Ximalaya {
 		specificParams[2] = new HttpParameter("count", paging.getCount());
 		return Album.constructAlbumTracks(
 				CLIENT.get(String.format("%s/albums/browse", BASE_URL),
-						   assembleHttpParams(specificParams)));
+						assembleHttpParams(specificParams)));
 	}
 	
 	/**
@@ -133,7 +131,18 @@ public class Albums extends Ximalaya {
 		
 		HttpParameter[] specificParams = new HttpParameter[] { new HttpParameter("ids", StringUtil.join(albumIDs, ",")) };
 		return UpdatedAlbum.constructUpdatedAlbums(
-				CLIENT.get(String.format("%s/albums/get_update_batch", BASE_URL), 
-							assembleHttpParams(specificParams)));
+				CLIENT.get(String.format("%s/albums/get_update_batch", BASE_URL),
+						assembleHttpParams(specificParams)));
+	}
+
+	public ReletiveAlbumList getReletiveAlbums(Long id) throws XimalayaException {
+		HttpResponse response= CLIENT.get(
+				String.format("%s/albums/relative_album",BASE_URL),
+				assembleHttpParams(
+						new HttpParameter[]{
+								new HttpParameter("albumId", id)}
+				)
+		);
+		return ReletiveAlbum.constructReletiveAlbumList(response);
 	}
 }

@@ -1,17 +1,12 @@
 package com.ximalaya.sdk4j;
 
-import java.util.List;
-
-import junit.framework.Assert;
-
-import org.junit.Test;
-
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.dto.album.Album;
-import com.ximalaya.sdk4j.model.dto.album.AlbumList;
-import com.ximalaya.sdk4j.model.dto.album.AlbumTracks;
-import com.ximalaya.sdk4j.model.dto.album.UpdatedAlbum;
+import com.ximalaya.sdk4j.model.dto.album.*;
+import junit.framework.Assert;
+import org.junit.Test;
+
+import java.util.List;
 
 public class AlbumsTest {
 	
@@ -26,7 +21,7 @@ public class AlbumsTest {
 	
 	@Test
 	public void testBatchGetAlbums() throws XimalayaException {
-		List<Album> albums = albumsService.batchGetAlbums(new long[] {269483, 414117, 239463});
+		List<Album> albums = albumsService.batchGetAlbums(new long[]{269483, 414117, 239463});
 		Assert.assertTrue(albums != null && albums.size() > 0);
 	}
 	
@@ -56,7 +51,13 @@ public class AlbumsTest {
 
 	@Test
 	public void testGetUpdatedAlbums() throws XimalayaException{
-		List<UpdatedAlbum> albums = albumsService.getUpdatedAlbums(new long[]{294573,331403,232829});
+		List<UpdatedAlbum> albums = albumsService.getUpdatedAlbums(new long[]{294573, 331403, 232829});
 		Assert.assertTrue(albums!= null && albums.size() > 0);
+	}
+
+	@Test
+	public void testReletiveAlbum() throws XimalayaException {
+		ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(462375L);
+		Assert.assertTrue(reletiveAlbumList!= null && reletiveAlbumList.getReletiveAlbum().size()> 0);
 	}
 }

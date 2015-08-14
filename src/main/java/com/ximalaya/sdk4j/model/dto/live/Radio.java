@@ -17,10 +17,6 @@ import com.ximalaya.sdk4j.model.XimalayaResponse;
  *
  */
 public class Radio extends XimalayaResponse {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8588679252699226797L;
 	
 	private Long id;                            // 电台ID
@@ -177,6 +173,24 @@ public class Radio extends XimalayaResponse {
 			radioList.setTotalCount(radioListJsonObject.getIntValue("total_count"));
 			radioList.setCurrentPage(radioListJsonObject.getIntValue("current_page"));
 			
+			List<Radio> radios = new ArrayList<Radio> ();
+			JSONArray radiosJsonArray = radioListJsonObject.getJSONArray("radios");
+			for(int i = 0; i < radiosJsonArray.size(); i++) {
+				radios.add(radiosJsonArray.getObject(i, Radio.class));
+			}
+			radioList.setRadios(radios);
+		} catch(JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return radioList;
+	}
+
+	public static RadioList constructRadioList(JSONObject radioListJsonObject) throws XimalayaException {
+		RadioList radioList = new RadioList();
+		try {
+			radioList.setTotalPage(radioListJsonObject.getIntValue("total_page"));
+			radioList.setTotalCount(radioListJsonObject.getIntValue("total_count"));
+			radioList.setCurrentPage(radioListJsonObject.getIntValue("current_page"));
 			List<Radio> radios = new ArrayList<Radio> ();
 			JSONArray radiosJsonArray = radioListJsonObject.getJSONArray("radios");
 			for(int i = 0; i < radiosJsonArray.size(); i++) {

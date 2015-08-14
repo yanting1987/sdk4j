@@ -6,6 +6,7 @@ import java.util.List;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
@@ -203,6 +204,32 @@ public class Album extends XimalayaResponse {
 		}
 		return albumList;
 	}
+
+
+	public static AlbumList constructAlbumList(JSONObject albumListJsonObject) throws XimalayaException {
+		AlbumList albumList = new AlbumList();
+		try {
+			int totalCount = albumListJsonObject.getIntValue("total_count");
+			if(totalCount > 0) {
+				albumList.setTotalPage(albumListJsonObject.getIntValue("total_page"));
+				albumList.setTotalCount(totalCount);
+				albumList.setCurrentPage(albumListJsonObject.getIntValue("current_page"));
+
+				albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
+				albumList.setTagName(albumListJsonObject.getString("tag_name"));
+
+				List<Album> albums = new ArrayList<Album> ();
+				JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");
+				for(int i = 0; i < albumsJsonArray.size(); i++) {
+					albums.add(albumsJsonArray.getObject(i, Album.class));
+				}
+				albumList.setAlbums(albums);
+			}
+		} catch(JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return albumList;
+	}
 	
 	public static AlbumTracks constructAlbumTracks(HttpResponse response) throws XimalayaException {
 		AlbumTracks albumTracks = new AlbumTracks();
@@ -232,7 +259,8 @@ public class Album extends XimalayaResponse {
 		}
 		return albumTracks;
 	}
-	
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

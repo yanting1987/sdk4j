@@ -250,6 +250,29 @@ public class Track extends XimalayaResponse {
 		}
 		return trackList;
 	}
+
+	public static TrackList constructTrackList(JSONObject trackListJsonObject) throws XimalayaException {
+		TrackList trackList = new TrackList();
+		try {
+			int totalCount = trackListJsonObject.getIntValue("total_count");
+			if(totalCount > 0) {
+				trackList.setTotalCount(totalCount);
+				trackList.setTotalPage(trackListJsonObject.getIntValue("total_page"));
+				trackList.setCurrentPage(trackListJsonObject.getIntValue("current_page"));
+				trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
+				trackList.setTagName(trackListJsonObject.getString("tag_name"));
+				List<Track> tracks = new ArrayList<Track> ();
+				JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
+				for(int i = 0; i < tracksJsonArray.size(); i++) {
+					tracks.add(tracksJsonArray.getObject(i, Track.class));
+				}
+				trackList.setTracks(tracks);
+			}
+		} catch(JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return trackList;
+	}
 	
 	public static List<Track> constructTracks(HttpResponse response) throws XimalayaException {
 		List<Track> tracks = new ArrayList<Track> ();
