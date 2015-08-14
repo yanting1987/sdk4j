@@ -8,7 +8,6 @@ import com.ximalaya.sdk4j.model.dto.live.RadioList;
 import com.ximalaya.sdk4j.model.dto.search.HotWordList;
 import com.ximalaya.sdk4j.model.dto.search.SuggestWordList;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
-import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -52,14 +51,8 @@ static	Searches searchesService = new Searches();
 	}
 
 	@Test
-	public void testSearchAll() throws XimalayaException, JSONException {
+	public void testSearchAll() throws XimalayaException {
 	    AllList allList= searchesService.searchAll("郭德纲", 2, 1);
 		Assert.assertTrue(allList!=null);
-	}
-
-	public static void main(String[] args) throws XimalayaException {
-		//searchesService.searchRadios("12", 1, 2);
-		//searchesService.searchAll();
-		//searchesService.searchReletiveAlbum();
 	}
 }
