@@ -19,10 +19,4 @@ public class BannersTest {
 		List<Banner> banners = bannerService.getVehicleBanners();
 		Assert.assertTrue(banners != null && banners.size() > 0);
 	}
-	
-	@Test
-	public void testGetRankBanners() throws XimalayaException {
-		List<Banner> banners = bannerService.getRankBanners("ios-dev", "3.1.37", 2);
-		Assert.assertTrue(banners != null && banners.size() > 0);
-	}
 }
