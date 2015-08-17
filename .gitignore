@@ -15,4 +15,9 @@ hs_err_pid*
 .settings/ 
 target/
 /bin
+<<<<<<< HEAD
 /.settings
+=======
+.idea/
+sdk4j.iml
+>>>>>>> 1d866c824e13a1d0a2d3ddd37cf59f3d39a268d5

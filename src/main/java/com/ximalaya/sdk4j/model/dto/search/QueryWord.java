@@ -1,8 +1,6 @@
 package com.ximalaya.sdk4j.model.dto.search;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
@@ -13,6 +11,9 @@ public class QueryWord extends XimalayaResponse {
 	private long id;
 	private String keyword;
 	private String highlightKeyword;
+	
+	public QueryWord() {
+	}
 	
 	public long getId() {
 		return id;
@@ -45,13 +46,9 @@ public class QueryWord extends XimalayaResponse {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				id = json.getLong("id");
-				keyword = json.getString("keyword");
-				highlightKeyword = json.getString("highlight_keyword");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			id = json.getLong("id");
+			keyword = json.getString("keyword");
+			highlightKeyword = json.getString("highlight_keyword");
 		}
 	}
 	

@@ -1,7 +1,7 @@
 package com.ximalaya.sdk4j.model;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 调用喜马拉雅OpenAPI出错时的异常类
@@ -33,14 +33,14 @@ public class XimalayaException extends Exception {
     }
     
     public XimalayaException(String msg, JSONObject json, int statusCode) throws JSONException {
-        super(msg + "\n { error_no: " + json.getInt("error_no") + ", error_code: \"" + json.getString("error_code")
-        	+ "\", error_desc: \"" + json.getString("error_desc") + "\"" + (json.has("service") ? (", service: \"" 
+        super(msg + "\n { error_no: " + json.getIntValue("error_no") + ", error_code: \"" + json.getString("error_code")
+        	+ "\", error_desc: \"" + json.getString("error_desc") + "\"" + (json.get("service") != null ? (", service: \"" 
         	+ json.getString("service") + "\"") : "" + "}"));
         this.statusCode = statusCode;
-        this.errorNo = json.getInt("error_no");
+        this.errorNo = json.getIntValue("error_no");
         this.errorCode = json.getString("error_code");
         this.errorDesc = json.getString("error_desc");
-        if(json.has("service")) {
+        if(json.get("service") != null) {
         	this.service = json.getString("service");
         }
     }

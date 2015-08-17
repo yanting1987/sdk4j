@@ -16,10 +16,10 @@ import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.httpclient.protocol.Protocol;
-import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.fastjson.JSONException;
 import com.ximalaya.sdk4j.model.MySSLSocketFactory;
 import com.ximalaya.sdk4j.model.XimalayaException;
 
@@ -218,8 +218,7 @@ public class HttpClient implements java.io.Serializable {
 
 			if (responseCode != HTTP_STATUS_OK) {
 				try {
-					throw new XimalayaException(getCause(responseCode),
-							response.asJSONObject(), method.getStatusCode());
+					throw new XimalayaException(getCause(responseCode), response.asJSONObject(), method.getStatusCode());
 				} catch (JSONException e) {
 					throw new XimalayaException("parse response json failed", e);
 				}

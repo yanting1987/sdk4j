@@ -1,8 +1,6 @@
 package com.ximalaya.sdk4j.model.dto.album;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
@@ -16,6 +14,9 @@ public class SubordinatedAlbum extends XimalayaResponse{
 	private String coverUrlSmall;      // 专辑封面小图
 	private String coverUrlMiddle;     // 专辑封面中图
 	private String coverUrlLarge;      // 专辑封面大图
+	
+	public SubordinatedAlbum() {
+	}
 	
 	public Long getId() {
 		return id;
@@ -60,15 +61,11 @@ public class SubordinatedAlbum extends XimalayaResponse{
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				id = json.getLong("id");
-				albumTitle = json.getString("album_title");
-				coverUrlSmall = json.getString("cover_url_small");
-				coverUrlMiddle = json.getString("cover_url_middle");
-				coverUrlLarge = json.getString("cover_url_large");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			id = json.getLong("id");
+			albumTitle = json.getString("album_title");
+			coverUrlSmall = json.getString("cover_url_small");
+			coverUrlMiddle = json.getString("cover_url_middle");
+			coverUrlLarge = json.getString("cover_url_large");
 		}
 	}
 	

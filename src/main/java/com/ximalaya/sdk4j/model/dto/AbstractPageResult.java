@@ -2,9 +2,9 @@ package com.ximalaya.sdk4j.model.dto;
 
 public abstract class AbstractPageResult {
 	
-	protected Integer totalPage;    // 总页数
-	protected Integer totalCount;   // 声音总数
-	protected Integer currentPage;  // 当前页
+	protected Integer totalPage;    // 鎬婚〉鏁�
+	protected Integer totalCount;   // 澹伴煶鎬绘暟
+	protected Integer currentPage;  // 褰撳墠椤�
 	
 	public Integer getTotalPage() {
 		return totalPage;

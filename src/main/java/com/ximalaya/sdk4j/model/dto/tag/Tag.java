@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.util.StringUtil;
@@ -29,6 +28,9 @@ public class Tag implements Serializable {
 	private String coverUrlSmall;    // 封面小图
 	private String coverUrlMiddle;   // 封面中图
 	private String coverUrlLarge;    // 封面大图
+	
+	public Tag() {
+	}
 	
 	public String getTagName() {
 		return tagName;
@@ -66,15 +68,11 @@ public class Tag implements Serializable {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				tagName = json.getString("tag_name");
-				kind = json.getString("kind");
-				coverUrlSmall = json.getString("cover_url_small");
-				coverUrlMiddle = json.getString("cover_url_middle");
-				coverUrlLarge = json.getString("cover_url_large");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			tagName = json.getString("tag_name");
+			kind = json.getString("kind");
+			coverUrlSmall = json.getString("cover_url_small");
+			coverUrlMiddle = json.getString("cover_url_middle");
+			coverUrlLarge = json.getString("cover_url_large");
 		}
 	}
 	
@@ -82,8 +80,7 @@ public class Tag implements Serializable {
 		List<Tag> tags = new ArrayList<Tag> ();
 		JSONArray tagsJsonArray = response.asJSONArray();
 		try {
-			int size = tagsJsonArray.length();
-			for(int i = 0; i < size; i++) {
+			for(int i = 0; i < tagsJsonArray.size(); i++) {
 				tags.add(new Tag(tagsJsonArray.getJSONObject(i)));
 			}
 		} catch (JSONException jsone) {

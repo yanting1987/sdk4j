@@ -3,10 +3,9 @@ package com.ximalaya.sdk4j.model.dto.track;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
@@ -47,6 +46,9 @@ public class Track extends XimalayaResponse {
 	private Integer source;             // 声音来源，1-用户原创，2-用户转采
 	private Long updatedAt;             // 更新时间
 	private Long createdAt;             // 更新时间
+	
+	public Track() {
+	}
 	
 	public Long getId() {
 		return id;
@@ -199,33 +201,29 @@ public class Track extends XimalayaResponse {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				id = json.getLong("id");
-				kind = json.getString("kind");
-				trackTitle = json.getString("track_title");
-				trackTags = json.getString("track_tags");
-				trackIntro = json.getString("track_intro");
-				coverUrlSmall = json.getString("cover_url_small");
-				coverUrlMiddle = json.getString("cover_url_middle");
-				coverUrlLarge = json.getString("cover_url_large");
-				announcer = new User(json.getJSONObject("announcer"));
-				duration = json.getInt("duration");
-				playCount = json.getLong("play_count");
-				favoriteCount = json.getLong("favorite_count");
-				commentCount = json.getLong("comment_count");
-				downloadCount = json.getLong("download_count");
-				playUrl32 = json.getString("play_url_32");
-				playSize32 = json.getInt("play_size_32");
-				playUrl64 = json.getString("play_url_64");
-				playSize64 = json.getInt("play_size_64");
-				downloadUrl = json.getString("download_url");
-				subordinatedAlbum = new SubordinatedAlbum(json.getJSONObject("subordinated_album"));
-				source = json.getInt("source");
-				updatedAt = json.getLong("updated_at");
-				createdAt = json.getLong("created_at");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			id = json.getLong("id");
+			kind = json.getString("kind");
+			trackTitle = json.getString("track_title");
+			trackTags = json.getString("track_tags");
+			trackIntro = json.getString("track_intro");
+			coverUrlSmall = json.getString("cover_url_small");
+			coverUrlMiddle = json.getString("cover_url_middle");
+			coverUrlLarge = json.getString("cover_url_large");
+			announcer = new User(json.getJSONObject("announcer"));
+			duration = json.getIntValue("duration");
+			playCount = json.getLong("play_count");
+			favoriteCount = json.getLong("favorite_count");
+			commentCount = json.getLong("comment_count");
+			downloadCount = json.getLong("download_count");
+			playUrl32 = json.getString("play_url_32");
+			playSize32 = json.getIntValue("play_size_32");
+			playUrl64 = json.getString("play_url_64");
+			playSize64 = json.getIntValue("play_size_64");
+			downloadUrl = json.getString("download_url");
+			subordinatedAlbum = new SubordinatedAlbum(json.getJSONObject("subordinated_album"));
+			source = json.getIntValue("source");
+			updatedAt = json.getLong("updated_at");
+			createdAt = json.getLong("created_at");
 		}
 	}
 	
@@ -233,21 +231,40 @@ public class Track extends XimalayaResponse {
 		TrackList trackList = new TrackList();
 		JSONObject trackListJsonObject = response.asJSONObject();
 		try {
-			int totalCount = trackListJsonObject.getInt("total_count");
+			int totalCount = trackListJsonObject.getIntValue("total_count");
 			if(totalCount > 0) {
 				trackList.setTotalCount(totalCount);
-				try {
-					trackList.setTotalPage(trackListJsonObject.getInt("total_page"));
-					trackList.setCurrentPage(trackListJsonObject.getInt("current_page"));
-				} catch (JSONException e) {
-					// sometimes no need, so swallow it
+				trackList.setTotalPage(trackListJsonObject.getIntValue("total_page"));
+				trackList.setCurrentPage(trackListJsonObject.getIntValue("current_page"));
+				trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
+				trackList.setTagName(trackListJsonObject.getString("tag_name"));
+				
+				List<Track> tracks = new ArrayList<Track> ();
+				JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
+				for(int i = 0; i < tracksJsonArray.size(); i++) {
+					tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
 				}
+				trackList.setTracks(tracks);
+			}
+		} catch(JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return trackList;
+	}
+
+	public static TrackList constructTrackList(JSONObject trackListJsonObject) throws XimalayaException {
+		TrackList trackList = new TrackList();
+		try {
+			int totalCount = trackListJsonObject.getIntValue("total_count");
+			if(totalCount > 0) {
+				trackList.setTotalCount(totalCount);
+				trackList.setTotalPage(trackListJsonObject.getIntValue("total_page"));
+				trackList.setCurrentPage(trackListJsonObject.getIntValue("current_page"));
 				trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
 				trackList.setTagName(trackListJsonObject.getString("tag_name"));
 				List<Track> tracks = new ArrayList<Track> ();
 				JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
-				int size = tracksJsonArray.length();
-				for(int i = 0; i < size; i++) {
+				for(int i = 0; i < tracksJsonArray.size(); i++) {
 					tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
 				}
 				trackList.setTracks(tracks);
@@ -263,8 +280,7 @@ public class Track extends XimalayaResponse {
 		JSONArray tracksJsonArray = null;
 		try {
 			tracksJsonArray = response.asJSONObject().getJSONArray("tracks");
-			int size = tracksJsonArray.length();
-			for(int i = 0; i < size; i++) {
+			for(int i = 0; i < tracksJsonArray.size(); i++) {
 				tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
 			}
 		} catch (JSONException jsone) {

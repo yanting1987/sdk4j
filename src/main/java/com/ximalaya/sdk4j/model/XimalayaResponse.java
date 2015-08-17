@@ -36,13 +36,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HTMLEntity;
 import com.ximalaya.sdk4j.http.HttpResponse;
 
@@ -135,17 +135,13 @@ public class XimalayaResponse implements java.io.Serializable {
 
     protected static String getString(String name, JSONObject json, boolean decode) {
         String returnValue = null;
-            try {
-                returnValue = json.getString(name);
-                if (decode) {
-                    try {
-                        returnValue = URLDecoder.decode(returnValue, "UTF-8");
-                    } catch (UnsupportedEncodingException ignore) {
-                    }
-                }
-            } catch (JSONException ignore) {
-                // refresh_url could be missing
+        returnValue = json.getString(name);
+        if (decode) {
+        	try {
+        		returnValue = URLDecoder.decode(returnValue, "UTF-8");
+            } catch (UnsupportedEncodingException ignore) {
             }
+        }
         return returnValue;
     }
 

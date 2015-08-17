@@ -8,6 +8,9 @@ public class IncrementRadioList extends AbstractPageResult {
 
 	private List<IncrementRadio> radios;
 	
+	public IncrementRadioList() {
+	}
+	
 	public List<IncrementRadio> getRadios() {
 		return radios;
 	}

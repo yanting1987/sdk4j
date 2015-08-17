@@ -3,10 +3,8 @@ package com.ximalaya.sdk4j.model.dto.live;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
@@ -114,35 +112,29 @@ public class Program extends XimalayaResponse {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				id = json.getLong("id");
-				kind = json.getString("kind");
-				programName = json.getString("program_name");
-				backPicUrl = json.getString("back_pic_url");
+			id = json.getLong("id");
+			kind = json.getString("kind");
+			programName = json.getString("program_name");
+			backPicUrl = json.getString("back_pic_url");
 				
-				supportBitRates = new ArrayList<Integer> ();
-				JSONArray supportBitRatesJsonArray = json.getJSONArray("support_bitrates");
-				int size = supportBitRatesJsonArray.length();
-				for(int i = 0; i < size; i++) {
-					supportBitRates.add(supportBitRatesJsonArray.getInt(i));
-				}
-				
-				rate24AacUrl = json.getString("rate24_aac_url");
-				rate24TsUrl = json.getString("rate24_ts_url");
-				rate64AacUrl = json.getString("rate64_aac_url");
-				rate64TsUrl = json.getString("rate64_ts_url");
-				
-				List<LiveAnnouncer> liveAnnouncers = new ArrayList<LiveAnnouncer> ();
-				JSONArray liveAnnouncersJsonArray = json.getJSONArray("live_announcers");
-				size = liveAnnouncersJsonArray.length();
-				for(int i = 0; i < size; i++) {
-					liveAnnouncers.add(new LiveAnnouncer(liveAnnouncersJsonArray.getJSONObject(i)));
-				}
-				this.liveAnnouncers = liveAnnouncers;
-				this.updatedAt = json.getLong("updated_at");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
+			supportBitRates = new ArrayList<Integer> ();
+			JSONArray supportBitRatesJsonArray = json.getJSONArray("support_bitrates");
+			for(int i = 0; i < supportBitRatesJsonArray.size(); i++) {
+				supportBitRates.add(supportBitRatesJsonArray.getIntValue(i));
 			}
+			
+			rate24AacUrl = json.getString("rate24_aac_url");
+			rate24TsUrl = json.getString("rate24_ts_url");
+			rate64AacUrl = json.getString("rate64_aac_url");
+			rate64TsUrl = json.getString("rate64_ts_url");
+			
+			List<LiveAnnouncer> liveAnnouncers = new ArrayList<LiveAnnouncer> ();
+			JSONArray liveAnnouncersJsonArray = json.getJSONArray("live_announcers");
+			for(int i = 0; i < liveAnnouncersJsonArray.size(); i++) {
+				liveAnnouncers.add(new LiveAnnouncer(liveAnnouncersJsonArray.getJSONObject(i)));
+			}
+			this.liveAnnouncers = liveAnnouncers;
+			this.updatedAt = json.getLong("updated_at");
 		}
 	}
 	

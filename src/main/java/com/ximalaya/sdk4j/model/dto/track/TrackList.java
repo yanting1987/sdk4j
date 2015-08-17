@@ -21,6 +21,9 @@ public class TrackList extends AbstractPageResult implements Serializable {
 	private String tagName;        // 选填的声音所属标签名，可选
 	private List<Track> tracks;    // 声音列表
 	
+	public TrackList() {
+	}
+	
 	public Long getCategoryID() {
 		return categoryID;
 	}

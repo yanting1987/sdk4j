@@ -3,10 +3,9 @@ package com.ximalaya.sdk4j.model.dto.live;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
@@ -29,6 +28,9 @@ public class Province extends XimalayaResponse {
 	private Integer provinceCode;   // 省市代码，比如110000
 	private String provinceName;    // 省市名称
 	private Long createdAt;         // 更新时间
+	
+	public Province() {
+	}
 	
 	public Long getId() {
 		return id;
@@ -72,15 +74,11 @@ public class Province extends XimalayaResponse {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				id = json.getLong("id");
-				kind = json.getString("kind");
-				provinceCode = json.getInt("province_code");
-				provinceName = json.getString("province_name");
-				createdAt = json.getLong("created_at");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			id = json.getLong("id");
+			kind = json.getString("kind");
+			provinceCode = json.getIntValue("province_code");
+			provinceName = json.getString("province_name");
+			createdAt = json.getLong("created_at");
 		}
 	}
 	
@@ -88,8 +86,7 @@ public class Province extends XimalayaResponse {
 		List<Province> provinces = new ArrayList<Province> ();
 		JSONArray provincesJsonArray = response.asJSONArray();
 		try {
-			int size = provincesJsonArray.length();
-			for(int i = 0; i < size; i++) {
+			for(int i = 0; i < provincesJsonArray.size(); i++) {
 				provinces.add(new Province(provincesJsonArray.getJSONObject(i)));
 			}
 		} catch(JSONException jsone) {

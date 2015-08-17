@@ -1,10 +1,14 @@
 package com.ximalaya.sdk4j;
 
 import com.ximalaya.sdk4j.http.HttpParameter;
+import com.ximalaya.sdk4j.http.HttpResponse;
+import com.ximalaya.sdk4j.model.AllList;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.Album;
 import com.ximalaya.sdk4j.model.dto.album.AlbumList;
+import com.ximalaya.sdk4j.model.dto.live.Radio;
+import com.ximalaya.sdk4j.model.dto.live.RadioList;
 import com.ximalaya.sdk4j.model.dto.search.HotWord;
 import com.ximalaya.sdk4j.model.dto.search.HotWordList;
 import com.ximalaya.sdk4j.model.dto.search.SuggestWordList;
@@ -53,7 +57,7 @@ public class Searches extends Ximalaya {
 		paging = paging == null ? new Paging(): paging;
 		return Track.constructTrackList(
 				CLIENT.get(String.format("%s/search/tracks", BASE_URL),
-						   assembleHttpParams(constructSpecificParamsForSearch(q, categoryID, paging))));
+						assembleHttpParams(constructSpecificParamsForSearch(q, categoryID, paging))));
 	}
 	
 	/**
@@ -67,7 +71,7 @@ public class Searches extends Ximalaya {
 		checkSearchTopParam(top);
 		return HotWord.constructHotWords(
 				CLIENT.get(String.format("%s/search/hot_words", BASE_URL),
-							assembleHttpParams(new HttpParameter[]{new HttpParameter("top", top)})));
+						assembleHttpParams(new HttpParameter[]{new HttpParameter("top", top)})));
 	}
 	
 	/**
@@ -82,7 +86,49 @@ public class Searches extends Ximalaya {
 		return new SuggestWordList(CLIENT.get(String.format("%s/search/suggest_words", BASE_URL),
 				assembleHttpParams(new HttpParameter[]{new HttpParameter("kw", keyWord)})));
 	}
-	
+
+	/**
+	 * 按照关键词搜索直播。
+	 * @param q
+	 * @param pageSize
+	 * @param page
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public RadioList searchRadios(String q, int pageSize, int page) throws XimalayaException {
+		HttpResponse response= CLIENT.get(
+				String.format("%s/search/radios",BASE_URL),
+				assembleHttpParams(
+					new HttpParameter[]{
+					new HttpParameter("q", q),
+					new HttpParameter("count", pageSize),
+					new HttpParameter("page", page)}
+				)
+		);
+		return Radio.constructRadioList(response);
+	}
+
+	/**
+	 * 获取指定数量直播，声音，专辑的内容。
+	 * @param q
+	 * @param pageSize
+	 * @param page
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public AllList searchAll(String q, int pageSize, int page) throws XimalayaException {
+		HttpResponse response= CLIENT.get(
+			String.format("%s/search/all",BASE_URL),
+			assembleHttpParams(
+				new HttpParameter[]{
+					new HttpParameter("q", q),
+					new HttpParameter("count", pageSize),
+					new HttpParameter("page", page)}
+			)
+		);
+		return new AllList(response);
+	}
+
 	private void checkSearchKeyWordParam(String keyWord) {
 		if(keyWord == null || keyWord.isEmpty()) {
 			throw new IllegalArgumentException("keyWord should not empty");
@@ -112,5 +158,4 @@ public class Searches extends Ximalaya {
 		specificParams[3] = new HttpParameter("count", paging.getCount());
 		return specificParams;
 	}
-	
 }

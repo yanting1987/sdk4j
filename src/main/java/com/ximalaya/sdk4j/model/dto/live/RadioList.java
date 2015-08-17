@@ -14,6 +14,9 @@ public class RadioList extends AbstractPageResult implements Serializable {
 	
 	private List<Radio> radios;
 	
+	public RadioList() {
+	}
+	
 	public List<Radio> getRadios() {
 		return radios;
 	}

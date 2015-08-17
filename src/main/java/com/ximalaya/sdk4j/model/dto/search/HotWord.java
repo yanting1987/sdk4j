@@ -3,10 +3,9 @@ package com.ximalaya.sdk4j.model.dto.search;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
@@ -17,6 +16,9 @@ public class HotWord extends XimalayaResponse {
 	private String searchword;
 	private int degree;
 	private int count;
+	
+	public HotWord() {
+	}
 	
 	public String getSearchword() {
 		return searchword;
@@ -49,13 +51,9 @@ public class HotWord extends XimalayaResponse {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				searchword = json.getString("search_word");
-				degree = json.getInt("degree");
-				count = json.getInt("count");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			searchword = json.getString("search_word");
+			degree = json.getIntValue("degree");
+			count = json.getIntValue("count");
 		}
 	}
 	
@@ -64,9 +62,9 @@ public class HotWord extends XimalayaResponse {
 		JSONObject albumListJsonObject = response.asJSONObject();
 	 	try {
 	 	 	List<HotWord> hotWords = new ArrayList<HotWord> ();
-	 	 	JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("hot_words");
-	 	 	for(int i = 0; i < albumsJsonArray.length(); i++) {
-	 	 		hotWords.add(new HotWord(albumsJsonArray.getJSONObject(i)));
+	 	 	JSONArray hotWordJsonArray = albumListJsonObject.getJSONArray("hot_words");
+	 	 	for(int i = 0; i < hotWordJsonArray.size(); i++) {
+	 	 		hotWords.add(new HotWord(hotWordJsonArray.getJSONObject(i)));
 	 	 	}
 	 	 	hotWordList.setHotWords(hotWords);
 		} catch(JSONException jsone) {

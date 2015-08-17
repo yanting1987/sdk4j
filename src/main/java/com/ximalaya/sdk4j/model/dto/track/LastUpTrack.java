@@ -1,8 +1,6 @@
 package com.ximalaya.sdk4j.model.dto.track;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
 
@@ -22,6 +20,9 @@ public class LastUpTrack extends XimalayaResponse {
 	private Double duration;     // 声音时长
 	private Long createdAt;      // 声音创建时间
 	private Long updatedAt;      // 声音更新时间
+	
+	public LastUpTrack() {
+	}
 	
 	public Long getTrackID() {
 		return trackID;
@@ -60,25 +61,11 @@ public class LastUpTrack extends XimalayaResponse {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				if (json.has("track_id")) {
-					trackID = json.getLong("track_id");
-				}
-				if (json.has("track_title")) {
-					trackTitle = json.getString("track_title");
-				}
-				if (json.has("duration")) {
-					duration = json.getDouble("duration");
-				}
-				if (json.has("created_at")) {
-					createdAt = json.getLong("created_at");
-				}
-				if (json.has("updated_at")) {
-					updatedAt = json.getLong("updated_at");
-				}
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			trackID = json.getLong("track_id");
+			trackTitle = json.getString("track_title");
+			duration = json.getDouble("duration");
+			createdAt = json.getLong("created_at");
+			updatedAt = json.getLong("updated_at");
 		}
 	}
 	

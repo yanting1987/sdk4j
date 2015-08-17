@@ -25,6 +25,9 @@ public class AlbumTracks extends AbstractPageResult implements Serializable {
 	private String coverUrlLarge;    // 专辑封面大图
 	private List<Track> tracks;      // 专辑下的声音（一页）
 	
+	public AlbumTracks() {
+	}
+	
 	public Long getAlbumID() {
 		return albumID;
 	}

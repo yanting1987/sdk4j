@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
 
@@ -28,6 +27,9 @@ public class Category implements Serializable {
 	private String coverUrlSmall;    // 封面小图
 	private String coverUrlMiddle;   // 封面中图
 	private String coverUrlLarge;    // 封面大图
+	
+	public Category() {
+	}
 	
 	public Long getId() {
 		return id;
@@ -71,16 +73,12 @@ public class Category implements Serializable {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			try {
-				id = json.getLong("id");
-				kind = json.getString("kind");
-				categoryName = json.getString("category_name");
-				coverUrlSmall = json.getString("cover_url_small");
-				coverUrlMiddle = json.getString("cover_url_middle");
-				coverUrlLarge = json.getString("cover_url_large");
-			} catch (JSONException jsone) {
-				throw new XimalayaException(jsone.getMessage() + ":" + json.toString(), jsone);
-			}
+			id = json.getLong("id");
+			kind = json.getString("kind");
+			categoryName = json.getString("category_name");
+			coverUrlSmall = json.getString("cover_url_small");
+			coverUrlMiddle = json.getString("cover_url_middle");
+			coverUrlLarge = json.getString("cover_url_large");
 		}
 	}
 	
@@ -88,8 +86,7 @@ public class Category implements Serializable {
 		List<Category> categories = new ArrayList<Category> ();
 		JSONArray categoriesJsonArray = response.asJSONArray();
 		try {
-			int size = categoriesJsonArray.length();
-			for(int i = 0; i < size; i++) {
+			for(int i = 0; i < categoriesJsonArray.size(); i++) {
 				categories.add(new Category(categoriesJsonArray.getJSONObject(i)));
 			}
 		} catch (JSONException jsone) {

@@ -10,6 +10,48 @@ public class DTOValidateUtil {
 		}
 	}
 	
+	public static void validateRankType(int rankType) {
+		if(!(rankType == 1 || rankType == 2)) {
+			throw new IllegalArgumentException("This rankType is not supported");
+		}
+	}
+	
+	public static void validateRankKey(String rankKey) {
+		if(StringUtil.isEmpty(rankKey)) {
+			throw new IllegalArgumentException("RankKey should not be empty");
+		}
+	}
+	
+	public static void validateImageScale(int imageScale) {
+		if(!(imageScale == 2 || imageScale == 3)) {
+			throw new IllegalArgumentException("This imageScale is not supported");
+		}
+	}
+	
+	public static void validateChannel(String channel) {
+		if(StringUtil.isEmpty(channel)) {
+			throw new IllegalArgumentException("Channel should not be empty");
+		}
+	}
+	
+	public static void validateAppVersion(String appVersion) {
+		if(StringUtil.isEmpty(appVersion)) {
+			throw new IllegalArgumentException("AppVersion should not be empty");
+		}
+	}
+	
+	public static void validateColumnID(long columnID) {
+		if(columnID < 0) {
+			throw new IllegalArgumentException("ColumnID should >= 0");
+		}
+	}
+	
+	public static void validateRadioCount(int radioCount) {
+		if(radioCount < 0) {
+			throw new IllegalArgumentException("RadioCount should >= 0");
+		}
+	}
+	
 	public static void validateAlbumID(long albumID) {
 		if(albumID <= 0) {
 			throw new IllegalArgumentException("albumID should > 0");
