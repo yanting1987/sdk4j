@@ -62,7 +62,7 @@ public class Ranks extends Ximalaya {
 		paging = paging == null ? new Paging(): paging;
 		DTOValidateUtil.validateRankKey(rankKey);
 		HttpParameter[] specificParams = new HttpParameter[3];
-		specificParams[0] = new HttpParameter("rank_type", rankKey);
+		specificParams[0] = new HttpParameter("rank_key", rankKey);
 		specificParams[1] = new HttpParameter("page", paging.getPage());
 		specificParams[2] = new HttpParameter("count", paging.getCount());
 		return Track.constructTrackList(

@@ -163,18 +163,11 @@ public class Rank extends XimalayaResponse{
 		try {
 			JSONObject jsonObject = response.asJSONObject();
 			JSONArray ranksJsonArray = jsonObject.getJSONArray("ranks");
-			int totalCount = jsonObject.getIntValue("total_count");
- 			if(totalCount > 0) {
- 				rankList.setTotalPage(jsonObject.getIntValue("total_page"));
- 				rankList.setTotalCount(totalCount);
- 				rankList.setCurrentPage(jsonObject.getIntValue("current_page"));
- 				
- 	 			List<Rank> ranks = new ArrayList<Rank> ();
- 	 			for(int i = 0; i < ranksJsonArray.size(); i++) {
- 	 				ranks.add(ranksJsonArray.getObject(i, Rank.class));
- 	 			}
- 	 			rankList.setRanks(ranks);
- 			}
+ 	 		List<Rank> ranks = new ArrayList<Rank> ();
+ 	 		for(int i = 0; i < ranksJsonArray.size(); i++) {
+ 	 			ranks.add(ranksJsonArray.getObject(i, Rank.class));
+ 	 		}
+ 	 		rankList.setRanks(ranks);
 		} catch (JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
