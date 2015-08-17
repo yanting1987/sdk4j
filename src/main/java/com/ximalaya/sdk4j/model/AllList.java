@@ -9,7 +9,7 @@ import com.ximalaya.sdk4j.model.dto.live.RadioList;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
 
-public class AllList extends XimalayaResponse{
+public class AllList extends XimalayaResponse {
 
 	private static final long serialVersionUID = 2721436489197473333L;
 	
@@ -50,6 +50,7 @@ public class AllList extends XimalayaResponse{
 		super(response);
 		init(response.asJSONObject());
 	}
+	
 	private void init(JSONObject jsonObject) throws XimalayaException {
 		albumList=	Album.constructAlbumList(jsonObject.getJSONObject("album_list"));
 		radioList=	Radio.constructRadioList(jsonObject.getJSONObject("radio_list"));

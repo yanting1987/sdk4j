@@ -87,7 +87,15 @@ public class Searches extends Ximalaya {
 				assembleHttpParams(new HttpParameter[]{new HttpParameter("kw", keyWord)})));
 	}
 
-	public RadioList searchRadios(String q,int pageSize,int page) throws XimalayaException {
+	/**
+	 * 按照关键词搜索直播。
+	 * @param q
+	 * @param pageSize
+	 * @param page
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public RadioList searchRadios(String q, int pageSize, int page) throws XimalayaException {
 		HttpResponse response= CLIENT.get(
 				String.format("%s/search/radios",BASE_URL),
 				assembleHttpParams(
@@ -100,14 +108,22 @@ public class Searches extends Ximalaya {
 		return Radio.constructRadioList(response);
 	}
 
-	public AllList searchAll(String q,int pageSize,int page) throws XimalayaException {
+	/**
+	 * 获取指定数量直播，声音，专辑的内容。
+	 * @param q
+	 * @param pageSize
+	 * @param page
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public AllList searchAll(String q, int pageSize, int page) throws XimalayaException {
 		HttpResponse response= CLIENT.get(
 			String.format("%s/search/all",BASE_URL),
 			assembleHttpParams(
 				new HttpParameter[]{
-				new HttpParameter("q", q),
-				new HttpParameter("count", pageSize),
-				new HttpParameter("page", page)}
+					new HttpParameter("q", q),
+					new HttpParameter("count", pageSize),
+					new HttpParameter("page", page)}
 			)
 		);
 		return new AllList(response);

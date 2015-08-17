@@ -184,6 +184,19 @@ public class Radio extends XimalayaResponse {
 		}
 		return radioList;
 	}
+	
+	public static List<Radio> constructRadios(HttpResponse response) throws XimalayaException {
+		JSONArray radioJsonObject = response.asJSONArray();
+		List<Radio> radios = new ArrayList<Radio> ();
+		try {
+			for(int i = 0; i < radioJsonObject.size(); i++) {
+				radios.add(radioJsonObject.getObject(i, Radio.class));
+			}
+		} catch(JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return radios;
+	}
 
 	public static RadioList constructRadioList(JSONObject radioListJsonObject) throws XimalayaException {
 		RadioList radioList = new RadioList();

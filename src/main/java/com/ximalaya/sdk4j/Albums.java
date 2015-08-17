@@ -135,12 +135,18 @@ public class Albums extends Ximalaya {
 						assembleHttpParams(specificParams)));
 	}
 
+	/**
+	 * 获取某个专辑的相关推荐专辑
+	 * @param id
+	 * @return
+	 * @throws XimalayaException
+	 */
 	public ReletiveAlbumList getReletiveAlbums(Long id) throws XimalayaException {
 		HttpResponse response= CLIENT.get(
 				String.format("%s/albums/relative_album",BASE_URL),
 				assembleHttpParams(
-						new HttpParameter[]{
-								new HttpParameter("albumId", id)}
+					new HttpParameter[]{
+						new HttpParameter("albumId", id)}
 				)
 		);
 		return ReletiveAlbum.constructReletiveAlbumList(response);
