@@ -11,7 +11,7 @@ public class DTOValidateUtil {
 	}
 	
 	public static void validateRankType(int rankType) {
-		if(rankType != 1 || rankType != 2) {
+		if(!(rankType == 1 || rankType == 2)) {
 			throw new IllegalArgumentException("This rankType is not supported");
 		}
 	}
@@ -23,7 +23,7 @@ public class DTOValidateUtil {
 	}
 	
 	public static void validateImageScale(int imageScale) {
-		if(imageScale != 2 || imageScale != 3) {
+		if(!(imageScale == 2 || imageScale == 3)) {
 			throw new IllegalArgumentException("This imageScale is not supported");
 		}
 	}
