@@ -152,14 +152,14 @@ public class Column extends XimalayaResponse{
 		if(columnContentType == 1) {
 			List<Album> columnList = new ArrayList<Album>();
 			for(int i = 0; i < cloumnJsonArray.size(); i++) {
-				columnList.add(cloumnJsonArray.getObject(i, Album.class));
+				columnList.add(new Album(cloumnJsonArray.getJSONObject(i)));
 			}
 			return columnList;
 		}
 		else if(columnContentType == 2) {
 			List<Track> trackList = new ArrayList<Track>();
 			for(int i = 0; i < cloumnJsonArray.size(); i++) {
-				trackList.add(cloumnJsonArray.getObject(i, Track.class));
+				trackList.add(new Track(cloumnJsonArray.getJSONObject(i)));
 			}
 			return trackList;
 		}
@@ -182,7 +182,7 @@ public class Column extends XimalayaResponse{
  	 			List<Column> columns = new ArrayList<Column> ();
  	 			JSONArray albumsJsonArray = columnListJsonObject.getJSONArray("columns");
  	 			for(int i = 0; i < albumsJsonArray.size(); i++) {
- 	 				columns.add(albumsJsonArray.getObject(i, Column.class));
+ 	 				columns.add(new Column(albumsJsonArray.getJSONObject(i)));
  	 			}
  	 			columnList.setColumns(columns);
  			}

@@ -157,9 +157,8 @@ public class Banner extends XimalayaResponse{
 		List<Banner> albums = new ArrayList<Banner> ();
 		JSONArray albumsJsonArray = response.asJSONArray();
 		try {
-			int size = albumsJsonArray.size();
-			for(int i = 0; i < size; i++) {
-				albums.add(albumsJsonArray.getObject(i, Banner.class));
+			for(int i = 0; i < albumsJsonArray.size(); i++) {
+				albums.add(new Banner(albumsJsonArray.getJSONObject(i)));
 			}
 		} catch (JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);

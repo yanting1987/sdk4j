@@ -88,7 +88,7 @@ public class UpdatedAlbum extends XimalayaResponse{
 		JSONArray albumsJsonArray = response.asJSONArray();
 		try {
 			for(int i = 0; i < albumsJsonArray.size(); i++) {
-				albums.add(albumsJsonArray.getObject(i, UpdatedAlbum.class));
+				albums.add(new UpdatedAlbum(albumsJsonArray.getJSONObject(i)));
 			}
 		} catch (JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);

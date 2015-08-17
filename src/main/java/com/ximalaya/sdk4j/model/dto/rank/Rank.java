@@ -145,10 +145,15 @@ public class Rank extends XimalayaResponse{
 		}
 	}
 	
-	private List<RankItem> parseRankItems(JSONArray jsonArray) {
+	private List<RankItem> parseRankItems(JSONArray jsonArray) throws XimalayaException {
 		List<RankItem> ranks = new ArrayList<RankItem>();
-		for(int i = 0; i < jsonArray.size(); i++) {
-			ranks.add(jsonArray.getObject(i, RankItem.class));
+		try {
+			for(int i = 0; i < jsonArray.size(); i++) {
+				ranks.add(new RankItem(jsonArray.getJSONObject(i)));
+			}
+		}
+		catch(XimalayaException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
 		return ranks;
 	}

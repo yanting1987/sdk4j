@@ -238,10 +238,11 @@ public class Track extends XimalayaResponse {
 				trackList.setCurrentPage(trackListJsonObject.getIntValue("current_page"));
 				trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
 				trackList.setTagName(trackListJsonObject.getString("tag_name"));
+				
 				List<Track> tracks = new ArrayList<Track> ();
 				JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
 				for(int i = 0; i < tracksJsonArray.size(); i++) {
-					tracks.add(tracksJsonArray.getObject(i, Track.class));
+					tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
 				}
 				trackList.setTracks(tracks);
 			}
@@ -264,7 +265,7 @@ public class Track extends XimalayaResponse {
 				List<Track> tracks = new ArrayList<Track> ();
 				JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
 				for(int i = 0; i < tracksJsonArray.size(); i++) {
-					tracks.add(tracksJsonArray.getObject(i, Track.class));
+					tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
 				}
 				trackList.setTracks(tracks);
 			}
@@ -280,7 +281,7 @@ public class Track extends XimalayaResponse {
 		try {
 			tracksJsonArray = response.asJSONObject().getJSONArray("tracks");
 			for(int i = 0; i < tracksJsonArray.size(); i++) {
-				tracks.add(tracksJsonArray.getObject(i, Track.class));
+				tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
 			}
 		} catch (JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);

@@ -87,7 +87,7 @@ public class Category implements Serializable {
 		JSONArray categoriesJsonArray = response.asJSONArray();
 		try {
 			for(int i = 0; i < categoriesJsonArray.size(); i++) {
-				categories.add(categoriesJsonArray.getObject(i, Category.class));
+				categories.add(new Category(categoriesJsonArray.getJSONObject(i)));
 			}
 		} catch (JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);

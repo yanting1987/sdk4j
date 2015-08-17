@@ -62,9 +62,9 @@ public class HotWord extends XimalayaResponse {
 		JSONObject albumListJsonObject = response.asJSONObject();
 	 	try {
 	 	 	List<HotWord> hotWords = new ArrayList<HotWord> ();
-	 	 	JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("hot_words");
-	 	 	for(int i = 0; i < albumsJsonArray.size(); i++) {
-	 	 		hotWords.add(albumsJsonArray.getObject(i, HotWord.class));
+	 	 	JSONArray hotWordJsonArray = albumListJsonObject.getJSONArray("hot_words");
+	 	 	for(int i = 0; i < hotWordJsonArray.size(); i++) {
+	 	 		hotWords.add(new HotWord(hotWordJsonArray.getJSONObject(i)));
 	 	 	}
 	 	 	hotWordList.setHotWords(hotWords);
 		} catch(JSONException jsone) {

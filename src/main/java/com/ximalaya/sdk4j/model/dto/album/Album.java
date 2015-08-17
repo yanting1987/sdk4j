@@ -169,9 +169,8 @@ public class Album extends XimalayaResponse {
 		List<Album> albums = new ArrayList<Album> ();
 		JSONArray albumsJsonArray = response.asJSONArray();
 		try {
-			int size = albumsJsonArray.size();
-			for(int i = 0; i < size; i++) {
-				albums.add(albumsJsonArray.getObject(i, Album.class));
+			for(int i = 0; i < albumsJsonArray.size(); i++) {
+				albums.add(new Album(albumsJsonArray.getJSONObject(i)));
 			}
 		} catch (JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
@@ -195,7 +194,7 @@ public class Album extends XimalayaResponse {
  	 			List<Album> albums = new ArrayList<Album> ();
  	 			JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");
  	 			for(int i = 0; i < albumsJsonArray.size(); i++) {
- 	 				albums.add(albumsJsonArray.getObject(i, Album.class));
+ 	 				albums.add(new Album(albumsJsonArray.getJSONObject(i)));
  	 			}
  	 			albumList.setAlbums(albums);
  			}
@@ -221,7 +220,7 @@ public class Album extends XimalayaResponse {
 				List<Album> albums = new ArrayList<Album> ();
 				JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");
 				for(int i = 0; i < albumsJsonArray.size(); i++) {
-					albums.add(albumsJsonArray.getObject(i, Album.class));
+					albums.add(new Album(albumsJsonArray.getJSONObject(i)));
 				}
 				albumList.setAlbums(albums);
 			}
@@ -250,7 +249,7 @@ public class Album extends XimalayaResponse {
 				List<Track> tracks = new ArrayList<Track> ();
 				JSONArray tracksJsonArray = albumTracksJsonObject.getJSONArray("tracks");
 				for(int i = 0; i < tracksJsonArray.size(); i++) {
-					tracks.add(tracksJsonArray.getObject(i, Track.class));
+					tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
 				}
 				albumTracks.setTracks(tracks);
 			}

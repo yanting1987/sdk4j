@@ -68,7 +68,7 @@ public class SuggestWordList extends XimalayaResponse{
 			throws XimalayaException {
 		List<AlbumWord> albumWords = new ArrayList<AlbumWord>();
 		for(int i = 0; i < jsonArray.size(); i++) {
-			albumWords.add(jsonArray.getObject(i, AlbumWord.class));
+			albumWords.add(new AlbumWord(jsonArray.getJSONObject(i)));
  	 	}
 		return albumWords;
 	}
@@ -77,7 +77,7 @@ public class SuggestWordList extends XimalayaResponse{
 			throws XimalayaException {
 		List<QueryWord> queryWords = new ArrayList<QueryWord>();
 		for(int i = 0; i < jsonArray.size(); i++) {
-			queryWords.add(jsonArray.getObject(i, QueryWord.class));
+			queryWords.add(new QueryWord(jsonArray.getJSONObject(i)));
  	 	}
 		return queryWords;
 	}

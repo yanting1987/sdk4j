@@ -15,6 +15,9 @@ public class ReletiveAlbum extends Album{
 	private String recommendSrc;     // 用于统计，推荐来源
     private String recommendTrace;   // 推荐跟踪
 
+    public ReletiveAlbum() {
+	}
+    
     public String getRecommendSrc() {
         return recommendSrc;
     }
@@ -41,7 +44,6 @@ public class ReletiveAlbum extends Album{
             recommendSrc = json.getString("recommend_src");
             recommendTrace = json.getString("recommend_trace");
         }
-
     }
 
     public static ReletiveAlbumList constructReletiveAlbumList(HttpResponse response) throws XimalayaException {
@@ -54,15 +56,12 @@ public class ReletiveAlbum extends Album{
         	reletiveAlbumList.setCurrentPage(albumListJsonObject.getIntValue("current_page"));
         	
         	List<ReletiveAlbum> reletiveAlbums = new ArrayList<ReletiveAlbum>();
-        	
         	JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("reletive_albums");
         	for (int i = 0; i < albumsJsonArray.size(); i++) {
-        		reletiveAlbums.add(albumsJsonArray.getObject(i, ReletiveAlbum.class));
+        		reletiveAlbums.add(new ReletiveAlbum(albumsJsonArray.getJSONObject(i)));
         	}
         	reletiveAlbumList.setReletiveAlbum(reletiveAlbums);
         }
         return reletiveAlbumList;
     }
-
-
 }

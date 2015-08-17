@@ -46,7 +46,6 @@ public class IncrementTrack extends Track {
 			if(totalCount > 0) {
 				incrementTracks.setCategoryID(incrementTracksJsonObject.getLong("category_id"));
 				incrementTracks.setTagName(incrementTracksJsonObject.getString("tag_name"));
-				
 				incrementTracks.setTotalCount(totalCount);
 				incrementTracks.setTotalPage(incrementTracksJsonObject.getIntValue("total_page"));
 				incrementTracks.setCurrentPage(incrementTracksJsonObject.getIntValue("current_page"));
@@ -54,7 +53,7 @@ public class IncrementTrack extends Track {
 				List<IncrementTrack> tracks = new ArrayList<IncrementTrack> ();
 				JSONArray tracksJsonArray = incrementTracksJsonObject.getJSONArray("tracks");
 				for(int i = 0; i < tracksJsonArray.size(); i++) {
-					tracks.add(tracksJsonArray.getObject(i, IncrementTrack.class));
+					tracks.add(new IncrementTrack(tracksJsonArray.getJSONObject(i)));
 				}
 				incrementTracks.setTracks(tracks);
 			}

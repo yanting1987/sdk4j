@@ -176,7 +176,7 @@ public class Radio extends XimalayaResponse {
 			List<Radio> radios = new ArrayList<Radio> ();
 			JSONArray radiosJsonArray = radioListJsonObject.getJSONArray("radios");
 			for(int i = 0; i < radiosJsonArray.size(); i++) {
-				radios.add(radiosJsonArray.getObject(i, Radio.class));
+				radios.add(new Radio(radiosJsonArray.getJSONObject(i)));
 			}
 			radioList.setRadios(radios);
 		} catch(JSONException jsone) {
@@ -186,11 +186,11 @@ public class Radio extends XimalayaResponse {
 	}
 	
 	public static List<Radio> constructRadios(HttpResponse response) throws XimalayaException {
-		JSONArray radioJsonObject = response.asJSONArray();
+		JSONArray radiosJsonArray = response.asJSONArray();
 		List<Radio> radios = new ArrayList<Radio> ();
 		try {
-			for(int i = 0; i < radioJsonObject.size(); i++) {
-				radios.add(radioJsonObject.getObject(i, Radio.class));
+			for(int i = 0; i < radiosJsonArray.size(); i++) {
+				radios.add(new Radio(radiosJsonArray.getJSONObject(i)));
 			}
 		} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
@@ -207,7 +207,7 @@ public class Radio extends XimalayaResponse {
 			List<Radio> radios = new ArrayList<Radio> ();
 			JSONArray radiosJsonArray = radioListJsonObject.getJSONArray("radios");
 			for(int i = 0; i < radiosJsonArray.size(); i++) {
-				radios.add(radiosJsonArray.getObject(i, Radio.class));
+				radios.add(new Radio(radiosJsonArray.getJSONObject(i)));
 			}
 			radioList.setRadios(radios);
 		} catch(JSONException jsone) {
