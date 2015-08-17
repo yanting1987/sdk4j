@@ -1,17 +1,15 @@
 package com.ximalaya.sdk4j;
 
-import java.util.List;
-
 import junit.framework.Assert;
 
 import org.junit.Test;
 
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.dto.album.Album;
-import com.ximalaya.sdk4j.model.dto.live.Radio;
-import com.ximalaya.sdk4j.model.dto.rank.Rank;
-import com.ximalaya.sdk4j.model.dto.track.Track;
+import com.ximalaya.sdk4j.model.dto.album.AlbumList;
+import com.ximalaya.sdk4j.model.dto.live.RadioList;
+import com.ximalaya.sdk4j.model.dto.rank.RankList;
+import com.ximalaya.sdk4j.model.dto.track.TrackList;
 
 public class RanskTest {
 	
@@ -19,25 +17,25 @@ public class RanskTest {
 	
 	@Test
 	public void testGetFirstPageRanks() throws XimalayaException {
-		List<Rank> ranks = rankService.getFirstPageRanks(1);
-		Assert.assertTrue(ranks != null && ranks.size() > 0);
+		RankList ranks = rankService.getFirstPageRanks(1);
+		Assert.assertTrue(ranks != null && ranks.getRanks()!= null && ranks.getRanks().size() > 0);
 	}
 	
 	@Test
 	public void testGetRankAlbums() throws XimalayaException {
-		List<Album> ranks = rankService.getRankAlbums("ranking:album:subscribed:30:0", new Paging());
-		Assert.assertTrue(ranks != null && ranks.size() > 0);
+		AlbumList albumList = rankService.getRankAlbums("ranking:album:subscribed:30:0", new Paging());
+		Assert.assertTrue(albumList != null && albumList.getAlbums() != null && albumList.getAlbums().size() > 0);
 	}
 	
 	@Test
 	public void testGetRankRadios() throws XimalayaException {
-		List<Radio> ranks = rankService.getRankRadios(5);
-		Assert.assertTrue(ranks != null && ranks.size() > 0);
+		RadioList ranks = rankService.getRankRadios(5);
+		Assert.assertTrue(ranks != null && ranks.getRadios() != null && ranks.getRadios().size() > 0);
 	}
 	
 	@Test
 	public void testGetRankTracks() throws XimalayaException {
-		List<Track> ranks = rankService.getRankTracks("ranking:track:played:1:0", new Paging());
-		Assert.assertTrue(ranks != null && ranks.size() > 0);
+		TrackList tracks = rankService.getRankTracks("ranking:track:played:1:0", new Paging());
+		Assert.assertTrue(tracks != null && tracks.getTracks() != null && tracks.getTracks().size() > 0);
 	}
 }

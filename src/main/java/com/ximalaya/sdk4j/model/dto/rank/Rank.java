@@ -158,10 +158,33 @@ public class Rank extends XimalayaResponse{
 		return ranks;
 	}
 	
+	public static RankList constructRankList(HttpResponse response) throws XimalayaException {
+		RankList rankList = new RankList();
+		try {
+			JSONObject jsonObject = response.asJSONObject();
+			JSONArray ranksJsonArray = jsonObject.getJSONArray("ranks");
+			int totalCount = jsonObject.getIntValue("total_count");
+ 			if(totalCount > 0) {
+ 				rankList.setTotalPage(jsonObject.getIntValue("total_page"));
+ 				rankList.setTotalCount(totalCount);
+ 				rankList.setCurrentPage(jsonObject.getIntValue("current_page"));
+ 				
+ 	 			List<Rank> ranks = new ArrayList<Rank> ();
+ 	 			for(int i = 0; i < ranksJsonArray.size(); i++) {
+ 	 				ranks.add(ranksJsonArray.getObject(i, Rank.class));
+ 	 			}
+ 	 			rankList.setRanks(ranks);
+ 			}
+		} catch (JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return rankList;
+	}
+	
 	public static List<Rank> constructRanks(HttpResponse response) throws XimalayaException {
 		List<Rank> ranks = new ArrayList<Rank> ();
-		JSONArray ranksJsonArray = response.asJSONArray();
 		try {
+			JSONArray ranksJsonArray = response.asJSONArray();
 			int size = ranksJsonArray.size();
 			for(int i = 0; i < size; i++) {
 				ranks.add(ranksJsonArray.getObject(i, Rank.class));

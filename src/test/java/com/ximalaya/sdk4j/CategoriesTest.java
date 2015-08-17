@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.category.Category;
+import com.ximalaya.sdk4j.model.dto.category.RecommendCategory;
 
 public class CategoriesTest {
 
@@ -19,4 +20,9 @@ public class CategoriesTest {
 		Assert.assertTrue(categories != null && !categories.isEmpty());
 	}
 	
+	@Test
+	public void testGetRecommendCategories() throws XimalayaException {
+		List<RecommendCategory> categories = categoriesService.getRecommendCategories();
+		Assert.assertTrue(categories != null && !categories.isEmpty());
+	}
 }
