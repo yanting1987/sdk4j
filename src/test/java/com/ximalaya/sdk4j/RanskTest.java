@@ -29,8 +29,8 @@ public class RanskTest {
 	
 	@Test
 	public void testGetRankRadios() throws XimalayaException {
-		RadioList ranks = rankService.getRankRadios(5);
-		Assert.assertTrue(ranks != null && ranks.getRadios() != null && ranks.getRadios().size() > 0);
+		RadioList radios = rankService.getRankRadios(5);
+		Assert.assertTrue(radios != null && radios.getRadios() != null && radios.getRadios().size() > 0);
 	}
 	
 	@Test
