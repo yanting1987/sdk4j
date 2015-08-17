@@ -15,8 +15,8 @@ public class ColumsTest {
 	
 	@Test
 	public void testGetQualityColumnList() throws XimalayaException {
-		ColumnList banners = columnService.getQualityColumnList(new Paging());
-		Assert.assertTrue(banners != null && banners.getColumns() != null && banners.getColumns().size() > 0);
+		ColumnList columns = columnService.getQualityColumnList(new Paging());
+		Assert.assertTrue(columns != null && columns.getColumns() != null && columns.getColumns().size() > 0);
 	}
 	
 	@Test
