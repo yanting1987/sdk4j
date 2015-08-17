@@ -41,6 +41,11 @@ public class Track extends XimalayaResponse {
 	private Integer playSize32;         // 声音32位大小
 	private String playUrl64;           // 声音64位播放地址
 	private Integer playSize64;         // 声音64位大小
+	private String playUrl24M4a; 		// 声音m4a格式24位地址
+	private Integer playSize24M4a; 		// 声音m4a格式24位大小
+	private String playUrl64M4a; 		// 声音m4a格式64位地址
+	private Integer playSize64M4a; 		// 声音m4a格式64位大小
+	private Integer orderNum; 			// 一条声音在一个专辑中的位置
 	private String downloadUrl;         // 声音下载地址
 	private SubordinatedAlbum subordinatedAlbum;   // 声音所属专辑ID
 	private Integer source;             // 声音来源，1-用户原创，2-用户转采
@@ -158,6 +163,36 @@ public class Track extends XimalayaResponse {
 	public void setPlaySize64(Integer playSize64) {
 		this.playSize64 = playSize64;
 	}
+	public String getPlayUrl24M4a() {
+		return playUrl24M4a;
+	}
+	public void setPlayUrl24M4a(String playUrl24M4a) {
+		this.playUrl24M4a = playUrl24M4a;
+	}
+	public Integer getPlaySize24M4a() {
+		return playSize24M4a;
+	}
+	public void setPlaySize24M4a(Integer playSize24M4a) {
+		this.playSize24M4a = playSize24M4a;
+	}
+	public String getPlayUrl64M4a() {
+		return playUrl64M4a;
+	}
+	public void setPlayUrl64M4a(String playUrl64M4a) {
+		this.playUrl64M4a = playUrl64M4a;
+	}
+	public Integer getPlaySize64M4a() {
+		return playSize64M4a;
+	}
+	public void setPlaySize64M4a(Integer playSize64M4a) {
+		this.playSize64M4a = playSize64M4a;
+	}
+	public Integer getOrderNum() {
+		return orderNum;
+	}
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
 	public String getDownloadUrl() {
 		return downloadUrl;
 	}
@@ -219,6 +254,11 @@ public class Track extends XimalayaResponse {
 			playSize32 = json.getIntValue("play_size_32");
 			playUrl64 = json.getString("play_url_64");
 			playSize64 = json.getIntValue("play_size_64");
+			playUrl24M4a = json.getString("play_url_24_m4a");
+			playSize24M4a = json.getInteger("play_size_24_m4a");
+			playUrl64M4a = json.getString("play_url_64_m4a");
+			playSize64M4a = json.getInteger("play_size_64_m4a");
+			orderNum = json.getInteger("order_num");
 			downloadUrl = json.getString("download_url");
 			subordinatedAlbum = new SubordinatedAlbum(json.getJSONObject("subordinated_album"));
 			source = json.getIntValue("source");
