@@ -34,7 +34,7 @@ public class Columns extends Ximalaya {
 	public Column getColumnDetail(Integer columnId) throws XimalayaException {
 		DTOValidateUtil.validateColumnID(columnId);
 		HttpParameter[] specificParams = new HttpParameter[2];
-		specificParams[0] = new HttpParameter("column_id", columnId);
+		specificParams[0] = new HttpParameter("id", columnId);
 		specificParams[1] = new HttpParameter("device_id", "andorid");
 		return new Column(
 			CLIENT.get(String.format("%s/column/detail", BASE_URL), 

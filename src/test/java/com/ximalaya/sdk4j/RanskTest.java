@@ -25,19 +25,19 @@ public class RanskTest {
 	
 	@Test
 	public void testGetRankAlbums() throws XimalayaException {
-		List<Album> ranks = rankService.getRankAlbums("", new Paging());
+		List<Album> ranks = rankService.getRankAlbums("ranking:album:subscribed:30:0", new Paging());
 		Assert.assertTrue(ranks != null && ranks.size() > 0);
 	}
 	
 	@Test
 	public void testGetRankRadios() throws XimalayaException {
-		List<Radio> ranks = rankService.getRankRadios(1);
+		List<Radio> ranks = rankService.getRankRadios(5);
 		Assert.assertTrue(ranks != null && ranks.size() > 0);
 	}
 	
 	@Test
 	public void testGetRankTracks() throws XimalayaException {
-		List<Track> ranks = rankService.getRankTracks("", new Paging());
+		List<Track> ranks = rankService.getRankTracks("ranking:track:played:1:0", new Paging());
 		Assert.assertTrue(ranks != null && ranks.size() > 0);
 	}
 }
