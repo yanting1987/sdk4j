@@ -148,23 +148,29 @@ public class Column extends XimalayaResponse{
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private List<?> parseColumnItems(JSONArray cloumnJsonArray, int columnContentType) throws XimalayaException {
-		if(columnContentType == 1) {
-			List<Album> columnList = new ArrayList<Album>();
-			for(int i = 0; i < cloumnJsonArray.size(); i++) {
-				columnList.add(new Album(cloumnJsonArray.getJSONObject(i)));
+		if(cloumnJsonArray != null) {
+			if(columnContentType == 1) {
+				List<Album> columnList = new ArrayList<Album>();
+				for(int i = 0; i < cloumnJsonArray.size(); i++) {
+					columnList.add(new Album(cloumnJsonArray.getJSONObject(i)));
+				}
+				return columnList;
 			}
-			return columnList;
-		}
-		else if(columnContentType == 2) {
-			List<Track> trackList = new ArrayList<Track>();
-			for(int i = 0; i < cloumnJsonArray.size(); i++) {
-				trackList.add(new Track(cloumnJsonArray.getJSONObject(i)));
+			else if(columnContentType == 2) {
+				List<Track> trackList = new ArrayList<Track>();
+				for(int i = 0; i < cloumnJsonArray.size(); i++) {
+					trackList.add(new Track(cloumnJsonArray.getJSONObject(i)));
+				}
+				return trackList;
 			}
-			return trackList;
+			else {
+				throw new XimalayaException("can find a matched columnContentType");
+			}
 		}
 		else {
-			throw new XimalayaException("can find a matched columnContentType");
+			return new ArrayList();
 		}
 	}
 	
