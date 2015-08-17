@@ -30,13 +30,13 @@ public class RanskTest {
 	}
 	
 	@Test
-	public void testGetVehicleBanners() throws XimalayaException {
+	public void testGetRankRadios() throws XimalayaException {
 		List<Radio> ranks = rankService.getRankRadios(1);
 		Assert.assertTrue(ranks != null && ranks.size() > 0);
 	}
 	
 	@Test
-	public void testGetRankBanners() throws XimalayaException {
+	public void testGetRankTracks() throws XimalayaException {
 		List<Track> ranks = rankService.getRankTracks("", new Paging());
 		Assert.assertTrue(ranks != null && ranks.size() > 0);
 	}
