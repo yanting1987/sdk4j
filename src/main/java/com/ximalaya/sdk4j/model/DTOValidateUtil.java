@@ -3,9 +3,6 @@ package com.ximalaya.sdk4j.model;
 import com.ximalaya.sdk4j.util.StringUtil;
 
 public class DTOValidateUtil {
-	private static final int RANK_PROGRAM = 1;
-	private static final int RANK_ANCHOR = 2;
-	private static final int BANNER_SCALE = 2;
 	
 	public static void validateCategoryID(long categoryID) {
 		if(categoryID < 0) {
