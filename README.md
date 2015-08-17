@@ -21,7 +21,7 @@ cover_url_large: 所属专辑封面大图
 
 * 增加了《开放平台API接口文档》
 
-### 2015/07/17 william 0.0.7-SNAPSHOT更新:
+### 2015/08/17 william 0.0.7-SNAPSHOT更新:
 
 * 新增人工推荐专辑分类接口
 
