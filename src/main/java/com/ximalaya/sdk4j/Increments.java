@@ -121,7 +121,7 @@ public class Increments extends Ximalaya {
 	}
 	
 	/**
-	 * 根据直播电台ID获取昨天、今天（由weekday决定）和明天共三天的节目时间表增量
+	 * 根据直播电台ID获取某个直播电台从指定某时刻到现在之间的节目排期增量数据。
 	 * @param radioID 直播电台ID
 	 * @param weekday 0-星期天，1-星期一，...，6-星期六
 	 * @return
