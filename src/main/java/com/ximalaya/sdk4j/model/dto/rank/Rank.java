@@ -26,6 +26,7 @@ public class Rank extends XimalayaResponse{
 	private Integer categoryId;
 	private String rankContentType;
 	private Long rankFirstItemId;
+	private String rankFirstItemTitle;
 	private List<RankItem> indexRankItems;
 	
 	public Rank() {
@@ -109,6 +110,13 @@ public class Rank extends XimalayaResponse{
 	public void setRankFirstItemId(Long rankFirstItemId) {
 		this.rankFirstItemId = rankFirstItemId;
 	}
+	public String getRankFirstItemTitle() {
+		return rankFirstItemTitle;
+	}
+	public void setRankFirstItemTitle(String rankFirstItemTitle) {
+		this.rankFirstItemTitle = rankFirstItemTitle;
+	}
+
 	public List<RankItem> getIndexRankItems() {
 		return indexRankItems;
 	}
@@ -141,6 +149,7 @@ public class Rank extends XimalayaResponse{
 			categoryId = json.getInteger("category_id");
 			rankContentType = json.getString("rank_content_type");
 			rankFirstItemId = json.getLong("rank_first_item_id");
+			rankFirstItemTitle = json.getString("rank_first_item_title");
 			indexRankItems = parseRankItems(json.getJSONArray("index_rank_items"));
 		}
 	}
