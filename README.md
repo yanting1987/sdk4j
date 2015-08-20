@@ -2,6 +2,26 @@
 
 Java OpenAPI Server SDK for Ximalaya
 
+##**使用说明：**
+
+> 1、使用git克隆喜马拉雅sdk4j项目
+```
+git clone https://github.com/jxqlovejava/sdk4j.git
+```
+> 2、使用maven将项目编译成.jar文件 (跳过测试)
+```bash
+mvn clean package -Dmaven.test.skip=true
+```
+> 3、在引用.jar文件的项目的classpath下配置conf.properties
+```bash
+ximalaya.openapi.appKey=[需要申请]
+ximalaya.openapi.appSecret=[需要申请]
+ximalaya.openapi.serverAuthenticateStaticKey=[需要申请]
+ximalaya.openapi.baseURL=http://api.ximalaya.com/openapi-gateway-app
+```
+> 附：喜马拉雅sdk4j项目为maven项目，引用方式不限，该方式仅供参考
+
+##**版本更新说明：**
 
 ### 2015/07/17 william 0.0.6-SNAPSHOT更新:
 
