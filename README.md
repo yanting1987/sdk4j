@@ -69,4 +69,6 @@ cover_url_large: 所属专辑封面大图
 
 * 声音model增加order_num排序值
 
+### 2015/08/17 william 0.0.8-SNAPSHOT更新:
 
+* 删除上版本的榜单焦点图接口和之前的焦点图相关接口
