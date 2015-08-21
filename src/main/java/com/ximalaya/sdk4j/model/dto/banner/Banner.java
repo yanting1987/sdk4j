@@ -24,7 +24,7 @@ public class Banner extends XimalayaResponse{
 	private Long bannerUid;
 	private Long trackId;
 	private Long columnId;
-	private Integer columnContentType;
+	private String columnContentType;
 	private Long albumId;
 	private String thirdPartyUrl;
 	private Boolean isExternalUrl;
@@ -98,10 +98,10 @@ public class Banner extends XimalayaResponse{
 	public void setColumnId(Long columnId) {
 		this.columnId = columnId;
 	}
-	public Integer getColumnContentType() {
+	public String getColumnContentType() {
 		return columnContentType;
 	}
-	public void setColumnContentType(Integer columnContentType) {
+	public void setColumnContentType(String columnContentType) {
 		this.columnContentType = columnContentType;
 	}
 	public Long getAlbumId() {
@@ -146,17 +146,31 @@ public class Banner extends XimalayaResponse{
 			bannerUid = json.getLong("banner_uid");
 			trackId  = json.getLong("track_id");
 			columnId  = json.getLong("column_id");
-			columnContentType = json.getInteger("column_content_type");
+			columnContentType = json.getString("column_content_type");
 			albumId = json.getLong("album_id");
 			thirdPartyUrl = json.getString("third_party_url");
 			isExternalUrl = json.getBoolean("is_external_url");
 		}
 	}
 	
-	public static List<Banner> constructBanners(HttpResponse response) throws XimalayaException {
+	public static List<Banner> constructVehicleBanners(HttpResponse response) throws XimalayaException {
 		List<Banner> albums = new ArrayList<Banner> ();
 		JSONArray albumsJsonArray = response.asJSONArray();
 		try {
+			for(int i = 0; i < albumsJsonArray.size(); i++) {
+				albums.add(new Banner(albumsJsonArray.getJSONObject(i)));
+			}
+		} catch (JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return albums;
+	}
+	
+	public static List<Banner> constructBanners(HttpResponse response) throws XimalayaException {
+		List<Banner> albums = new ArrayList<Banner> ();
+		try {
+			JSONObject jsonObject = response.asJSONObject();
+			JSONArray albumsJsonArray = jsonObject.getJSONArray("banners");
 			for(int i = 0; i < albumsJsonArray.size(); i++) {
 				albums.add(new Banner(albumsJsonArray.getJSONObject(i)));
 			}

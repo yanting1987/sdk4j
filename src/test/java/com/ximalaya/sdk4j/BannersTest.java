@@ -22,7 +22,19 @@ public class BannersTest {
 	
 	@Test
 	public void testGetRankBanners() throws XimalayaException {
-		List<Banner> banners = bannerService.getRankBanners("ios-dev", "3.1.37", 2);
+		List<Banner> banners = bannerService.getRankBanners("and-f5", "4.3.2.2", 2);
+		Assert.assertTrue(banners != null && banners.size() > 0);
+	}
+	
+	@Test
+	public void testGetCategoryBanners() throws XimalayaException {
+		List<Banner> banners = bannerService.getCategoryBanners("and-f5", "4.3.2.2", 2, 3);
+		Assert.assertTrue(banners != null && banners.size() > 0);
+	}
+	
+	@Test
+	public void testGetDiscoveryBanners() throws XimalayaException {
+		List<Banner> banners = bannerService.getDiscoveryBanners("and-f5", "4.3.2.2", 2);
 		Assert.assertTrue(banners != null && banners.size() > 0);
 	}
 }
