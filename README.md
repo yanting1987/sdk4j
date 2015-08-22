@@ -19,7 +19,7 @@ ximalaya.openapi.appSecret=[需要申请]
 ximalaya.openapi.serverAuthenticateStaticKey=[需要申请]
 ximalaya.openapi.baseURL=http://api.ximalaya.com/openapi-gateway-app
 ```
-> 附：喜马拉雅sdk4j项目为maven项目，引用方式不限，该方式仅供参考
+> 附：喜马拉雅sdk4j项目为maven项目，此说明方式仅供参考
 
 ##**版本更新说明：**
 
