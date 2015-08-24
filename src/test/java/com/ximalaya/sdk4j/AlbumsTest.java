@@ -1,9 +1,13 @@
 package com.ximalaya.sdk4j;
 
+import static org.junit.Assert.assertTrue;
+
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.*;
+
 import junit.framework.Assert;
+
 import org.junit.Test;
 
 import java.util.List;
@@ -59,5 +63,11 @@ public class AlbumsTest {
 	public void testReletiveAlbum() throws XimalayaException {
 		ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(462375L);
 		Assert.assertTrue(reletiveAlbumList!= null && reletiveAlbumList.getReletiveAlbum().size()> 0);
+	}
+	
+	@Test
+	public void testGetHumanRecommendAlbumList() throws XimalayaException {
+		List<HumanRecommendAlbumList> humanRecommendAlbumLists = albumsService.getHumanRecommendAlbumList();
+		assertTrue(humanRecommendAlbumLists != null && humanRecommendAlbumLists.size() > 0);
 	}
 }

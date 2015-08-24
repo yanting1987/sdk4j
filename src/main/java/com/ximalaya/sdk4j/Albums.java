@@ -58,6 +58,20 @@ public class Albums extends Ximalaya {
 	}
 	
 	/**
+	 * 
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<HumanRecommendAlbumList> getHumanRecommendAlbumList() throws XimalayaException {
+		HttpParameter[] specificParams = new HttpParameter[2];
+		specificParams[0] = new HttpParameter("page", 1);
+		specificParams[1] = new HttpParameter("count", 3);
+		return Album.constructHumanRecommendAlbumList(
+			CLIENT.get(String.format("%s/albums/human_recommend", BASE_URL),
+				assembleHttpParams(specificParams)));
+	}
+	
+	/**
 	 * 根据一组ID批量获取专辑
 	 * 
 	 * @param albumIDs 一组专辑ID，必填

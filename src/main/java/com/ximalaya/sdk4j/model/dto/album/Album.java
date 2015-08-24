@@ -259,6 +259,16 @@ public class Album extends XimalayaResponse {
 		return albumTracks;
 	}
 
+	public static List<HumanRecommendAlbumList> constructHumanRecommendAlbumList(HttpResponse httpResponse)
+			throws XimalayaException {
+		JSONArray albumsJsonArray = httpResponse.asJSONArray();
+		List<HumanRecommendAlbumList> recommendAlbumList = 
+			new ArrayList<HumanRecommendAlbumList>(albumsJsonArray.size());
+		for(int i = 0; i < albumsJsonArray.size(); i++) {
+			recommendAlbumList.add(new HumanRecommendAlbumList(albumsJsonArray.getJSONObject(i)));
+		}
+		return recommendAlbumList;
+	}
 
 	@Override
 	public int hashCode() {
@@ -288,4 +298,5 @@ public class Album extends XimalayaResponse {
 		
 		return true;
 	}
+	
 }
