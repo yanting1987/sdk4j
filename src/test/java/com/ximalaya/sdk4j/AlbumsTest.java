@@ -73,7 +73,7 @@ public class AlbumsTest {
 
 	@Test
 	public void testGetHumanRecommendDownloadAlbums() throws XimalayaException {
-		AlbumList recommendDownloadAlbumLists = albumsService.getHumanRecommendDownloadAlbumList(0, new Paging());
+		AlbumList recommendDownloadAlbumLists = albumsService.getRecommendDownloadAlbumList(0, new Paging());
 		assertTrue(recommendDownloadAlbumLists != null && recommendDownloadAlbumLists.getAlbums().size() > 0);
 	}
 	

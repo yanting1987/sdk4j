@@ -77,7 +77,7 @@ public class Albums extends Ximalaya {
      * @return
      * @throws XimalayaException
      */
-    public AlbumList getHumanRecommendDownloadAlbumList(int calcDimension, Paging paging) throws XimalayaException {
+    public AlbumList getRecommendDownloadAlbumList(int calcDimension, Paging paging) throws XimalayaException {
     	DTOValidateUtil.validateCalcDimension(calcDimension);
     	paging = paging == null ? new Paging() : paging;
     	
