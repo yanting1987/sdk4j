@@ -10,6 +10,12 @@ public class DTOValidateUtil {
 		}
 	}
 	
+	public static void validateCalcDimension(long calcDimension) {
+		if(calcDimension < 0) {
+			throw new IllegalArgumentException("calcDimension should >= 0");
+		}
+	}
+	
 	public static void validateRankType(int rankType) {
 		if(!(rankType == 1 || rankType == 2)) {
 			throw new IllegalArgumentException("This rankType is not supported");

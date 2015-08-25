@@ -18,7 +18,7 @@ public class Ranks extends Ximalaya {
 
 	/**
 	 * 根据榜单类型获取榜单首页的榜单列表。
-	 * @param rankType
+	 * @param rankType 榜单类型，1-节目榜单
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -32,10 +32,9 @@ public class Ranks extends Ximalaya {
 	}
 	
 	/**
-	 * 根据rank_key获取某个榜单下的专辑列表。	 
-	 * @param rank_key
-	 * @param page
-	 * @param count
+	 * 根据rankKey获取某个榜单下的专辑列表。	 
+	 * @param rankkey 用于获取具体榜单内容的key，可以先通过/ranks/index_list获得
+	 * @param paging  分页参数，可选，不填则为默认值
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -53,8 +52,8 @@ public class Ranks extends Ximalaya {
 	
 	/**
 	 * 根据rank_key获取某个榜单下的声音列表。
-	 * @param rank_key
-	 * @param paging
+	 * @param rankKey 用于获取具体榜单内容的key，可以先通过/ranks/index_list获得
+	 * @param paging  分页参数，可选，不填则为默认值
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -72,7 +71,7 @@ public class Ranks extends Ximalaya {
 	
 	/**
 	 * 获取直播电台排行榜。
-	 * @param radioCount
+	 * @param radioCount 需要获取排行榜中的电台数目
 	 * @return
 	 * @throws XimalayaException
 	 */

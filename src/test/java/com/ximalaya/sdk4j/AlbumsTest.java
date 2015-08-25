@@ -1,9 +1,13 @@
 package com.ximalaya.sdk4j;
 
+import static org.junit.Assert.assertTrue;
+
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.*;
+
 import junit.framework.Assert;
+
 import org.junit.Test;
 
 import java.util.List;
@@ -59,5 +63,23 @@ public class AlbumsTest {
 	public void testReletiveAlbum() throws XimalayaException {
 		ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(462375L);
 		Assert.assertTrue(reletiveAlbumList!= null && reletiveAlbumList.getReletiveAlbum().size()> 0);
+	}
+	
+	@Test
+	public void testGetHumanRecommendAlbumList() throws XimalayaException {
+		List<HumanRecommendAlbumList> humanRecommendAlbumLists = albumsService.getHumanRecommendAlbumList(3);
+		assertTrue(humanRecommendAlbumLists != null && humanRecommendAlbumLists.size() > 0);
+	}
+
+	@Test
+	public void testGetHumanRecommendDownloadAlbums() throws XimalayaException {
+		AlbumList recommendDownloadAlbumLists = albumsService.getRecommendDownloadAlbumList(0, new Paging());
+		assertTrue(recommendDownloadAlbumLists != null && recommendDownloadAlbumLists.getAlbums().size() > 0);
+	}
+	
+	@Test
+	public void testHotAggregation() throws XimalayaException {
+	    List<AlbumList> albumLists = albumsService.getHotAggregation(3L,4,3);
+		assertTrue(albumLists.size() > 0);
 	}
 }

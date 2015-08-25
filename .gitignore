@@ -22,3 +22,8 @@ target/
 sdk4j.iml
 >>>>>>> 1d866c824e13a1d0a2d3ddd37cf59f3d39a268d5
 /.settings
+<<<<<<< HEAD
+=======
+/doc
+/README.md
+>>>>>>> 71ee495e001b73678b24a49bd4466bafc5716861

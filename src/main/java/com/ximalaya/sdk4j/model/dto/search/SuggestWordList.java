@@ -21,11 +21,6 @@ public class SuggestWordList extends XimalayaResponse{
 	public SuggestWordList() {
 	}
 	
-	public SuggestWordList(JSONObject json) throws XimalayaException {
-		super();
-		init(json);
-	}
-	
 	public int getAlbumTotalCount() {
 		return albumTotalCount;
 	}
@@ -49,6 +44,11 @@ public class SuggestWordList extends XimalayaResponse{
 	}
 	public void setKeywords(List<QueryWord> keywords) {
 		this.keywords = keywords;
+	}
+
+	public SuggestWordList(JSONObject json) throws XimalayaException {
+		super();
+		init(json);
 	}
 
 	public SuggestWordList(HttpResponse response) throws XimalayaException {
