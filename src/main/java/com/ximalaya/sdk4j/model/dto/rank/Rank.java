@@ -174,7 +174,7 @@ public class Rank extends XimalayaResponse{
 			JSONArray ranksJsonArray = jsonObject.getJSONArray("ranks");
  	 		List<Rank> ranks = new ArrayList<Rank> ();
  	 		for(int i = 0; i < ranksJsonArray.size(); i++) {
- 	 			ranks.add(ranksJsonArray.getObject(i, Rank.class));
+ 	 			ranks.add(new Rank(ranksJsonArray.getJSONObject(i)));
  	 		}
  	 		rankList.setRanks(ranks);
 		} catch (JSONException jsone) {
@@ -189,7 +189,7 @@ public class Rank extends XimalayaResponse{
 			JSONArray ranksJsonArray = response.asJSONArray();
 			int size = ranksJsonArray.size();
 			for(int i = 0; i < size; i++) {
-				ranks.add(ranksJsonArray.getObject(i, Rank.class));
+				ranks.add(new Rank(ranksJsonArray.getJSONObject(i)));
 			}
 		} catch (JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
