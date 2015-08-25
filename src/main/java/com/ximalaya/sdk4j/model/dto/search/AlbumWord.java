@@ -10,8 +10,8 @@ public class AlbumWord extends XimalayaResponse{
 	private static final long serialVersionUID = -8121832465530680886L;
 	
 	private long id;
-	private String keyword;
-	private String highlightKeyword;
+	private String albumTitle;
+	private String highlightAlbumTitle;
 	private String categoryName;
 	private String coverUrlSmall;
 	
@@ -24,31 +24,31 @@ public class AlbumWord extends XimalayaResponse{
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getKeyword() {
-		return keyword;
+	public String getAlbumTitle() {
+		return albumTitle;
 	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
+	public void setAlbumTitle(String albumTitle) {
+		this.albumTitle = albumTitle;
 	}
-	public String getHighlightKeyword() {
-		return highlightKeyword;
+	public String getHighlightAlbumTitle() {
+		return highlightAlbumTitle;
 	}
-	public void setHighlightKeyword(String highlightKeyword) {
-		this.highlightKeyword = highlightKeyword;
+	public void setHighlightAlbumTitle(String highlightAlbumTitle) {
+		this.highlightAlbumTitle = highlightAlbumTitle;
 	}
-	public String getCategory() {
+	public String getCategoryName() {
 		return categoryName;
 	}
-	public void setCategory(String category) {
-		this.categoryName = category;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
-	public String getImgPath() {
+	public String getCoverUrlSmall() {
 		return coverUrlSmall;
 	}
-	public void setImgPath(String imgPath) {
-		this.coverUrlSmall = imgPath;
+	public void setCoverUrlSmall(String coverUrlSmall) {
+		this.coverUrlSmall = coverUrlSmall;
 	}
-	
+
 	public AlbumWord(JSONObject json) throws XimalayaException {
 		super();
 		init(json);
@@ -62,8 +62,8 @@ public class AlbumWord extends XimalayaResponse{
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
 			id = json.getLong("id");
-			keyword = json.getString("keyword");
-			highlightKeyword = json.getString("highlight_keyword");
+			albumTitle = json.getString("album_title");
+			highlightAlbumTitle = json.getString("highlight_album_title");
 			categoryName = json.getString("category_name");
 			coverUrlSmall = json.getString("cover_url_small");
 		}
@@ -71,8 +71,8 @@ public class AlbumWord extends XimalayaResponse{
 	
 	@Override
 	public String toString() {
-		return "AlbumWord {id=" + id + ", keyword=" + keyword
-				+ ", highlightKeyword=" + highlightKeyword + ", categoryName="
+		return "AlbumWord {id=" + id + ", albumTitle=" + albumTitle
+				+ ", highlightAlbumTitle=" + highlightAlbumTitle + ", categoryName="
 				+ categoryName + ", coverUrlSmall=" + coverUrlSmall + "}";
 	}
 }
