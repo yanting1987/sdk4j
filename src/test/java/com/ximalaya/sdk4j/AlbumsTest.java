@@ -72,8 +72,14 @@ public class AlbumsTest {
 	}
 
 	@Test
+	public void testGetHumanRecommendDownloadAlbums() throws XimalayaException {
+		AlbumList recommendDownloadAlbumLists = albumsService.getHumanRecommendDownloadAlbumList(0, new Paging());
+		assertTrue(recommendDownloadAlbumLists != null && recommendDownloadAlbumLists.getAlbums().size() > 0);
+	}
+	
+	@Test
 	public void testHotAggregation() throws XimalayaException {
-	    List<AlbumList>albumLists	=albumsService.getHotAggregation(3L,4,3);
-		System.out.println(albumLists.size());
+	    List<AlbumList> albumLists = albumsService.getHotAggregation(3L,4,3);
+		assertTrue(albumLists.size() > 0);
 	}
 }

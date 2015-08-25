@@ -57,6 +57,7 @@ public class Albums extends Ximalaya {
     }
 
     /**
+     * 获取所有人工推荐分类下的热门专辑，每个分类下返回的专辑个数固定。
      * @return
      * @throws XimalayaException
      */
@@ -66,6 +67,26 @@ public class Albums extends Ximalaya {
         specificParams[1] = new HttpParameter("count", 3);
         return Album.constructHumanRecommendAlbumList(
                 CLIENT.get(String.format("%s/albums/human_recommend", BASE_URL),
+                        assembleHttpParams(specificParams)));
+    }
+    
+    /**
+     * 获取下载听模块热门下载推荐专辑
+     * @param calcDimension
+     * @param paging
+     * @return
+     * @throws XimalayaException
+     */
+    public AlbumList getHumanRecommendDownloadAlbumList(int calcDimension, Paging paging) throws XimalayaException {
+    	DTOValidateUtil.validateCalcDimension(calcDimension);
+    	paging = paging == null ? new Paging() : paging;
+    	
+        HttpParameter[] specificParams = new HttpParameter[3];
+        specificParams[0] = new HttpParameter("page", paging.getPage());
+        specificParams[1] = new HttpParameter("count", paging.getCount());
+        specificParams[2] = new HttpParameter("calc_dimension", calcDimension);
+        return Album.constructAlbumList(
+                CLIENT.get(String.format("%s/albums/recommend_download", BASE_URL),
                         assembleHttpParams(specificParams)));
     }
 
