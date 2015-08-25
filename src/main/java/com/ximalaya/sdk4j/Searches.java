@@ -1,5 +1,7 @@
 package com.ximalaya.sdk4j;
 
+import java.util.List;
+
 import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.AllList;
@@ -10,7 +12,6 @@ import com.ximalaya.sdk4j.model.dto.album.AlbumList;
 import com.ximalaya.sdk4j.model.dto.live.Radio;
 import com.ximalaya.sdk4j.model.dto.live.RadioList;
 import com.ximalaya.sdk4j.model.dto.search.HotWord;
-import com.ximalaya.sdk4j.model.dto.search.HotWordList;
 import com.ximalaya.sdk4j.model.dto.search.SuggestWordList;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
@@ -67,7 +68,7 @@ public class Searches extends Ximalaya {
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public HotWordList searchHotWords(int top) throws XimalayaException {
+	public List<HotWord> searchHotWords(int top) throws XimalayaException {
 		checkSearchTopParam(top);
 		return HotWord.constructHotWords(
 				CLIENT.get(String.format("%s/search/hot_words", BASE_URL),
@@ -77,14 +78,14 @@ public class Searches extends Ximalaya {
 	/**
 	 * 获取某个关键词的联想词
 	 * 
-	 * @param keyWord 关键词，必填
+	 * @param q 关键词，必填
 	 * @return
 	 * @throws XimalayaException
 	 */
 	public SuggestWordList searchSuggestWords(String keyWord) throws XimalayaException{
 		checkSearchKeyWordParam(keyWord);
 		return new SuggestWordList(CLIENT.get(String.format("%s/search/suggest_words", BASE_URL),
-				assembleHttpParams(new HttpParameter[]{new HttpParameter("kw", keyWord)})));
+				assembleHttpParams(new HttpParameter[]{new HttpParameter("q", keyWord)})));
 	}
 
 	/**

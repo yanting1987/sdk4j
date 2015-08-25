@@ -10,9 +10,7 @@ import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.AlbumList;
 import com.ximalaya.sdk4j.model.dto.live.Radio;
-import com.ximalaya.sdk4j.model.dto.live.RadioList;
 import com.ximalaya.sdk4j.model.dto.rank.Rank;
-import com.ximalaya.sdk4j.model.dto.rank.RankList;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
 
 public class RanskTest {

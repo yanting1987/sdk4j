@@ -1,13 +1,16 @@
 package com.ximalaya.sdk4j;
 
+import java.util.List;
+
 import com.ximalaya.sdk4j.model.AllList;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.AlbumList;
 import com.ximalaya.sdk4j.model.dto.live.RadioList;
-import com.ximalaya.sdk4j.model.dto.search.HotWordList;
+import com.ximalaya.sdk4j.model.dto.search.HotWord;
 import com.ximalaya.sdk4j.model.dto.search.SuggestWordList;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,18 +33,18 @@ static	Searches searchesService = new Searches();
 
 	@Test
 	public void testSearchHotWords() throws XimalayaException {
-		HotWordList hotWordList = searchesService.searchHotWords(10);
-		Assert.assertTrue(hotWordList != null && hotWordList.getHotWords() != null && !hotWordList.getHotWords().isEmpty());
+		List<HotWord> hotWordList = searchesService.searchHotWords(10);
+		Assert.assertTrue(hotWordList != null && !hotWordList.isEmpty());
 	}
 
 	@Test
 	public void testSearchSuggestWords() throws XimalayaException {
 		SuggestWordList suggestWordList = searchesService.searchSuggestWords("郭");
 		Assert.assertNotNull(suggestWordList);
-		Assert.assertNotNull(suggestWordList.getAlbumResultList());
-		Assert.assertTrue(!suggestWordList.getAlbumResultList().isEmpty());
-		Assert.assertNotNull(suggestWordList.getQueryResultList());
-		Assert.assertTrue(!suggestWordList.getQueryResultList().isEmpty());
+		Assert.assertNotNull(suggestWordList.getAlbums());
+		Assert.assertTrue(!suggestWordList.getAlbums().isEmpty());
+		Assert.assertNotNull(suggestWordList.getKeywords());
+		Assert.assertTrue(!suggestWordList.getKeywords().isEmpty());
 	}
 
 	@Test

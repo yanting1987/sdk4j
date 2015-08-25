@@ -12,40 +12,40 @@ import com.ximalaya.sdk4j.model.XimalayaResponse;
 public class SuggestWordList extends XimalayaResponse{
 	private static final long serialVersionUID = 2721436489197473333L;
 	
-	private int albumResultNum;
-	private List<AlbumWord> albumResultList;
+	private int albumTotalCount;
+	private List<AlbumWord> albums;
 	
-	private int queryResultNum;
-	private List<QueryWord> queryResultList;
+	private int keywordTotalCount;
+	private List<QueryWord> keywords;
 	
 	public SuggestWordList() {
 	}
 	
-	public int getAlbumResultNum() {
-		return albumResultNum;
+	public int getAlbumTotalCount() {
+		return albumTotalCount;
 	}
-	public void setAlbumResultNum(int albumResultNum) {
-		this.albumResultNum = albumResultNum;
+	public void setAlbumTotalCount(int albumTotalCount) {
+		this.albumTotalCount = albumTotalCount;
 	}
-	public List<AlbumWord> getAlbumResultList() {
-		return albumResultList;
+	public List<AlbumWord> getAlbums() {
+		return albums;
 	}
-	public void setAlbumResultList(List<AlbumWord> albumResultList) {
-		this.albumResultList = albumResultList;
+	public void setAlbums(List<AlbumWord> albums) {
+		this.albums = albums;
 	}
-	public int getQueryResultNum() {
-		return queryResultNum;
+	public int getKeywordTotalCount() {
+		return keywordTotalCount;
 	}
-	public void setQueryResultNum(int queryResultNum) {
-		this.queryResultNum = queryResultNum;
+	public void setKeywordTotalCount(int keywordTotalCount) {
+		this.keywordTotalCount = keywordTotalCount;
 	}
-	public List<QueryWord> getQueryResultList() {
-		return queryResultList;
+	public List<QueryWord> getKeywords() {
+		return keywords;
 	}
-	public void setQueryResultList(List<QueryWord> queryResultList) {
-		this.queryResultList = queryResultList;
+	public void setKeywords(List<QueryWord> keywords) {
+		this.keywords = keywords;
 	}
-	
+
 	public SuggestWordList(JSONObject json) throws XimalayaException {
 		super();
 		init(json);
@@ -57,10 +57,10 @@ public class SuggestWordList extends XimalayaResponse{
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			albumResultNum = json.getIntValue("album_result_num");
-			albumResultList = parseAlbumWordList(json.getJSONArray("album_result_list"));
-			queryResultNum = json.getIntValue("query_result_num");
-			queryResultList = parseQueryWordList(json.getJSONArray("query_result_list"));
+			albumTotalCount = json.getIntValue("album_total_count");
+			albums = parseAlbumWordList(json.getJSONArray("albums"));
+			keywordTotalCount = json.getIntValue("keyword_total_count");
+			keywords = parseQueryWordList(json.getJSONArray("keywords"));
 		}
 	}
 	

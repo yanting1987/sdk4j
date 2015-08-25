@@ -12,8 +12,8 @@ public class AlbumWord extends XimalayaResponse{
 	private long id;
 	private String keyword;
 	private String highlightKeyword;
-	private String category;
-	private String imgPath;
+	private String categoryName;
+	private String coverUrlSmall;
 	
 	public AlbumWord() {
 	}
@@ -37,16 +37,16 @@ public class AlbumWord extends XimalayaResponse{
 		this.highlightKeyword = highlightKeyword;
 	}
 	public String getCategory() {
-		return category;
+		return categoryName;
 	}
 	public void setCategory(String category) {
-		this.category = category;
+		this.categoryName = category;
 	}
 	public String getImgPath() {
-		return imgPath;
+		return coverUrlSmall;
 	}
 	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
+		this.coverUrlSmall = imgPath;
 	}
 	
 	public AlbumWord(JSONObject json) throws XimalayaException {
@@ -64,15 +64,15 @@ public class AlbumWord extends XimalayaResponse{
 			id = json.getLong("id");
 			keyword = json.getString("keyword");
 			highlightKeyword = json.getString("highlight_keyword");
-			category = json.getString("category");
-			imgPath = json.getString("img_path");
+			categoryName = json.getString("category_name");
+			coverUrlSmall = json.getString("cover_url_small");
 		}
 	}
 	
 	@Override
 	public String toString() {
 		return "AlbumWord {id=" + id + ", keyword=" + keyword
-				+ ", highlightKeyword=" + highlightKeyword + ", category="
-				+ category + ", imgPath=" + imgPath + "}";
+				+ ", highlightKeyword=" + highlightKeyword + ", categoryName="
+				+ categoryName + ", coverUrlSmall=" + coverUrlSmall + "}";
 	}
 }
