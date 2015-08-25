@@ -58,13 +58,17 @@ public class Albums extends Ximalaya {
 
     /**
      * 获取所有人工推荐分类下的热门专辑，每个分类下返回的专辑个数固定。
+     * @param count 每个人工推荐分类下返回专辑的数量
      * @return
      * @throws XimalayaException
      */
-    public List<HumanRecommendAlbumList> getHumanRecommendAlbumList() throws XimalayaException {
+    public List<HumanRecommendAlbumList> getHumanRecommendAlbumList(int count) throws XimalayaException {
+    	if(count <= 0) {
+    		return new ArrayList<HumanRecommendAlbumList>(0);
+    	}
         HttpParameter[] specificParams = new HttpParameter[2];
         specificParams[0] = new HttpParameter("page", 1);
-        specificParams[1] = new HttpParameter("count", 3);
+        specificParams[1] = new HttpParameter("count", count);
         return Album.constructHumanRecommendAlbumList(
                 CLIENT.get(String.format("%s/albums/human_recommend", BASE_URL),
                         assembleHttpParams(specificParams)));
@@ -72,8 +76,8 @@ public class Albums extends Ximalaya {
     
     /**
      * 获取下载听模块热门下载推荐专辑
-     * @param calcDimension
-     * @param paging
+     * @param calcDimension 计算维度，现支持经典（0），最火（1），最新（2），播放最多（3）
+     * @param paging  		分页参数，可选，不填则为默认值
      * @return
      * @throws XimalayaException
      */
@@ -171,42 +175,37 @@ public class Albums extends Ximalaya {
 
     /**
      * 获取某个专辑的相关推荐专辑
-     *
-     * @param id
+     * @param id 专辑ID
      * @return
      * @throws XimalayaException
      */
     public ReletiveAlbumList getReletiveAlbums(Long id) throws XimalayaException {
-        HttpResponse response = CLIENT.get(
-                String.format("%s/albums/relative_album", BASE_URL),
-                assembleHttpParams(
-                        new HttpParameter[]{
-                                new HttpParameter("albumId", id)}
-                )
-        );
+    	if (id == null || id <= 0) {
+            return new ReletiveAlbumList();
+        }
+    	HttpParameter[] specificParams = new HttpParameter[]{new HttpParameter("albumId", id)};
+        HttpResponse response = CLIENT.get(String.format("%s/albums/relative_album", BASE_URL),
+             assembleHttpParams(specificParams));
         return ReletiveAlbum.constructReletiveAlbumList(response);
     }
 
 
     /**
      * 某分类下的热门专辑聚合接口
-     * @param categoryId
-     * @param tagCount
-     * @param albumCount
+     * @param categoryId	分类id
+     * @param tagCount		取该分类下前几个标签，默认为4（包括最火）
+     * @param albumCount	获取每个标签下的专辑数量，默认为3
      * @return
      * @throws XimalayaException
      */
     public List<AlbumList> getHotAggregation(Long categoryId, Integer tagCount, Integer albumCount) throws XimalayaException {
-        HttpResponse response = CLIENT.get(
-                String.format("%s/albums/hot_aggregation", BASE_URL),
-                assembleHttpParams(
-                        new HttpParameter[]{
-                                new HttpParameter("category_id", categoryId),
-                                new HttpParameter("tag_count", tagCount),
-                                new HttpParameter("album_count", albumCount)
-                        }
-                )
-        );
+       DTOValidateUtil.validateCategoryID(categoryId);
+       HttpParameter[] specificParams = new HttpParameter[]{
+           new HttpParameter("category_id", categoryId),
+           new HttpParameter("tag_count", tagCount),
+           new HttpParameter("album_count", albumCount)};
+       HttpResponse response = CLIENT.get(String.format("%s/albums/hot_aggregation", BASE_URL),
+           assembleHttpParams(specificParams));
        return Album.constructAlbumListList(response);
 
     }

@@ -12,6 +12,7 @@ public class Columns extends Ximalaya {
 
 	/**
 	 * 获取精品听单列表
+	 * @param paging 分页参数，可选，不填则为默认值
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -28,7 +29,7 @@ public class Columns extends Ximalaya {
 	
 	/**
 	 * 获取精品听单列表
-	 * @return
+	 * @return	听单ID
 	 * @throws XimalayaException
 	 */
 	public Column getColumnDetail(Integer columnId) throws XimalayaException {

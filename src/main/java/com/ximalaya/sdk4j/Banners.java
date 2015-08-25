@@ -23,9 +23,9 @@ public class Banners extends Ximalaya {
 	
 	/**
 	 * 获取榜单的焦点图列表。
-	 * @param channel
-	 * @param appVersion
-	 * @param imageScale
+	 * @param channel	 app的渠道号（对应渠道焦点图配置）
+	 * @param appVersion app版本号
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于Android一般设为2
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -43,11 +43,11 @@ public class Banners extends Ximalaya {
 	}
 	
 	/**
-	 * 获取分类推荐焦点图列表。
-	 * @param channel
-	 * @param appVersion
-	 * @param imageScale
-	 * @param categoryId
+	 * 获取分类推荐焦点图列表。内容类型：暂时仅专辑(album)
+	 * @param channel	 app的渠道号（对应渠道焦点图配置）
+	 * @param appVersion app版本号
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于Android一般设为2
+	 * @param categoryId 分类ID
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -70,9 +70,9 @@ public class Banners extends Ximalaya {
 	
 	/**
 	 * 获取发现页的焦点图列表。
-	 * @param channel
-	 * @param appVersion
-	 * @param imageScale
+	 * @param channel	 app的渠道号（对应渠道焦点图配置）
+	 * @param appVersion app版本号
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于Android一般设为2
 	 * @return
 	 * @throws XimalayaException
 	 */

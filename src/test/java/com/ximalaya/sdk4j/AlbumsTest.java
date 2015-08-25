@@ -67,7 +67,7 @@ public class AlbumsTest {
 	
 	@Test
 	public void testGetHumanRecommendAlbumList() throws XimalayaException {
-		List<HumanRecommendAlbumList> humanRecommendAlbumLists = albumsService.getHumanRecommendAlbumList();
+		List<HumanRecommendAlbumList> humanRecommendAlbumLists = albumsService.getHumanRecommendAlbumList(3);
 		assertTrue(humanRecommendAlbumLists != null && humanRecommendAlbumLists.size() > 0);
 	}
 
