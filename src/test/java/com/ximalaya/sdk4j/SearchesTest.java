@@ -25,7 +25,6 @@ static	Searches searchesService = new Searches();
 	}
 
 	@Test
-
 	public void testSearchTracks() throws XimalayaException {
 		TrackList trackList = searchesService.searchTrackList("郭德纲", 0, new Paging());
 		Assert.assertTrue(trackList != null && trackList.getTracks() != null && !trackList.getTracks().isEmpty());
