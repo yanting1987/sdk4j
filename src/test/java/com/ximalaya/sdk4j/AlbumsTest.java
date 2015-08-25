@@ -70,4 +70,10 @@ public class AlbumsTest {
 		List<HumanRecommendAlbumList> humanRecommendAlbumLists = albumsService.getHumanRecommendAlbumList();
 		assertTrue(humanRecommendAlbumLists != null && humanRecommendAlbumLists.size() > 0);
 	}
+
+	@Test
+	public void testHotAggregation() throws XimalayaException {
+	    List<AlbumList>albumLists	=albumsService.getHotAggregation(3L,4,3);
+		System.out.println(albumLists.size());
+	}
 }

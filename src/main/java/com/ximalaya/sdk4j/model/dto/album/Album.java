@@ -229,6 +229,19 @@ public class Album extends XimalayaResponse {
 		}
 		return albumList;
 	}
+
+
+	public static List<AlbumList> constructAlbumListList(HttpResponse response) throws XimalayaException {
+		List<AlbumList> albumLists=new ArrayList<AlbumList>();
+		JSONArray albumListArray = response.asJSONArray();
+		for(int i=0;i<albumListArray.size();i++){
+			JSONObject albumListJsonObject= (JSONObject) albumListArray.get(i);
+			albumLists.add(constructAlbumList(albumListJsonObject));
+		}
+		return albumLists;
+
+
+	}
 	
 	public static AlbumTracks constructAlbumTracks(HttpResponse response) throws XimalayaException {
 		AlbumTracks albumTracks = new AlbumTracks();
