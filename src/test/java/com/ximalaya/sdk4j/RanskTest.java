@@ -1,5 +1,7 @@
 package com.ximalaya.sdk4j;
 
+import java.util.List;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -7,7 +9,9 @@ import org.junit.Test;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.AlbumList;
+import com.ximalaya.sdk4j.model.dto.live.Radio;
 import com.ximalaya.sdk4j.model.dto.live.RadioList;
+import com.ximalaya.sdk4j.model.dto.rank.Rank;
 import com.ximalaya.sdk4j.model.dto.rank.RankList;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
 
@@ -17,8 +21,8 @@ public class RanskTest {
 	
 	@Test
 	public void testGetFirstPageRanks() throws XimalayaException {
-		RankList ranks = rankService.getFirstPageRanks(1);
-		Assert.assertTrue(ranks != null && ranks.getRanks()!= null && ranks.getRanks().size() > 0);
+		List<Rank> ranks = rankService.getFirstPageRanks(1);
+		Assert.assertTrue(ranks != null && ranks.size() > 0);
 	}
 	
 	@Test
@@ -29,8 +33,8 @@ public class RanskTest {
 	
 	@Test
 	public void testGetRankRadios() throws XimalayaException {
-		RadioList radios = rankService.getRankRadios(5);
-		Assert.assertTrue(radios != null && radios.getRadios() != null && radios.getRadios().size() > 0);
+		List<Radio> radios = rankService.getRankRadios(5);
+		Assert.assertTrue(radios != null && radios.size() > 0);
 	}
 	
 	@Test

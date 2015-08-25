@@ -1,5 +1,7 @@
 package com.ximalaya.sdk4j;
 
+import java.util.List;
+
 import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.model.DTOValidateUtil;
 import com.ximalaya.sdk4j.model.Paging;
@@ -7,9 +9,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.Album;
 import com.ximalaya.sdk4j.model.dto.album.AlbumList;
 import com.ximalaya.sdk4j.model.dto.live.Radio;
-import com.ximalaya.sdk4j.model.dto.live.RadioList;
 import com.ximalaya.sdk4j.model.dto.rank.Rank;
-import com.ximalaya.sdk4j.model.dto.rank.RankList;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
 
@@ -22,11 +22,11 @@ public class Ranks extends Ximalaya {
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public RankList getFirstPageRanks(int rankType) throws XimalayaException {
+	public List<Rank> getFirstPageRanks(int rankType) throws XimalayaException {
 		HttpParameter[] specificParams = new HttpParameter[1];
 		DTOValidateUtil.validateRankType(rankType);
 		specificParams[0] = new HttpParameter("rank_type", rankType);
-		return Rank.constructRankList(
+		return Rank.constructRanks(
 			CLIENT.get(String.format("%s/ranks/index_list", BASE_URL), 
 					assembleHttpParams(specificParams)));
 	}
@@ -76,11 +76,11 @@ public class Ranks extends Ximalaya {
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public RadioList getRankRadios(int radioCount) throws XimalayaException {
+	public List<Radio> getRankRadios(int radioCount) throws XimalayaException {
 		DTOValidateUtil.validateRadioCount(radioCount);
 		HttpParameter[] specificParams = new HttpParameter[1];
 		specificParams[0] = new HttpParameter("radio_count", radioCount);
-		return Radio.constructRadioList(
+		return Radio.constructRadios(
 			CLIENT.get(String.format("%s/ranks/radios", BASE_URL), 
 					assembleHttpParams(specificParams)));
 	}
