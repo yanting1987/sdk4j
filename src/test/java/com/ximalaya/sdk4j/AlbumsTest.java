@@ -54,6 +54,13 @@ public class AlbumsTest {
 	}
 
 	@Test
+	public void testAllCopyrightAlbumListll() throws XimalayaException {
+		AlbumList albumList =	albumsService.getAllCopyrightAlbumList(3,"言情",new Paging(1,3));
+		//AlbumList albumList =	albumsService.getAllCopyrightAlbumList(3,null,new Paging(1,3));
+		Assert.assertTrue(albumList != null);
+	}
+
+	@Test
 	public void testGetUpdatedAlbums() throws XimalayaException{
 		List<UpdatedAlbum> albums = albumsService.getUpdatedAlbums(new long[]{294573, 331403, 232829});
 		Assert.assertTrue(albums!= null && albums.size() > 0);
@@ -79,7 +86,7 @@ public class AlbumsTest {
 	
 	@Test
 	public void testHotAggregation() throws XimalayaException {
-	    List<AlbumList> albumLists = albumsService.getHotAggregation(3L,4,3);
+	    List<AlbumList> albumLists = albumsService.getHotAggregation(3L, 4, 3);
 		assertTrue(albumLists.size() > 0);
 	}
 }
