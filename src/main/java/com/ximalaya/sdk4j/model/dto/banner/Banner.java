@@ -169,8 +169,7 @@ public class Banner extends XimalayaResponse{
 	public static List<Banner> constructBanners(HttpResponse response) throws XimalayaException {
 		List<Banner> albums = new ArrayList<Banner> ();
 		try {
-			JSONObject jsonObject = response.asJSONObject();
-			JSONArray albumsJsonArray = jsonObject.getJSONArray("banners");
+			JSONArray albumsJsonArray = response.asJSONArray();
 			for(int i = 0; i < albumsJsonArray.size(); i++) {
 				albums.add(new Banner(albumsJsonArray.getJSONObject(i)));
 			}
