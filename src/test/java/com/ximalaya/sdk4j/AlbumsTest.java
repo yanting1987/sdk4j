@@ -55,8 +55,9 @@ public class AlbumsTest {
 
 	@Test
 	public void testAllCopyrightAlbumListll() throws XimalayaException {
-		AlbumList albumList =	albumsService.getAllCopyrightAlbumList(3,"言情",new Paging(1,3));
-		//AlbumList albumList =	albumsService.getAllCopyrightAlbumList(3,null,new Paging(1,3));
+		//AlbumList albumList =	albumsService.getAllCopyrightAlbumList(3,"浪漫言情",new Paging(1,3)); //正网
+		//AlbumList albumList =	albumsService.getAllCopyrightAlbumList(3,"言情",new Paging(1,3)); //测试  标签不一致
+		AlbumList albumList =	albumsService.getAllCopyrightAlbumList(3,null,new Paging(1,3));
 		Assert.assertTrue(albumList != null);
 	}
 
