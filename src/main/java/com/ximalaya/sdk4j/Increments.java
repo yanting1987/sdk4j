@@ -33,7 +33,7 @@ public class Increments extends Ximalaya {
 	 * @param categoryID 分类ID，必填，如果为0则表示所有分类下热门专辑
 	 * @param tagName    标签名，可选
 	 * @param paging     分页参数，可选，不填则为默认值
-	 * @param updateTime 增量更新时间
+	 * @param updateTime 增量更新时间，Unix时间戳毫秒数，update_time最小不能小于距当前时间10分钟
 	 * @return
 	 * @throws XimalayaException 
 	 */
@@ -66,8 +66,8 @@ public class Increments extends Ximalaya {
 	 * 根据专辑ID获取专辑内声音增量（带分页）
 	 * 
 	 * @param albumID 专辑ID
-	 * @param paging
-	 * @param updateTime 更新时间
+	 * @param paging  分页参数，可选，不填则为默认值
+	 * @param updateTime 更新时间，Unix时间戳毫秒数，update_time最小不能小于距当前时间10分钟
 	 * @return
 	 * @throws XimalayaException 
 	 */
@@ -90,8 +90,8 @@ public class Increments extends Ximalaya {
 	 * 获取直播电台列表增量
 	 * @param radioType 1-国家台，2-省市台，3-网络台
 	 * @param provinceCode 省市代码，如果radioType为2则必须指定该参数
-	 * @param paging 分页参数
-	 * @param updateTime 电台更新时间
+	 * @param paging 分页参数，可选，不填则为默认值
+	 * @param updateTime 电台更新时间，Unix时间戳毫秒数，update_time最小不能小于距当前时间10分钟
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -124,6 +124,7 @@ public class Increments extends Ximalaya {
 	 * 根据直播电台ID获取某个直播电台从指定某时刻到现在之间的节目排期增量数据。
 	 * @param radioID 直播电台ID
 	 * @param weekday 0-星期天，1-星期一，...，6-星期六
+	 * @param updateTime 更新时间，Unix时间戳毫秒数，update_time最小不能小于距当前时间10分钟
 	 * @return
 	 * @throws XimalayaException
 	 */
