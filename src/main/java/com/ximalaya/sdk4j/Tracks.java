@@ -80,14 +80,9 @@ public class Tracks extends Ximalaya {
 							assembleHttpParams(specificParams)));
 	}
 
-
-
-
-
-
 	/**
 	 * 获取某个专辑的相关推荐专辑
-	 * @param id 专辑ID
+	 * @param id 声音ID
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -100,8 +95,6 @@ public class Tracks extends Ximalaya {
 				assembleHttpParams(specificParams));
 		return ReletiveAlbum.constructReletiveAlbumList(response);
 	}
-
-
 
 	/**
 	 * 根据一组声音ID批量获取声音

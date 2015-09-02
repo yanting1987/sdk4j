@@ -10,6 +10,12 @@ public class DTOValidateUtil {
 		}
 	}
 	
+	public static void validateCount(long count) {
+		if(count < 0) {
+			throw new IllegalArgumentException("count should >= 0");
+		}
+	}
+	
 	public static void validateCalcDimension(long calcDimension) {
 		if(calcDimension < 0) {
 			throw new IllegalArgumentException("calcDimension should >= 0");

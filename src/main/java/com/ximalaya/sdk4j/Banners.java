@@ -88,4 +88,50 @@ public class Banners extends Ximalaya {
 			CLIENT.get(String.format("%s/banners/discovery_banners", BASE_URL), 
 					assembleHttpParams(specificParams)));
 	}
+	
+	/**
+	 * 获取分类推荐焦点声音图列表
+	 * @param channel	 app的渠道号（对应渠道焦点图配置）
+	 * @param appVersion app版本号
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于Android一般设为2
+	 * @param categoryId 分类ID
+	 * @param count      返回的声音焦点图个数
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Banner> getCategoryTrackBanners(String channel, String appVersion, int imageScale, long categoryId, int count)
+			throws XimalayaException {
+		DTOValidateUtil.validateCategoryID(categoryId);
+		DTOValidateUtil.validateCount(count);
+		HttpParameter[] specificParams = new HttpParameter[5];
+		specificParams[0] = new HttpParameter("channel", channel);
+		specificParams[1] = new HttpParameter("app_version", appVersion);
+		specificParams[2] = new HttpParameter("image_scale", imageScale);
+		specificParams[3] = new HttpParameter("category_id", categoryId);
+		specificParams[4] = new HttpParameter("count", count);
+		return Banner.constructBanners(
+			CLIENT.get(String.format("%s/banners/category_track_banners", BASE_URL), 
+					assembleHttpParams(specificParams)));
+	}
+	
+	/**
+	 * 获取发现页的声音焦点图列表。
+	 * @param channel	 app的渠道号（对应渠道焦点图配置）
+	 * @param appVersion app版本号
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于Android一般设为2
+	 * @param count  	  返回的声音焦点图个数
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Banner> getDiscoveryTrackBanners(String channel, String appVersion, int imageScale, int count) throws XimalayaException {
+		DTOValidateUtil.validateCount(count);
+		HttpParameter[] specificParams = new HttpParameter[4];
+		specificParams[0] = new HttpParameter("channel", channel);
+		specificParams[1] = new HttpParameter("app_version", appVersion);
+		specificParams[2] = new HttpParameter("image_scale", imageScale);
+		specificParams[3] = new HttpParameter("count", count);
+		return Banner.constructBanners(
+			CLIENT.get(String.format("%s/banners/discovery_track_banners", BASE_URL), 
+					assembleHttpParams(specificParams)));
+	}
 }
