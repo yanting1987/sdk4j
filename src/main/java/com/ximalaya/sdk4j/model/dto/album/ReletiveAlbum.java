@@ -14,6 +14,7 @@ public class ReletiveAlbum extends Album{
 	
 	private String recommendSrc;     // 用于统计，推荐来源
     private String recommendTrace;   // 推荐跟踪
+    private long basedRelativeAlbumId;  //相关专辑的id
 
     public ReletiveAlbum() {
 	}
@@ -34,6 +35,14 @@ public class ReletiveAlbum extends Album{
         this.recommendTrace = recommendTrace;
     }
 
+    public long getBasedRelativeAlbumId() {
+        return basedRelativeAlbumId;
+    }
+
+    public void setBasedRelativeAlbumId(long basedRelativeAlbumId) {
+        this.basedRelativeAlbumId = basedRelativeAlbumId;
+    }
+
     public ReletiveAlbum(JSONObject json) throws XimalayaException {
     	super(json);
         init(json);
@@ -43,6 +52,7 @@ public class ReletiveAlbum extends Album{
         if (json != null) {
             recommendSrc = json.getString("recommend_src");
             recommendTrace = json.getString("recommend_trace");
+            basedRelativeAlbumId=json.getLong("based_relative_album_id");
         }
     }
 
@@ -63,5 +73,16 @@ public class ReletiveAlbum extends Album{
         	reletiveAlbumList.setReletiveAlbum(reletiveAlbums);
         }
         return reletiveAlbumList;
+    }
+
+
+
+    public static List<ReletiveAlbum> constructReletiveAlbumOfList(HttpResponse response) throws XimalayaException {
+        List<ReletiveAlbum> reletiveAlbums=new ArrayList<ReletiveAlbum>();
+         JSONArray albumsJsonArray=  response.asJSONArray();
+        for (int i = 0; i < albumsJsonArray.size(); i++) {
+            reletiveAlbums.add(new ReletiveAlbum(albumsJsonArray.getJSONObject(i)));
+        }
+        return reletiveAlbums;
     }
 }

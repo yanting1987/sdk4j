@@ -57,7 +57,7 @@ public class AlbumsTest {
 	public void testAllCopyrightAlbumListll() throws XimalayaException {
 		//AlbumList albumList =	albumsService.getAllCopyrightAlbumList(3,"浪漫言情",new Paging(1,3)); //正网
 		//AlbumList albumList =	albumsService.getAllCopyrightAlbumList(3,"言情",new Paging(1,3)); //测试  标签不一致
-		AlbumList albumList =	albumsService.getAllCopyrightAlbumList(3,null,new Paging(1,3));
+		AlbumList albumList =	albumsService.getAllCopyrightAlbumList(3, null, new Paging(1, 3));
 		Assert.assertTrue(albumList != null);
 	}
 
@@ -89,5 +89,12 @@ public class AlbumsTest {
 	public void testHotAggregation() throws XimalayaException {
 	    List<AlbumList> albumLists = albumsService.getHotAggregation(3L, 4, 3);
 		assertTrue(albumLists.size() > 0);
+	}
+
+
+	@Test
+	public void testRecommondCollection() throws XimalayaException {
+		List<ReletiveAlbum> reletiveAlbumList=	albumsService.getRecommondCollection(2);
+		assertTrue(reletiveAlbumList.size() > 0);
 	}
 }

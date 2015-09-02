@@ -6,8 +6,11 @@ import java.util.List;
 
 
 import com.ximalaya.sdk4j.http.HttpParameter;
+import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
+import com.ximalaya.sdk4j.model.dto.album.ReletiveAlbum;
+import com.ximalaya.sdk4j.model.dto.album.ReletiveAlbumList;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
 import com.ximalaya.sdk4j.util.StringUtil;
@@ -76,7 +79,30 @@ public class Tracks extends Ximalaya {
 				CLIENT.get(String.format("%s/tracks/get_last_play_tracks", BASE_URL),
 							assembleHttpParams(specificParams)));
 	}
-	
+
+
+
+
+
+
+	/**
+	 * 获取某个专辑的相关推荐专辑
+	 * @param id 专辑ID
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public ReletiveAlbumList getReletiveAlbums(Long id) throws XimalayaException {
+		if (id == null || id <= 0) {
+			return new ReletiveAlbumList();
+		}
+		HttpParameter[] specificParams = new HttpParameter[]{new HttpParameter("trackId", id)};
+		HttpResponse response = CLIENT.get(String.format("%s/tracks/relative_album", BASE_URL),
+				assembleHttpParams(specificParams));
+		return ReletiveAlbum.constructReletiveAlbumList(response);
+	}
+
+
+
 	/**
 	 * 根据一组声音ID批量获取声音
 	 * 

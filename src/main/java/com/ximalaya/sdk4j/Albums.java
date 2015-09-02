@@ -240,4 +240,16 @@ public class Albums extends Ximalaya {
        return Album.constructAlbumListList(response);
 
     }
+
+
+    /**
+     * 查询推荐收藏
+     * @param clientOsType
+     * @return
+     */
+    public List<ReletiveAlbum> getRecommondCollection(int clientOsType) throws XimalayaException {
+        HttpResponse response = CLIENT.get(String.format("%s/albums/recommend_collect", BASE_URL),
+                assembleHttpParams());
+        return ReletiveAlbum.constructReletiveAlbumOfList(response);
+    }
 }
