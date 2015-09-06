@@ -94,7 +94,7 @@ public class AlbumsTest {
 
 	@Test
 	public void testRecommondCollection() throws XimalayaException {
-		List<ReletiveAlbum> reletiveAlbumList=	albumsService.getRecommondCollection(2);
+		List<Album> reletiveAlbumList=	albumsService.getRecommondCollection(2);
 		assertTrue(reletiveAlbumList.size() > 0);
 	}
 }

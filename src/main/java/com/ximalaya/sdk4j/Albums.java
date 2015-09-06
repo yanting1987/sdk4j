@@ -247,9 +247,9 @@ public class Albums extends Ximalaya {
      * @param clientOsType
      * @return
      */
-    public List<ReletiveAlbum> getRecommondCollection(int clientOsType) throws XimalayaException {
+    public List<Album> getRecommondCollection(int clientOsType) throws XimalayaException {
         HttpResponse response = CLIENT.get(String.format("%s/albums/recommend_collect", BASE_URL),
                 assembleHttpParams());
-        return ReletiveAlbum.constructReletiveAlbumOfList(response);
+        return Album.constructAlbums(response);
     }
 }
