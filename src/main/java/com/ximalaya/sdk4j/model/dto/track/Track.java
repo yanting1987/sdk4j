@@ -271,21 +271,18 @@ public class Track extends XimalayaResponse {
 		TrackList trackList = new TrackList();
 		JSONObject trackListJsonObject = response.asJSONObject();
 		try {
-			int totalCount = trackListJsonObject.getIntValue("total_count");
-			if(totalCount > 0) {
-				trackList.setTotalCount(totalCount);
-				trackList.setTotalPage(trackListJsonObject.getIntValue("total_page"));
-				trackList.setCurrentPage(trackListJsonObject.getIntValue("current_page"));
-				trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
-				trackList.setTagName(trackListJsonObject.getString("tag_name"));
+			trackList.setTotalCount(trackListJsonObject.getIntValue("total_count"));
+			trackList.setTotalPage(trackListJsonObject.getIntValue("total_page"));
+			trackList.setCurrentPage(trackListJsonObject.getIntValue("current_page"));
+			trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
+			trackList.setTagName(trackListJsonObject.getString("tag_name"));
 				
-				List<Track> tracks = new ArrayList<Track> ();
-				JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
-				for(int i = 0; i < tracksJsonArray.size(); i++) {
-					tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
-				}
-				trackList.setTracks(tracks);
+			List<Track> tracks = new ArrayList<Track> ();
+			JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
+			for(int i = 0; i < tracksJsonArray.size(); i++) {
+				tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
 			}
+			trackList.setTracks(tracks);
 		} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
@@ -295,20 +292,17 @@ public class Track extends XimalayaResponse {
 	public static TrackList constructTrackList(JSONObject trackListJsonObject) throws XimalayaException {
 		TrackList trackList = new TrackList();
 		try {
-			int totalCount = trackListJsonObject.getIntValue("total_count");
-			if(totalCount > 0) {
-				trackList.setTotalCount(totalCount);
-				trackList.setTotalPage(trackListJsonObject.getIntValue("total_page"));
-				trackList.setCurrentPage(trackListJsonObject.getIntValue("current_page"));
-				trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
-				trackList.setTagName(trackListJsonObject.getString("tag_name"));
-				List<Track> tracks = new ArrayList<Track> ();
-				JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
-				for(int i = 0; i < tracksJsonArray.size(); i++) {
-					tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
-				}
-				trackList.setTracks(tracks);
+			trackList.setTotalCount(trackListJsonObject.getIntValue("total_count"));
+			trackList.setTotalPage(trackListJsonObject.getIntValue("total_page"));
+			trackList.setCurrentPage(trackListJsonObject.getIntValue("current_page"));
+			trackList.setCategoryID(trackListJsonObject.getLong("category_id"));
+			trackList.setTagName(trackListJsonObject.getString("tag_name"));
+			List<Track> tracks = new ArrayList<Track> ();
+			JSONArray tracksJsonArray = trackListJsonObject.getJSONArray("tracks");
+			for(int i = 0; i < tracksJsonArray.size(); i++) {
+				tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
 			}
+			trackList.setTracks(tracks);
 		} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
