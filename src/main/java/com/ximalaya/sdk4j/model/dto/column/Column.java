@@ -178,20 +178,17 @@ public class Column extends XimalayaResponse{
 		ColumnList columnList = new ColumnList();
 		JSONObject columnListJsonObject = response.asJSONObject();
  		try {
- 			int totalCount = columnListJsonObject.getIntValue("total_count");
- 			if(totalCount > 0) {
- 				columnList.setTotalPage(columnListJsonObject.getIntValue("total_page"));
- 	 			columnList.setTotalCount(totalCount);
- 	 			columnList.setCurrentPage(columnListJsonObject.getIntValue("current_page"));
- 	 			columnList.setColumnTitle(columnListJsonObject.getString("column_title"));
+ 			columnList.setTotalPage(columnListJsonObject.getIntValue("total_page"));
+ 	 		columnList.setTotalCount(columnListJsonObject.getIntValue("total_count"));
+ 	 		columnList.setCurrentPage(columnListJsonObject.getIntValue("current_page"));
+ 	 		columnList.setColumnTitle(columnListJsonObject.getString("column_title"));
  	 			
- 	 			List<Column> columns = new ArrayList<Column> ();
- 	 			JSONArray albumsJsonArray = columnListJsonObject.getJSONArray("columns");
- 	 			for(int i = 0; i < albumsJsonArray.size(); i++) {
- 	 				columns.add(new Column(albumsJsonArray.getJSONObject(i)));
- 	 			}
- 	 			columnList.setColumns(columns);
- 			}
+ 	 		List<Column> columns = new ArrayList<Column> ();
+ 	 		JSONArray albumsJsonArray = columnListJsonObject.getJSONArray("columns");
+ 	 		for(int i = 0; i < albumsJsonArray.size(); i++) {
+ 	 			columns.add(new Column(albumsJsonArray.getJSONObject(i)));
+ 	 		}
+ 	 		columnList.setColumns(columns);
 		} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}

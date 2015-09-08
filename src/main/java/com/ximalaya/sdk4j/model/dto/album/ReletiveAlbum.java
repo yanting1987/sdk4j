@@ -49,19 +49,16 @@ public class ReletiveAlbum extends Album{
     public static ReletiveAlbumList constructReletiveAlbumList(HttpResponse response) throws XimalayaException {
         ReletiveAlbumList reletiveAlbumList = new ReletiveAlbumList();
         JSONObject albumListJsonObject = response.asJSONObject();
-        int totalCount = albumListJsonObject.getIntValue("total_count");
-        if (totalCount > 0) {
-        	reletiveAlbumList.setTotalPage(albumListJsonObject.getIntValue("total_page"));
-        	reletiveAlbumList.setTotalCount(totalCount);
-        	reletiveAlbumList.setCurrentPage(albumListJsonObject.getIntValue("current_page"));
+        reletiveAlbumList.setTotalPage(albumListJsonObject.getIntValue("total_page"));
+        reletiveAlbumList.setTotalCount(albumListJsonObject.getIntValue("total_count"));
+        reletiveAlbumList.setCurrentPage(albumListJsonObject.getIntValue("current_page"));
         	
-        	List<ReletiveAlbum> reletiveAlbums = new ArrayList<ReletiveAlbum>();
-        	JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("reletive_albums");
-        	for (int i = 0; i < albumsJsonArray.size(); i++) {
-        		reletiveAlbums.add(new ReletiveAlbum(albumsJsonArray.getJSONObject(i)));
-        	}
-        	reletiveAlbumList.setReletiveAlbum(reletiveAlbums);
+        List<ReletiveAlbum> reletiveAlbums = new ArrayList<ReletiveAlbum>();
+        JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("reletive_albums");
+        for (int i = 0; i < albumsJsonArray.size(); i++) {
+        	reletiveAlbums.add(new ReletiveAlbum(albumsJsonArray.getJSONObject(i)));
         }
+       	reletiveAlbumList.setReletiveAlbum(reletiveAlbums);
         return reletiveAlbumList;
     }
 }
