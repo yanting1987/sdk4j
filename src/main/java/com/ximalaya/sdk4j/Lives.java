@@ -69,7 +69,7 @@ public class Lives extends Ximalaya {
 	}
 	
 	/**
-	 * 根据直播电台ID获取昨天、今天和明天共三天的节目时间表
+	 * 根据直播电台ID获取今天的节目时间表
 	 * @param radioID 直播电台ID
 	 * @return
 	 * @throws XimalayaException
@@ -80,7 +80,7 @@ public class Lives extends Ximalaya {
 	}
 	
 	/**
-	 * 根据直播电台ID获取昨天、今天（由weekday决定）和明天共三天的节目时间表
+	 * 根据直播电台ID获取指定weekday的节目时间表
 	 * @param radioID 直播电台ID
 	 * @param weekday 0-星期天，1-星期一，...，6-星期六
 	 * @return
