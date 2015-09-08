@@ -181,7 +181,6 @@ public class Column extends XimalayaResponse{
  			columnList.setTotalPage(columnListJsonObject.getIntValue("total_page"));
  	 		columnList.setTotalCount(columnListJsonObject.getIntValue("total_count"));
  	 		columnList.setCurrentPage(columnListJsonObject.getIntValue("current_page"));
- 	 		columnList.setColumnTitle(columnListJsonObject.getString("column_title"));
  	 			
  	 		List<Column> columns = new ArrayList<Column> ();
  	 		JSONArray albumsJsonArray = columnListJsonObject.getJSONArray("columns");
