@@ -80,3 +80,13 @@ cover_url_large: 所属专辑封面大图
 * 增加发现页焦点图接口
 
 * 增加分类下推荐标签的焦点图接口
+
+### 2015/09/08 william 0.0.10-SNAPSHOT更新:
+
+* 修改Albums接口中返回的AlbumList中，albums字段为空的bug
+
+* 修改Tracks接口中返回的TrackList中，tracks字段为空的bug
+
+* 修改Tracks接口中返回的IncrementTrackList中，tracks字段为空的bug
+
+* 修改Columns接口中返回的ColumnList中，columns字段为空的bug
