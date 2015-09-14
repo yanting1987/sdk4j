@@ -120,7 +120,7 @@ public class Lives extends Ximalaya {
 		specificParameters[0] = new HttpParameter("city_code", cityCode);
 		specificParameters[1] = new HttpParameter("page", page);
 		specificParameters[2] = new HttpParameter("count", count);
-		HttpResponse response= CLIENT.get(String.format("%s/live/get_radios_by_city", "http://127.0.0.1:8084/openapi-gateway-app"),assembleHttpParams(specificParameters) );
+		HttpResponse response= CLIENT.get(String.format("%s/live/get_radios_by_city", BASE_URL),assembleHttpParams(specificParameters) );
 		return Radio.constructRadioList(response);
 	}
 	
