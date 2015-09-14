@@ -4,14 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.ximalaya.sdk4j.http.HttpParameter;
+import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.DTOValidateUtil;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.dto.live.Program;
-import com.ximalaya.sdk4j.model.dto.live.Province;
-import com.ximalaya.sdk4j.model.dto.live.Radio;
-import com.ximalaya.sdk4j.model.dto.live.RadioList;
-import com.ximalaya.sdk4j.model.dto.live.Schedule;
+import com.ximalaya.sdk4j.model.dto.live.*;
 import com.ximalaya.sdk4j.util.StringUtil;
 
 /**
@@ -65,7 +62,7 @@ public class Lives extends Ximalaya {
 		}
 		return Radio.constructRadioList(
 				CLIENT.get(String.format("%s/live/radios", BASE_URL),
-						    assembleHttpParams(specificParams)));
+						assembleHttpParams(specificParams)));
 	}
 	
 	/**
@@ -93,7 +90,7 @@ public class Lives extends Ximalaya {
 		specificParameters[0] = new HttpParameter("radio_id", radioID);
 		specificParameters[1] = new HttpParameter("weekday", weekday);
 		return Schedule.constructSchedules(CLIENT.get(String.format("%s/live/schedules", BASE_URL),
-						    assembleHttpParams(specificParameters)));
+				assembleHttpParams(specificParameters)));
 	}
 	
 	/**
@@ -107,6 +104,24 @@ public class Lives extends Ximalaya {
 		return new Program(
 				CLIENT.get(String.format("%s/live/get_playing_program", BASE_URL), 
 				            assembleHttpParams(new HttpParameter[] { new HttpParameter("radio_id", radioID) })));
+	}
+
+
+	public List<City> getCityByProvince(int provinceCode)throws XimalayaException{
+		HttpParameter[] specificParameters = new HttpParameter[1];
+		specificParameters[0] = new HttpParameter("province_code", provinceCode);
+	    HttpResponse response= CLIENT.get(String.format("%s/live/cities", BASE_URL),assembleHttpParams(specificParameters) );
+		return City.constructCities(response);
+	}
+
+
+	public RadioList getRadiosByCity(int cityCode,int page,int count)throws XimalayaException{
+		HttpParameter[] specificParameters = new HttpParameter[3];
+		specificParameters[0] = new HttpParameter("city_code", cityCode);
+		specificParameters[1] = new HttpParameter("page", page);
+		specificParameters[2] = new HttpParameter("count", count);
+		HttpResponse response= CLIENT.get(String.format("%s/live/get_radios_by_city", "http://127.0.0.1:8084/openapi-gateway-app"),assembleHttpParams(specificParameters) );
+		return Radio.constructRadioList(response);
 	}
 	
 }

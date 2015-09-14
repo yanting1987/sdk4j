@@ -2,16 +2,13 @@ package com.ximalaya.sdk4j;
 
 import java.util.List;
 
+import com.ximalaya.sdk4j.model.dto.live.*;
 import junit.framework.Assert;
 
 import org.junit.Test;
 
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.dto.live.Program;
-import com.ximalaya.sdk4j.model.dto.live.Province;
-import com.ximalaya.sdk4j.model.dto.live.RadioList;
-import com.ximalaya.sdk4j.model.dto.live.Schedule;
 
 public class LivesTest {
 	
@@ -41,6 +38,19 @@ public class LivesTest {
 	public void testGetProgram() throws XimalayaException {
 		Program program = lives.getPlayingProgram(75);
 		Assert.assertNotNull(program != null && program.getProgramName() != null);
+	}
+
+
+	@Test
+	public void testGetCitiesByProvince()throws XimalayaException{
+		List<City> cities=lives.getCityByProvince(320000);
+		Assert.assertNotNull(cities != null && cities.size() != 0);
+	}
+
+	@Test
+	public void testGetRadiosByCity() throws XimalayaException{
+	   RadioList radioList=lives.getRadiosByCity(3201, 1, 10);
+		System.out.println(radioList.getRadios().size());
 	}
 
 }
