@@ -43,4 +43,15 @@ public class LivesTest {
 		Assert.assertNotNull(program != null && program.getProgramName() != null);
 	}
 
+	@Test
+    public void testGetCitiesByProvince() throws XimalayaException {
+        List<City> cities = lives.getCityByProvince(320000);
+        Assert.assertNotNull(cities != null && cities.size() != 0);
+    }
+
+    @Test
+    public void testGetRadiosByCity() throws XimalayaException {
+        RadioList radioList = lives.getRadiosByCity(3201, new Paging(1, 10));
+        Assert.assertNotNull(radioList != null && radioList.getRadios().size() != 0);
+    }
 }
