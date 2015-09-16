@@ -49,7 +49,7 @@ public class LivesTest {
 
     @Test
     public void testGetRadiosByCity() throws XimalayaException {
-        RadioList radioList = lives.getRadiosByCity(3201, 1, 10);
+        RadioList radioList = lives.getRadiosByCity(3201, new Paging(1, 10));
         Assert.assertNotNull(radioList != null && radioList.getRadios().size() != 0);
     }
 

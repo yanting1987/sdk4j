@@ -107,6 +107,12 @@ public class Lives extends Ximalaya {
 	}
 
 
+	/**
+	 * 获取某省份城市列表。
+	 * @param provinceCode	省份code (国家行政规划的省代码)
+	 * @return
+	 * @throws XimalayaException
+	 */
 	public List<City> getCityByProvince(int provinceCode)throws XimalayaException{
 		HttpParameter[] specificParameters = new HttpParameter[1];
 		specificParameters[0] = new HttpParameter("province_code", provinceCode);
@@ -114,12 +120,19 @@ public class Lives extends Ximalaya {
 		return City.constructCities(response);
 	}
 
-
-	public RadioList getRadiosByCity(int cityCode,int page,int count)throws XimalayaException{
+	/**
+	 * 获取某个城市下的电台列表。
+	 * @param cityCode	城市code (国家行政规划的城市代码)
+	 * @param paging	分页参数，可选，不填则为默认值
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public RadioList getRadiosByCity(int cityCode, Paging paging)throws XimalayaException{
+		paging = paging == null ? new Paging() : paging;
 		HttpParameter[] specificParameters = new HttpParameter[3];
 		specificParameters[0] = new HttpParameter("city_code", cityCode);
-		specificParameters[1] = new HttpParameter("page", page);
-		specificParameters[2] = new HttpParameter("count", count);
+		specificParameters[1] = new HttpParameter("page", paging.getPage());
+		specificParameters[2] = new HttpParameter("count", paging.getCount());
 		HttpResponse response= CLIENT.get(String.format("%s/live/get_radios_by_city", BASE_URL),assembleHttpParams(specificParameters) );
 		return Radio.constructRadioList(response);
 	}
