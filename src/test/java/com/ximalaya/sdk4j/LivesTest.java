@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
+import com.ximalaya.sdk4j.model.dto.live.City;
 import com.ximalaya.sdk4j.model.dto.live.Program;
 import com.ximalaya.sdk4j.model.dto.live.Province;
 import com.ximalaya.sdk4j.model.dto.live.RadioList;
