@@ -7,6 +7,7 @@ import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.model.DTOValidateUtil;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
+import com.ximalaya.sdk4j.model.dto.live.City;
 import com.ximalaya.sdk4j.model.dto.live.Program;
 import com.ximalaya.sdk4j.model.dto.live.Province;
 import com.ximalaya.sdk4j.model.dto.live.Radio;
@@ -93,7 +94,7 @@ public class Lives extends Ximalaya {
 		specificParameters[0] = new HttpParameter("radio_id", radioID);
 		specificParameters[1] = new HttpParameter("weekday", weekday);
 		return Schedule.constructSchedules(CLIENT.get(String.format("%s/live/schedules", BASE_URL),
-						    assembleHttpParams(specificParameters)));
+			assembleHttpParams(specificParameters)));
 	}
 	
 	/**
@@ -105,8 +106,8 @@ public class Lives extends Ximalaya {
 	public Program getPlayingProgram(long radioID) throws XimalayaException {
 		DTOValidateUtil.validateRadioID(radioID);
 		return new Program(
-				CLIENT.get(String.format("%s/live/get_playing_program", BASE_URL), 
-				            assembleHttpParams(new HttpParameter[] { new HttpParameter("radio_id", radioID) })));
+			CLIENT.get(String.format("%s/live/get_playing_program", BASE_URL), 
+					assembleHttpParams(new HttpParameter[] { new HttpParameter("radio_id", radioID) })));
 	}
 	
 	/**
@@ -118,8 +119,8 @@ public class Lives extends Ximalaya {
 	public List<City> getCityByProvince(int provinceCode)throws XimalayaException{
 		HttpParameter[] specificParameters = new HttpParameter[1];
 		specificParameters[0] = new HttpParameter("province_code", provinceCode);
-	    HttpResponse response= CLIENT.get(String.format("%s/live/cities", BASE_URL),assembleHttpParams(specificParameters) );
-		return City.constructCities(response);
+		return City.constructCities(
+			CLIENT.get(String.format("%s/live/cities", BASE_URL), assembleHttpParams(specificParameters)));
 	}
 
 	/**
@@ -135,7 +136,7 @@ public class Lives extends Ximalaya {
 		specificParameters[0] = new HttpParameter("city_code", cityCode);
 		specificParameters[1] = new HttpParameter("page", paging.getPage());
 		specificParameters[2] = new HttpParameter("count", paging.getCount());
-		HttpResponse response= CLIENT.get(String.format("%s/live/get_radios_by_city", BASE_URL),assembleHttpParams(specificParameters) );
-		return Radio.constructRadioList(response);
+		return Radio.constructRadioList(
+			CLIENT.get(String.format("%s/live/get_radios_by_city", BASE_URL), assembleHttpParams(specificParameters)));
 	}
 }
