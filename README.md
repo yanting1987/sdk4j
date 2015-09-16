@@ -35,11 +35,11 @@ cover_url_middle: 所属专辑封面中图
 cover_url_large: 所属专辑封面大图
 ```
 
-* 增加getAllCopyrightAlbumList获取带版权的专辑全量接口
+* 新增getAllCopyrightAlbumList获取带版权的专辑全量接口
 
-* 增加了搜索热词接口和搜索联想词接口
+* 新增了搜索热词接口和搜索联想词接口
 
-* 增加了《开放平台API接口文档》
+* 新增了《开放平台API接口文档》
 
 ### 2015/08/17 william 0.0.7-SNAPSHOT更新:
 
@@ -75,11 +75,11 @@ cover_url_large: 所属专辑封面大图
 
 ### 2015/08/27 william 0.0.9-SNAPSHOT更新:
 
-* 增加榜单焦点图接口
+* 新增榜单焦点图接口
 
-* 增加发现页焦点图接口
+* 新增发现页焦点图接口
 
-* 增加分类下推荐标签的焦点图接口
+* 新增分类下推荐标签的焦点图接口
 
 ### 2015/09/08 william 0.0.10-SNAPSHOT更新:
 
@@ -90,3 +90,9 @@ cover_url_large: 所属专辑封面大图
 * 修改Tracks接口中返回的IncrementTrackList中，tracks字段为空的bug
 
 * 修改Columns接口中返回的ColumnList中，columns字段为空的bug
+
+### 2015/09/16 william 0.0.11-SNAPSHOT更新:
+
+* 新增根据省分代码获取某省份城市列表
+
+* 新增根据城市代码获取某个城市下的电台列表
