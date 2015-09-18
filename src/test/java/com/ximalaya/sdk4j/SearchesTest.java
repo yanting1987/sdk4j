@@ -49,7 +49,8 @@ static	Searches searchesService = new Searches();
 
 	@Test
 	public void testSearchRadios() throws XimalayaException {
-		RadioList radioList=searchesService.searchRadios("郭德纲", 2, 1);
+		//RadioList radioList=searchesService.searchRadios("郭德纲", 2, 1);
+		RadioList radioList=searchesService.searchRadios("上海", 2, 1);
 		Assert.assertTrue(!radioList.getRadios().isEmpty());
 	}
 

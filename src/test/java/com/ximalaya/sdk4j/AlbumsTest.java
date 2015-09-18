@@ -25,7 +25,7 @@ public class AlbumsTest {
 	
 	@Test
 	public void testBatchGetAlbums() throws XimalayaException {
-		List<Album> albums = albumsService.batchGetAlbums(new long[]{269483, 414117, 239463});
+		List<Album> albums = albumsService.batchGetAlbums(new long[]{88065, 414117, 239463});
 		Assert.assertTrue(albums != null && albums.size() > 0);
 	}
 	
@@ -69,7 +69,8 @@ public class AlbumsTest {
 
 	@Test
 	public void testReletiveAlbum() throws XimalayaException {
-		ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(462375L);
+		//ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(462375L);  //线上
+		ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(85646L);    //测试
 		Assert.assertTrue(reletiveAlbumList!= null && reletiveAlbumList.getReletiveAlbum().size()> 0);
 	}
 	
@@ -90,7 +91,6 @@ public class AlbumsTest {
 	    List<AlbumList> albumLists = albumsService.getHotAggregation(3L, 4, 3);
 		assertTrue(albumLists.size() > 0);
 	}
-
 
 	@Test
 	public void testRecommondCollection() throws XimalayaException {
