@@ -323,6 +323,20 @@ public class Track extends XimalayaResponse {
 		return tracks;
 	}
 	
+	public static List<Track> constructTrackContents(HttpResponse response) throws XimalayaException {
+		List<Track> tracks = new ArrayList<Track> ();
+		JSONArray tracksJsonArray = null;
+		try {
+			tracksJsonArray = response.asJSONArray();
+			for(int i = 0; i < tracksJsonArray.size(); i++) {
+				tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
+			}
+		} catch (JSONException jsone) {
+			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
+		}
+		return tracks;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

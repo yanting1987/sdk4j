@@ -16,6 +16,12 @@ public class DTOValidateUtil {
 		}
 	}
 	
+	public static void validateBannerID(long BannerID) {
+		if(BannerID < 0) {
+			throw new IllegalArgumentException("BannerID should >= 0");
+		}
+	}
+	
 	public static void validateCalcDimension(long calcDimension) {
 		if(calcDimension < 0) {
 			throw new IllegalArgumentException("calcDimension should >= 0");

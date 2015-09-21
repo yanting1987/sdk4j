@@ -5,7 +5,9 @@ import java.util.List;
 import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.model.DTOValidateUtil;
 import com.ximalaya.sdk4j.model.XimalayaException;
+import com.ximalaya.sdk4j.model.dto.album.Album;
 import com.ximalaya.sdk4j.model.dto.banner.Banner;
+import com.ximalaya.sdk4j.model.dto.track.Track;
 
 public class Banners extends Ximalaya {
 	private static final long serialVersionUID = -8651526987345601726L;
@@ -132,6 +134,38 @@ public class Banners extends Ximalaya {
 		specificParams[3] = new HttpParameter("count", count);
 		return Banner.constructBanners(
 			CLIENT.get(String.format("%s/banners/discovery_track_banners", BASE_URL), 
+					assembleHttpParams(specificParams)));
+	}
+	
+	/**
+	 * 根据多声音焦点图ID获取声音列表。
+	 * @param trackBannerID	多声音焦点图ID
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Track> getBannerTracks(int trackBannerID) throws XimalayaException {
+		DTOValidateUtil.validateBannerID(trackBannerID);
+		HttpParameter[] specificParams = new HttpParameter[2];
+		specificParams[0] = new HttpParameter("banner_id", trackBannerID);
+		specificParams[1] = new HttpParameter("banner_content_type", 7);
+		return Track.constructTrackContents(
+			CLIENT.get(String.format("%s/banners/get_content_list", BASE_URL), 
+					assembleHttpParams(specificParams)));
+	}
+	
+	/**
+	 * 根据多专辑焦点图ID专辑列表。
+	 * @param albumBannerID 多专辑焦点图ID
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Album> getBannerAlbums(int albumBannerID) throws XimalayaException {
+		DTOValidateUtil.validateBannerID(albumBannerID);
+		HttpParameter[] specificParams = new HttpParameter[2];
+		specificParams[0] = new HttpParameter("banner_id", albumBannerID);
+		specificParams[1] = new HttpParameter("banner_content_type", 6);
+		return Album.constructAlbums(
+			CLIENT.get(String.format("%s/banners/get_content_list", BASE_URL), 
 					assembleHttpParams(specificParams)));
 	}
 }
