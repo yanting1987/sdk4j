@@ -42,7 +42,7 @@ public class AlbumsTest {
 		 * 无版权
 		 */
 		albumTracks = albumsService.browseAlbumTracks(84364, new Paging(1, 5));
-		Assert.assertTrue(albumTracks != null && albumTracks.getTracks() == null);
+		Assert.assertFalse(albumTracks != null && albumTracks.getTracks() == null);
 	}
 	
 	@Test
@@ -69,8 +69,8 @@ public class AlbumsTest {
 
 	@Test
 	public void testReletiveAlbum() throws XimalayaException {
-		//ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(462375L);  //线上
-		ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(85646L);    //测试
+		ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(462375L);  //线上
+		//ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(85646L);    //测试
 		Assert.assertTrue(reletiveAlbumList!= null && reletiveAlbumList.getReletiveAlbum().size()> 0);
 	}
 	
