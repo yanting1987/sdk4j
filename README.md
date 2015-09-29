@@ -12,7 +12,7 @@ git clone https://github.com/jxqlovejava/sdk4j.git
 ```bash
 mvn clean package -Dmaven.test.skip=true
 ```
-> 3、在引用.jar文件的项目的classpath下配置conf.properties
+> 3、在引用.jar文件的项目的classpath下配置config.properties
 ```bash
 ximalaya.openapi.appKey=[需要申请]
 ximalaya.openapi.appSecret=[需要申请]
