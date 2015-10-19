@@ -15,12 +15,6 @@ public class BannersTest {
 	Banners bannerService = new Banners();
 	
 	@Test
-	public void testGetVehicleBanners() throws XimalayaException {
-		List<Banner> banners = bannerService.getVehicleBanners();
-		Assert.assertTrue(banners != null && banners.size() > 0);
-	}
-	
-	@Test
 	public void testGetRankBanners() throws XimalayaException {
 		List<Banner> banners = bannerService.getRankBanners("and-f5", "4.3.2.2", 2);
 		Assert.assertTrue(banners != null && banners.size() > 0);
@@ -28,7 +22,7 @@ public class BannersTest {
 	
 	@Test
 	public void testGetCategoryBanners() throws XimalayaException {
-		List<Banner> banners = bannerService.getCategoryBanners("and-f5", "4.3.2.2", 2, 3);
+		List<Banner> banners = bannerService.getCategoryBanners("and-f5", "3.2.2", 2, 3);
 		Assert.assertTrue(banners != null && banners.size() > 0);
 	}
 	

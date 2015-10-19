@@ -24,7 +24,7 @@ public class SignatureUtil {
 		}
 		
 		Map<String, String> paramsMap = new TreeMap<String, String> ();
-		int len = httpParams.length - 1;	//排除sig参数
+		int len = httpParams.length - 1;		//排除sig参数
 		for(int i = 0; i < len; i++) {
 			HttpParameter curParam = httpParams[i];
 			paramsMap.put(curParam.getName(), curParam.getValue());

@@ -50,7 +50,7 @@ public class SuggestWordList extends XimalayaResponse{
 		super();
 		init(json);
 	}
-	
+
 	public SuggestWordList(HttpResponse response) throws XimalayaException {
 		init(response.asJSONObject());
 	}

@@ -187,14 +187,14 @@ public class Album extends XimalayaResponse {
  	 		albumList.setCurrentPage(albumListJsonObject.getIntValue("current_page"));
  	 		albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
  	 		albumList.setTagName(albumListJsonObject.getString("tag_name"));
- 	 			
+
  	 		List<Album> albums = new ArrayList<Album> ();
  	 		JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");
  	 		for(int i = 0; i < albumsJsonArray.size(); i++) {
  	 			albums.add(new Album(albumsJsonArray.getJSONObject(i)));
  	 		}
- 	 		albumList.setAlbums(albums);
-		} catch(JSONException jsone) {
+ 	 		albumList.setAlbums(albums);		
+ 	 	} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
 		return albumList;

@@ -59,8 +59,8 @@ public class HotWord extends XimalayaResponse {
 	
 	public static List<HotWord> constructHotWords(HttpResponse response) throws XimalayaException {
 		List<HotWord> hotWords = new ArrayList<HotWord> ();
-		JSONArray hotWordJsonArray = response.asJSONArray();
 	 	try {
+	 	 	JSONArray hotWordJsonArray = response.asJSONArray();
 	 	 	for(int i = 0; i < hotWordJsonArray.size(); i++) {
 	 	 		hotWords.add(new HotWord(hotWordJsonArray.getJSONObject(i)));
 	 	 	}

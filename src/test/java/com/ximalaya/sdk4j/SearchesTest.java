@@ -25,7 +25,6 @@ static	Searches searchesService = new Searches();
 	}
 
 	@Test
-
 	public void testSearchTracks() throws XimalayaException {
 		TrackList trackList = searchesService.searchTrackList("郭德纲", 0, new Paging());
 		Assert.assertTrue(trackList != null && trackList.getTracks() != null && !trackList.getTracks().isEmpty());
@@ -36,7 +35,7 @@ static	Searches searchesService = new Searches();
 		List<HotWord> hotWordList = searchesService.searchHotWords(10);
 		Assert.assertTrue(hotWordList != null && !hotWordList.isEmpty());
 	}
-
+	
 	@Test
 	public void testSearchSuggestWords() throws XimalayaException {
 		SuggestWordList suggestWordList = searchesService.searchSuggestWords("郭");

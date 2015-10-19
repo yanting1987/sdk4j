@@ -74,8 +74,7 @@ public class Lives extends Ximalaya {
 	}
 	
 	/**
-	 * 根据直播电台ID获取当天节目时间表
-	 * @param radioID 直播电台ID
+	 * 根据直播电台ID获取当天节目时间表	 * @param radioID 直播电台ID
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -85,8 +84,7 @@ public class Lives extends Ximalaya {
 	}
 	
 	/**
-	 * 获取某个直播电台某一天的节目排期的列表。
-	 * @param radioID 直播电台ID
+	 * 根据直播电台ID获取当天节目时间表	 * @param radioID 直播电台ID
 	 * @param weekday 0-星期天，1-星期一，...，6-星期六
 	 * @return
 	 * @throws XimalayaException
@@ -98,8 +96,7 @@ public class Lives extends Ximalaya {
 		specificParameters[0] = new HttpParameter("radio_id", radioID);
 		specificParameters[1] = new HttpParameter("weekday", weekday);
 		return Schedule.constructSchedules(CLIENT.get(String.format("%s/live/schedules", BASE_URL),
-				assembleHttpParams(specificParameters)));
-	}
+						    assembleHttpParams(specificParameters)));	}
 	
 	/**
 	 * 根据直播电台ID获取对应直播电台正在直播的节目详情
@@ -110,8 +107,8 @@ public class Lives extends Ximalaya {
 	public Program getPlayingProgram(long radioID) throws XimalayaException {
 		DTOValidateUtil.validateRadioID(radioID);
 		return new Program(
-				CLIENT.get(String.format("%s/live/get_playing_program", BASE_URL), 
-				            assembleHttpParams(new HttpParameter[] { new HttpParameter("radio_id", radioID) })));
+			CLIENT.get(String.format("%s/live/get_playing_program", BASE_URL), 
+					assembleHttpParams(new HttpParameter[] { new HttpParameter("radio_id", radioID) })));
 	}
 
 
