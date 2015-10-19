@@ -11,6 +11,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.live.City;
 import com.ximalaya.sdk4j.model.dto.live.Program;
 import com.ximalaya.sdk4j.model.dto.live.Province;
+import com.ximalaya.sdk4j.model.dto.live.Radio;
 import com.ximalaya.sdk4j.model.dto.live.RadioList;
 import com.ximalaya.sdk4j.model.dto.live.Schedule;
 
@@ -59,6 +60,7 @@ public class LivesTest {
 
     @Test
     public void testBatchGetRadios() throws XimalayaException {
-//    	lives.batchGetRadios(radiosIDs)
+    	List<Radio> radios = lives.batchGetRadios(new long[] { 12 });
+    	Assert.assertTrue(radios != null && radios.size() == 1 && !radios.get(0).getRadioName().isEmpty());
     }
 }
