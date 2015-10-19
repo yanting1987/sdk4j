@@ -2,25 +2,20 @@ package com.ximalaya.sdk4j;
 
 import java.util.List;
 
-import com.ximalaya.sdk4j.model.dto.live.*;
 import junit.framework.Assert;
 
 import org.junit.Test;
 
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
-<<<<<<< HEAD
-=======
 import com.ximalaya.sdk4j.model.dto.live.City;
 import com.ximalaya.sdk4j.model.dto.live.Program;
 import com.ximalaya.sdk4j.model.dto.live.Province;
 import com.ximalaya.sdk4j.model.dto.live.RadioList;
 import com.ximalaya.sdk4j.model.dto.live.Schedule;
->>>>>>> 2beb4f95572b69de5931495c20cd87def6072182
 
 public class LivesTest {
 
-<<<<<<< HEAD
     Lives lives = new Lives();
 
     @Test
@@ -50,10 +45,7 @@ public class LivesTest {
     }
 
 
-    @Test
-=======
 	@Test
->>>>>>> 2beb4f95572b69de5931495c20cd87def6072182
     public void testGetCitiesByProvince() throws XimalayaException {
         List<City> cities = lives.getCityByProvince(320000);
         Assert.assertNotNull(cities != null && cities.size() != 0);
@@ -64,12 +56,9 @@ public class LivesTest {
         RadioList radioList = lives.getRadiosByCity(3201, new Paging(1, 10));
         Assert.assertNotNull(radioList != null && radioList.getRadios().size() != 0);
     }
-<<<<<<< HEAD
 
     @Test
     public void testBatchGetRadios() throws XimalayaException {
 //    	lives.batchGetRadios(radiosIDs)
     }
-=======
->>>>>>> 2beb4f95572b69de5931495c20cd87def6072182
 }
