@@ -1,5 +1,6 @@
 package com.ximalaya.sdk4j;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +9,12 @@ import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.DTOValidateUtil;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.dto.live.*;
+import com.ximalaya.sdk4j.model.dto.live.City;
+import com.ximalaya.sdk4j.model.dto.live.Program;
+import com.ximalaya.sdk4j.model.dto.live.Province;
+import com.ximalaya.sdk4j.model.dto.live.Radio;
+import com.ximalaya.sdk4j.model.dto.live.RadioList;
+import com.ximalaya.sdk4j.model.dto.live.Schedule;
 import com.ximalaya.sdk4j.util.StringUtil;
 
 /**
@@ -22,6 +28,8 @@ public class Lives extends Ximalaya {
 	 * 
 	 */
 	private static final long serialVersionUID = 523186493386608032L;
+	
+	private static final List<Radio> EMPTY_RADIOS = new ArrayList<Radio> (0);
 	
 	/**
 	 * 获取直播省市列表
@@ -137,4 +145,14 @@ public class Lives extends Ximalaya {
 		return Radio.constructRadioList(response);
 	}
 	
+	public List<Radio> batchGetRadios(long[] radiosIDs) throws XimalayaException {
+		if(radiosIDs == null || radiosIDs.length == 0) {
+			return EMPTY_RADIOS; 
+		}
+		
+		HttpParameter[] specificParams = new HttpParameter[] { new HttpParameter("ids", StringUtil.join(radiosIDs, ",")) };
+		return Radio.constructRadios(
+				CLIENT.get(String.format("%s/live/get_radios_by_ids", BASE_URL),
+						   assembleHttpParams(specificParams)).asJSONObject().getJSONArray("radios"));
+	}
 }

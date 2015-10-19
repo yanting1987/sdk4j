@@ -53,4 +53,8 @@ public class LivesTest {
         Assert.assertNotNull(radioList != null && radioList.getRadios().size() != 0);
     }
 
+    @Test
+    public void testBatchGetRadios() throws XimalayaException {
+//    	lives.batchGetRadios(radiosIDs)
+    }
 }
