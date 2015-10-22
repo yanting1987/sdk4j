@@ -207,7 +207,7 @@ public class HttpClient implements java.io.Serializable {
 			Header[] resHeader = method.getResponseHeaders();
 			responseCode = method.getStatusCode();
 			LOG.debug("Response:");
-			LOG.debug("https StatusCode:" + String.valueOf(responseCode));
+			LOG.debug("http StatusCode:" + String.valueOf(responseCode));
 			
 			for (Header header : resHeader) {
 				LOG.debug(header.getName() + ":" + header.getValue());
