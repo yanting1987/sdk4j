@@ -234,7 +234,7 @@ public class Banners extends Ximalaya {
 	}
 	
 	/**
-	 * 根据多声音焦点图ID获取声音列表。
+	 * 根据多声音焦点图ID获取声音列表
 	 * @param trackBannerID	多声音焦点图ID
 	 * @return
 	 * @throws XimalayaException
@@ -250,7 +250,7 @@ public class Banners extends Ximalaya {
 	}
 	
 	/**
-	 * 根据多专辑焦点图ID专辑列表。
+	 * 根据多专辑焦点图ID获取专辑列表
 	 * @param albumBannerID 多专辑焦点图ID
 	 * @return
 	 * @throws XimalayaException
