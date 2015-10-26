@@ -6,16 +6,16 @@ import java.io.Serializable;
 import java.util.List;
 
 
-public class ReletiveAlbumList extends AbstractPageResult implements Serializable {
+public class RelativeAlbumList extends AbstractPageResult implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private List<ReletiveAlbum> reletiveAlbum;    // 推荐专辑列表
+	private List<RelativeAlbum> reletiveAlbum;    // 推荐专辑列表
 
-	public List<ReletiveAlbum> getReletiveAlbum() {
+	public List<RelativeAlbum> getReletiveAlbum() {
 		return reletiveAlbum;
 	}
 
-	public void setReletiveAlbum(List<ReletiveAlbum> reletiveAlbum) {
+	public void setReletiveAlbum(List<RelativeAlbum> reletiveAlbum) {
 		this.reletiveAlbum = reletiveAlbum;
 	}
 }

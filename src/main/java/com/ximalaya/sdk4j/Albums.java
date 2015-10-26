@@ -188,14 +188,14 @@ public class Albums extends Ximalaya {
      * @return
      * @throws XimalayaException
      */
-    public ReletiveAlbumList getReletiveAlbums(Long id) throws XimalayaException {
+    public RelativeAlbumList getRelativeAlbums(Long id) throws XimalayaException {
     	if (id == null || id <= 0) {
-            return new ReletiveAlbumList();
+            return new RelativeAlbumList();
         }
     	HttpParameter[] specificParams = new HttpParameter[]{new HttpParameter("albumId", id)};
         HttpResponse response = CLIENT.get(String.format("%s/albums/relative_album", BASE_URL),
              assembleHttpParams(specificParams));
-        return ReletiveAlbum.constructReletiveAlbumList(response);
+        return RelativeAlbum.constructReletiveAlbumList(response);
     }
 
 

@@ -69,7 +69,7 @@ public class AlbumsTest {
 
 	@Test
 	public void testReletiveAlbum() throws XimalayaException {
-		ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(462375L);  //线上
+		RelativeAlbumList reletiveAlbumList=  albumsService.getRelativeAlbums(462375L);  //线上
 		//ReletiveAlbumList reletiveAlbumList=  albumsService.getReletiveAlbums(85646L);    //测试
 		Assert.assertTrue(reletiveAlbumList!= null && reletiveAlbumList.getReletiveAlbum().size()> 0);
 	}

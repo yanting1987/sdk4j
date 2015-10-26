@@ -9,8 +9,8 @@ import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.dto.album.ReletiveAlbum;
-import com.ximalaya.sdk4j.model.dto.album.ReletiveAlbumList;
+import com.ximalaya.sdk4j.model.dto.album.RelativeAlbum;
+import com.ximalaya.sdk4j.model.dto.album.RelativeAlbumList;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
 import com.ximalaya.sdk4j.util.StringUtil;
@@ -86,14 +86,14 @@ public class Tracks extends Ximalaya {
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public ReletiveAlbumList getReletiveAlbums(Long id) throws XimalayaException {
+	public RelativeAlbumList getRelativeAlbums(Long id) throws XimalayaException {
 		if (id == null || id <= 0) {
-			return new ReletiveAlbumList();
+			return new RelativeAlbumList();
 		}
 		HttpParameter[] specificParams = new HttpParameter[]{new HttpParameter("trackId", id)};
 		HttpResponse response = CLIENT.get(String.format("%s/tracks/relative_album", BASE_URL),
 				assembleHttpParams(specificParams));
-		return ReletiveAlbum.constructReletiveAlbumList(response);
+		return RelativeAlbum.constructReletiveAlbumList(response);
 	}
 
 	/**

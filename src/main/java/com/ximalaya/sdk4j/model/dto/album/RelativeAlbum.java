@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ReletiveAlbum extends Album{
+public class RelativeAlbum extends Album{
 	private static final long serialVersionUID = 1L;
 	
 	private String recommendSrc;     // 用于统计，推荐来源
     private String recommendTrace;   // 推荐跟踪
     private long basedRelativeAlbumId;  //相关专辑的id
 
-    public ReletiveAlbum() {
+    public RelativeAlbum() {
 	}
     
     public String getRecommendSrc() {
@@ -43,7 +43,7 @@ public class ReletiveAlbum extends Album{
         this.basedRelativeAlbumId = basedRelativeAlbumId;
     }
 
-    public ReletiveAlbum(JSONObject json) throws XimalayaException {
+    public RelativeAlbum(JSONObject json) throws XimalayaException {
     	super(json);
         init(json);
     }
@@ -56,17 +56,17 @@ public class ReletiveAlbum extends Album{
         }
     }
 
-    public static ReletiveAlbumList constructReletiveAlbumList(HttpResponse response) throws XimalayaException {
-        ReletiveAlbumList reletiveAlbumList = new ReletiveAlbumList();
+    public static RelativeAlbumList constructReletiveAlbumList(HttpResponse response) throws XimalayaException {
+        RelativeAlbumList reletiveAlbumList = new RelativeAlbumList();
         JSONObject albumListJsonObject = response.asJSONObject();
         reletiveAlbumList.setTotalPage(albumListJsonObject.getIntValue("total_page"));
         reletiveAlbumList.setTotalCount(albumListJsonObject.getIntValue("total_count"));
         reletiveAlbumList.setCurrentPage(albumListJsonObject.getIntValue("current_page"));
         	
-        List<ReletiveAlbum> reletiveAlbums = new ArrayList<ReletiveAlbum>();
+        List<RelativeAlbum> reletiveAlbums = new ArrayList<RelativeAlbum>();
         JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("reletive_albums");
         for (int i = 0; i < albumsJsonArray.size(); i++) {
-        	reletiveAlbums.add(new ReletiveAlbum(albumsJsonArray.getJSONObject(i)));
+        	reletiveAlbums.add(new RelativeAlbum(albumsJsonArray.getJSONObject(i)));
         }
        	reletiveAlbumList.setReletiveAlbum(reletiveAlbums);
         return reletiveAlbumList;
@@ -74,11 +74,11 @@ public class ReletiveAlbum extends Album{
 
 
 
-    public static List<ReletiveAlbum> constructReletiveAlbumOfList(HttpResponse response) throws XimalayaException {
-        List<ReletiveAlbum> reletiveAlbums=new ArrayList<ReletiveAlbum>();
+    public static List<RelativeAlbum> constructReletiveAlbumOfList(HttpResponse response) throws XimalayaException {
+        List<RelativeAlbum> reletiveAlbums=new ArrayList<RelativeAlbum>();
          JSONArray albumsJsonArray=  response.asJSONArray();
         for (int i = 0; i < albumsJsonArray.size(); i++) {
-            reletiveAlbums.add(new ReletiveAlbum(albumsJsonArray.getJSONObject(i)));
+            reletiveAlbums.add(new RelativeAlbum(albumsJsonArray.getJSONObject(i)));
         }
         return reletiveAlbums;
     }

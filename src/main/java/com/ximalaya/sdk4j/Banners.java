@@ -11,12 +11,119 @@ import com.ximalaya.sdk4j.model.dto.track.Track;
 
 public class Banners extends Ximalaya {
 	private static final long serialVersionUID = -8651526987345601726L;
+	
+	private static final String DEFAULT_CHANNEL = "and-f5";
+	private static final String DEFAULT_APP_VERSION = "4.3.2.2";
+	private static final Integer DEFAULT_IMAGE_SCALE = 2;
 
 	/**
+	 * 获取榜单的默认焦点图列表。
+	 * @param channel	 app的渠道号（对应渠道焦点图配置），默认值为“and-f5”
+	 * @param appVersion app版本号，默认值为“4.3.2.2”
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于android一般设置scale=2，默认值为2
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Banner> getRankBanners() throws XimalayaException {
+		HttpParameter[] specificParams = new HttpParameter[3];
+		specificParams[0] = new HttpParameter("channel", DEFAULT_CHANNEL);
+		specificParams[1] = new HttpParameter("app_version", DEFAULT_APP_VERSION);
+		specificParams[2] = new HttpParameter("image_scale", DEFAULT_IMAGE_SCALE);
+		return Banner.constructBanners(
+			CLIENT.get(String.format("%s/banners/rank_banners", BASE_URL), 
+					assembleHttpParams(specificParams)));
+	}
+	
+	/**
+	 * 获取分类推荐的默认焦点图列表。内容类型：暂时仅专辑(album)
+	 * @param channel	 app的渠道号（对应渠道焦点图配置），默认值为“and-f5”
+	 * @param appVersion app版本号，默认值为“4.3.2.2”
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于android一般设置scale=2，默认值为2
+	 * @param categoryId 分类ID
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Banner> getCategoryBanners(long categoryId) throws XimalayaException {
+		DTOValidateUtil.validateCategoryID(categoryId);
+		HttpParameter[] specificParams = new HttpParameter[5];
+		specificParams[0] = new HttpParameter("channel", DEFAULT_CHANNEL);
+		specificParams[1] = new HttpParameter("app_version", DEFAULT_APP_VERSION);
+		specificParams[2] = new HttpParameter("image_scale", DEFAULT_IMAGE_SCALE);
+		specificParams[3] = new HttpParameter("category_id", categoryId);
+		specificParams[4] = new HttpParameter("content_type", "album");
+		return Banner.constructBanners(
+			CLIENT.get(String.format("%s/banners/category_banners", BASE_URL), 
+					assembleHttpParams(specificParams)));
+	}
+	
+	/**
+	 * 获取发现页的默认焦点图列表。
+	 * @param channel	 app的渠道号（对应渠道焦点图配置），默认值为“and-f5”
+	 * @param appVersion app版本号，默认值为“4.3.2.2”
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于android一般设置scale=2，默认值为2
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Banner> getDiscoveryBanners() throws XimalayaException {
+		HttpParameter[] specificParams = new HttpParameter[3];
+		specificParams[0] = new HttpParameter("channel", DEFAULT_CHANNEL);
+		specificParams[1] = new HttpParameter("app_version", DEFAULT_APP_VERSION);
+		specificParams[2] = new HttpParameter("image_scale", DEFAULT_IMAGE_SCALE);
+		return Banner.constructBanners(
+			CLIENT.get(String.format("%s/banners/discovery_banners", BASE_URL), 
+					assembleHttpParams(specificParams)));
+	}
+	
+	/**
+	 * 获取分类推荐的默认焦点声音图列表
+	 * @param channel	 app的渠道号（对应渠道焦点图配置），默认值为“and-f5”
+	 * @param appVersion app版本号，默认值为“4.3.2.2”
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于android一般设置scale=2，默认值为2
+	 * @param categoryId 分类ID
+	 * @param count      返回的声音焦点图个数
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Banner> getCategoryTrackBanners(long categoryId, int count) throws XimalayaException {
+		DTOValidateUtil.validateCategoryID(categoryId);
+		DTOValidateUtil.validateCount(count);
+		HttpParameter[] specificParams = new HttpParameter[5];
+		specificParams[0] = new HttpParameter("channel", DEFAULT_CHANNEL);
+		specificParams[1] = new HttpParameter("app_version", DEFAULT_APP_VERSION);
+		specificParams[2] = new HttpParameter("image_scale", DEFAULT_IMAGE_SCALE);
+		specificParams[3] = new HttpParameter("category_id", categoryId);
+		specificParams[4] = new HttpParameter("count", count);
+		return Banner.constructBanners(
+			CLIENT.get(String.format("%s/banners/category_track_banners", BASE_URL), 
+					assembleHttpParams(specificParams)));
+	}
+	
+	/**
+	 * 获取发现页的声音焦点图列表。
+	 * @param channel	 app的渠道号（对应渠道焦点图配置），默认值为“and-f5”
+	 * @param appVersion app版本号，默认值为“4.3.2.2”
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于android一般设置scale=2，默认值为2
+	 * @param count  	  返回的声音焦点图个数
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Banner> getDiscoveryTrackBanners(int count) throws XimalayaException {
+		DTOValidateUtil.validateCount(count);
+		HttpParameter[] specificParams = new HttpParameter[4];
+		specificParams[0] = new HttpParameter("channel", DEFAULT_CHANNEL);
+		specificParams[1] = new HttpParameter("app_version", DEFAULT_APP_VERSION);
+		specificParams[2] = new HttpParameter("image_scale", DEFAULT_IMAGE_SCALE);
+		specificParams[3] = new HttpParameter("count", count);
+		return Banner.constructBanners(
+			CLIENT.get(String.format("%s/banners/discovery_track_banners", BASE_URL), 
+					assembleHttpParams(specificParams)));
+	}
+	
+	/**
 	 * 获取榜单的焦点图列表。
-	 * @param channel	 app的渠道号（对应渠道焦点图配置）
-	 * @param appVersion app版本号
-	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于Android一般设为2
+	 * @param channel	 app的渠道号（对应渠道焦点图配置），默认值为“and-f5”
+	 * @param appVersion app版本号，默认值为“4.3.2.2”
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于android一般设置scale=2，默认值为2
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -35,9 +142,9 @@ public class Banners extends Ximalaya {
 	
 	/**
 	 * 获取分类推荐焦点图列表。内容类型：暂时仅专辑(album)
-	 * @param channel	 app的渠道号（对应渠道焦点图配置）
-	 * @param appVersion app版本号
-	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于Android一般设为2
+	 * @param channel	 app的渠道号（对应渠道焦点图配置），默认值为“and-f5”
+	 * @param appVersion app版本号，默认值为“4.3.2.2”
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于android一般设置scale=2，默认值为2
 	 * @param categoryId 分类ID
 	 * @return
 	 * @throws XimalayaException
@@ -61,9 +168,9 @@ public class Banners extends Ximalaya {
 	
 	/**
 	 * 获取发现页的焦点图列表。
-	 * @param channel	 app的渠道号（对应渠道焦点图配置）
-	 * @param appVersion app版本号
-	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于Android一般设为2
+	 * @param channel	 app的渠道号（对应渠道焦点图配置），默认值为“and-f5”
+	 * @param appVersion app版本号，默认值为“4.3.2.2”
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于android一般设置scale=2，默认值为2
 	 * @return
 	 * @throws XimalayaException
 	 */
@@ -82,9 +189,9 @@ public class Banners extends Ximalaya {
 	
 	/**
 	 * 获取分类推荐焦点声音图列表
-	 * @param channel	 app的渠道号（对应渠道焦点图配置）
-	 * @param appVersion app版本号
-	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于Android一般设为2
+	 * @param channel	 app的渠道号（对应渠道焦点图配置），默认值为“and-f5”
+	 * @param appVersion app版本号，默认值为“4.3.2.2”
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于android一般设置scale=2，默认值为2
 	 * @param categoryId 分类ID
 	 * @param count      返回的声音焦点图个数
 	 * @return
@@ -107,9 +214,9 @@ public class Banners extends Ximalaya {
 	
 	/**
 	 * 获取发现页的声音焦点图列表。
-	 * @param channel	 app的渠道号（对应渠道焦点图配置）
-	 * @param appVersion app版本号
-	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于Android一般设为2
+	 * @param channel	 app的渠道号（对应渠道焦点图配置），默认值为“and-f5”
+	 * @param appVersion app版本号，默认值为“4.3.2.2”
+	 * @param imageScale 控制焦点图图片大小参数，scale=2为iphone适配类型，scale=3为iphone6适配机型，对于android一般设置scale=2，默认值为2
 	 * @param count  	  返回的声音焦点图个数
 	 * @return
 	 * @throws XimalayaException
