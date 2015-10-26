@@ -96,14 +96,15 @@ public class Searches extends Ximalaya {
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public RadioList searchRadios(String q, int pageSize, int page) throws XimalayaException {
+	public RadioList searchRadios(String q, Paging paging) throws XimalayaException {
+		paging = paging == null ? new Paging() : paging;
 		HttpResponse response= CLIENT.get(
 				String.format("%s/search/radios",BASE_URL),
 				assembleHttpParams(
 					new HttpParameter[]{
 					new HttpParameter("q", q),
-					new HttpParameter("count", pageSize),
-					new HttpParameter("page", page)}
+					new HttpParameter("count", paging.getCount()),
+					new HttpParameter("page", paging.getPage())}
 				)
 		);
 		return Radio.constructRadioList(response);
