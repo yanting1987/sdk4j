@@ -97,4 +97,10 @@ public class DTOValidateUtil {
 		}
 	}
 
+	public static void validateProvinceCode(String provinceCode) {
+		if(StringUtil.isEmpty(provinceCode)) {
+			throw new IllegalArgumentException("provinceCode should be specified");
+		}
+	}
+
 }

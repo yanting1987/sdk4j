@@ -118,10 +118,12 @@ public class Lives extends Ximalaya {
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public List<City> getCityByProvince(int provinceCode)throws XimalayaException{
+	public List<City> getCityByProvince(String provinceCode)throws XimalayaException{
+		DTOValidateUtil.validateProvinceCode(provinceCode);
 		HttpParameter[] specificParameters = new HttpParameter[1];
 		specificParameters[0] = new HttpParameter("province_code", provinceCode);
-	    HttpResponse response= CLIENT.get(String.format("%s/live/cities", BASE_URL),assembleHttpParams(specificParameters) );
+	    HttpResponse response= CLIENT.get(String.format("%s/live/cities", BASE_URL),
+	    		assembleHttpParams(specificParameters));
 		return City.constructCities(response);
 	}
 

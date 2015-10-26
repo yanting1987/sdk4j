@@ -48,7 +48,7 @@ public class LivesTest {
 
 	@Test
     public void testGetCitiesByProvince() throws XimalayaException {
-        List<City> cities = lives.getCityByProvince(320000);
+        List<City> cities = lives.getCityByProvince("320000");
         Assert.assertNotNull(cities != null && cities.size() != 0);
     }
 
