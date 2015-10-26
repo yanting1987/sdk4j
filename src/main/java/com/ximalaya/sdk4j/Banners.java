@@ -12,10 +12,6 @@ import com.ximalaya.sdk4j.model.dto.track.Track;
 public class Banners extends Ximalaya {
 	private static final long serialVersionUID = -8651526987345601726L;
 	
-	private static final String DEFAULT_CHANNEL = "and-f5";
-	private static final String DEFAULT_APP_VERSION = "4.3.2.2";
-	private static final Integer DEFAULT_IMAGE_SCALE = 2;
-
 	/**
 	 * 获取榜单的默认焦点图列表。
 	 * @param channel	 app的渠道号（对应渠道焦点图配置），默认值为“and-f5”
@@ -25,13 +21,9 @@ public class Banners extends Ximalaya {
 	 * @throws XimalayaException
 	 */
 	public List<Banner> getRankBanners() throws XimalayaException {
-		HttpParameter[] specificParams = new HttpParameter[3];
-		specificParams[0] = new HttpParameter("channel", DEFAULT_CHANNEL);
-		specificParams[1] = new HttpParameter("app_version", DEFAULT_APP_VERSION);
-		specificParams[2] = new HttpParameter("image_scale", DEFAULT_IMAGE_SCALE);
 		return Banner.constructBanners(
 			CLIENT.get(String.format("%s/banners/rank_banners", BASE_URL), 
-					assembleHttpParams(specificParams)));
+					assembleHttpParams()));
 	}
 	
 	/**
@@ -45,12 +37,9 @@ public class Banners extends Ximalaya {
 	 */
 	public List<Banner> getCategoryBanners(long categoryId) throws XimalayaException {
 		DTOValidateUtil.validateCategoryID(categoryId);
-		HttpParameter[] specificParams = new HttpParameter[5];
-		specificParams[0] = new HttpParameter("channel", DEFAULT_CHANNEL);
-		specificParams[1] = new HttpParameter("app_version", DEFAULT_APP_VERSION);
-		specificParams[2] = new HttpParameter("image_scale", DEFAULT_IMAGE_SCALE);
-		specificParams[3] = new HttpParameter("category_id", categoryId);
-		specificParams[4] = new HttpParameter("content_type", "album");
+		HttpParameter[] specificParams = new HttpParameter[2];
+		specificParams[0] = new HttpParameter("category_id", categoryId);
+		specificParams[1] = new HttpParameter("content_type", "album");
 		return Banner.constructBanners(
 			CLIENT.get(String.format("%s/banners/category_banners", BASE_URL), 
 					assembleHttpParams(specificParams)));
@@ -65,13 +54,9 @@ public class Banners extends Ximalaya {
 	 * @throws XimalayaException
 	 */
 	public List<Banner> getDiscoveryBanners() throws XimalayaException {
-		HttpParameter[] specificParams = new HttpParameter[3];
-		specificParams[0] = new HttpParameter("channel", DEFAULT_CHANNEL);
-		specificParams[1] = new HttpParameter("app_version", DEFAULT_APP_VERSION);
-		specificParams[2] = new HttpParameter("image_scale", DEFAULT_IMAGE_SCALE);
 		return Banner.constructBanners(
 			CLIENT.get(String.format("%s/banners/discovery_banners", BASE_URL), 
-					assembleHttpParams(specificParams)));
+					assembleHttpParams()));
 	}
 	
 	/**
@@ -87,12 +72,9 @@ public class Banners extends Ximalaya {
 	public List<Banner> getCategoryTrackBanners(long categoryId, int count) throws XimalayaException {
 		DTOValidateUtil.validateCategoryID(categoryId);
 		DTOValidateUtil.validateCount(count);
-		HttpParameter[] specificParams = new HttpParameter[5];
-		specificParams[0] = new HttpParameter("channel", DEFAULT_CHANNEL);
-		specificParams[1] = new HttpParameter("app_version", DEFAULT_APP_VERSION);
-		specificParams[2] = new HttpParameter("image_scale", DEFAULT_IMAGE_SCALE);
-		specificParams[3] = new HttpParameter("category_id", categoryId);
-		specificParams[4] = new HttpParameter("count", count);
+		HttpParameter[] specificParams = new HttpParameter[2];
+		specificParams[0] = new HttpParameter("category_id", categoryId);
+		specificParams[1] = new HttpParameter("count", count);
 		return Banner.constructBanners(
 			CLIENT.get(String.format("%s/banners/category_track_banners", BASE_URL), 
 					assembleHttpParams(specificParams)));
@@ -109,11 +91,8 @@ public class Banners extends Ximalaya {
 	 */
 	public List<Banner> getDiscoveryTrackBanners(int count) throws XimalayaException {
 		DTOValidateUtil.validateCount(count);
-		HttpParameter[] specificParams = new HttpParameter[4];
-		specificParams[0] = new HttpParameter("channel", DEFAULT_CHANNEL);
-		specificParams[1] = new HttpParameter("app_version", DEFAULT_APP_VERSION);
-		specificParams[2] = new HttpParameter("image_scale", DEFAULT_IMAGE_SCALE);
-		specificParams[3] = new HttpParameter("count", count);
+		HttpParameter[] specificParams = new HttpParameter[1];
+		specificParams[0] = new HttpParameter("count", count);
 		return Banner.constructBanners(
 			CLIENT.get(String.format("%s/banners/discovery_track_banners", BASE_URL), 
 					assembleHttpParams(specificParams)));
