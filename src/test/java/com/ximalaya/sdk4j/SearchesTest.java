@@ -55,7 +55,7 @@ static	Searches searchesService = new Searches();
 
 	@Test
 	public void testSearchAll() throws XimalayaException {
-	    AllList allList= searchesService.searchAll("郭德纲", 2, 1);
-		Assert.assertTrue(allList!=null);
+	    AllList allList= searchesService.searchAll("郭德纲", new Paging());
+		Assert.assertTrue(allList != null);
 	}
 }
