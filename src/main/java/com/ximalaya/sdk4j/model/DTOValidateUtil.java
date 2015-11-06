@@ -104,7 +104,7 @@ public class DTOValidateUtil {
 	}
 
 	public static void validateDeviceType(int deviceType) {
-		if(deviceType != 1 || deviceType != 2 || deviceType != 3) {
+		if(deviceType != 1 && deviceType != 2 && deviceType != 3) {
     		throw new IllegalArgumentException("device_type must be 1-ios or 2-android or 3-pc");
     	}
 	}
