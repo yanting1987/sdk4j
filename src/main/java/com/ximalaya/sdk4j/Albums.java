@@ -239,7 +239,7 @@ public class Albums extends Ximalaya {
      * @return
      * @throws XimalayaException
      */
-    public List<PerferedAlbum> getGuessYouLikeAlbumList(int deviceType, String deviceId, Integer likeCount) throws XimalayaException {
+    public List<LikeAlbum> getGuessYouLikeAlbumList(int deviceType, String deviceId, Integer likeCount) throws XimalayaException {
     	DTOValidateUtil.validateDeviceType(deviceType);
     	DTOValidateUtil.validateDeviceId(deviceId);
     	HttpParameter[] specificParams = null;
@@ -249,14 +249,14 @@ public class Albums extends Ximalaya {
             specificParams[1] = new HttpParameter("device_id", deviceId);
         } else {
         	if(likeCount.intValue() <= 0) {
-        		return new ArrayList<PerferedAlbum>(0);
+        		return new ArrayList<LikeAlbum>(0);
         	}
         	specificParams = new HttpParameter[3];
             specificParams[0] = new HttpParameter("device_type", deviceType);
             specificParams[1] = new HttpParameter("device_id", deviceId);
             specificParams[2] = new HttpParameter("like_count", likeCount);
         }
-        return PerferedAlbum.constructPerferedAlbums(
+        return LikeAlbum.constructPerferedAlbums(
                 CLIENT.get(String.format("%s/albums/guess_like", BASE_URL),
                         assembleHttpParams(specificParams)));
     }

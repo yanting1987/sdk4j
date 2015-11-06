@@ -4,13 +4,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
+import com.ximalaya.sdk4j.model.XimalayaResponse;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class PerferedAlbum implements Serializable {
+public class LikeAlbum extends XimalayaResponse {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
@@ -35,7 +35,7 @@ public class PerferedAlbum implements Serializable {
 		this.kind = kind;
 	}
 
-	public PerferedAlbum() {
+	public LikeAlbum() {
 	}
     
     public String getRecommendSrc() {
@@ -62,7 +62,7 @@ public class PerferedAlbum implements Serializable {
         this.basedRelativeAlbumId = basedRelativeAlbumId;
     }
 
-    public PerferedAlbum(JSONObject json) throws XimalayaException {
+    public LikeAlbum(JSONObject json) throws XimalayaException {
         init(json);
     }
 
@@ -76,11 +76,11 @@ public class PerferedAlbum implements Serializable {
         }
     }
 
-    public static List<PerferedAlbum> constructPerferedAlbums(HttpResponse response) throws XimalayaException {
-        List<PerferedAlbum> reletiveAlbums=new ArrayList<PerferedAlbum>();
+    public static List<LikeAlbum> constructPerferedAlbums(HttpResponse response) throws XimalayaException {
+        List<LikeAlbum> reletiveAlbums=new ArrayList<LikeAlbum>();
          JSONArray albumsJsonArray=  response.asJSONArray();
         for (int i = 0; i < albumsJsonArray.size(); i++) {
-            reletiveAlbums.add(new PerferedAlbum(albumsJsonArray.getJSONObject(i)));
+            reletiveAlbums.add(new LikeAlbum(albumsJsonArray.getJSONObject(i)));
         }
         return reletiveAlbums;
     }
