@@ -296,5 +296,5 @@ public class Album extends XimalayaResponse {
 		
 		return true;
 	}
-	
+
 }

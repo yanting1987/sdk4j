@@ -230,4 +230,34 @@ public class Albums extends Ximalaya {
                 assembleHttpParams());
         return Album.constructAlbums(response);
     }
+    
+    /**
+     * 猜你喜欢的专辑。和在喜马拉雅主app的“猜你喜欢”栏点“更多”链接后返回的数据一样。
+     * @param device_type 必填	1-ios，2-android，3-pc
+     * @param device_id   必填	设备唯一标识
+     * @param like_count  选填 	返回几条，不填则默认为3，取值区间为[1, 50]
+     * @return
+     * @throws XimalayaException
+     */
+    public List<PerferedAlbum> getGuessYouLikeAlbumList(int deviceType, String deviceId, Integer likeCount) throws XimalayaException {
+    	DTOValidateUtil.validateDeviceType(deviceType);
+    	DTOValidateUtil.validateDeviceId(deviceId);
+    	HttpParameter[] specificParams = null;
+        if (likeCount == null) {
+            specificParams = new HttpParameter[2];
+            specificParams[0] = new HttpParameter("device_type", deviceType);
+            specificParams[1] = new HttpParameter("device_id", deviceId);
+        } else {
+        	if(likeCount.intValue() <= 0) {
+        		return new ArrayList<PerferedAlbum>(0);
+        	}
+        	specificParams = new HttpParameter[3];
+            specificParams[0] = new HttpParameter("device_type", deviceType);
+            specificParams[1] = new HttpParameter("device_id", deviceId);
+            specificParams[2] = new HttpParameter("like_count", likeCount);
+        }
+        return PerferedAlbum.constructPerferedAlbums(
+                CLIENT.get(String.format("%s/albums/guess_like", BASE_URL),
+                        assembleHttpParams(specificParams)));
+    }
 }

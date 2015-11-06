@@ -97,4 +97,10 @@ public class AlbumsTest {
 		List<Album> reletiveAlbumList=	albumsService.getRecommondCollection(2);
 		assertTrue(reletiveAlbumList.size() > 0);
 	}
+	
+	@Test
+	public void testGuessYouLikeAlbumList() throws XimalayaException {
+		List<PerferedAlbum> reletiveAlbumList =	albumsService.getGuessYouLikeAlbumList(2, "device_id", 3);
+		assertTrue(reletiveAlbumList.size() > 0);
+	}
 }
