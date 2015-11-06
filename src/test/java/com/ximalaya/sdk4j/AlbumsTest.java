@@ -100,7 +100,7 @@ public class AlbumsTest {
 	
 	@Test
 	public void testGuessYouLikeAlbumList() throws XimalayaException {
-		List<LikeAlbum> reletiveAlbumList =	albumsService.getGuessYouLikeAlbumList(2, "device_id", 3);
+		List<LikeAlbum> reletiveAlbumList =	albumsService.getGuessYouLikeAlbumList(2, "ffffffff-e827-8bbe-2462-83ac0037d7ef", 10);
 		assertTrue(reletiveAlbumList.size() > 0);
 	}
 }
