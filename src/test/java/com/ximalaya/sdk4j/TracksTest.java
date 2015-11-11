@@ -31,7 +31,7 @@ public class TracksTest {
 
 	@Test
 	public void testGetLastPlayTracks() throws XimalayaException {
-		TrackList trackList = tracksService.getLastPlayTracks(12964151L, 275158L, 7861837L, 2);
+		TrackList trackList = tracksService.getLastPlayTracks(275158L, 7861837L, 2);
 		List<Track> tracks = trackList.getTracks();
 		Assert.assertTrue(trackList != null && tracks != null && tracks.size() > 0);
 	}
