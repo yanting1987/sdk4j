@@ -61,14 +61,14 @@ public class Tracks extends Ximalaya {
 	}
 	
 	/**
-	 * 根据上一次所听声音的id，搜索给定数量的数据。
+	 * 根据上一次所听声音的id，搜索给定数量的声音。
 	 * @param albumId 专辑ID
 	 * @param trackId 声音ID
 	 * @param count   需要数据的条数
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public TrackList getLastPlayTracks(Long albumId, Long trackId,int count) throws XimalayaException{
+	public TrackList getLastPlayTracks(Long albumId, Long trackId, int count) throws XimalayaException{
 		HttpParameter[] specificParams = new HttpParameter[3];
 			specificParams[0] = new HttpParameter("album_id", albumId);
 			specificParams[1] = new HttpParameter("track_id", trackId);
