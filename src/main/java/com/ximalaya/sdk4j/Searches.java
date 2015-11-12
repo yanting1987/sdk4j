@@ -45,6 +45,22 @@ public class Searches extends Ximalaya {
 	}
 	
 	/**
+	 * 搜索专辑
+	 * 
+	 * @param q 搜索词，必填
+	 * @param paging 分页参数，可选，不填则为默认值
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public AlbumList searchAlbumList(String q, Paging paging) throws XimalayaException {
+		checkSearchQ(q);
+		paging = paging == null ? new Paging(): paging;
+		return Album.constructAlbumList(
+				CLIENT.get(String.format("%s/search/albums", BASE_URL),
+						   assembleHttpParams(constructSpecificParamsForSearch(q, paging))));
+	}
+	
+	/**
 	 * 搜索声音
 	 * 
 	 * @param q  搜索词，必填
@@ -151,6 +167,20 @@ public class Searches extends Ximalaya {
 		if(categoryID < 0) {
 			throw new IllegalArgumentException("category_id should >= 0");
 		}
+	}
+	
+	private void checkSearchQ(String q) {
+		if(q == null || q.isEmpty()) {
+			throw new IllegalArgumentException("q should not empty");
+		}
+	}
+	
+	private HttpParameter[] constructSpecificParamsForSearch(String q,  Paging paging) {
+		HttpParameter[] specificParams = new HttpParameter[3];
+		specificParams[0] = new HttpParameter("q", q);
+		specificParams[1] = new HttpParameter("page", paging.getPage());
+		specificParams[2] = new HttpParameter("count", paging.getCount());
+		return specificParams;
 	}
 	
 	private HttpParameter[] constructSpecificParamsForSearch(String q, long categoryID,  Paging paging) {
