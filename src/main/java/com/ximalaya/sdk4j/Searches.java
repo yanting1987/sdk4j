@@ -78,6 +78,22 @@ public class Searches extends Ximalaya {
 	}
 	
 	/**
+	 * 搜索声音
+	 * 
+	 * @param q  搜索词，必填
+	 * @param paging 分页参数，可选，不填则为默认值
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public TrackList searchTrackList(String q, Paging paging) throws XimalayaException {
+		checkSearchQ(q);
+		paging = paging == null ? new Paging(): paging;
+		return Track.constructTrackList(
+				CLIENT.get(String.format("%s/search/tracks", BASE_URL),
+						assembleHttpParams(constructSpecificParamsForSearch(q, paging))));
+	}
+	
+	/**
 	 * 获取最近top的热搜词
 	 * 
 	 * @param top 热搜词，必填
