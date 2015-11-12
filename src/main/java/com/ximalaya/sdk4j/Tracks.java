@@ -5,9 +5,11 @@ import java.util.List;
 
 
 
+
 import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.Paging;
+import com.ximalaya.sdk4j.model.Sort;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.RelativeAlbum;
 import com.ximalaya.sdk4j.model.dto.album.RelativeAlbumList;
@@ -62,17 +64,20 @@ public class Tracks extends Ximalaya {
 	
 	/**
 	 * 根据上一次所听声音的id，搜索给定数量的声音。
-	 * @param albumId 专辑ID
-	 * @param trackId 声音ID
-	 * @param count   需要数据的条数
+	 * @param albumId 必填	专辑ID
+	 * @param trackId 必填	声音ID
+	 * @param count   选填	需要数据的条数，默认20条，最大100条
+	 * @param sort    选填	asc（正序），或desc（倒序）；默认asc
 	 * @return
 	 * @throws XimalayaException
 	 */
-	public TrackList getLastPlayTracks(Long albumId, Long trackId, int count) throws XimalayaException{
-		HttpParameter[] specificParams = new HttpParameter[3];
+	public TrackList getLastPlayTracks(long albumId, long trackId, int count, Sort sort) throws XimalayaException{
+		sort = sort == null ? Sort.ASC : sort;
+		HttpParameter[] specificParams = new HttpParameter[4];
 			specificParams[0] = new HttpParameter("album_id", albumId);
 			specificParams[1] = new HttpParameter("track_id", trackId);
 			specificParams[2] = new HttpParameter("count", count);
+			specificParams[3] = new HttpParameter("sort", Sort.getSortText(sort));
 		return Track.constructTrackList(
 				CLIENT.get(String.format("%s/tracks/get_last_play_tracks", BASE_URL),
 							assembleHttpParams(specificParams)));
