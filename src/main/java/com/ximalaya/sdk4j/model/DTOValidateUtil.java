@@ -115,4 +115,10 @@ public class DTOValidateUtil {
     	}
 	}
 
+	public static void validateAnnouncerId(int aid) {
+		if(aid <= 0) {
+			throw new IllegalArgumentException("aid should > 0");
+		}
+	}
+
 }

@@ -103,4 +103,10 @@ public class AlbumsTest {
 		List<LikeAlbum> reletiveAlbumList =	albumsService.getGuessYouLikeAlbumList(2, "ffffffff-e827-8bbe-2462-83ac0037d7ef", 10);
 		assertTrue(reletiveAlbumList.size() > 0);
 	}
+	
+	@Test
+	public void testGetAnnouncerAlbums() throws XimalayaException {
+		List<Album>  albums = albumsService.getAnnouncerAlbums(2629294, new Paging());
+		Assert.assertTrue(albums.size() > 0);
+	}
 }

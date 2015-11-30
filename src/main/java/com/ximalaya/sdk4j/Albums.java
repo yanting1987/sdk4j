@@ -260,4 +260,23 @@ public class Albums extends Ximalaya {
                 CLIENT.get(String.format("%s/albums/guess_like", BASE_URL),
                         assembleHttpParams(specificParams)));
     }
+    
+    /**
+     * 获取某个主播下的专辑列表
+     * @param aid		是	主播用户ID
+     * @param paging	否	返回第几页，必须大于等于1，不填默认为1否；每页多少条，默认20，最多不超过100
+     * @return
+     * @throws XimalayaException
+     */
+    public List<Album> getAnnouncerAlbums(int aid, Paging paging) throws XimalayaException {
+    	DTOValidateUtil.validateAnnouncerId(aid);
+    	paging = paging == null ? new Paging() : paging;
+    	HttpParameter[] specificParams = new HttpParameter[3];
+        specificParams[0] = new HttpParameter("aid", aid);
+        specificParams[1] = new HttpParameter("page", paging.getPage());
+        specificParams[2] = new HttpParameter("count", paging.getCount());
+        HttpResponse response = CLIENT.get(String.format("%s/albums/by_announcer", BASE_URL),
+                assembleHttpParams(specificParams));
+        return Album.constructAlbums(response);
+    }
 }
