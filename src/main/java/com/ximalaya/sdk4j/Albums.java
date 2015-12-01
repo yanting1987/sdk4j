@@ -268,7 +268,7 @@ public class Albums extends Ximalaya {
      * @return
      * @throws XimalayaException
      */
-    public List<Album> getAnnouncerAlbums(int aid, Paging paging) throws XimalayaException {
+    public AlbumList getAnnouncerAlbums(int aid, Paging paging) throws XimalayaException {
     	DTOValidateUtil.validateAnnouncerId(aid);
     	paging = paging == null ? new Paging() : paging;
     	HttpParameter[] specificParams = new HttpParameter[3];
@@ -277,6 +277,6 @@ public class Albums extends Ximalaya {
         specificParams[2] = new HttpParameter("count", paging.getCount());
         HttpResponse response = CLIENT.get(String.format("%s/albums/by_announcer", BASE_URL),
                 assembleHttpParams(specificParams));
-        return Album.constructAlbums(response);
+        return Album.constructAlbumList(response);
     }
 }

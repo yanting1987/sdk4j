@@ -106,7 +106,7 @@ public class AlbumsTest {
 	
 	@Test
 	public void testGetAnnouncerAlbums() throws XimalayaException {
-		List<Album>  albums = albumsService.getAnnouncerAlbums(2629294, new Paging());
-		Assert.assertTrue(albums.size() > 0);
+		AlbumList albumList = albumsService.getAnnouncerAlbums(2629294, new Paging());
+		Assert.assertTrue(albumList.getAlbums().size() > 0);
 	}
 }
