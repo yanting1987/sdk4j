@@ -38,6 +38,7 @@ public class Album extends XimalayaResponse {
 	private Long favoriteCount;        // 专辑被喜欢次数
 	private Long includeTrackCount;    // 专辑包含声音数
 	private LastUpTrack lastUpTrack;   // 专辑内最新上传声音
+	private Integer isFinished;		   // 是否完结，0-无此属性；1-未完结；2-完结
 	private Long updatedAt;            // 更新时间
 	private Long createdAt;            // 更新时间
 	
@@ -122,6 +123,12 @@ public class Album extends XimalayaResponse {
 	public void setLastUptrack(LastUpTrack lastUptrack) {
 		this.lastUpTrack = lastUptrack;
 	}
+	public Integer getIsFinished() {
+		return isFinished;
+	}
+	public void setIsFinished(Integer isFinished) {
+		this.isFinished = isFinished;
+	}
 	public Long getUpdatedAt() {
 		return updatedAt;
 	}
@@ -160,6 +167,7 @@ public class Album extends XimalayaResponse {
 			favoriteCount = json.getLong("favorite_count");
 			includeTrackCount = json.getLong("include_track_count");
 			lastUpTrack = new LastUpTrack(json.getJSONObject("last_uptrack"));
+			isFinished = json.getInteger("is_finished");
 			updatedAt = json.getLong("updated_at");
 			createdAt = json.getLong("created_at");
 		}

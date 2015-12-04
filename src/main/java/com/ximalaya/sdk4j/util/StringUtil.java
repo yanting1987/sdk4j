@@ -23,6 +23,26 @@ public class StringUtil {
 	}
 	
 	/**
+	 * 分隔String数组里的各个元素，比如array为[1,2,3]，seperator为英文逗号，那么得到"1,2,3"
+	 * @param array
+	 * @param seperator
+	 * @return
+	 */
+	public static String join(String[] array, String seperator) {
+		if(array == null || array.length == 0 || seperator == null || seperator.isEmpty()) {
+			throw new IllegalArgumentException("array should not empty, seperator should be specified");
+		}
+		
+		StringBuilder strBuilder = new StringBuilder();
+		for(String i: array) {
+			strBuilder.append(i);
+			strBuilder.append(seperator);
+		}
+		strBuilder.deleteCharAt(strBuilder.lastIndexOf(seperator));
+		return strBuilder.toString();
+	}
+	
+	/**
 	 * 判断字符串是否为null或者长度为0
 	 * @param s
 	 * @return

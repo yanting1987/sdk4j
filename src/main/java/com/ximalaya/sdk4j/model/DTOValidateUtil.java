@@ -121,4 +121,15 @@ public class DTOValidateUtil {
 		}
 	}
 
+	public static void validateColdbootGenre(String coldbootGenre) {
+		if(StringUtil.isEmpty(coldbootGenre)) {
+			throw new IllegalArgumentException("coldbootGenre should not be empty");
+		}
+	}
+	
+	public static void validateColdbootSubGenre(String coldbootSubGenre) {
+		if(StringUtil.isEmpty(coldbootSubGenre)) {
+			throw new IllegalArgumentException("coldbootSubGenre should not be empty");
+		}
+	}
 }
