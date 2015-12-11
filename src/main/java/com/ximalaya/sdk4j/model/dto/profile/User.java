@@ -18,11 +18,11 @@ public class User extends XimalayaResponse {
 	 */
 	private static final long serialVersionUID = -3394162338155271567L;
 	
-	private Long id;              // ID
-	private String kind;          // DTO实体类型
-	private String nickname;      // 用户昵称
-	private String avatarUrl;     // 用户头像
-	private Boolean isVerified;   // 用户是否加V
+	protected Long id;              // ID
+	protected String kind;          // DTO实体类型
+	protected String nickname;      // 用户昵称
+	protected String avatarUrl;     // 用户头像
+	protected Boolean isVerified;   // 用户是否加V
 	
 	public User() {
 	}

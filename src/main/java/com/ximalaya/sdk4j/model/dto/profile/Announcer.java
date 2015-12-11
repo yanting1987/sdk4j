@@ -90,14 +90,14 @@ public class Announcer extends User {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
-			vcategoryID = json.getLong("id");
-			vdesc = json.getString("kind");
-			vsignature = json.getString("nickname");
-			announcerPosition = json.getString("avatar_url");
-			followerCount = json.getInteger("is_verified");
-			followingCount = json.getInteger("");
-			releasedAlbumCount = json.getInteger("");
-			releasedTrackCount = json.getInteger("");
+			vcategoryID = json.getLong("vcategory_id");
+			vdesc = json.getString("vdesc");
+			vsignature = json.getString("vsignature");
+			announcerPosition = json.getString("announcer_position");
+			followerCount = json.getInteger("follower_count");
+			followingCount = json.getInteger("following_count");
+			releasedAlbumCount = json.getInteger("released_album_count");
+			releasedTrackCount = json.getInteger("released_track_count");
 		}
 	}
 
