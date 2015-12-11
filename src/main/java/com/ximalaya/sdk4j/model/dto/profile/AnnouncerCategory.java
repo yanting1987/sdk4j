@@ -71,11 +71,6 @@ public class AnnouncerCategory extends XimalayaResponse {
 		}
 	}
 
-	@Override
-	public String toString() {
-		return "AnnouncerCategory {id=" + id + ", kind=" + kind + ", vCategoryName=" + vCategoryName + ", orderNum=" + orderNum + "}";
-	}
-
 	public static List<AnnouncerCategory> constructAnnouncerCategories(
 			HttpResponse response) throws XimalayaException {
 		List<AnnouncerCategory> albums = new ArrayList<AnnouncerCategory> ();
