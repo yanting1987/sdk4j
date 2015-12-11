@@ -24,5 +24,4 @@ public class AnnouncerList extends AbstractPageResult implements Serializable {
 		this.announcers = announcers;
 	}
 	
-	
 }
