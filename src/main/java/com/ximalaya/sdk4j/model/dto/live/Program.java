@@ -119,8 +119,10 @@ public class Program extends XimalayaResponse {
 				
 			supportBitRates = new ArrayList<Integer> ();
 			JSONArray supportBitRatesJsonArray = json.getJSONArray("support_bitrates");
-			for(int i = 0; i < supportBitRatesJsonArray.size(); i++) {
-				supportBitRates.add(supportBitRatesJsonArray.getIntValue(i));
+			if(supportBitRatesJsonArray != null) {
+				for(int i = 0; i < supportBitRatesJsonArray.size(); i++) {
+					supportBitRates.add(supportBitRatesJsonArray.getIntValue(i));
+				}
 			}
 			
 			rate24AacUrl = json.getString("rate24_aac_url");
