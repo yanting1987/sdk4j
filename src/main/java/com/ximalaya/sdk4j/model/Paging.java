@@ -11,7 +11,7 @@ public class Paging implements java.io.Serializable {
 	 * 分页参数配置
 	 */
 	public static final int MIN_COUNT = 1;
-	public static final int MAX_COUNT = 100;
+	public static final int MAX_COUNT = 200;
 	public static final int MIN_PAGE = 1;
 	public static final int DEFAULT_COUNT = 20;
 	public static final int DEFAULT_PAGE = 1;
