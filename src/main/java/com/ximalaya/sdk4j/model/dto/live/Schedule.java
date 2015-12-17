@@ -24,6 +24,7 @@ public class Schedule extends XimalayaResponse {
 	
 	private Long id;                  // 节目时间表ID
 	private String kind;              // DTO实体类型
+	private Long radioId;
 	private String startTime;         // 开始时间
 	private String endTime;           // 结束时间
 	private Long updatedAt;		      // 更新时间，Unix毫秒数时间戳
@@ -40,6 +41,13 @@ public class Schedule extends XimalayaResponse {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public Long getRadioId() {
+		return radioId;
+	}
+	public void setRadioId(Long radioId) {
+		this.radioId = radioId;
+	}
+
 	public String getKind() {
 		return kind;
 	}
@@ -92,6 +100,7 @@ public class Schedule extends XimalayaResponse {
 		if(json != null) {
 			id = json.getLong("id");
 			kind = json.getString("kind");
+			radioId = json.getLong("radio_id");
 			startTime = json.getString("start_time");
 			endTime = json.getString("end_time");
 			updatedAt = json.getLong("updated_at");
