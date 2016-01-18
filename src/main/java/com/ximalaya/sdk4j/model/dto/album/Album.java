@@ -246,6 +246,7 @@ public class Album extends XimalayaResponse {
 		try {
 			albumTracks.setAlbumID(albumTracksJsonObject.getLong("album_id"));
 			albumTracks.setAlbumTitle(albumTracksJsonObject.getString("album_title"));
+			albumTracks.setAlbumTitle(albumTracksJsonObject.getString("album_intro"));
 			albumTracks.setCategoryID(albumTracksJsonObject.getLong("category_id"));
 			albumTracks.setCoverUrlSmall(albumTracksJsonObject.getString("cover_url_small"));
 			albumTracks.setCoverUrlMiddle(albumTracksJsonObject.getString("cover_url_middle"));

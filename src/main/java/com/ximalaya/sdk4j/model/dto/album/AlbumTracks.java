@@ -19,6 +19,7 @@ public class AlbumTracks extends AbstractPageResult implements Serializable {
 	
 	private Long albumID;            // 专辑ID
 	private String albumTitle;       // 专辑名称
+	private String albumIntro;		 // 专辑简介 新增字段 2016/1/18
 	private Long categoryID;         // 专辑分类ID
 	private String coverUrlSmall;    // 专辑封面小图
 	private String coverUrlMiddle;   // 专辑封面中图
@@ -39,6 +40,12 @@ public class AlbumTracks extends AbstractPageResult implements Serializable {
 	}
 	public void setAlbumTitle(String albumTitle) {
 		this.albumTitle = albumTitle;
+	}
+	public String getAlbumIntro() {
+		return albumIntro;
+	}
+	public void setAlbumIntro(String albumIntro) {
+		this.albumIntro = albumIntro;
 	}
 	public Long getCategoryID() {
 		return categoryID;
