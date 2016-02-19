@@ -132,4 +132,16 @@ public class DTOValidateUtil {
 			throw new IllegalArgumentException("coldbootSubGenre should not be empty");
 		}
 	}
+
+	public static void validateIconSetID(int iconSetId) {
+		if(iconSetId <= 0) {
+			throw new IllegalArgumentException("iconSetId should > 0");
+		}
+	}
+
+	public static void validateTracklistID(int tracklistId) {
+		if(tracklistId <= 0) {
+			throw new IllegalArgumentException("tracklistId should > 0");
+		}
+	}
 }

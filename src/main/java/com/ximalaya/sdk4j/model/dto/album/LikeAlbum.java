@@ -4,37 +4,18 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
-import com.ximalaya.sdk4j.model.XimalayaResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class LikeAlbum extends XimalayaResponse {
+public class LikeAlbum extends Album {
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
-	private String kind;
 	private String recommendSrc;     // 用于统计，推荐来源
     private String recommendTrace;   // 推荐跟踪
     private long basedRelativeAlbumId;  //相关专辑的id
     
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getKind() {
-		return kind;
-	}
-
-	public void setKind(String kind) {
-		this.kind = kind;
-	}
-
 	public LikeAlbum() {
 	}
     
@@ -63,13 +44,12 @@ public class LikeAlbum extends XimalayaResponse {
     }
 
     public LikeAlbum(JSONObject json) throws XimalayaException {
+    	super(json);
         init(json);
     }
 
     private void init(JSONObject json) throws XimalayaException {
         if (json != null) {
-        	id = json.getLong("id");
-        	kind = json.getString("kind");
             recommendSrc = json.getString("recommend_src");
             recommendTrace = json.getString("recommend_trace");
             basedRelativeAlbumId=json.getLong("based_relative_album_id");
