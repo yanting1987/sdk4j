@@ -1,5 +1,9 @@
 package com.ximalaya.sdk4j.model;
 
+import java.util.List;
+
+import com.ximalaya.sdk4j.model.dto.upload.LiveRecord;
+import com.ximalaya.sdk4j.model.dto.upload.TrackRecord;
 import com.ximalaya.sdk4j.util.StringUtil;
 
 public class DTOValidateUtil {
@@ -142,6 +146,67 @@ public class DTOValidateUtil {
 	public static void validateTracklistID(int tracklistId) {
 		if(tracklistId <= 0) {
 			throw new IllegalArgumentException("tracklistId should > 0");
+		}
+	}
+
+	public static void validateLiveRecord(LiveRecord liveRecord) {
+		if(liveRecord == null) {
+			throw new IllegalArgumentException("liveRecord should not be null");
+		}
+		if(liveRecord.getRadioId() == null) {
+			throw new IllegalArgumentException("liveRecord.radioId should not be null");
+		}
+		if(liveRecord.getDuration() == null) {
+			throw new IllegalArgumentException("liveRecord.duration should not be null");
+		}
+		if(liveRecord.getPlayedSecs() == null) {
+			throw new IllegalArgumentException("liveRecord.playedSecs should not be null");
+		}
+	}
+
+	public static void validateTrackRecord(TrackRecord trackRecord) {
+		if(trackRecord == null) {
+			throw new IllegalArgumentException("trackRecord should not be null");
+		}
+		if(trackRecord.getTrackId() == null) {
+			throw new IllegalArgumentException("trackRecord.trackId should not be null");
+		}
+		if(trackRecord.getDuration() == null) {
+			throw new IllegalArgumentException("trackRecord.duration should not be null");
+		}
+		if(trackRecord.getPlayedSecs() == null) {
+			throw new IllegalArgumentException("trackRecord.playedSecs should not be null");
+		}
+		if(trackRecord.getPlayType() == null) {
+			throw new IllegalArgumentException("trackRecord.playType should not be null");
+		}
+	}
+
+	private static final int BATCH_UPLOAD_MAX_COUNT = 200;
+	
+	public static void validateLiveRecords(List<LiveRecord> liveRecords) {
+		if(liveRecords == null) {
+			throw new IllegalArgumentException("liveRecords should not be null");
+		}
+		int size = liveRecords.size();
+		if(size > BATCH_UPLOAD_MAX_COUNT) {
+			throw new IllegalArgumentException("liveRecords size should be less than " + BATCH_UPLOAD_MAX_COUNT);
+		}
+		for(int i = 0; i < liveRecords.size(); i++) {
+			validateLiveRecord(liveRecords.get(i));
+		}
+	}
+
+	public static void validateTrackRecords(List<TrackRecord> trackRecords) {
+		if(trackRecords == null) {
+			throw new IllegalArgumentException("trackRecords should not be null");
+		}
+		int size = trackRecords.size();
+		if(size > BATCH_UPLOAD_MAX_COUNT) {
+			throw new IllegalArgumentException("trackRecords size should be less than " + BATCH_UPLOAD_MAX_COUNT);
+		}
+		for(int i = 0; i < size; i++) {
+			validateTrackRecord(trackRecords.get(i));
 		}
 	}
 }

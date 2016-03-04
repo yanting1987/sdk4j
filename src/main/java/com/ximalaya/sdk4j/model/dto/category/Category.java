@@ -27,6 +27,7 @@ public class Category implements Serializable {
 	private String coverUrlSmall;    // 封面小图
 	private String coverUrlMiddle;   // 封面中图
 	private String coverUrlLarge;    // 封面大图
+	private Integer orderNum;		 // 排序值，值越小排序越在前
 	
 	public Category() {
 	}
@@ -67,6 +68,13 @@ public class Category implements Serializable {
 	public void setCoverUrlLarge(String coverUrlLarge) {
 		this.coverUrlLarge = coverUrlLarge;
 	}
+	public Integer getOrderNum() {
+		return orderNum;
+	}
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
+
 	public Category(JSONObject json) throws XimalayaException {
 		init(json);
 	}
@@ -79,6 +87,7 @@ public class Category implements Serializable {
 			coverUrlSmall = json.getString("cover_url_small");
 			coverUrlMiddle = json.getString("cover_url_middle");
 			coverUrlLarge = json.getString("cover_url_large");
+			orderNum = json.getInteger("order_num");
 		}
 	}
 	

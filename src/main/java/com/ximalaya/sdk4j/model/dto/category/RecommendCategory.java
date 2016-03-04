@@ -21,27 +21,11 @@ public class RecommendCategory extends Category implements Serializable {
 	 */
 	private static final long serialVersionUID = -8134137599995673738L;
 	
-	private Integer orderNum;		 // 排序值，值越小排序越靠前
-	
 	public RecommendCategory() {
 	}
 	
-	public Integer getOrderNum() {
-		return orderNum;
-	}
-	public void setOrderNum(Integer orderNum) {
-		this.orderNum = orderNum;
-	}
-
 	public RecommendCategory(JSONObject json) throws XimalayaException {
 		super(json);
-		init(json);
-	}
-	
-	private void init(JSONObject json) throws XimalayaException {
-		if(json != null) {
-			orderNum = json.getIntValue("order_num");
-		}
 	}
 	
 	public static List<RecommendCategory> constructRecommendCategories(HttpResponse response) throws XimalayaException {
