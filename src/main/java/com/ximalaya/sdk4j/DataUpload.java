@@ -138,7 +138,7 @@ public class DataUpload extends Ximalaya {
 		return specificParams;
 	}
 	
-	class UploadResponse extends XimalayaResponse {
+	public static class UploadResponse extends XimalayaResponse {
 		private static final long serialVersionUID = -5641815373670280547L;
 		
 		private Integer code;		//0-成功，1-失败
