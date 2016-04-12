@@ -4,6 +4,7 @@ import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.DTOValidateUtil;
 import com.ximalaya.sdk4j.model.Paging;
+import com.ximalaya.sdk4j.model.Sort;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.*;
 import com.ximalaya.sdk4j.util.StringUtil;
@@ -187,14 +188,16 @@ public class Albums extends Ximalaya {
      * @return
      * @throws XimalayaException
      */
-    public AlbumTracks browseAlbumTracks(long albumID, Paging paging) throws XimalayaException {
+    public AlbumTracks browseAlbumTracks(long albumID, Paging paging, Sort sort) throws XimalayaException {
         DTOValidateUtil.validateAlbumID(albumID);
         paging = paging == null ? new Paging() : paging;
+        sort = sort == null ? Sort.ASC : sort;
 
         HttpParameter[] specificParams = new HttpParameter[3];
         specificParams[0] = new HttpParameter("album_id", albumID);
         specificParams[1] = new HttpParameter("page", paging.getPage());
         specificParams[2] = new HttpParameter("count", paging.getCount());
+        specificParams[3] = new HttpParameter("sort", Sort.getSortText(sort));
         return Album.constructAlbumTracks(
                 CLIENT.get(String.format("%s/albums/browse", BASE_URL),
                         assembleHttpParams(specificParams)));

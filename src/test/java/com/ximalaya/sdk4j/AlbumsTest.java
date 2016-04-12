@@ -3,6 +3,7 @@ package com.ximalaya.sdk4j;
 import static org.junit.Assert.assertTrue;
 
 import com.ximalaya.sdk4j.model.Paging;
+import com.ximalaya.sdk4j.model.Sort;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.*;
 
@@ -34,14 +35,14 @@ public class AlbumsTest {
 		/*
 		 * 有版权
 		 */
-		AlbumTracks albumTracks = albumsService.browseAlbumTracks(269483, new Paging(1, 5));
+		AlbumTracks albumTracks = albumsService.browseAlbumTracks(269483, new Paging(1, 5), Sort.ASC);
 		Assert.assertTrue(albumTracks != null && albumTracks.getTracks() != null
 				&& !albumTracks.getTracks().isEmpty());
 		
 		/*
 		 * 无版权
 		 */
-		albumTracks = albumsService.browseAlbumTracks(84364, new Paging(1, 5));
+		albumTracks = albumsService.browseAlbumTracks(84364, new Paging(1, 5), Sort.ASC);
 		Assert.assertFalse(albumTracks != null && albumTracks.getTracks() == null);
 	}
 	
