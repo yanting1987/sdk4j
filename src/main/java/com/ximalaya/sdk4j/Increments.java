@@ -104,11 +104,11 @@ public class Increments extends Ximalaya {
 			specificParams[4] = new HttpParameter("update_time", updateTime);
 		}
 		else {
-			specificParams = new HttpParameter[5];
+			specificParams = new HttpParameter[4];
 			specificParams[0] = new HttpParameter("radio_type", radioType);
 			specificParams[1] = new HttpParameter("page", paging.getPage());
 			specificParams[2] = new HttpParameter("count", paging.getCount());
-			specificParams[4] = new HttpParameter("update_time", updateTime);
+			specificParams[3] = new HttpParameter("update_time", updateTime);
 		}
 		return IncrementRadio.constructIncrementRadioList(
 				CLIENT.get(String.format("%s/incr/radios", BASE_URL),
