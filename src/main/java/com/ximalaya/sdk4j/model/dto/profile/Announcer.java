@@ -112,8 +112,10 @@ public class Announcer extends User {
 
  	 		List<Announcer> announcers = new ArrayList<Announcer> ();
  	 		JSONArray announcerJsonArray = announcerJsonObject.getJSONArray("announcers");
- 	 		for(int i = 0; i < announcerJsonArray.size(); i++) {
- 	 			announcers.add(new Announcer(announcerJsonArray.getJSONObject(i)));
+ 	 		if(announcerJsonArray != null) {
+ 	 			for(int i = 0; i < announcerJsonArray.size(); i++) {
+ 	 	 			announcers.add(new Announcer(announcerJsonArray.getJSONObject(i)));
+ 	 	 		}
  	 		}
  	 		announcerList.setAnnouncers(announcers);		
  	 	} catch(JSONException jsone) {

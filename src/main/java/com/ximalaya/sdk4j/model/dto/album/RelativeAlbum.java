@@ -65,8 +65,10 @@ public class RelativeAlbum extends Album{
         	
         List<RelativeAlbum> reletiveAlbums = new ArrayList<RelativeAlbum>();
         JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("reletive_albums");
-        for (int i = 0; i < albumsJsonArray.size(); i++) {
-        	reletiveAlbums.add(new RelativeAlbum(albumsJsonArray.getJSONObject(i)));
+        if(albumsJsonArray != null) {
+        	for (int i = 0; i < albumsJsonArray.size(); i++) {
+            	reletiveAlbums.add(new RelativeAlbum(albumsJsonArray.getJSONObject(i)));
+            }
         }
        	reletiveAlbumList.setReletiveAlbum(reletiveAlbums);
         return reletiveAlbumList;

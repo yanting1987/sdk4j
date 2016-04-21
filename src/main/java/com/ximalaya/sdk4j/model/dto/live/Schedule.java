@@ -114,8 +114,10 @@ public class Schedule extends XimalayaResponse {
 		JSONArray schedulesJsonArray = response.asJSONArray();
 		List<Schedule> schedules = new ArrayList<Schedule> ();
 		try {
-			for(int i = 0; i < schedulesJsonArray.size(); i++) {
-				schedules.add(new Schedule(schedulesJsonArray.getJSONObject(i)));
+			if(schedulesJsonArray != null) {
+				for(int i = 0; i < schedulesJsonArray.size(); i++) {
+					schedules.add(new Schedule(schedulesJsonArray.getJSONObject(i)));
+				}
 			}
 		} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);

@@ -50,8 +50,10 @@ public class IncrementAlbum extends Album {
  	 			
  	 		List<IncrementAlbum> albums = new ArrayList<IncrementAlbum>();
  	 		JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");
- 	 		for(int i = 0; i < albumsJsonArray.size(); i++) {
- 	 			albums.add(new IncrementAlbum(albumsJsonArray.getJSONObject(i)));
+ 	 		if(albumsJsonArray != null) {
+ 	 			for(int i = 0; i < albumsJsonArray.size(); i++) {
+ 	 	 			albums.add(new IncrementAlbum(albumsJsonArray.getJSONObject(i)));
+ 	 	 		}
  	 		}
  	 		albumList.setAlbums(albums);
 		} catch(JSONException jsone) {

@@ -198,8 +198,10 @@ public class Album extends XimalayaResponse {
 
  	 		List<Album> albums = new ArrayList<Album> ();
  	 		JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");
- 	 		for(int i = 0; i < albumsJsonArray.size(); i++) {
- 	 			albums.add(new Album(albumsJsonArray.getJSONObject(i)));
+ 	 		if(albumsJsonArray != null){
+ 	 			for(int i = 0; i < albumsJsonArray.size(); i++) {
+ 	 	 			albums.add(new Album(albumsJsonArray.getJSONObject(i)));
+ 	 	 		}
  	 		}
  	 		albumList.setAlbums(albums);		
  	 	} catch(JSONException jsone) {
@@ -243,36 +245,36 @@ public class Album extends XimalayaResponse {
 	public static AlbumTracks constructAlbumTracks(HttpResponse response) throws XimalayaException {
 		AlbumTracks albumTracks = new AlbumTracks();
 		JSONObject albumTracksJsonObject = response.asJSONObject();
-		try {
-			albumTracks.setAlbumID(albumTracksJsonObject.getLong("album_id"));
-			albumTracks.setAlbumTitle(albumTracksJsonObject.getString("album_title"));
-			albumTracks.setAlbumTitle(albumTracksJsonObject.getString("album_intro"));
-			albumTracks.setCategoryID(albumTracksJsonObject.getLong("category_id"));
-			albumTracks.setCoverUrlSmall(albumTracksJsonObject.getString("cover_url_small"));
-			albumTracks.setCoverUrlMiddle(albumTracksJsonObject.getString("cover_url_middle"));
-			albumTracks.setCoverUrlLarge(albumTracksJsonObject.getString("cover_url_large"));
-			albumTracks.setTotalCount(albumTracksJsonObject.getIntValue("total_count"));
-			albumTracks.setTotalPage(albumTracksJsonObject.getIntValue("total_page"));
-			albumTracks.setCurrentPage(albumTracksJsonObject.getIntValue("current_page"));
-				
-			List<Track> tracks = new ArrayList<Track> ();
-			JSONArray tracksJsonArray = albumTracksJsonObject.getJSONArray("tracks");
+		albumTracks.setAlbumID(albumTracksJsonObject.getLong("album_id"));
+		albumTracks.setAlbumTitle(albumTracksJsonObject.getString("album_title"));
+		albumTracks.setAlbumTitle(albumTracksJsonObject.getString("album_intro"));
+		albumTracks.setCategoryID(albumTracksJsonObject.getLong("category_id"));
+		albumTracks.setCoverUrlSmall(albumTracksJsonObject.getString("cover_url_small"));
+		albumTracks.setCoverUrlMiddle(albumTracksJsonObject.getString("cover_url_middle"));
+		albumTracks.setCoverUrlLarge(albumTracksJsonObject.getString("cover_url_large"));
+		albumTracks.setTotalCount(albumTracksJsonObject.getIntValue("total_count"));
+		albumTracks.setTotalPage(albumTracksJsonObject.getIntValue("total_page"));
+		albumTracks.setCurrentPage(albumTracksJsonObject.getIntValue("current_page"));
+			
+		List<Track> tracks = new ArrayList<Track> ();
+		JSONArray tracksJsonArray = albumTracksJsonObject.getJSONArray("tracks");
+		if(tracksJsonArray != null){
 			for(int i = 0; i < tracksJsonArray.size(); i++) {
 				tracks.add(new Track(tracksJsonArray.getJSONObject(i)));
 			}
-			albumTracks.setTracks(tracks);
-		} catch(JSONException jsone) {
-			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
+		albumTracks.setTracks(tracks);
 		return albumTracks;
 	}
 
 	public static List<HumanRecommendAlbumList> constructHumanRecommendAlbumList(HttpResponse httpResponse)
 			throws XimalayaException {
 		JSONArray albumsJsonArray = httpResponse.asJSONArray();
-		List<HumanRecommendAlbumList> recommendAlbumList = new ArrayList<HumanRecommendAlbumList>(albumsJsonArray.size());
-		for(int i = 0; i < albumsJsonArray.size(); i++) {
-			recommendAlbumList.add(new HumanRecommendAlbumList(albumsJsonArray.getJSONObject(i)));
+		List<HumanRecommendAlbumList> recommendAlbumList = new ArrayList<HumanRecommendAlbumList>();
+		if(albumsJsonArray != null) {
+			for(int i = 0; i < albumsJsonArray.size(); i++) {
+				recommendAlbumList.add(new HumanRecommendAlbumList(albumsJsonArray.getJSONObject(i)));
+			}
 		}
 		return recommendAlbumList;
 	}

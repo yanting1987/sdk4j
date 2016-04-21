@@ -80,8 +80,10 @@ public class Tag implements Serializable {
 		List<Tag> tags = new ArrayList<Tag> ();
 		JSONArray tagsJsonArray = response.asJSONArray();
 		try {
-			for(int i = 0; i < tagsJsonArray.size(); i++) {
-				tags.add(new Tag(tagsJsonArray.getJSONObject(i)));
+			if(tagsJsonArray != null) {
+				for(int i = 0; i < tagsJsonArray.size(); i++) {
+					tags.add(new Tag(tagsJsonArray.getJSONObject(i)));
+				}
 			}
 		} catch (JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
