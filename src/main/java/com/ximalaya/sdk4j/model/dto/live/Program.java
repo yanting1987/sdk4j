@@ -132,8 +132,10 @@ public class Program extends XimalayaResponse {
 			
 			List<LiveAnnouncer> liveAnnouncers = new ArrayList<LiveAnnouncer> ();
 			JSONArray liveAnnouncersJsonArray = json.getJSONArray("live_announcers");
-			for(int i = 0; i < liveAnnouncersJsonArray.size(); i++) {
-				liveAnnouncers.add(new LiveAnnouncer(liveAnnouncersJsonArray.getJSONObject(i)));
+			if(liveAnnouncersJsonArray != null) {
+				for(int i = 0; i < liveAnnouncersJsonArray.size(); i++) {
+					liveAnnouncers.add(new LiveAnnouncer(liveAnnouncersJsonArray.getJSONObject(i)));
+				}
 			}
 			this.liveAnnouncers = liveAnnouncers;
 			this.updatedAt = json.getLong("updated_at");

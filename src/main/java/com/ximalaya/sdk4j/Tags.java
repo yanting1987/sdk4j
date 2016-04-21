@@ -58,6 +58,26 @@ public class Tags extends Ximalaya {
 						    assembleHttpParams(specificParams)));
 	}
 	
+	/**
+	 * 根据分类和类型获取标签（v2版本标签，返回的标签已没有封面图，仅包含tag_name，kind两个字段）
+	 * 
+	 * @param categoryID 分类ID，必填
+	 * @param type       类型，必填，0-专辑标签，1-声音标签
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Tag> getTagsV2(long categoryID, int type) throws XimalayaException {
+		checkCategoryIDAndType(categoryID, type);
+		
+		HttpParameter[] specificParams = new HttpParameter[2];
+		specificParams[0] = new HttpParameter("category_id", categoryID);
+		specificParams[1] = new HttpParameter("type", type);
+		return Tag.constructTags(
+				CLIENT.get(String.format("%s/v2/tags/list", BASE_URL),
+						    assembleHttpParams(specificParams)));
+	}
+	
+	
 	private void checkCategoryIDAndType(long categoryID, int type) {
 		if(categoryID < 0) {
 			throw new IllegalArgumentException("categoryID should >= 0");
