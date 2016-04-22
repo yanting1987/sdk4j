@@ -42,8 +42,10 @@ public class IncrementRadio extends Radio {
 			
 			List<IncrementRadio> radios = new ArrayList<IncrementRadio> ();
 			JSONArray radiosJsonArray = radioListJsonObject.getJSONArray("radios");
-			for(int i = 0; i < radiosJsonArray.size(); i++) {
-				radios.add(new IncrementRadio(radiosJsonArray.getJSONObject(i)));
+			if(radiosJsonArray != null) {
+				for(int i = 0; i < radiosJsonArray.size(); i++) {
+					radios.add(new IncrementRadio(radiosJsonArray.getJSONObject(i)));
+				}
 			}
 			radioList.setRadios(radios);
 		} catch(JSONException jsone) {

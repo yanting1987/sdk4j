@@ -61,8 +61,10 @@ public class HotWord extends XimalayaResponse {
 		List<HotWord> hotWords = new ArrayList<HotWord> ();
 	 	try {
 	 	 	JSONArray hotWordJsonArray = response.asJSONArray();
-	 	 	for(int i = 0; i < hotWordJsonArray.size(); i++) {
-	 	 		hotWords.add(new HotWord(hotWordJsonArray.getJSONObject(i)));
+	 	 	if(hotWordJsonArray != null) {
+	 	 		for(int i = 0; i < hotWordJsonArray.size(); i++) {
+		 	 		hotWords.add(new HotWord(hotWordJsonArray.getJSONObject(i)));
+		 	 	}
 	 	 	}
 		} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
@@ -76,8 +78,10 @@ public class HotWord extends XimalayaResponse {
 	 	try {
 	 	 	List<HotWord> hotWords = new ArrayList<HotWord> ();
 	 	 	JSONArray hotWordJsonArray = albumListJsonObject.getJSONArray("hot_words");
-	 	 	for(int i = 0; i < hotWordJsonArray.size(); i++) {
-	 	 		hotWords.add(new HotWord(hotWordJsonArray.getJSONObject(i)));
+	 	 	if(hotWordJsonArray != null) {
+	 	 		for(int i = 0; i < hotWordJsonArray.size(); i++) {
+		 	 		hotWords.add(new HotWord(hotWordJsonArray.getJSONObject(i)));
+		 	 	}
 	 	 	}
 	 	 	hotWordList.setHotWords(hotWords);
 		} catch(JSONException jsone) {

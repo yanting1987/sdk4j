@@ -76,8 +76,10 @@ public class AnnouncerCategory extends XimalayaResponse {
 		List<AnnouncerCategory> albums = new ArrayList<AnnouncerCategory> ();
 		JSONArray albumsJsonArray = response.asJSONArray();
 		try {
-			for(int i = 0; i < albumsJsonArray.size(); i++) {
-				albums.add(new AnnouncerCategory(albumsJsonArray.getJSONObject(i)));
+			if(albumsJsonArray != null) {
+				for(int i = 0; i < albumsJsonArray.size(); i++) {
+					albums.add(new AnnouncerCategory(albumsJsonArray.getJSONObject(i)));
+				}
 			}
 		} catch (JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);

@@ -50,8 +50,10 @@ public class IncrementTrack extends Track {
 				
 			List<IncrementTrack> tracks = new ArrayList<IncrementTrack> ();
 			JSONArray tracksJsonArray = incrementTracksJsonObject.getJSONArray("tracks");
-			for(int i = 0; i < tracksJsonArray.size(); i++) {
-				tracks.add(new IncrementTrack(tracksJsonArray.getJSONObject(i)));
+			if(tracksJsonArray != null) {
+				for(int i = 0; i < tracksJsonArray.size(); i++) {
+					tracks.add(new IncrementTrack(tracksJsonArray.getJSONObject(i)));
+				}
 			}
 			incrementTracks.setTracks(tracks);
 		} catch(JSONException jsone) {

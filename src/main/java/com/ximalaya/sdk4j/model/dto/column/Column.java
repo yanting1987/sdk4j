@@ -184,8 +184,10 @@ public class Column extends XimalayaResponse{
  	 			
  	 		List<Column> columns = new ArrayList<Column> ();
  	 		JSONArray albumsJsonArray = columnListJsonObject.getJSONArray("columns");
- 	 		for(int i = 0; i < albumsJsonArray.size(); i++) {
- 	 			columns.add(new Column(albumsJsonArray.getJSONObject(i)));
+ 	 		if(albumsJsonArray != null) {
+ 	 			for(int i = 0; i < albumsJsonArray.size(); i++) {
+ 	 	 			columns.add(new Column(albumsJsonArray.getJSONObject(i)));
+ 	 	 		}
  	 		}
  	 		columnList.setColumns(columns);
 		} catch(JSONException jsone) {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.XimalayaException;
@@ -86,12 +85,10 @@ public class UpdatedAlbum extends XimalayaResponse{
 			throws XimalayaException {
 		List<UpdatedAlbum> albums = new ArrayList<UpdatedAlbum> ();
 		JSONArray albumsJsonArray = response.asJSONArray();
-		try {
+		if(albumsJsonArray != null) {
 			for(int i = 0; i < albumsJsonArray.size(); i++) {
 				albums.add(new UpdatedAlbum(albumsJsonArray.getJSONObject(i)));
 			}
-		} catch (JSONException jsone) {
-			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
 		return albums;
 	}

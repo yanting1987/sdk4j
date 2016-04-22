@@ -67,9 +67,11 @@ public class SuggestWordList extends XimalayaResponse{
 	private List<AlbumWord> parseAlbumWordList(JSONArray jsonArray) 
 			throws XimalayaException {
 		List<AlbumWord> albumWords = new ArrayList<AlbumWord>();
-		for(int i = 0; i < jsonArray.size(); i++) {
-			albumWords.add(new AlbumWord(jsonArray.getJSONObject(i)));
- 	 	}
+		if(jsonArray != null) {
+			for(int i = 0; i < jsonArray.size(); i++) {
+				albumWords.add(new AlbumWord(jsonArray.getJSONObject(i)));
+	 	 	}
+		}
 		return albumWords;
 	}
 	

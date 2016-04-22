@@ -157,8 +157,10 @@ public class Rank extends XimalayaResponse{
 	private List<RankItem> parseRankItems(JSONArray jsonArray) throws XimalayaException {
 		List<RankItem> ranks = new ArrayList<RankItem>();
 		try {
-			for(int i = 0; i < jsonArray.size(); i++) {
-				ranks.add(new RankItem(jsonArray.getJSONObject(i)));
+			if(jsonArray != null) {
+				for(int i = 0; i < jsonArray.size(); i++) {
+					ranks.add(new RankItem(jsonArray.getJSONObject(i)));
+				}
 			}
 		}
 		catch(XimalayaException jsone) {
@@ -173,8 +175,10 @@ public class Rank extends XimalayaResponse{
 			JSONObject jsonObject = response.asJSONObject();
 			JSONArray ranksJsonArray = jsonObject.getJSONArray("ranks");
  	 		List<Rank> ranks = new ArrayList<Rank> ();
- 	 		for(int i = 0; i < ranksJsonArray.size(); i++) {
- 	 			ranks.add(new Rank(ranksJsonArray.getJSONObject(i)));
+ 	 		if(ranksJsonArray != null) {
+ 	 			for(int i = 0; i < ranksJsonArray.size(); i++) {
+ 	 	 			ranks.add(new Rank(ranksJsonArray.getJSONObject(i)));
+ 	 	 		}
  	 		}
  	 		rankList.setRanks(ranks);
 		} catch (JSONException jsone) {
@@ -188,8 +192,10 @@ public class Rank extends XimalayaResponse{
 		try {
 			JSONArray ranksJsonArray = response.asJSONArray();
 			int size = ranksJsonArray.size();
-			for(int i = 0; i < size; i++) {
-				ranks.add(new Rank(ranksJsonArray.getJSONObject(i)));
+			if(ranksJsonArray != null) {
+				for(int i = 0; i < size; i++) {
+					ranks.add(new Rank(ranksJsonArray.getJSONObject(i)));
+				}
 			}
 		} catch (JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);

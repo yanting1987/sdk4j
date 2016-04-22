@@ -32,8 +32,10 @@ public class IncrementSchedule extends Schedule {
 		JSONArray schedulesJsonArray = response.asJSONArray();
 		List<IncrementSchedule> schedules = new ArrayList<IncrementSchedule> ();
 		try {
-			for(int i = 0; i < schedulesJsonArray.size(); i++) {
-				schedules.add(new IncrementSchedule(schedulesJsonArray.getJSONObject(i)));
+			if(schedulesJsonArray != null) {
+				for(int i = 0; i < schedulesJsonArray.size(); i++) {
+					schedules.add(new IncrementSchedule(schedulesJsonArray.getJSONObject(i)));
+				}
 			}
 		} catch(JSONException jsone) {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
