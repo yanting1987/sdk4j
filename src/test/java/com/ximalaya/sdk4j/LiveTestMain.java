@@ -11,12 +11,15 @@ public class LiveTestMain {
 	private static final Lives liveService = new Lives();
 	
 	public static void main(String[] args) throws XimalayaException {
-		List<City> cities = liveService.getCityByProvince("500000");
+//		liveService.getProvinces();
+//		List<City> cities = liveService.getCityByProvince("140000");
 //		for(City c: cities) {
 //		liveService.getRadioList(2, null, new Paging());
-////			liveService.getRadioList(2, String.valueOf(c.getCityCode()), new Paging());
+//			liveService.getRadioList(2, String.valueOf(c.getCityCode()), new Paging());
 ////		}
-//		liveService.getRadioList(2, "110000", new Paging());
+		
+		
+		
 //		liveService.getProvinces();
 //		liveService.getRadioList(3, null, new Paging());
 		
@@ -27,7 +30,7 @@ public class LiveTestMain {
 //		liveService.getPlayingProgram(12);
 //		liveService.getPlayingProgram(12000);
 		
-//		liveService.getRadiosByCity(, new Paging());
+		liveService.getRadiosByCity(1401, new Paging());
 		
 //		liveService.getProvinces();
 		// 130000 河北 110000 北京

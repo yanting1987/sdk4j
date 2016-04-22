@@ -230,7 +230,7 @@ public class Albums extends Ximalaya {
         paging = paging == null ? new Paging() : paging;
         sort = sort == null ? Sort.ASC : sort;
 
-        HttpParameter[] specificParams = new HttpParameter[3];
+        HttpParameter[] specificParams = new HttpParameter[4];
         specificParams[0] = new HttpParameter("album_id", albumID);
         specificParams[1] = new HttpParameter("page", paging.getPage());
         specificParams[2] = new HttpParameter("count", paging.getCount());
