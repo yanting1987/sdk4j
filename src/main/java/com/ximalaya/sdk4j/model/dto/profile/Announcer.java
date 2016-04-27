@@ -17,6 +17,10 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 public class Announcer extends User {
 	private static final long serialVersionUID = 7534355346514586516L;
 	
+	private Long id;						// 主播用户ID
+	private String kind;					// 固定值"announcer"
+	private String nickname;				// 主播用户昵称
+	private String avatarUrl;				// 主播头像
 	private Long vcategoryID;   			// 主播所属分类ID
 	private String vdesc;   				// 主播简介
 	private String vsignature;   			// 主播签名
@@ -25,64 +29,115 @@ public class Announcer extends User {
 	private Integer followingCount;  	  	// 主播关注数
 	private Integer releasedAlbumCount;   	// 主播发布的专辑数
 	private Integer releasedTrackCount;   	// 主播发布的声音数
+	private Boolean isVerified;				// 主播是否加V
 
 	public Announcer() {
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
 	public Long getVcategoryID() {
 		return vcategoryID;
 	}
+
 	public void setVcategoryID(Long vcategoryID) {
 		this.vcategoryID = vcategoryID;
 	}
+
 	public String getVdesc() {
 		return vdesc;
 	}
+
 	public void setVdesc(String vdesc) {
 		this.vdesc = vdesc;
 	}
+
 	public String getVsignature() {
 		return vsignature;
 	}
+
 	public void setVsignature(String vsignature) {
 		this.vsignature = vsignature;
 	}
+
 	public String getAnnouncerPosition() {
 		return announcerPosition;
 	}
+
 	public void setAnnouncerPosition(String announcerPosition) {
 		this.announcerPosition = announcerPosition;
 	}
+
 	public Integer getFollowerCount() {
 		return followerCount;
 	}
+
 	public void setFollowerCount(Integer followerCount) {
 		this.followerCount = followerCount;
 	}
+
 	public Integer getFollowingCount() {
 		return followingCount;
 	}
+
 	public void setFollowingCount(Integer followingCount) {
 		this.followingCount = followingCount;
 	}
+
 	public Integer getReleasedAlbumCount() {
 		return releasedAlbumCount;
 	}
+
 	public void setReleasedAlbumCount(Integer releasedAlbumCount) {
 		this.releasedAlbumCount = releasedAlbumCount;
 	}
+
 	public Integer getReleasedTrackCount() {
 		return releasedTrackCount;
 	}
+
 	public void setReleasedTrackCount(Integer releasedTrackCount) {
 		this.releasedTrackCount = releasedTrackCount;
 	}
 
-	public Announcer(HttpResponse response) throws XimalayaException {
-		super(response);
-		init(response.asJSONObject());
+	public Boolean getIsVerified() {
+		return isVerified;
 	}
-	
+
+	public void setIsVerified(Boolean isVerified) {
+		this.isVerified = isVerified;
+	}
+
 	public Announcer(JSONObject json) throws XimalayaException {
 		super(json);
 		init(json);
@@ -90,6 +145,11 @@ public class Announcer extends User {
 	
 	private void init(JSONObject json) throws XimalayaException {
 		if(json != null) {
+			id = json.getLong("id");
+			kind = json.getString("kind");
+			nickname = json.getString("nickname");
+			avatarUrl = json.getString("avatar_url");
+			isVerified = json.getBoolean("is_verified");
 			vcategoryID = json.getLong("vcategory_id");
 			vdesc = json.getString("vdesc");
 			vsignature = json.getString("vsignature");
@@ -122,6 +182,17 @@ public class Announcer extends User {
 			throw new XimalayaException(jsone.getMessage() + ":" + jsone.toString(), jsone);
 		}
 		return announcerList;
+	}
+
+	public static List<Announcer> constructAnnouncers(HttpResponse response) throws XimalayaException {
+		JSONArray announcerJsonArray = response.asJSONArray();
+ 		List<Announcer> announcers = new ArrayList<Announcer> ();
+ 		if(announcerJsonArray != null) {
+ 			for(int i = 0; i < announcerJsonArray.size(); i++) {
+ 	 			announcers.add(new Announcer(announcerJsonArray.getJSONObject(i)));
+ 	 		}
+ 		}
+		return announcers;
 	}
 	
 }
