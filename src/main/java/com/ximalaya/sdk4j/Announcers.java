@@ -1,14 +1,19 @@
 package com.ximalaya.sdk4j;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ximalaya.sdk4j.http.HttpParameter;
+import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.DTOValidateUtil;
 import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
+import com.ximalaya.sdk4j.model.dto.album.Album;
+import com.ximalaya.sdk4j.model.dto.album.AlbumList;
 import com.ximalaya.sdk4j.model.dto.profile.Announcer;
 import com.ximalaya.sdk4j.model.dto.profile.AnnouncerCategory;
 import com.ximalaya.sdk4j.model.dto.profile.AnnouncerList;
+import com.ximalaya.sdk4j.util.StringUtil;
 
 /**
  * 喜马拉雅内容分类
@@ -52,5 +57,41 @@ public class Announcers extends Ximalaya {
 		return  Announcer.constructAnnouncerList(CLIENT.get(String.format("%s/announcers/list",
 				BASE_URL), assembleHttpParams(specificParams)));
 	}
+	
+	
+	/**
+	 * 	根据一批主播ID批量获取主播信息
+	 * @param ids 		主播用户ID列表
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Announcer> batchGetAnnouncers(long[] ids)
+			throws XimalayaException {
+		if (ids == null || ids.length == 0) {
+            return new ArrayList<Announcer>(0);
+        }
+        HttpParameter[] specificParams = new HttpParameter[]{new HttpParameter("ids", StringUtil.join(ids, ","))};
+		return Announcer.constructAnnouncers(CLIENT.get(String.format("%s/announcers/get_batch",
+				BASE_URL), assembleHttpParams(specificParams)));
+	}
+	
+	/**
+     * 获取某个主播下的专辑列表
+     * @param aid		是	主播用户ID
+     * @param paging	否	返回第几页，必须大于等于1，不填默认为1否；每页多少条，默认20，最多不超过100
+     * @return
+     * @throws XimalayaException
+     */
+    public AlbumList getAnnouncerAlbums(int aid, Paging paging) throws XimalayaException {
+    	DTOValidateUtil.validateAnnouncerId(aid);
+    	paging = paging == null ? new Paging() : paging;
+    	HttpParameter[] specificParams = new HttpParameter[3];
+        specificParams[0] = new HttpParameter("aid", aid);
+        specificParams[1] = new HttpParameter("page", paging.getPage());
+        specificParams[2] = new HttpParameter("count", paging.getCount());
+        HttpResponse response = CLIENT.get(String.format("%s/announcers/albums", BASE_URL),
+                assembleHttpParams(specificParams));
+        return Album.constructAlbumList(response);
+    }
 	
 }

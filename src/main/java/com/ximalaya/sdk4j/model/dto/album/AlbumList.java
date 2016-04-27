@@ -20,6 +20,7 @@ public class AlbumList extends AbstractPageResult implements Serializable {
 	private Long categoryID;       // 标签所属分类ID，可选
 	private String tagName;        // 标签名，可选
 	private List<Album> albums;    // 专辑列表
+	private Integer releasedTrackCount;		//主播发布的声音总数
 	
 	public AlbumList() {
 	}
@@ -42,7 +43,13 @@ public class AlbumList extends AbstractPageResult implements Serializable {
 	public void setAlbums(List<Album> albums) {
 		this.albums = albums;
 	}
-	
+	public Integer getReleasedTrackCount() {
+		return releasedTrackCount;
+	}
+	public void setReleasedTrackCount(Integer releasedTrackCount) {
+		this.releasedTrackCount = releasedTrackCount;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

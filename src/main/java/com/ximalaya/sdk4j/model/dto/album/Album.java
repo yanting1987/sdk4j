@@ -195,6 +195,7 @@ public class Album extends XimalayaResponse {
  	 		albumList.setCurrentPage(albumListJsonObject.getIntValue("current_page"));
  	 		albumList.setCategoryID(albumListJsonObject.getLong("category_id"));
  	 		albumList.setTagName(albumListJsonObject.getString("tag_name"));
+ 	 		albumList.setReleasedTrackCount(albumListJsonObject.getIntValue("released_track_count"));
 
  	 		List<Album> albums = new ArrayList<Album> ();
  	 		JSONArray albumsJsonArray = albumListJsonObject.getJSONArray("albums");

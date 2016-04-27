@@ -21,4 +21,13 @@ public class AnnouncersTest {
 		Assert.assertTrue(announcerService.getAnnouncerList(0, 1, new Paging()) != null);
 	}
 
+	@Test
+	public void testGetAnnouncerAlbums() throws XimalayaException {
+		Assert.assertTrue(announcerService.getAnnouncerAlbums(2629294, new Paging()) != null);
+	}
+	
+	@Test
+	public void testBatchGetAnnouncers() throws XimalayaException {
+		Assert.assertTrue(announcerService.batchGetAnnouncers(new long[]{2629294}).size() > 0);
+	}
 }
