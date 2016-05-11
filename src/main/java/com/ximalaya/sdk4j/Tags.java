@@ -25,7 +25,7 @@ public class Tags extends Ximalaya {
 	 * @throws XimalayaException 
 	 */
 	public List<Tag> getAlbumTags(long categoryID) throws XimalayaException {
-		return getTags(categoryID, 0);
+		return getTagsV2(categoryID, 0);
 	}
 	
 	/**
@@ -36,26 +36,7 @@ public class Tags extends Ximalaya {
 	 * @throws XimalayaException
 	 */
 	public List<Tag> getTrackTags(long categoryID) throws XimalayaException {
-		return getTags(categoryID, 1);
-	}
-	
-	/**
-	 * 根据分类和类型获取标签
-	 * 
-	 * @param categoryID 分类ID，必填
-	 * @param type       类型，必填，0-专辑标签，1-声音标签
-	 * @return
-	 * @throws XimalayaException
-	 */
-	public List<Tag> getTags(long categoryID, int type) throws XimalayaException {
-		checkCategoryIDAndType(categoryID, type);
-		
-		HttpParameter[] specificParams = new HttpParameter[2];
-		specificParams[0] = new HttpParameter("category_id", categoryID);
-		specificParams[1] = new HttpParameter("type", type);
-		return Tag.constructTags(
-				CLIENT.get(String.format("%s/tags/list", BASE_URL),
-						    assembleHttpParams(specificParams)));
+		return getTagsV2(categoryID, 1);
 	}
 	
 	/**

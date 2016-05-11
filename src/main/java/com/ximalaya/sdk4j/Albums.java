@@ -67,42 +67,6 @@ public class Albums extends Ximalaya {
      * @return
      * @throws XimalayaException
      */
-    public AlbumList getAlbumList(long categoryID, String tagName, 
-    		int calcDimension, Paging paging) throws XimalayaException {
-        DTOValidateUtil.validateCategoryID(categoryID);
-        DTOValidateUtil.validateCalcDimension(calcDimension);
-        paging = paging == null ? new Paging() : paging;
-
-        HttpParameter[] specificParams = null;
-        if (!StringUtil.isEmpty(tagName)) {
-            specificParams = new HttpParameter[5];
-            specificParams[0] = new HttpParameter("category_id", categoryID);
-            specificParams[1] = new HttpParameter("tag_name", tagName);
-            specificParams[2] = new HttpParameter("calc_dimension", calcDimension);
-            specificParams[3] = new HttpParameter("page", paging.getPage());
-            specificParams[4] = new HttpParameter("count", paging.getCount());
-        } else {
-            specificParams = new HttpParameter[4];
-            specificParams[0] = new HttpParameter("category_id", categoryID);
-            specificParams[1] = new HttpParameter("calc_dimension", calcDimension);
-            specificParams[2] = new HttpParameter("page", paging.getPage());
-            specificParams[3] = new HttpParameter("count", paging.getCount());
-        }
-        return Album.constructAlbumList(
-                CLIENT.get(String.format("%s/albums/list", BASE_URL),
-                        assembleHttpParams(specificParams)));
-    }
-    
-    /**
-     * 根据分类和标签获取相关维度的专辑（带分页）
-     *
-     * @param categoryID 		分类ID，必填，如果为0则表示所有分类下热门专辑
-     * @param tagName    		标签名， 可选
-     * @param calcDimension 	计算维度，必填， 现支持最火（1），最新（2），经典或播放最多（3）
-     * @param paging     		分页参数，可选，不填则为默认值
-     * @return
-     * @throws XimalayaException
-     */
     public AlbumList getAlbumListV2(long categoryID, String tagName, 
     		int calcDimension, Paging paging) throws XimalayaException {
         DTOValidateUtil.validateCategoryID(categoryID);
