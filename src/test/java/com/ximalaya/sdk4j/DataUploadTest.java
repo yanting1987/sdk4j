@@ -24,7 +24,7 @@ public class DataUploadTest {
 	}
 	
 	@Test
-	public void testUploadSingleLiveRecords() throws XimalayaException {
+	public void testUploadBatchLiveRecord() throws XimalayaException {
 		List<LiveRecord> liveRecords = new ArrayList<LiveRecord>();
 		LiveRecord liveRecord = new LiveRecord();
 		liveRecord.setRadio_id(123456789);
@@ -45,7 +45,7 @@ public class DataUploadTest {
 	}
 	
 	@Test
-	public void testUploadSingleTrackRecords() throws XimalayaException {
+	public void testUploadBatchTrackRecord() throws XimalayaException {
 		List<TrackRecord> trackRecords = new ArrayList<TrackRecord>();
 		TrackRecord trackRecord = new TrackRecord();
 		trackRecord.setTrack_id(264899);
