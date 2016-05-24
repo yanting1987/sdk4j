@@ -17,8 +17,8 @@ public class DataUploadTest {
 	@Test
 	public void testUploadSingleLiveRecord() throws XimalayaException {
 		LiveRecord liveRecord = new LiveRecord();
-		liveRecord.setRadioId(123456789);
-		liveRecord.setPlayedSecs(32323.33D);
+		liveRecord.setRadio_id(123456789);
+		liveRecord.setPlayed_secs(32323.33D);
 		liveRecord.setDuration(33333.33D);
 		uploadService.uploadSingleLiveRecord(liveRecord);
 	}
@@ -27,8 +27,8 @@ public class DataUploadTest {
 	public void testUploadSingleLiveRecords() throws XimalayaException {
 		List<LiveRecord> liveRecords = new ArrayList<LiveRecord>();
 		LiveRecord liveRecord = new LiveRecord();
-		liveRecord.setRadioId(123456789);
-		liveRecord.setPlayedSecs(32323.33D);
+		liveRecord.setRadio_id(123456789);
+		liveRecord.setPlayed_secs(32323.33D);
 		liveRecord.setDuration(33333.33D);
 		liveRecords.add(liveRecord);
 		uploadService.uploadBatchLiveRecord(liveRecords);
@@ -37,10 +37,10 @@ public class DataUploadTest {
 	@Test
 	public void testUploadSingleTrackRecord() throws XimalayaException {
 		TrackRecord trackRecord = new TrackRecord();
-		trackRecord.setTrackId(264899);
-		trackRecord.setPlayType(0);
+		trackRecord.setTrack_id(264899);
+		trackRecord.setPlay_type(0);
 		trackRecord.setDuration(2223.3D);
-		trackRecord.setPlayedSecs(2223.3D);
+		trackRecord.setPlayed_secs(2223.3D);
 		uploadService.uploadSingleTrackRecord(trackRecord);
 	}
 	
@@ -48,10 +48,10 @@ public class DataUploadTest {
 	public void testUploadSingleTrackRecords() throws XimalayaException {
 		List<TrackRecord> trackRecords = new ArrayList<TrackRecord>();
 		TrackRecord trackRecord = new TrackRecord();
-		trackRecord.setTrackId(264899);
-		trackRecord.setPlayType(0);
+		trackRecord.setTrack_id(264899);
+		trackRecord.setPlay_type(0);
 		trackRecord.setDuration(2223.3D);
-		trackRecord.setPlayedSecs(2223.3D);
+		trackRecord.setPlayed_secs(2223.3D);
 		trackRecords.add(trackRecord);
 		uploadService.uploadBatchTrackRecord(trackRecords);
 	}

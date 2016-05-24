@@ -96,19 +96,19 @@ public class DataUpload extends Ximalaya {
 	
 	private HttpParameter[] prepareLiveRecord(LiveRecord liveRecord) {
 		List<HttpParameter> specificParamList = new ArrayList<HttpParameter>();
-		specificParamList.add(new HttpParameter("radio_id", liveRecord.getRadioId()));
+		specificParamList.add(new HttpParameter("radio_id", liveRecord.getRadio_id()));
 		specificParamList.add(new HttpParameter("duration", liveRecord.getDuration()));
-		if(liveRecord.getProgramScheduleId() != null) {
+		if(liveRecord.getProgram_schedule_id() != null) {
 			specificParamList.add(new HttpParameter("program_schedule_id",
-					liveRecord.getProgramScheduleId()));
+					liveRecord.getProgram_schedule_id()));
 		}
-		if(liveRecord.getProgramId() != null) {
-			specificParamList.add(new HttpParameter("program_id", liveRecord.getProgramId()));
+		if(liveRecord.getProgram_id() != null) {
+			specificParamList.add(new HttpParameter("program_id", liveRecord.getProgram_id()));
 		}
 		if(liveRecord.getStartedAt() != null) {
 			specificParamList.add(new HttpParameter("started_at", liveRecord.getStartedAt()));
 		}
-		specificParamList.add(new HttpParameter("played_secs", liveRecord.getPlayedSecs()));
+		specificParamList.add(new HttpParameter("played_secs", liveRecord.getPlayed_secs()));
 		return specificParamList.toArray(new HttpParameter[specificParamList.size()]);
 	}
 	
@@ -120,20 +120,20 @@ public class DataUpload extends Ximalaya {
 	
 	private HttpParameter[]  prepareTrackRecord(TrackRecord trackRecord) {
 		HttpParameter[] specificParams = null;
-		if(trackRecord.getStartedAt() == null) {
+		if(trackRecord.getStarted_at() == null) {
 			specificParams = new HttpParameter[4];
-			specificParams[0] = new HttpParameter("track_id", trackRecord.getTrackId());
+			specificParams[0] = new HttpParameter("track_id", trackRecord.getTrack_id());
 	        specificParams[1] = new HttpParameter("duration", trackRecord.getDuration());
-	        specificParams[2] = new HttpParameter("played_secs", trackRecord.getPlayedSecs());
-	        specificParams[3] = new HttpParameter("play_type", trackRecord.getPlayType());
+	        specificParams[2] = new HttpParameter("played_secs", trackRecord.getPlayed_secs());
+	        specificParams[3] = new HttpParameter("play_type", trackRecord.getPlay_type());
 		}
 		else {
 			specificParams = new HttpParameter[5];
-			specificParams[0] = new HttpParameter("track_id", trackRecord.getTrackId());
+			specificParams[0] = new HttpParameter("track_id", trackRecord.getTrack_id());
 	        specificParams[1] = new HttpParameter("duration", trackRecord.getDuration());
-	        specificParams[2] = new HttpParameter("played_secs", trackRecord.getPlayedSecs());
-	        specificParams[3] = new HttpParameter("started_at", trackRecord.getStartedAt());
-	        specificParams[4] = new HttpParameter("play_type", trackRecord.getPlayType());
+	        specificParams[2] = new HttpParameter("played_secs", trackRecord.getPlayed_secs());
+	        specificParams[3] = new HttpParameter("started_at", trackRecord.getStarted_at());
+	        specificParams[4] = new HttpParameter("play_type", trackRecord.getPlay_type());
 		}
 		return specificParams;
 	}
@@ -154,6 +154,9 @@ public class DataUpload extends Ximalaya {
 		
 		public UploadResponse(HttpResponse response) throws XimalayaException {
 			super();
+			if(response == null) {
+				throw new XimalayaException("response is null"); 
+			}
 			init(response.asJSONObject());
 		}
 		

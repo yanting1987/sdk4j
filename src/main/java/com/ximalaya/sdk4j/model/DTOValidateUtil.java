@@ -153,13 +153,13 @@ public class DTOValidateUtil {
 		if(liveRecord == null) {
 			throw new IllegalArgumentException("liveRecord should not be null");
 		}
-		if(liveRecord.getRadioId() == null) {
+		if(liveRecord.getRadio_id() == null) {
 			throw new IllegalArgumentException("liveRecord.radioId should not be null");
 		}
 		if(liveRecord.getDuration() == null) {
 			throw new IllegalArgumentException("liveRecord.duration should not be null");
 		}
-		if(liveRecord.getPlayedSecs() == null) {
+		if(liveRecord.getPlayed_secs() == null) {
 			throw new IllegalArgumentException("liveRecord.playedSecs should not be null");
 		}
 	}
@@ -168,16 +168,16 @@ public class DTOValidateUtil {
 		if(trackRecord == null) {
 			throw new IllegalArgumentException("trackRecord should not be null");
 		}
-		if(trackRecord.getTrackId() == null) {
+		if(trackRecord.getTrack_id() == null) {
 			throw new IllegalArgumentException("trackRecord.trackId should not be null");
 		}
 		if(trackRecord.getDuration() == null) {
 			throw new IllegalArgumentException("trackRecord.duration should not be null");
 		}
-		if(trackRecord.getPlayedSecs() == null) {
+		if(trackRecord.getPlayed_secs() == null) {
 			throw new IllegalArgumentException("trackRecord.playedSecs should not be null");
 		}
-		if(trackRecord.getPlayType() == null) {
+		if(trackRecord.getPlay_type() == null) {
 			throw new IllegalArgumentException("trackRecord.playType should not be null");
 		}
 	}
