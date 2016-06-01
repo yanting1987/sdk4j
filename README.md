@@ -23,6 +23,14 @@ ximalaya.openapi.baseURL=http://api.ximalaya.com/openapi-gateway-app
 
 ##**版本更新说明：**
 
+### 2016/6/1 william 0.1.11-SNAPSHOT更新：
+
+* 更新获取热门专辑接口getHotAlbumList，采用从getAlbumListV2中获取
+
+* 更新获取专辑或声音的标签（v2版本标签）
+
+* 更新根据分类和标签获取某个分类某个标签下的热门专辑列表/最新专辑列表/最多播放专辑列表（v2版本）
+
 ### 2016/5/24 william 0.1.11-SNAPSHOT更新：
 
 * bug修复，修复批量上传直播和点播播放数据字段错误的bug

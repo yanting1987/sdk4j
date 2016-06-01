@@ -40,6 +40,18 @@ public class Tags extends Ximalaya {
 	}
 	
 	/**
+	 * 根据分类和类型获取标签（已采用v2版本覆盖）
+	 * 
+	 * @param categoryID 分类ID，必填
+	 * @param type       类型，必填，0-专辑标签，1-声音标签
+	 * @return
+	 * @throws XimalayaException
+	 */
+	public List<Tag> getTags(long categoryID, int type) throws XimalayaException {
+		return getTagsV2(categoryID, type);
+	}
+	
+	/**
 	 * 根据分类和类型获取标签（v2版本标签，返回的标签已没有封面图，仅包含tag_name，kind两个字段）
 	 * 
 	 * @param categoryID 分类ID，必填
