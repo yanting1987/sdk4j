@@ -23,7 +23,7 @@ ximalaya.openapi.baseURL=http://api.ximalaya.com/openapi-gateway-app
 
 ##**版本更新说明：**
 
-### 2016/6/1 william 0.1.11-SNAPSHOT更新：
+### 2016/6/1 william 0.1.12-SNAPSHOT更新：
 
 * 更新获取热门专辑接口getHotAlbumList，采用从getAlbumListV2中获取
 
