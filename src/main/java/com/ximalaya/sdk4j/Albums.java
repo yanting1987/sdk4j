@@ -35,26 +35,9 @@ public class Albums extends Ximalaya {
      * @return
      * @throws XimalayaException
      */
-    public AlbumList getHotAlbumList(long categoryID, String tagName, Paging paging) throws XimalayaException {
-        DTOValidateUtil.validateCategoryID(categoryID);
-        paging = paging == null ? new Paging() : paging;
-
-        HttpParameter[] specificParams = null;
-        if (!StringUtil.isEmpty(tagName)) {
-            specificParams = new HttpParameter[4];
-            specificParams[0] = new HttpParameter("category_id", categoryID);
-            specificParams[1] = new HttpParameter("tag_name", tagName);
-            specificParams[2] = new HttpParameter("page", paging.getPage());
-            specificParams[3] = new HttpParameter("count", paging.getCount());
-        } else {
-            specificParams = new HttpParameter[3];
-            specificParams[0] = new HttpParameter("category_id", categoryID);
-            specificParams[1] = new HttpParameter("page", paging.getPage());
-            specificParams[2] = new HttpParameter("count", paging.getCount());
-        }
-        return Album.constructAlbumList(
-                CLIENT.get(String.format("%s/albums/hot", BASE_URL),
-                        assembleHttpParams(specificParams)));
+    public AlbumList getHotAlbumList(long categoryID, String tagName,
+    		Paging paging) throws XimalayaException {
+        return getAlbumListV2(categoryID, tagName, 1, paging);
     }
     
     /**
@@ -69,28 +52,7 @@ public class Albums extends Ximalaya {
      */
     public AlbumList getAlbumList(long categoryID, String tagName, 
     		int calcDimension, Paging paging) throws XimalayaException {
-        DTOValidateUtil.validateCategoryID(categoryID);
-        DTOValidateUtil.validateCalcDimension(calcDimension);
-        paging = paging == null ? new Paging() : paging;
-
-        HttpParameter[] specificParams = null;
-        if (!StringUtil.isEmpty(tagName)) {
-            specificParams = new HttpParameter[5];
-            specificParams[0] = new HttpParameter("category_id", categoryID);
-            specificParams[1] = new HttpParameter("tag_name", tagName);
-            specificParams[2] = new HttpParameter("calc_dimension", calcDimension);
-            specificParams[3] = new HttpParameter("page", paging.getPage());
-            specificParams[4] = new HttpParameter("count", paging.getCount());
-        } else {
-            specificParams = new HttpParameter[4];
-            specificParams[0] = new HttpParameter("category_id", categoryID);
-            specificParams[1] = new HttpParameter("calc_dimension", calcDimension);
-            specificParams[2] = new HttpParameter("page", paging.getPage());
-            specificParams[3] = new HttpParameter("count", paging.getCount());
-        }
-        return Album.constructAlbumList(
-                CLIENT.get(String.format("%s/albums/list", BASE_URL),
-                        assembleHttpParams(specificParams)));
+        return getAlbumListV2(categoryID, tagName, calcDimension, paging);
     }
     
     /**
@@ -128,7 +90,6 @@ public class Albums extends Ximalaya {
                 CLIENT.get(String.format("%s/v2/albums/list", BASE_URL),
                         assembleHttpParams(specificParams)));
     }
-
 
     /**
      * 获取所有人工推荐分类下的热门专辑，每个分类下返回的专辑个数固定。
