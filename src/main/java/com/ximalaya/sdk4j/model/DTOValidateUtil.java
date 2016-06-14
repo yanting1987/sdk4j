@@ -143,6 +143,12 @@ public class DTOValidateUtil {
 		}
 	}
 
+	public static void validateDisplayCount(Integer displayCount) {
+		if(displayCount != null && (displayCount < 1 || displayCount > 20)) {
+			throw new IllegalArgumentException("displayCount should be between 1 and 20");
+		}
+	}
+	
 	public static void validateTracklistID(int tracklistId) {
 		if(tracklistId <= 0) {
 			throw new IllegalArgumentException("tracklistId should > 0");
@@ -209,4 +215,5 @@ public class DTOValidateUtil {
 			validateTrackRecord(trackRecords.get(i));
 		}
 	}
+
 }

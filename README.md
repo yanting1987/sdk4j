@@ -23,6 +23,14 @@ ximalaya.openapi.baseURL=http://api.ximalaya.com/openapi-gateway-app
 
 ##**版本更新说明：**
 
+### 2016/6/14 william 0.1.13-SNAPSHOT更新：
+
+* 新增获取运营人员在发现页配置的分类维度专辑推荐模块的列表
+
+* 新增获取运营人员为某个分类配置的标签维度专辑推荐模块列表
+
+* 更新获取定制听模块下的推荐收藏专辑（getRecommondCollection）
+
 ### 2016/6/1 william 0.1.12-SNAPSHOT更新：
 
 * 更新获取热门专辑接口getHotAlbumList，采用从getAlbumListV2中获取
