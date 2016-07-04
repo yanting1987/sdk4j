@@ -2,7 +2,7 @@
 
 Java OpenAPI Server SDK for Ximalaya
 
-##**使用说明：**
+## **使用说明：**
 
 > 1、使用git克隆喜马拉雅sdk4j项目
 ```
@@ -21,7 +21,7 @@ ximalaya.openapi.baseURL=http://api.ximalaya.com/openapi-gateway-app
 ```
 > 附：喜马拉雅sdk4j项目为maven项目，此说明方式仅供参考
 
-##**版本更新说明：**
+## **版本更新说明：**
 
 ### 2016/6/14 william 0.1.13-SNAPSHOT更新：
 
