@@ -88,6 +88,18 @@ public class AlbumsTest {
 	}
 	
 	@Test
+	public void testDiscoveryRecommondCollection() throws XimalayaException {
+		List<CategoryAlbumList> categoryAlbumList = albumsService.getDiscoveryRecommondAlbums(null);
+		assertTrue(categoryAlbumList.size() > 0);
+	}
+	
+	@Test
+	public void testCategoryRecommondCollection() throws XimalayaException {
+		List<TagAlbumList> tagAlbumList = albumsService.getCategoryRecommondAlbums(6, null);
+		assertTrue(tagAlbumList.size() > 0);
+	}
+	
+	@Test
 	public void testHotAggregation() throws XimalayaException {
 	    List<AlbumList> albumLists = albumsService.getHotAggregation(3L, 4, 3);
 		assertTrue(albumLists.size() > 0);
@@ -95,7 +107,7 @@ public class AlbumsTest {
 
 	@Test
 	public void testRecommondCollection() throws XimalayaException {
-		List<Album> reletiveAlbumList=	albumsService.getRecommondCollection(2);
+		List<Album> reletiveAlbumList=	albumsService.getRecommondCollection();
 		assertTrue(reletiveAlbumList.size() > 0);
 	}
 	

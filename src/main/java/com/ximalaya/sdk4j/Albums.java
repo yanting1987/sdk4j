@@ -225,8 +225,8 @@ public class Albums extends Ximalaya {
      * @return
      * @throws XimalayaException
      */
-    public RelativeAlbumList getRelativeAlbums(Long id) throws XimalayaException {
-    	if (id == null || id <= 0) {
+    public RelativeAlbumList getRelativeAlbums(long id) throws XimalayaException {
+    	if (id <= 0) {
             return new RelativeAlbumList();
         }
     	HttpParameter[] specificParams = new HttpParameter[]{new HttpParameter("albumId", id)};
@@ -258,14 +258,52 @@ public class Albums extends Ximalaya {
 
 
     /**
-     * 查询推荐收藏
-     * @param clientOsType
+     * 获取定制听模块下的推荐收藏专辑
      * @return
+     * @throws XimalayaException
      */
-    public List<Album> getRecommondCollection(int clientOsType) throws XimalayaException {
+    public List<Album> getRecommondCollection() throws XimalayaException {
         HttpResponse response = CLIENT.get(String.format("%s/albums/recommend_collect", BASE_URL),
                 assembleHttpParams());
         return Album.constructAlbums(response);
+    }
+    
+    /**
+     * 获取运营人员在发现页配置的分类维度专辑推荐模块的列表。
+     * 对应如下喜马拉雅App功能：喜马拉雅发现页的推荐标签页下的听新闻、听小说、听脱口秀等内容。
+     * @param displayCount	选填	每个分类维度专辑推荐模块包含的专辑数，不填则默认为3，取值区间为[1, 20]
+     * @return
+     * @throws XimalayaException
+     */
+    public List<CategoryAlbumList> getDiscoveryRecommondAlbums(Integer displayCount) throws XimalayaException {
+    	DTOValidateUtil.validateDisplayCount(displayCount);
+    	displayCount = displayCount == null ? 3 : displayCount;
+    	HttpParameter[] specificParams = new HttpParameter[]{
+ 	           new HttpParameter("display_count", displayCount)};
+        HttpResponse response = CLIENT.get(String.format("%s/albums/discovery_recommend_albums", BASE_URL),
+               assembleHttpParams(specificParams));
+        return CategoryAlbumList.constructCategoryAlbumList(response);
+    }
+    
+    /**
+     * 获取运营人员为某个分类配置的标签维度专辑推荐模块列表。
+     * 对应如下喜马拉雅App功能：从喜马拉雅发现页点击某个分类（如有声小说），然后在该分类下选择“推荐”标签页，
+     * 	该标签页下有一些运营人员配置的专辑推荐模块（如有声小说下有热播小说、女生最爱、男生最爱等专辑推荐模块）
+     * @param categoryID	必填	分类ID，指定分类
+     * @param displayCount	选填	每个专辑推荐模块默认显示的专辑数，不填则默认为3，取值区间为[1, 20]
+     * @return
+     * @throws XimalayaException
+     */
+    public List<TagAlbumList> getCategoryRecommondAlbums(long categoryID, Integer displayCount) throws XimalayaException {
+    	DTOValidateUtil.validateCategoryID(categoryID);
+    	DTOValidateUtil.validateDisplayCount(displayCount);
+    	displayCount = displayCount == null ? 3 : displayCount;
+    	HttpParameter[] specificParams = new HttpParameter[]{
+    	           new HttpParameter("category_id", categoryID),
+    	           new HttpParameter("display_count", displayCount)};
+        HttpResponse response = CLIENT.get(String.format("%s/albums/category_recommend_albums", BASE_URL),
+                assembleHttpParams(specificParams));
+        return TagAlbumList.constructTagAlbumList(response);
     }
     
     /**
