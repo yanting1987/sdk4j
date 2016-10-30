@@ -14,14 +14,6 @@ public abstract class Ximalaya implements Serializable {
 	 */
 	private static final long serialVersionUID = -2462822863708818946L;
 	
-	/*
-	 * 全局配置
-	 */
-	protected static final String BASE_URL = XimalayaConfig.getValue("ximalaya.openapi.baseURL");
-	protected static final String APP_KEY = XimalayaConfig.getValue("ximalaya.openapi.appKey");
-	protected static final String APP_SECRET = XimalayaConfig.getValue("ximalaya.openapi.appSecret");
-	protected static final String SERVER_AUTHENTICATE_STATIC_KEY = XimalayaConfig.getValue("ximalaya.openapi.serverAuthenticateStaticKey");
-	
 	protected static final HttpClient CLIENT = new HttpClient();
 	protected static final HttpParameter[] DEFAULT_SPECIFIC_PARAMS = new HttpParameter[0];
 	
@@ -55,7 +47,7 @@ public abstract class Ximalaya implements Serializable {
 		/*
 		 * 计算签名参数 
 		 */
-		String seed = APP_SECRET + SERVER_AUTHENTICATE_STATIC_KEY;
+		String seed = XimalayaConfig.getAppSecret() + XimalayaConfig.getServerAuthenticateStaticKey();
 		String sig = SignatureUtil.caculateSignature(resultParams, seed);
 		resultParams[resultParams.length - 1] = new HttpParameter("sig", sig);
 		
@@ -69,7 +61,7 @@ public abstract class Ximalaya implements Serializable {
 	 */
 	private final HttpParameter[] assembleCommonParams() {
 		HttpParameter[] commonParams = new HttpParameter[4];
-		commonParams[0] = new HttpParameter("app_key", APP_KEY);
+		commonParams[0] = new HttpParameter("app_key", XimalayaConfig.getAppKey());
 		commonParams[1] = new HttpParameter("client_os_type", SERVER_CLIENT_OS_TYPE);
 		commonParams[2] = new HttpParameter("nonce", CrypterUtil.getRandKey());  // nonce是一个随机字符串
 		commonParams[3] = new HttpParameter("timestamp", System.currentTimeMillis());

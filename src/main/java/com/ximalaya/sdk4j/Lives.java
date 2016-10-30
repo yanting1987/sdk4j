@@ -16,6 +16,7 @@ import com.ximalaya.sdk4j.model.dto.live.Radio;
 import com.ximalaya.sdk4j.model.dto.live.RadioList;
 import com.ximalaya.sdk4j.model.dto.live.Schedule;
 import com.ximalaya.sdk4j.util.StringUtil;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 /**
  * 直播相关接口
@@ -38,7 +39,7 @@ public class Lives extends Ximalaya {
 	 */
 	public List<Province> getProvinces() throws XimalayaException {
 		return Province.constructProvinces(
-				CLIENT.get(String.format("%s/live/provinces", BASE_URL), assembleHttpParams()));
+				CLIENT.get(String.format("%s/live/provinces", XimalayaConfig.getBaseUrl()), assembleHttpParams()));
 	}
 	
 	/**
@@ -69,7 +70,7 @@ public class Lives extends Ximalaya {
 			specificParams[2] = new HttpParameter("count", paging.getCount());
 		}
 		return Radio.constructRadioList(
-				CLIENT.get(String.format("%s/live/radios", BASE_URL),
+				CLIENT.get(String.format("%s/live/radios", XimalayaConfig.getBaseUrl()),
 						assembleHttpParams(specificParams)));
 	}
 	
@@ -95,7 +96,7 @@ public class Lives extends Ximalaya {
 		HttpParameter[] specificParameters = new HttpParameter[2];
 		specificParameters[0] = new HttpParameter("radio_id", radioID);
 		specificParameters[1] = new HttpParameter("weekday", weekday);
-		return Schedule.constructSchedules(CLIENT.get(String.format("%s/live/schedules", BASE_URL),
+		return Schedule.constructSchedules(CLIENT.get(String.format("%s/live/schedules", XimalayaConfig.getBaseUrl()),
 						    assembleHttpParams(specificParameters)));	}
 	
 	/**
@@ -107,7 +108,7 @@ public class Lives extends Ximalaya {
 	public Program getPlayingProgram(long radioID) throws XimalayaException {
 		DTOValidateUtil.validateRadioID(radioID);
 		return new Program(
-			CLIENT.get(String.format("%s/live/get_playing_program", BASE_URL), 
+			CLIENT.get(String.format("%s/live/get_playing_program", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(new HttpParameter[] { new HttpParameter("radio_id", radioID) })));
 	}
 
@@ -122,7 +123,7 @@ public class Lives extends Ximalaya {
 		DTOValidateUtil.validateProvinceCode(provinceCode);
 		HttpParameter[] specificParameters = new HttpParameter[1];
 		specificParameters[0] = new HttpParameter("province_code", provinceCode);
-	    HttpResponse response= CLIENT.get(String.format("%s/live/cities", BASE_URL),
+	    HttpResponse response= CLIENT.get(String.format("%s/live/cities", XimalayaConfig.getBaseUrl()),
 	    		assembleHttpParams(specificParameters));
 		return City.constructCities(response);
 	}
@@ -140,7 +141,7 @@ public class Lives extends Ximalaya {
 		specificParameters[0] = new HttpParameter("city_code", cityCode);
 		specificParameters[1] = new HttpParameter("page", paging.getPage());
 		specificParameters[2] = new HttpParameter("count", paging.getCount());
-		HttpResponse response= CLIENT.get(String.format("%s/live/get_radios_by_city", BASE_URL),assembleHttpParams(specificParameters) );
+		HttpResponse response= CLIENT.get(String.format("%s/live/get_radios_by_city", XimalayaConfig.getBaseUrl()),assembleHttpParams(specificParameters) );
 		return Radio.constructRadioList(response);
 	}
 	
@@ -151,7 +152,7 @@ public class Lives extends Ximalaya {
 		
 		HttpParameter[] specificParams = new HttpParameter[] { new HttpParameter("ids", StringUtil.join(radiosIDs, ",")) };
 		return Radio.constructRadios(
-				CLIENT.get(String.format("%s/live/get_radios_by_ids", BASE_URL),
+				CLIENT.get(String.format("%s/live/get_radios_by_ids", XimalayaConfig.getBaseUrl()),
 						   assembleHttpParams(specificParams)).asJSONObject().getJSONArray("radios"));
 	}
 }

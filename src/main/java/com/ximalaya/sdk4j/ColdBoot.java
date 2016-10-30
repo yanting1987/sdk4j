@@ -8,6 +8,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.coldboot.ColdBootDetail;
 import com.ximalaya.sdk4j.model.dto.coldboot.ColdBootTag;
 import com.ximalaya.sdk4j.util.StringUtil;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 /**
  * 喜马拉雅内容分类
@@ -28,7 +29,7 @@ public class ColdBoot extends Ximalaya {
 	 */
 	public List<String> getColdBootGenres() throws XimalayaException {
 		return ColdBootTag.constructColdBootTags(
-				CLIENT.get(String.format("%s/coldboot/genres", BASE_URL), assembleHttpParams()));
+				CLIENT.get(String.format("%s/coldboot/genres", XimalayaConfig.getBaseUrl()), assembleHttpParams()));
 	}
 
 	/**
@@ -38,7 +39,7 @@ public class ColdBoot extends Ximalaya {
 	 */
 	public List<String> getColdBootSubGenres() throws XimalayaException {
 		return ColdBootTag.constructColdBootTags(
-				CLIENT.get(String.format("%s/coldboot/sub_genres", BASE_URL), assembleHttpParams()));
+				CLIENT.get(String.format("%s/coldboot/sub_genres", XimalayaConfig.getBaseUrl()), assembleHttpParams()));
 	}
 	
 	/**
@@ -55,7 +56,7 @@ public class ColdBoot extends Ximalaya {
         specificParams[0] = new HttpParameter("coldboot_genre", coldbootGenre);
         specificParams[1] = new HttpParameter("coldboot_sub_genre", coldbootSubGenre);
 		return new ColdBootTag(CLIENT.get(String.format("%s/coldboot/tags",
-				BASE_URL), assembleHttpParams(specificParams)).asJSONObject());
+				XimalayaConfig.getBaseUrl()), assembleHttpParams(specificParams)).asJSONObject());
 	}
 	
 	/**
@@ -83,7 +84,7 @@ public class ColdBoot extends Ximalaya {
         specificParams[2] = new HttpParameter("device_type", deviceType);
         specificParams[3] = new HttpParameter("device_id", deviceId);
         specificParams[4] = new HttpParameter("coldboot_tags", StringUtil.join(tags, ","));
-        CLIENT.post(String.format("%s/coldboot/submit_tags", BASE_URL), assembleHttpParams(specificParams));
+        CLIENT.post(String.format("%s/coldboot/submit_tags", XimalayaConfig.getBaseUrl()), assembleHttpParams(specificParams));
 	}
 	
 	
@@ -101,6 +102,6 @@ public class ColdBoot extends Ximalaya {
         specificParams[0] = new HttpParameter("device_type", deviceType);
         specificParams[1] = new HttpParameter("device_id", deviceId);
 		return new ColdBootDetail(CLIENT.get(String.format("%s/coldboot/detail",
-				BASE_URL), assembleHttpParams(specificParams)).asJSONObject());
+				XimalayaConfig.getBaseUrl()), assembleHttpParams(specificParams)).asJSONObject());
 	}
 }

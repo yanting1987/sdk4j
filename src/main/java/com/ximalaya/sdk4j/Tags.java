@@ -5,6 +5,7 @@ import java.util.List;
 import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.tag.Tag;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 /**
  * 标签相关接口
@@ -66,7 +67,7 @@ public class Tags extends Ximalaya {
 		specificParams[0] = new HttpParameter("category_id", categoryID);
 		specificParams[1] = new HttpParameter("type", type);
 		return Tag.constructTags(
-				CLIENT.get(String.format("%s/v2/tags/list", BASE_URL),
+				CLIENT.get(String.format("%s/v2/tags/list", XimalayaConfig.getBaseUrl()),
 						    assembleHttpParams(specificParams)));
 	}
 	

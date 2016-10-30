@@ -14,6 +14,7 @@ import com.ximalaya.sdk4j.model.dto.live.IncrementSchedule;
 import com.ximalaya.sdk4j.model.dto.track.IncrementTrack;
 import com.ximalaya.sdk4j.model.dto.track.IncrementTrackList;
 import com.ximalaya.sdk4j.util.StringUtil;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 /**
  * 直播相关接口
@@ -57,7 +58,7 @@ public class Increments extends Ximalaya {
 			specificParams[3] = new HttpParameter("update_time", updateTime);
 		}
 		return IncrementAlbum.constructIncrementAlbumList(
-				CLIENT.get(String.format("%s/incr/albums", BASE_URL), 
+				CLIENT.get(String.format("%s/incr/albums", XimalayaConfig.getBaseUrl()), 
 							assembleHttpParams(specificParams)));
 	}
 	
@@ -78,7 +79,7 @@ public class Increments extends Ximalaya {
 		specificParams[2] = new HttpParameter("count", paging.getCount());
 		specificParams[3] = new HttpParameter("update_time", updateTime);
 		return IncrementTrack.constructIncrementTracks(
-				CLIENT.get(String.format("%s/incr/tracks", BASE_URL),
+				CLIENT.get(String.format("%s/incr/tracks", XimalayaConfig.getBaseUrl()),
 						   assembleHttpParams(specificParams)));
 	}
 	
@@ -111,7 +112,7 @@ public class Increments extends Ximalaya {
 			specificParams[3] = new HttpParameter("update_time", updateTime);
 		}
 		return IncrementRadio.constructIncrementRadioList(
-				CLIENT.get(String.format("%s/incr/radios", BASE_URL),
+				CLIENT.get(String.format("%s/incr/radios", XimalayaConfig.getBaseUrl()),
 						    assembleHttpParams(specificParams)));
 	}
 	
@@ -130,7 +131,7 @@ public class Increments extends Ximalaya {
 		specificParameters[0] = new HttpParameter("radio_id", radioID);
 		specificParameters[1] = new HttpParameter("weekday", weekday);
 		specificParameters[2] = new HttpParameter("update_time", updateTime);
-		return IncrementSchedule.constructIncrementSchedules(CLIENT.get(String.format("%s/incr/schedules", BASE_URL),
+		return IncrementSchedule.constructIncrementSchedules(CLIENT.get(String.format("%s/incr/schedules", XimalayaConfig.getBaseUrl()),
 						    assembleHttpParams(specificParameters)));
 	}
 }

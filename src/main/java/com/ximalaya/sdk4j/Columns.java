@@ -6,6 +6,7 @@ import com.ximalaya.sdk4j.model.Paging;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.column.Column;
 import com.ximalaya.sdk4j.model.dto.column.ColumnList;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 public class Columns extends Ximalaya {
 	private static final long serialVersionUID = -8651526987345601726L;
@@ -23,7 +24,7 @@ public class Columns extends Ximalaya {
 		specificParams[1] = new HttpParameter("count", paging.getCount());
 		specificParams[2] = new HttpParameter("device_id", "andorid");
 		return Column.constructColumnList(
-			CLIENT.get(String.format("%s/column/quality_list", BASE_URL), 
+			CLIENT.get(String.format("%s/column/quality_list", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -38,7 +39,7 @@ public class Columns extends Ximalaya {
 		specificParams[0] = new HttpParameter("id", columnId);
 		specificParams[1] = new HttpParameter("device_id", "andorid");
 		return new Column(
-			CLIENT.get(String.format("%s/column/detail", BASE_URL), 
+			CLIENT.get(String.format("%s/column/detail", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.category.Category;
 import com.ximalaya.sdk4j.model.dto.category.RecommendCategory;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 /**
  * 喜马拉雅内容分类
@@ -25,7 +26,7 @@ public class Categories extends Ximalaya {
 	 */
 	public List<Category> getCategories() throws XimalayaException {
 		return Category.constructCategories(
-				CLIENT.get(String.format("%s/categories/list", BASE_URL), assembleHttpParams()));
+				CLIENT.get(String.format("%s/categories/list", XimalayaConfig.getBaseUrl()), assembleHttpParams()));
 	}
 
 	/**
@@ -35,6 +36,6 @@ public class Categories extends Ximalaya {
 	 */
 	public List<RecommendCategory> getRecommendCategories() throws XimalayaException {
 		return RecommendCategory.constructRecommendCategories(
-				CLIENT.get(String.format("%s/categories/human_recommend", BASE_URL), assembleHttpParams()));
+				CLIENT.get(String.format("%s/categories/human_recommend", XimalayaConfig.getBaseUrl()), assembleHttpParams()));
 	}
 }

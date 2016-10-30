@@ -8,6 +8,7 @@ import com.ximalaya.sdk4j.model.Sort;
 import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.*;
 import com.ximalaya.sdk4j.util.StringUtil;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,7 @@ public class Albums extends Ximalaya {
             specificParams[3] = new HttpParameter("count", paging.getCount());
         }
         return Album.constructAlbumList(
-                CLIENT.get(String.format("%s/v2/albums/list", BASE_URL),
+                CLIENT.get(String.format("%s/v2/albums/list", XimalayaConfig.getBaseUrl()),
                         assembleHttpParams(specificParams)));
     }
 
@@ -105,7 +106,7 @@ public class Albums extends Ximalaya {
         specificParams[0] = new HttpParameter("page", 1);
         specificParams[1] = new HttpParameter("count", count);
         return Album.constructHumanRecommendAlbumList(
-                CLIENT.get(String.format("%s/albums/human_recommend", BASE_URL),
+                CLIENT.get(String.format("%s/albums/human_recommend", XimalayaConfig.getBaseUrl()),
                         assembleHttpParams(specificParams)));
     }
     
@@ -125,7 +126,7 @@ public class Albums extends Ximalaya {
         specificParams[1] = new HttpParameter("count", paging.getCount());
         specificParams[2] = new HttpParameter("calc_dimension", calcDimension);
         return Album.constructAlbumList(
-                CLIENT.get(String.format("%s/albums/recommend_download", BASE_URL),
+                CLIENT.get(String.format("%s/albums/recommend_download", XimalayaConfig.getBaseUrl()),
                         assembleHttpParams(specificParams)));
     }
 
@@ -143,7 +144,7 @@ public class Albums extends Ximalaya {
 
         HttpParameter[] specificParams = new HttpParameter[]{new HttpParameter("ids", StringUtil.join(albumIDs, ","))};
         return Album.constructAlbums(
-                CLIENT.get(String.format("%s/albums/get_batch", BASE_URL),
+                CLIENT.get(String.format("%s/albums/get_batch", XimalayaConfig.getBaseUrl()),
                         assembleHttpParams(specificParams)));
     }
 
@@ -174,7 +175,7 @@ public class Albums extends Ximalaya {
             specificParams[2] = new HttpParameter("count", paging.getCount());
         }
         return Album.constructAlbumList(
-                CLIENT.get(String.format("%s/albums/get_all", BASE_URL),
+                CLIENT.get(String.format("%s/albums/get_all", XimalayaConfig.getBaseUrl()),
                         assembleHttpParams(specificParams)));
     }
     
@@ -197,7 +198,7 @@ public class Albums extends Ximalaya {
         specificParams[2] = new HttpParameter("count", paging.getCount());
         specificParams[3] = new HttpParameter("sort", Sort.getSortText(sort));
         return Album.constructAlbumTracks(
-                CLIENT.get(String.format("%s/albums/browse", BASE_URL),
+                CLIENT.get(String.format("%s/albums/browse", XimalayaConfig.getBaseUrl()),
                         assembleHttpParams(specificParams)));
     }
 
@@ -215,7 +216,7 @@ public class Albums extends Ximalaya {
 
         HttpParameter[] specificParams = new HttpParameter[]{new HttpParameter("ids", StringUtil.join(albumIDs, ","))};
         return UpdatedAlbum.constructUpdatedAlbums(
-                CLIENT.get(String.format("%s/albums/get_update_batch", BASE_URL),
+                CLIENT.get(String.format("%s/albums/get_update_batch", XimalayaConfig.getBaseUrl()),
                         assembleHttpParams(specificParams)));
     }
 
@@ -230,7 +231,7 @@ public class Albums extends Ximalaya {
             return new RelativeAlbumList();
         }
     	HttpParameter[] specificParams = new HttpParameter[]{new HttpParameter("albumId", id)};
-        HttpResponse response = CLIENT.get(String.format("%s/albums/relative_album", BASE_URL),
+        HttpResponse response = CLIENT.get(String.format("%s/albums/relative_album", XimalayaConfig.getBaseUrl()),
              assembleHttpParams(specificParams));
         return RelativeAlbum.constructReletiveAlbumList(response);
     }
@@ -250,7 +251,7 @@ public class Albums extends Ximalaya {
            new HttpParameter("category_id", categoryId),
            new HttpParameter("tag_count", tagCount),
            new HttpParameter("album_count", albumCount)};
-       HttpResponse response = CLIENT.get(String.format("%s/albums/hot_aggregation", BASE_URL),
+       HttpResponse response = CLIENT.get(String.format("%s/albums/hot_aggregation", XimalayaConfig.getBaseUrl()),
            assembleHttpParams(specificParams));
        return Album.constructAlbumListList(response);
 
@@ -263,7 +264,7 @@ public class Albums extends Ximalaya {
      * @throws XimalayaException
      */
     public List<Album> getRecommondCollection() throws XimalayaException {
-        HttpResponse response = CLIENT.get(String.format("%s/albums/recommend_collect", BASE_URL),
+        HttpResponse response = CLIENT.get(String.format("%s/albums/recommend_collect", XimalayaConfig.getBaseUrl()),
                 assembleHttpParams());
         return Album.constructAlbums(response);
     }
@@ -280,7 +281,7 @@ public class Albums extends Ximalaya {
     	displayCount = displayCount == null ? 3 : displayCount;
     	HttpParameter[] specificParams = new HttpParameter[]{
  	           new HttpParameter("display_count", displayCount)};
-        HttpResponse response = CLIENT.get(String.format("%s/albums/discovery_recommend_albums", BASE_URL),
+        HttpResponse response = CLIENT.get(String.format("%s/albums/discovery_recommend_albums", XimalayaConfig.getBaseUrl()),
                assembleHttpParams(specificParams));
         return CategoryAlbumList.constructCategoryAlbumList(response);
     }
@@ -301,7 +302,7 @@ public class Albums extends Ximalaya {
     	HttpParameter[] specificParams = new HttpParameter[]{
     	           new HttpParameter("category_id", categoryID),
     	           new HttpParameter("display_count", displayCount)};
-        HttpResponse response = CLIENT.get(String.format("%s/albums/category_recommend_albums", BASE_URL),
+        HttpResponse response = CLIENT.get(String.format("%s/albums/category_recommend_albums", XimalayaConfig.getBaseUrl()),
                 assembleHttpParams(specificParams));
         return TagAlbumList.constructTagAlbumList(response);
     }
@@ -332,7 +333,7 @@ public class Albums extends Ximalaya {
             specificParams[2] = new HttpParameter("like_count", likeCount);
         }
         return LikeAlbum.constructPerferedAlbums(
-                CLIENT.get(String.format("%s/albums/guess_like", BASE_URL),
+                CLIENT.get(String.format("%s/albums/guess_like", XimalayaConfig.getBaseUrl()),
                         assembleHttpParams(specificParams)));
     }
     
@@ -350,7 +351,7 @@ public class Albums extends Ximalaya {
         specificParams[0] = new HttpParameter("aid", aid);
         specificParams[1] = new HttpParameter("page", paging.getPage());
         specificParams[2] = new HttpParameter("count", paging.getCount());
-        HttpResponse response = CLIENT.get(String.format("%s/albums/by_announcer", BASE_URL),
+        HttpResponse response = CLIENT.get(String.format("%s/albums/by_announcer", XimalayaConfig.getBaseUrl()),
                 assembleHttpParams(specificParams));
         return Album.constructAlbumList(response);
     }

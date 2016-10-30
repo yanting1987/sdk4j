@@ -12,6 +12,7 @@ import com.ximalaya.sdk4j.model.dto.live.Radio;
 import com.ximalaya.sdk4j.model.dto.rank.Rank;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 public class Ranks extends Ximalaya {
 	private static final long serialVersionUID = -8651526987345601726L;
@@ -27,7 +28,7 @@ public class Ranks extends Ximalaya {
 		DTOValidateUtil.validateRankType(rankType);
 		specificParams[0] = new HttpParameter("rank_type", rankType);
 		return Rank.constructRanks(
-			CLIENT.get(String.format("%s/ranks/index_list", BASE_URL), 
+			CLIENT.get(String.format("%s/ranks/index_list", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -46,7 +47,7 @@ public class Ranks extends Ximalaya {
 		specificParams[1] = new HttpParameter("page", paging.getPage());
 		specificParams[2] = new HttpParameter("count", paging.getCount());
 		return Album.constructAlbumList(
-			CLIENT.get(String.format("%s/ranks/albums", BASE_URL), 
+			CLIENT.get(String.format("%s/ranks/albums", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -65,7 +66,7 @@ public class Ranks extends Ximalaya {
 		specificParams[1] = new HttpParameter("page", paging.getPage());
 		specificParams[2] = new HttpParameter("count", paging.getCount());
 		return Track.constructTrackList(
-			CLIENT.get(String.format("%s/ranks/tracks", BASE_URL), 
+			CLIENT.get(String.format("%s/ranks/tracks", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -80,7 +81,7 @@ public class Ranks extends Ximalaya {
 		HttpParameter[] specificParams = new HttpParameter[1];
 		specificParams[0] = new HttpParameter("radio_count", radioCount);
 		return Radio.constructRadios(
-			CLIENT.get(String.format("%s/ranks/radios", BASE_URL), 
+			CLIENT.get(String.format("%s/ranks/radios", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 }

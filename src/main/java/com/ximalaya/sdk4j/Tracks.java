@@ -6,6 +6,7 @@ import java.util.List;
 
 
 
+
 import com.ximalaya.sdk4j.http.HttpParameter;
 import com.ximalaya.sdk4j.http.HttpResponse;
 import com.ximalaya.sdk4j.model.Paging;
@@ -16,6 +17,7 @@ import com.ximalaya.sdk4j.model.dto.album.RelativeAlbumList;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
 import com.ximalaya.sdk4j.util.StringUtil;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 /**
  * 声音相关接口
@@ -58,7 +60,7 @@ public class Tracks extends Ximalaya {
 			specificParams[2] = new HttpParameter("count", paging.getCount());
 		}
 		return Track.constructTrackList(
-				CLIENT.get(String.format("%s/tracks/hot", BASE_URL),
+				CLIENT.get(String.format("%s/tracks/hot", XimalayaConfig.getBaseUrl()),
 						   assembleHttpParams(specificParams)));
 	}
 	
@@ -79,7 +81,7 @@ public class Tracks extends Ximalaya {
 			specificParams[2] = new HttpParameter("count", count);
 			specificParams[3] = new HttpParameter("sort", Sort.getSortText(sort));
 		return Track.constructTrackList(
-				CLIENT.get(String.format("%s/tracks/get_last_play_tracks", BASE_URL),
+				CLIENT.get(String.format("%s/tracks/get_last_play_tracks", XimalayaConfig.getBaseUrl()),
 							assembleHttpParams(specificParams)));
 	}
 
@@ -94,7 +96,7 @@ public class Tracks extends Ximalaya {
 			return new RelativeAlbumList();
 		}
 		HttpParameter[] specificParams = new HttpParameter[]{new HttpParameter("trackId", id)};
-		HttpResponse response = CLIENT.get(String.format("%s/tracks/relative_album", BASE_URL),
+		HttpResponse response = CLIENT.get(String.format("%s/tracks/relative_album", XimalayaConfig.getBaseUrl()),
 				assembleHttpParams(specificParams));
 		return RelativeAlbum.constructReletiveAlbumList(response);
 	}
@@ -113,7 +115,7 @@ public class Tracks extends Ximalaya {
 		
 		HttpParameter[] specificParams = new HttpParameter[] { new HttpParameter("ids", StringUtil.join(trackIDs, ",")) };
 		return Track.constructTracks(
-				CLIENT.get(String.format("%s/tracks/get_batch", BASE_URL),
+				CLIENT.get(String.format("%s/tracks/get_batch", XimalayaConfig.getBaseUrl()),
 						   assembleHttpParams(specificParams)));
 	}
 	

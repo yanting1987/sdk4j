@@ -14,6 +14,7 @@ import com.ximalaya.sdk4j.model.dto.profile.Announcer;
 import com.ximalaya.sdk4j.model.dto.profile.AnnouncerCategory;
 import com.ximalaya.sdk4j.model.dto.profile.AnnouncerList;
 import com.ximalaya.sdk4j.util.StringUtil;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 /**
  * 喜马拉雅内容分类
@@ -34,7 +35,7 @@ public class Announcers extends Ximalaya {
 	 */
 	public List<AnnouncerCategory> getAnnouncerCategories() throws XimalayaException {
 		return AnnouncerCategory.constructAnnouncerCategories(
-				CLIENT.get(String.format("%s/announcers/categories", BASE_URL), assembleHttpParams()));
+				CLIENT.get(String.format("%s/announcers/categories", XimalayaConfig.getBaseUrl()), assembleHttpParams()));
 	}
 
 	/**
@@ -55,7 +56,7 @@ public class Announcers extends Ximalaya {
         specificParams[2] = new HttpParameter("page", paging.getPage());
         specificParams[3] = new HttpParameter("count", paging.getCount());
 		return  Announcer.constructAnnouncerList(CLIENT.get(String.format("%s/announcers/list",
-				BASE_URL), assembleHttpParams(specificParams)));
+				XimalayaConfig.getBaseUrl()), assembleHttpParams(specificParams)));
 	}
 	
 	
@@ -72,7 +73,7 @@ public class Announcers extends Ximalaya {
         }
         HttpParameter[] specificParams = new HttpParameter[]{new HttpParameter("ids", StringUtil.join(ids, ","))};
 		return Announcer.constructAnnouncers(CLIENT.get(String.format("%s/announcers/get_batch",
-				BASE_URL), assembleHttpParams(specificParams)));
+				XimalayaConfig.getBaseUrl()), assembleHttpParams(specificParams)));
 	}
 	
 	/**
@@ -89,7 +90,7 @@ public class Announcers extends Ximalaya {
         specificParams[0] = new HttpParameter("aid", aid);
         specificParams[1] = new HttpParameter("page", paging.getPage());
         specificParams[2] = new HttpParameter("count", paging.getCount());
-        HttpResponse response = CLIENT.get(String.format("%s/announcers/albums", BASE_URL),
+        HttpResponse response = CLIENT.get(String.format("%s/announcers/albums", XimalayaConfig.getBaseUrl()),
                 assembleHttpParams(specificParams));
         return Album.constructAlbumList(response);
     }

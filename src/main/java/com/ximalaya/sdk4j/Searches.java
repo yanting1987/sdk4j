@@ -18,6 +18,7 @@ import com.ximalaya.sdk4j.model.dto.search.HotWord;
 import com.ximalaya.sdk4j.model.dto.search.SuggestWordList;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 /**
  * 搜索，包括专辑搜索和声音搜索
@@ -48,14 +49,14 @@ public class Searches extends Ximalaya {
 		checkSearchParam(q, categoryID);
 		DTOValidateUtil.validateCalcDimension(calcDimension);
 		paging = paging == null ? new Paging() : paging;
-		return Album.constructAlbumList(CLIENT.get(String.format("%s/search/albums", BASE_URL),
+		return Album.constructAlbumList(CLIENT.get(String.format("%s/search/albums", XimalayaConfig.getBaseUrl()),
 				assembleHttpParams(constructSpecificParamsForSearch(q, categoryID, calcDimension, paging))));
 	}
 
 	public AlbumList searchAlbumList(String q, long categoryID, Paging paging) throws XimalayaException {
 		checkSearchParam(q, categoryID);
 		paging = paging == null ? new Paging() : paging;
-		return Album.constructAlbumList(CLIENT.get(String.format("%s/search/albums", BASE_URL),
+		return Album.constructAlbumList(CLIENT.get(String.format("%s/search/albums", XimalayaConfig.getBaseUrl()),
 				assembleHttpParams(constructSpecificParamsForSearch(q, categoryID, 4, paging))));
 	}
 
@@ -72,7 +73,7 @@ public class Searches extends Ximalaya {
 	public AlbumList searchAlbumList(String q, Paging paging) throws XimalayaException {
 		checkSearchQ(q);
 		paging = paging == null ? new Paging() : paging;
-		return Album.constructAlbumList(CLIENT.get(String.format("%s/search/albums", BASE_URL),
+		return Album.constructAlbumList(CLIENT.get(String.format("%s/search/albums", XimalayaConfig.getBaseUrl()),
 				assembleHttpParams(constructSpecificParamsForSearch(q, paging))));
 	}
 
@@ -93,14 +94,14 @@ public class Searches extends Ximalaya {
 		checkSearchParam(q, categoryID);
 		DTOValidateUtil.validateCalcDimension(calcDimension);
 		paging = paging == null ? new Paging() : paging;
-		return Track.constructTrackList(CLIENT.get(String.format("%s/search/tracks", BASE_URL),
+		return Track.constructTrackList(CLIENT.get(String.format("%s/search/tracks", XimalayaConfig.getBaseUrl()),
 				assembleHttpParams(constructSpecificParamsForSearch(q, categoryID, calcDimension, paging))));
 	}
 
 	public TrackList searchTrackList(String q, long categoryID, Paging paging) throws XimalayaException {
 		checkSearchParam(q, categoryID);
 		paging = paging == null ? new Paging() : paging;
-		return Track.constructTrackList(CLIENT.get(String.format("%s/search/tracks", BASE_URL),
+		return Track.constructTrackList(CLIENT.get(String.format("%s/search/tracks", XimalayaConfig.getBaseUrl()),
 				assembleHttpParams(constructSpecificParamsForSearch(q, categoryID, 4, paging))));
 	}
 
@@ -117,7 +118,7 @@ public class Searches extends Ximalaya {
 	public TrackList searchTrackList(String q, Paging paging) throws XimalayaException {
 		checkSearchQ(q);
 		paging = paging == null ? new Paging() : paging;
-		return Track.constructTrackList(CLIENT.get(String.format("%s/search/tracks", BASE_URL),
+		return Track.constructTrackList(CLIENT.get(String.format("%s/search/tracks", XimalayaConfig.getBaseUrl()),
 				assembleHttpParams(constructSpecificParamsForSearch(q, paging))));
 	}
 
@@ -131,7 +132,7 @@ public class Searches extends Ximalaya {
 	 */
 	public List<HotWord> searchHotWords(int top) throws XimalayaException {
 		checkSearchTopParam(top);
-		return HotWord.constructHotWords(CLIENT.get(String.format("%s/search/hot_words", BASE_URL),
+		return HotWord.constructHotWords(CLIENT.get(String.format("%s/search/hot_words", XimalayaConfig.getBaseUrl()),
 				assembleHttpParams(new HttpParameter[] { new HttpParameter("top", top) })));
 	}
 
@@ -145,7 +146,7 @@ public class Searches extends Ximalaya {
 	 */
 	public SuggestWordList searchSuggestWords(String keyWord) throws XimalayaException {
 		checkSearchKeyWordParam(keyWord);
-		return new SuggestWordList(CLIENT.get(String.format("%s/search/suggest_words", BASE_URL),
+		return new SuggestWordList(CLIENT.get(String.format("%s/search/suggest_words", XimalayaConfig.getBaseUrl()),
 				assembleHttpParams(new HttpParameter[] { new HttpParameter("q", keyWord) })));
 	}
 
@@ -161,7 +162,7 @@ public class Searches extends Ximalaya {
 	public RadioList searchRadios(String q, Paging paging) throws XimalayaException {
 		paging = paging == null ? new Paging() : paging;
 		HttpResponse response = CLIENT
-				.get(String.format("%s/search/radios", BASE_URL),
+				.get(String.format("%s/search/radios", XimalayaConfig.getBaseUrl()),
 						assembleHttpParams(new HttpParameter[] { new HttpParameter("q", q),
 								new HttpParameter("count", paging.getCount()),
 								new HttpParameter("page", paging.getPage()) }));
@@ -179,7 +180,7 @@ public class Searches extends Ximalaya {
 	 */
 	public AnnouncerList searchAnnouncerList(String q, Integer calcDimension, Paging paging) throws XimalayaException {
 		paging = paging == null ? new Paging() : paging;
-		HttpResponse response = CLIENT.get(String.format("%s/search/announcers", BASE_URL),
+		HttpResponse response = CLIENT.get(String.format("%s/search/announcers", XimalayaConfig.getBaseUrl()),
 				assembleHttpParams(new HttpParameter[] { new HttpParameter("q", q),
 						new HttpParameter("calc_dimension", calcDimension),
 						new HttpParameter("count", paging.getCount()), new HttpParameter("page", paging.getPage()) }));
@@ -198,7 +199,7 @@ public class Searches extends Ximalaya {
 	public AllList searchAll(String q, Paging paging) throws XimalayaException {
 		paging = paging == null ? new Paging() : paging;
 		HttpResponse response = CLIENT
-				.get(String.format("%s/search/all", BASE_URL),
+				.get(String.format("%s/search/all", XimalayaConfig.getBaseUrl()),
 						assembleHttpParams(new HttpParameter[] { new HttpParameter("q", q),
 								new HttpParameter("count", paging.getCount()),
 								new HttpParameter("page", paging.getPage()) }));
@@ -237,15 +238,6 @@ public class Searches extends Ximalaya {
 		specificParams[0] = new HttpParameter("q", q);
 		specificParams[1] = new HttpParameter("page", paging.getPage());
 		specificParams[2] = new HttpParameter("count", paging.getCount());
-		return specificParams;
-	}
-
-	private HttpParameter[] constructSpecificParamsForSearch(String q, long categoryID, Paging paging) {
-		HttpParameter[] specificParams = new HttpParameter[4];
-		specificParams[0] = new HttpParameter("q", q);
-		specificParams[1] = new HttpParameter("category_id", categoryID);
-		specificParams[2] = new HttpParameter("page", paging.getPage());
-		specificParams[3] = new HttpParameter("count", paging.getCount());
 		return specificParams;
 	}
 

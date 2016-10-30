@@ -8,6 +8,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.album.Album;
 import com.ximalaya.sdk4j.model.dto.banner.Banner;
 import com.ximalaya.sdk4j.model.dto.track.Track;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 public class Banners extends Ximalaya {
 	private static final long serialVersionUID = -8651526987345601726L;
@@ -22,7 +23,7 @@ public class Banners extends Ximalaya {
 	 */
 	public List<Banner> getRankBanners() throws XimalayaException {
 		return Banner.constructBanners(
-			CLIENT.get(String.format("%s/banners/rank_banners", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/rank_banners", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams()));
 	}
 	
@@ -41,7 +42,7 @@ public class Banners extends Ximalaya {
 		specificParams[0] = new HttpParameter("category_id", categoryId);
 		specificParams[1] = new HttpParameter("content_type", "album");
 		return Banner.constructBanners(
-			CLIENT.get(String.format("%s/banners/category_banners", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/category_banners", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -55,7 +56,7 @@ public class Banners extends Ximalaya {
 	 */
 	public List<Banner> getDiscoveryBanners() throws XimalayaException {
 		return Banner.constructBanners(
-			CLIENT.get(String.format("%s/banners/discovery_banners", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/discovery_banners", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams()));
 	}
 	
@@ -76,7 +77,7 @@ public class Banners extends Ximalaya {
 		specificParams[0] = new HttpParameter("category_id", categoryId);
 		specificParams[1] = new HttpParameter("count", count);
 		return Banner.constructBanners(
-			CLIENT.get(String.format("%s/banners/category_track_banners", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/category_track_banners", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -94,7 +95,7 @@ public class Banners extends Ximalaya {
 		HttpParameter[] specificParams = new HttpParameter[1];
 		specificParams[0] = new HttpParameter("count", count);
 		return Banner.constructBanners(
-			CLIENT.get(String.format("%s/banners/discovery_track_banners", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/discovery_track_banners", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -115,7 +116,7 @@ public class Banners extends Ximalaya {
 		specificParams[1] = new HttpParameter("app_version", appVersion);
 		specificParams[2] = new HttpParameter("image_scale", imageScale);
 		return Banner.constructBanners(
-			CLIENT.get(String.format("%s/banners/rank_banners", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/rank_banners", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -141,7 +142,7 @@ public class Banners extends Ximalaya {
 		specificParams[3] = new HttpParameter("category_id", categoryId);
 		specificParams[4] = new HttpParameter("content_type", "album");
 		return Banner.constructBanners(
-			CLIENT.get(String.format("%s/banners/category_banners", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/category_banners", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -162,7 +163,7 @@ public class Banners extends Ximalaya {
 		specificParams[1] = new HttpParameter("app_version", appVersion);
 		specificParams[2] = new HttpParameter("image_scale", imageScale);
 		return Banner.constructBanners(
-			CLIENT.get(String.format("%s/banners/discovery_banners", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/discovery_banners", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -187,7 +188,7 @@ public class Banners extends Ximalaya {
 		specificParams[3] = new HttpParameter("category_id", categoryId);
 		specificParams[4] = new HttpParameter("count", count);
 		return Banner.constructBanners(
-			CLIENT.get(String.format("%s/banners/category_track_banners", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/category_track_banners", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -208,7 +209,7 @@ public class Banners extends Ximalaya {
 		specificParams[2] = new HttpParameter("image_scale", imageScale);
 		specificParams[3] = new HttpParameter("count", count);
 		return Banner.constructBanners(
-			CLIENT.get(String.format("%s/banners/discovery_track_banners", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/discovery_track_banners", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -224,7 +225,7 @@ public class Banners extends Ximalaya {
 		specificParams[0] = new HttpParameter("banner_id", trackBannerID);
 		specificParams[1] = new HttpParameter("banner_content_type", 7);
 		return Track.constructTrackContents(
-			CLIENT.get(String.format("%s/banners/get_content_list", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/get_content_list", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 	
@@ -240,7 +241,7 @@ public class Banners extends Ximalaya {
 		specificParams[0] = new HttpParameter("banner_id", albumBannerID);
 		specificParams[1] = new HttpParameter("banner_content_type", 6);
 		return Album.constructAlbums(
-			CLIENT.get(String.format("%s/banners/get_content_list", BASE_URL), 
+			CLIENT.get(String.format("%s/banners/get_content_list", XimalayaConfig.getBaseUrl()), 
 					assembleHttpParams(specificParams)));
 	}
 }

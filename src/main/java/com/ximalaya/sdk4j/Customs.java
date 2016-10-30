@@ -9,6 +9,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.dto.category.Category;
 import com.ximalaya.sdk4j.model.dto.track.Track;
 import com.ximalaya.sdk4j.model.dto.track.TrackList;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 /**
  * 
@@ -30,7 +31,7 @@ public class Customs extends Ximalaya {
 		HttpParameter[] specificParams = new HttpParameter[1];
         specificParams[0] = new HttpParameter("icon_set_id", iconSetId);
 		return Category.constructCategories(
-				CLIENT.get(String.format("%s/customized/categories", BASE_URL), assembleHttpParams(specificParams)));
+				CLIENT.get(String.format("%s/customized/categories", XimalayaConfig.getBaseUrl()), assembleHttpParams(specificParams)));
 	}
 	
 	/**
@@ -49,7 +50,7 @@ public class Customs extends Ximalaya {
 		specificParams[1] = new HttpParameter("page", paging.getPage());
 		specificParams[2] = new HttpParameter("count", paging.getCount());
 		return Track.constructTrackList(
-				CLIENT.get(String.format("%s/customized/tracks", BASE_URL),
+				CLIENT.get(String.format("%s/customized/tracks", XimalayaConfig.getBaseUrl()),
 						   assembleHttpParams(specificParams)));
 	}
 }

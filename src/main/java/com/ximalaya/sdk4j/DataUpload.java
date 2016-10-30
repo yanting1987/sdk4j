@@ -12,6 +12,7 @@ import com.ximalaya.sdk4j.model.XimalayaException;
 import com.ximalaya.sdk4j.model.XimalayaResponse;
 import com.ximalaya.sdk4j.model.dto.upload.LiveRecord;
 import com.ximalaya.sdk4j.model.dto.upload.TrackRecord;
+import com.ximalaya.sdk4j.util.XimalayaConfig;
 
 /**
  * 
@@ -25,11 +26,11 @@ public class DataUpload extends Ximalaya {
 	private static String DATA_UPLOAD_URL;
 
 	static {
-		if(!BASE_URL.contains(ORIGINAL_PROJECT_NAME)) {
-			DATA_UPLOAD_URL = BASE_URL.concat("/").concat(DATA_UPLOAD_PROJECT_NAME);
+		if(!XimalayaConfig.getBaseUrl().contains(ORIGINAL_PROJECT_NAME)) {
+			DATA_UPLOAD_URL = XimalayaConfig.getBaseUrl().concat("/").concat(DATA_UPLOAD_PROJECT_NAME);
 		}
 		else {
-			DATA_UPLOAD_URL = BASE_URL.replace(ORIGINAL_PROJECT_NAME, DATA_UPLOAD_PROJECT_NAME);
+			DATA_UPLOAD_URL = XimalayaConfig.getBaseUrl().replace(ORIGINAL_PROJECT_NAME, DATA_UPLOAD_PROJECT_NAME);
 		}
 	}
 	
