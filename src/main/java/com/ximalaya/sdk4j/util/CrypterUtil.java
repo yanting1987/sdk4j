@@ -32,7 +32,7 @@ public class CrypterUtil {
         SecureRandom secureRandom = new SecureRandom();
         keyGenerator.init(AES_KEY_SIZE, secureRandom); 
         SecretKey secretKey = keyGenerator.generateKey(); 
-        return BASE64Encoder.encode(secretKey.getEncoded());
+        return DigestUtils.md5Hex(secretKey.getEncoded());
     }
     
 	/*
