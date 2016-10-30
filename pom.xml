@@ -4,7 +4,7 @@
 
 	<groupId>com.ximalaya</groupId>
 	<artifactId>sdk4j</artifactId>
-	<version>0.1.13-SNAPSHOT</version>	
+	<version>1.0</version>	
 	<packaging>jar</packaging>
 
 	<name>sdk4j</name>
